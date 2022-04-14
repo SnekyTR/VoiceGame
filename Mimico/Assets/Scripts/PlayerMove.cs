@@ -5,78 +5,208 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
-    //navmesh player
+    //player
     private NavMeshAgent playerNM;
+    private PlayerStats playerStats;
+    [SerializeField] private Image stateImg;
+    [SerializeField] private Text turnTxt;
+    private int turn = 1;
 
-    [SerializeField] private Transform[] cubePos;
+    [Header("Locations")]
+    [SerializeField] private Transform[] positionTr;
+    [SerializeField] private string[] posNames;
 
-    //comandos voz
-    private Dictionary<string, Action> moveCmd1 = new Dictionary<string, Action>();
-    private Dictionary<string, Action> moveCmd2 = new Dictionary<string, Action>();
-    private KeywordRecognizer moveCmd1R;
-    private KeywordRecognizer moveCmd2R;
+    [Header("Enemys")]
+    [SerializeField] private Transform[] enemyTr;
+    [SerializeField] private string[] enemyNames;
+    private GameObject target;
+    private bool inAtk;
+
+    //voice commands start turn
+    private Dictionary<string, Action> startCmd1 = new Dictionary<string, Action>();
+    private KeywordRecognizer startCmdR;
+
+    //voice commands movement
+    private Dictionary<string, Action> moveCmd = new Dictionary<string, Action>();
+    private KeywordRecognizer moveCmdR;
+
+    //voide commands attack
+    private Dictionary<string, Action> atkCmd = new Dictionary<string, Action>();
+    private KeywordRecognizer atkCmdR;
+
 
     void Start()
     {
+        playerStats = GetComponent<PlayerStats>();
+        turnTxt.text = "Turn " + turn;
+
+        //start turn
+        startCmd1.Add("mover", StartMove);
+        startCmd1.Add("atacar", StartAttack);
+
+        //movement
         playerNM = GetComponent<NavMeshAgent>();
 
-        moveCmd1.Add("muevete a", StartMove);
-        moveCmd2.Add("el cubo uno", MoveCube01);
-        moveCmd2.Add("el cubo dos", MoveCube02);
-        moveCmd2.Add("el cubo tres", MoveCube03);
+        moveCmd.Add(posNames[0], Move01);
+        moveCmd.Add(posNames[1], Move02);
+        moveCmd.Add(posNames[2], Move03);
 
-        moveCmd1R = new KeywordRecognizer(moveCmd1.Keys.ToArray());
-        moveCmd1R.OnPhraseRecognized += RecognizedVoice1;
-        moveCmd2R = new KeywordRecognizer(moveCmd2.Keys.ToArray());
-        moveCmd2R.OnPhraseRecognized += RecognizedVoice2;
+        startCmdR = new KeywordRecognizer(startCmd1.Keys.ToArray());
+        startCmdR.OnPhraseRecognized += RecognizedVoice1;
+        moveCmdR = new KeywordRecognizer(moveCmd.Keys.ToArray());
+        moveCmdR.OnPhraseRecognized += RecognizedVoice2;
 
-        moveCmd1R.Start();
+        startCmdR.Start();
+
+        //player attack
+        atkCmd.Add(enemyNames[0], Enemy01);
+
+        atkCmdR = new KeywordRecognizer(atkCmd.Keys.ToArray());
+        atkCmdR.OnPhraseRecognized += RecognizedVoice3;
+    }
+
+    private bool TurnEnergy(int n)
+    {
+        bool isEnergy = false;
+        if (playerStats.GetEnergy() > n)
+        {
+            playerStats.SetEnergy(-n);
+            isEnergy = true;
+        }
+        else
+        {
+            playerStats.FullEnergy();
+            isEnergy = false;
+            turn++;
+            turnTxt.text = "Turno " + turn;
+        }
+
+        return isEnergy;
     }
 
     void Update()
     {
-        
+
     }
 
     public void RecognizedVoice1(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
-        moveCmd1[speech.text].Invoke();
+        startCmd1[speech.text].Invoke();
     }
 
     public void RecognizedVoice2(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
-        moveCmd2[speech.text].Invoke();
+        moveCmd[speech.text].Invoke();
+    }
+    public void RecognizedVoice3(PhraseRecognizedEventArgs speech)
+    {
+        Debug.Log(speech.text);
+        atkCmd[speech.text].Invoke();
     }
 
+    //move actions
     private void StartMove()
     {
-        moveCmd1R.Stop();
-        moveCmd2R.Start();
-        Debug.Log("ok");
+        startCmdR.Stop();
+        moveCmdR.Start();
+        stateImg.color = Color.blue;
+    }
+    private void Move01()
+    {
+        if (TurnEnergy(3))
+        {
+            playerNM.destination = positionTr[0].position;
+            startCmdR.Start();
+            moveCmdR.Stop();
+            stateImg.color = Color.white;
+        }
+        else
+        {
+            startCmdR.Start();
+            moveCmdR.Stop();
+            stateImg.color = Color.white;
+        }
+    }
+    private void Move02()
+    {
+        if (TurnEnergy(4))
+        {
+            playerNM.destination = positionTr[1].position;
+            startCmdR.Start();
+            moveCmdR.Stop();
+            stateImg.color = Color.white;
+        }
+        else
+        {
+            startCmdR.Start();
+            moveCmdR.Stop();
+            stateImg.color = Color.white;
+        }
+    }
+    private void Move03()
+    {
+        if (TurnEnergy(5))
+        {
+            playerNM.destination = positionTr[2].position;
+            startCmdR.Start();
+            moveCmdR.Stop();
+            stateImg.color = Color.white;
+        }
+        else
+        {
+            startCmdR.Start();
+            moveCmdR.Stop();
+            stateImg.color = Color.white;
+        }
     }
 
-    private void MoveCube01()
+    //attack actions
+    private void StartAttack()
     {
-        playerNM.destination = cubePos[0].position;
-        moveCmd1R.Start();
-        moveCmd2R.Stop();
+        startCmdR.Stop();
+        atkCmdR.Start();
+        stateImg.color = Color.red;
     }
-
-    private void MoveCube02()
+    private void OnTriggerEnter(Collider other)
     {
-        playerNM.destination = cubePos[1].position;
-        moveCmd1R.Start();
-        moveCmd2R.Stop();
+        if (inAtk && other.gameObject == target)
+        {
+            target.GetComponent<EnemyStats>().SetLife(-playerStats.GetAtk());
+            startCmdR.Start();
+            atkCmdR.Stop();
+            stateImg.color = Color.white;
+            playerNM.destination = transform.position;
+        }
     }
-    private void MoveCube03()
+    private void Enemy01()
     {
-        playerNM.destination = cubePos[2].position;
-        moveCmd1R.Start();
-        moveCmd2R.Stop();
+        if (Vector3.Distance(playerNM.transform.position, enemyTr[0].position) < 10)
+        {
+            if (TurnEnergy(5))
+            {
+                playerNM.destination = enemyTr[0].position;
+                target = enemyTr[0].gameObject;
+                inAtk = true;
+            }
+            else
+            {
+                startCmdR.Start();
+                atkCmdR.Stop();
+                stateImg.color = Color.white;
+            }
+        }
+        else
+        {
+            startCmdR.Start();
+            atkCmdR.Stop();
+            stateImg.color = Color.white;
+            print("fuera de alcance");
+        }
     }
 }
