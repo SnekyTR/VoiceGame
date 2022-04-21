@@ -12,13 +12,14 @@ public class PlayerMove : MonoBehaviour
     //player
     private NavMeshAgent playerNM;
     private PlayerStats playerStats;
+    public GridActivation gridA;
     [SerializeField] private Image stateImg;
     [SerializeField] private Text turnTxt;
     private int turn = 1;
 
     [Header("Locations")]
-    [SerializeField] private Transform[] positionTr;
-    [SerializeField] private string[] posNames;
+    private GameObject[] positionTr;
+    private string[] posNames;
 
     [Header("Enemys")]
     [SerializeField] private Transform[] enemyTr;
@@ -27,11 +28,11 @@ public class PlayerMove : MonoBehaviour
     private bool inAtk;
 
     //voice commands start turn
-    private Dictionary<string, Action> startCmd1 = new Dictionary<string, Action>();
+    private Dictionary<string, Action> startCmd = new Dictionary<string, Action>();
     private KeywordRecognizer startCmdR;
 
     //voice commands movement
-    private Dictionary<string, Action> moveCmd = new Dictionary<string, Action>();
+    private Dictionary<string, Action<int>> moveCmd = new Dictionary<string, Action<int>>();
     private KeywordRecognizer moveCmdR;
 
     //voide commands attack
@@ -45,17 +46,22 @@ public class PlayerMove : MonoBehaviour
         turnTxt.text = "Turn " + turn;
 
         //start turn
-        startCmd1.Add("mover", StartMove);
-        startCmd1.Add("atacar", StartAttack);
+        startCmd.Add("mover", StartMove);
+        startCmd.Add("muevete a", StartMove);
+        startCmd.Add("atacar", StartAttack);
+        startCmd.Add("ataca", StartAttack);
+        startCmd.Add("ataca a", StartAttack);
+        startCmd.Add("atacar a", StartAttack);
 
         //movement
         playerNM = GetComponent<NavMeshAgent>();
 
-        moveCmd.Add(posNames[0], Move01);
-        moveCmd.Add(posNames[1], Move02);
-        moveCmd.Add(posNames[2], Move03);
+        for(int i = 0; i < posNames.Length; i++)
+        {
+            moveCmd.Add(posNames[i], MoveCasilla);
+        }
 
-        startCmdR = new KeywordRecognizer(startCmd1.Keys.ToArray());
+        startCmdR = new KeywordRecognizer(startCmd.Keys.ToArray());
         startCmdR.OnPhraseRecognized += RecognizedVoice1;
         moveCmdR = new KeywordRecognizer(moveCmd.Keys.ToArray());
         moveCmdR.OnPhraseRecognized += RecognizedVoice2;
@@ -67,6 +73,12 @@ public class PlayerMove : MonoBehaviour
 
         atkCmdR = new KeywordRecognizer(atkCmd.Keys.ToArray());
         atkCmdR.OnPhraseRecognized += RecognizedVoice3;
+    }
+
+    public void SetList(GameObject[] go, string[] ns)
+    {
+        positionTr = go;
+        posNames = ns;
     }
 
     private bool TurnEnergy(int n)
@@ -96,13 +108,14 @@ public class PlayerMove : MonoBehaviour
     public void RecognizedVoice1(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
-        startCmd1[speech.text].Invoke();
+        startCmd[speech.text].Invoke();
     }
 
     public void RecognizedVoice2(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
-        moveCmd[speech.text].Invoke();
+        int newNum = (int.Parse(speech.text) - 1);
+        moveCmd[speech.text].Invoke(newNum);
     }
     public void RecognizedVoice3(PhraseRecognizedEventArgs speech)
     {
@@ -115,13 +128,15 @@ public class PlayerMove : MonoBehaviour
     {
         startCmdR.Stop();
         moveCmdR.Start();
+        gridA.EnableGrid();
         stateImg.color = Color.blue;
+
     }
-    private void Move01()
+    private void MoveCasilla(int i)
     {
         if (TurnEnergy(3))
         {
-            playerNM.destination = positionTr[0].position;
+            playerNM.destination = positionTr[i].transform.position;
             startCmdR.Start();
             moveCmdR.Stop();
             stateImg.color = Color.white;
@@ -132,38 +147,7 @@ public class PlayerMove : MonoBehaviour
             moveCmdR.Stop();
             stateImg.color = Color.white;
         }
-    }
-    private void Move02()
-    {
-        if (TurnEnergy(4))
-        {
-            playerNM.destination = positionTr[1].position;
-            startCmdR.Start();
-            moveCmdR.Stop();
-            stateImg.color = Color.white;
-        }
-        else
-        {
-            startCmdR.Start();
-            moveCmdR.Stop();
-            stateImg.color = Color.white;
-        }
-    }
-    private void Move03()
-    {
-        if (TurnEnergy(5))
-        {
-            playerNM.destination = positionTr[2].position;
-            startCmdR.Start();
-            moveCmdR.Stop();
-            stateImg.color = Color.white;
-        }
-        else
-        {
-            startCmdR.Start();
-            moveCmdR.Stop();
-            stateImg.color = Color.white;
-        }
+        gridA.DisableGrid();
     }
 
     //attack actions
@@ -182,6 +166,7 @@ public class PlayerMove : MonoBehaviour
             atkCmdR.Stop();
             stateImg.color = Color.white;
             playerNM.destination = transform.position;
+            GetComponent<SphereCollider>().enabled = false;
         }
     }
     private void Enemy01()
@@ -193,6 +178,7 @@ public class PlayerMove : MonoBehaviour
                 playerNM.destination = enemyTr[0].position;
                 target = enemyTr[0].gameObject;
                 inAtk = true;
+                GetComponent<SphereCollider>().enabled = true;
             }
             else
             {

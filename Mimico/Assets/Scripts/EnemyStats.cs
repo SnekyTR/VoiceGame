@@ -25,6 +25,10 @@ public class EnemyStats : MonoBehaviour
     public void SetLife(int n)
     {
         life += n;
+        if(life <= 0)
+        {
+            Destroy(transform.gameObject);
+        }
         lifeSld.value = (life / maxLife);
     }
 }
