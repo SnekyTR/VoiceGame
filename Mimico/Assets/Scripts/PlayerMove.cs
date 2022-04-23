@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
     private int turn = 1;
 
     [Header("Locations")]
-    private GameObject[] positionTr;
+    private Transform[] positionTr;
     private string[] posNames;
 
     [Header("Enemys")]
@@ -32,7 +32,7 @@ public class PlayerMove : MonoBehaviour
     private KeywordRecognizer startCmdR;
 
     //voice commands movement
-    private Dictionary<string, Action<int>> moveCmd = new Dictionary<string, Action<int>>();
+    private Dictionary<string, Action<string>> moveCmd = new Dictionary<string, Action<string>>();
     private KeywordRecognizer moveCmdR;
 
     //voide commands attack
@@ -52,6 +52,7 @@ public class PlayerMove : MonoBehaviour
         startCmd.Add("ataca", StartAttack);
         startCmd.Add("ataca a", StartAttack);
         startCmd.Add("atacar a", StartAttack);
+        startCmd.Add("nuevo turno", NewTurn);
 
         //movement
         playerNM = GetComponent<NavMeshAgent>();
@@ -75,7 +76,7 @@ public class PlayerMove : MonoBehaviour
         atkCmdR.OnPhraseRecognized += RecognizedVoice3;
     }
 
-    public void SetList(GameObject[] go, string[] ns)
+    public void SetList(Transform[] go, string[] ns)
     {
         positionTr = go;
         posNames = ns;
@@ -84,17 +85,10 @@ public class PlayerMove : MonoBehaviour
     private bool TurnEnergy(int n)
     {
         bool isEnergy = false;
-        if (playerStats.GetEnergy() > n)
+        if (playerStats.GetEnergy() >= n)
         {
             playerStats.SetEnergy(-n);
             isEnergy = true;
-        }
-        else
-        {
-            playerStats.FullEnergy();
-            isEnergy = false;
-            turn++;
-            turnTxt.text = "Turno " + turn;
         }
 
         return isEnergy;
@@ -114,8 +108,8 @@ public class PlayerMove : MonoBehaviour
     public void RecognizedVoice2(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
-        int newNum = (int.Parse(speech.text) - 1);
-        moveCmd[speech.text].Invoke(newNum);
+        
+        moveCmd[speech.text].Invoke(speech.text);
     }
     public void RecognizedVoice3(PhraseRecognizedEventArgs speech)
     {
@@ -132,22 +126,42 @@ public class PlayerMove : MonoBehaviour
         stateImg.color = Color.blue;
 
     }
-    private void MoveCasilla(int i)
+
+    private void NewTurn()
     {
-        if (TurnEnergy(3))
+        playerStats.FullEnergy();
+        turn++;
+        turnTxt.text = "Turno " + turn;
+    }
+
+    private void MoveCasilla(string i)
+    {
+        int dis = (int)(Vector3.Distance(GameObject.Find(i).transform.position, transform.position)/5);
+        if (GameObject.Find(i).CompareTag("Section"))
         {
-            playerNM.destination = positionTr[i].transform.position;
-            startCmdR.Start();
-            moveCmdR.Stop();
-            stateImg.color = Color.white;
+            if (TurnEnergy(dis))
+            {
+                playerNM.destination = GameObject.Find(i).transform.position;
+                startCmdR.Start();
+                moveCmdR.Stop();
+                stateImg.color = Color.white;
+                gridA.DisableGrid();
+            }
+            else
+            {
+                startCmdR.Start();
+                moveCmdR.Stop();
+                stateImg.color = Color.white;
+                gridA.DisableGrid();
+            }
         }
         else
         {
             startCmdR.Start();
             moveCmdR.Stop();
             stateImg.color = Color.white;
+            gridA.DisableGrid();
         }
-        gridA.DisableGrid();
     }
 
     //attack actions

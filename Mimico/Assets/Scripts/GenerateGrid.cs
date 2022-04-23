@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class GenerateGrid : MonoBehaviour
 {
     RaycastHit hit;
-    [SerializeField] GameObject pos;
     private PlayerMove playerM;
 
     void Start()
@@ -22,11 +21,22 @@ public class GenerateGrid : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f))
         {
-            if (!hit.transform.gameObject.CompareTag("Collide"))
+            if (hit.transform.gameObject.layer == 9)
             {
-                Vector3 newPos = hit.point;
-                newPos.y += 1;
-                pos.transform.position = newPos;
+                hit.transform.GetChild(0).GetComponent<Canvas>().enabled = true;
+                hit.transform.tag = "Section";
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f))
+        {
+            if (hit.transform.gameObject.layer == 9)
+            {
+                hit.transform.GetChild(0).GetComponent<Canvas>().enabled = false;
+                hit.transform.tag = "Untagged";
             }
         }
     }
