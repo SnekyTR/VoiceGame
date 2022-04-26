@@ -28,6 +28,10 @@ public class PlayerMove : MonoBehaviour
     private bool inAtk;
 
     //voice commands start turn
+    private Dictionary<string, Action<string>> selectPJCmd = new Dictionary<string, Action<string>>();
+    private KeywordRecognizer selectPJCmdR;
+
+    //voice commands select action
     private Dictionary<string, Action> startCmd = new Dictionary<string, Action>();
     private KeywordRecognizer startCmdR;
 
@@ -35,9 +39,13 @@ public class PlayerMove : MonoBehaviour
     private Dictionary<string, Action<string>> moveCmd = new Dictionary<string, Action<string>>();
     private KeywordRecognizer moveCmdR;
 
-    //voide commands attack
-    private Dictionary<string, Action> atkCmd = new Dictionary<string, Action>();
+    //voice commands attack
+    private Dictionary<string, Action<string>> atkCmd = new Dictionary<string, Action<string>>();
     private KeywordRecognizer atkCmdR;
+
+    //voice commands spells
+    private Dictionary<string, Action<string>> spellCmd = new Dictionary<string, Action<string>>();
+    private KeywordRecognizer spellCmdR;
 
 
     void Start()
@@ -46,6 +54,12 @@ public class PlayerMove : MonoBehaviour
         turnTxt.text = "Turn " + turn;
 
         //start turn
+        selectPJCmd.Add("player uno", SelectPJ);
+
+        selectPJCmdR = new KeywordRecognizer(selectPJCmd.Keys.ToArray());
+        selectPJCmdR.OnPhraseRecognized += RecognizedVoice4;
+
+        //select action
         startCmd.Add("mover", StartMove);
         startCmd.Add("muevete a", StartMove);
         startCmd.Add("atacar", StartAttack);
@@ -67,13 +81,20 @@ public class PlayerMove : MonoBehaviour
         moveCmdR = new KeywordRecognizer(moveCmd.Keys.ToArray());
         moveCmdR.OnPhraseRecognized += RecognizedVoice2;
 
-        startCmdR.Start();
-
         //player attack
-        atkCmd.Add(enemyNames[0], Enemy01);
+        atkCmd.Add(enemyNames[0], Enemy);
 
         atkCmdR = new KeywordRecognizer(atkCmd.Keys.ToArray());
         atkCmdR.OnPhraseRecognized += RecognizedVoice3;
+
+        //spells
+        spellCmd.Add("meteor atack", Spells);
+
+        spellCmdR = new KeywordRecognizer(spellCmd.Keys.ToArray());
+        spellCmdR.OnPhraseRecognized += RecognizedVoice5;
+
+        //initial voice
+        selectPJCmdR.Start();
     }
 
     public void SetList(Transform[] go, string[] ns)
@@ -94,9 +115,12 @@ public class PlayerMove : MonoBehaviour
         return isEnergy;
     }
 
-    void Update()
+    void LateUpdate()
     {
-
+        if (playerNM.isStopped)
+        {
+            print("hi");
+        }
     }
 
     public void RecognizedVoice1(PhraseRecognizedEventArgs speech)
@@ -114,7 +138,24 @@ public class PlayerMove : MonoBehaviour
     public void RecognizedVoice3(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
-        atkCmd[speech.text].Invoke();
+        atkCmd[speech.text].Invoke(speech.text);
+    }
+    public void RecognizedVoice4(PhraseRecognizedEventArgs speech)
+    {
+        Debug.Log(speech.text);
+        selectPJCmd[speech.text].Invoke(speech.text);
+    }
+    public void RecognizedVoice5(PhraseRecognizedEventArgs speech)
+    {
+        Debug.Log(speech.text);
+        spellCmd[speech.text].Invoke(speech.text);
+    }
+
+    //select pj actions
+    private void SelectPJ(string n)
+    {
+        selectPJCmdR.Stop();
+        startCmdR.Start();
     }
 
     //move actions
@@ -133,23 +174,23 @@ public class PlayerMove : MonoBehaviour
         turn++;
         turnTxt.text = "Turno " + turn;
     }
-
+    //movement
     private void MoveCasilla(string i)
     {
-        int dis = (int)(Vector3.Distance(GameObject.Find(i).transform.position, transform.position)/5);
+        int dis = (int)(Vector3.Distance(GameObject.Find(i).transform.position, transform.position)/2);     //formula energia distancia
         if (GameObject.Find(i).CompareTag("Section"))
         {
             if (TurnEnergy(dis))
             {
                 playerNM.destination = GameObject.Find(i).transform.position;
-                startCmdR.Start();
+                selectPJCmdR.Start();
                 moveCmdR.Stop();
                 stateImg.color = Color.white;
                 gridA.DisableGrid();
             }
             else
             {
-                startCmdR.Start();
+                selectPJCmdR.Start();
                 moveCmdR.Stop();
                 stateImg.color = Color.white;
                 gridA.DisableGrid();
@@ -157,53 +198,48 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            startCmdR.Start();
+            selectPJCmdR.Start();
             moveCmdR.Stop();
             stateImg.color = Color.white;
             gridA.DisableGrid();
         }
     }
-
     //attack actions
     private void StartAttack()
     {
         startCmdR.Stop();
         atkCmdR.Start();
+        spellCmdR.Start();
         stateImg.color = Color.red;
     }
-    private void OnTriggerEnter(Collider other)
+    //spells actions
+    private void Spells(string n)
     {
-        if (inAtk && other.gameObject == target)
-        {
-            target.GetComponent<EnemyStats>().SetLife(-playerStats.GetAtk());
-            startCmdR.Start();
-            atkCmdR.Stop();
-            stateImg.color = Color.white;
-            playerNM.destination = transform.position;
-            GetComponent<SphereCollider>().enabled = false;
-        }
+        spellCmdR.Stop();
+        stateImg.color = Color.red;
     }
-    private void Enemy01()
+    private void Enemy(string n)
     {
-        if (Vector3.Distance(playerNM.transform.position, enemyTr[0].position) < 10)
+        if (Vector3.Distance(playerNM.transform.position, enemyTr[0].position) < 5)
         {
             if (TurnEnergy(5))
             {
-                playerNM.destination = enemyTr[0].position;
                 target = enemyTr[0].gameObject;
-                inAtk = true;
-                GetComponent<SphereCollider>().enabled = true;
+                target.GetComponent<EnemyStats>().SetLife(-playerStats.GetAtk());
+                selectPJCmdR.Start();
+                atkCmdR.Stop();
+                stateImg.color = Color.white;
             }
             else
             {
-                startCmdR.Start();
+                selectPJCmdR.Start();
                 atkCmdR.Stop();
                 stateImg.color = Color.white;
             }
         }
         else
         {
-            startCmdR.Start();
+            selectPJCmdR.Start();
             atkCmdR.Stop();
             stateImg.color = Color.white;
             print("fuera de alcance");

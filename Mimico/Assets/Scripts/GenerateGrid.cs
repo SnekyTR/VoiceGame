@@ -8,22 +8,19 @@ public class GenerateGrid : MonoBehaviour
     RaycastHit hit;
     private PlayerMove playerM;
 
-    void Start()
-    {
-        playerM = GameObject.Find("Player").GetComponent<PlayerMove>();
-    }
-
     void LateUpdate()
     {
         
     }
     private void OnEnable()
     {
+        playerM = GameObject.Find("Player").GetComponent<PlayerMove>();
+
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f))
         {
             if (hit.transform.gameObject.layer == 9)
             {
-                hit.transform.GetChild(0).GetComponent<Canvas>().enabled = true;
+                hit.transform.GetComponent<SectionControl>().EnableSection(playerM.transform);
                 hit.transform.tag = "Section";
             }
         }
@@ -35,7 +32,7 @@ public class GenerateGrid : MonoBehaviour
         {
             if (hit.transform.gameObject.layer == 9)
             {
-                hit.transform.GetChild(0).GetComponent<Canvas>().enabled = false;
+                hit.transform.GetComponent<SectionControl>().DisableSection();
                 hit.transform.tag = "Untagged";
             }
         }
