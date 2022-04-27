@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     public GridActivation gridA;
     [SerializeField] private Image stateImg;
     [SerializeField] private Text turnTxt;
+    [SerializeField] private Image range;
     private int turn = 1;
 
     [Header("Locations")]
@@ -103,7 +104,7 @@ public class PlayerMove : MonoBehaviour
         posNames = ns;
     }
 
-    private bool TurnEnergy(int n)
+    private bool TurnEnergy(float n)
     {
         bool isEnergy = false;
         if (playerStats.GetEnergy() >= n)
@@ -177,10 +178,16 @@ public class PlayerMove : MonoBehaviour
     //movement
     private void MoveCasilla(string i)
     {
-        int dis = (int)(Vector3.Distance(GameObject.Find(i).transform.position, transform.position)/2);     //formula energia distancia
+        float energy = (Vector3.Distance(GameObject.Find(i).transform.position, transform.position) / 2);
+        if (energy > ((int)energy + 0.1f) && energy < ((int)energy + 0.7f))
+        {
+            energy = (int)energy + 0.5f;
+        }
+        else if (energy > ((int)energy + 0.7f)) energy = (int)energy + 1;
+        else energy = (int)energy;   //formula energia distancia
         if (GameObject.Find(i).CompareTag("Section"))
         {
-            if (TurnEnergy(dis))
+            if (TurnEnergy(energy))
             {
                 playerNM.destination = GameObject.Find(i).transform.position;
                 selectPJCmdR.Start();
@@ -208,8 +215,8 @@ public class PlayerMove : MonoBehaviour
     private void StartAttack()
     {
         startCmdR.Stop();
-        atkCmdR.Start();
         spellCmdR.Start();
+        atkCmdR.Start();
         stateImg.color = Color.red;
     }
     //spells actions
@@ -244,5 +251,7 @@ public class PlayerMove : MonoBehaviour
             stateImg.color = Color.white;
             print("fuera de alcance");
         }
+
+        if (spellCmdR.IsRunning) spellCmdR.Stop();
     }
 }

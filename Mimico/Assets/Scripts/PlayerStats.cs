@@ -8,11 +8,11 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private int life;
     [SerializeField] private int mana;
     [SerializeField] private int atk;
-    [SerializeField] private int energy;
+    [SerializeField] private float energy;
 
     private float maxLife;
     private float maxMana;
-    public int maxEnergy;
+    public float maxEnergy;
 
     [SerializeField] private Slider lifeSld;
     [SerializeField] private Slider manaSld;
@@ -43,7 +43,7 @@ public class PlayerStats : MonoBehaviour
         manaSld.value = (mana / maxMana);
     }
 
-    public void SetEnergy(int n)
+    public void SetEnergy(float n)
     {
         energy += n;
         energyTxt.text = energy.ToString();
@@ -60,7 +60,7 @@ public class PlayerStats : MonoBehaviour
         return atk;
     }
 
-    public int GetEnergy()
+    public float GetEnergy()
     {
         return energy;
     }

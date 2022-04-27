@@ -10,9 +10,24 @@ public class SectionControl : MonoBehaviour
 
     public void EnableSection(Transform tr)
     {
+        float energy = (Vector3.Distance(tr.position, transform.position) / 2);
+        if (energy > ((int)energy + 0.1f) && energy < ((int)energy + 0.7f))
+        {
+            energy = (int)energy + 0.5f;
+        }
+        else if (energy > ((int)energy + 0.7f)) energy = (int)energy + 1;       //formula energia mov
+        else energy = (int)energy;
+
+        if(tr.gameObject.GetComponent<PlayerStats>().GetEnergy() <= energy)
+        {
+            transform.tag = "Untagged";
+            DisableSection();
+            return;
+        }
+
         canvasObj.SetActive(true);
         nameTxt.text = transform.name;
-        costTxt.text = ((int)(Vector3.Distance(tr.position, transform.position)/2)).ToString() + " E";         //formula energia mov
+        costTxt.text = energy.ToString() + " E";
     }
 
     public void DisableSection()
