@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     private NavMeshAgent playerNM;
     private PlayerStats playerStats;
     public GridActivation gridA;
+    public CameraFollow cam;
     [SerializeField] private Image stateImg;
     [SerializeField] private Text turnTxt;
     [SerializeField] private Image range;
@@ -157,6 +158,7 @@ public class PlayerMove : MonoBehaviour
     {
         selectPJCmdR.Stop();
         startCmdR.Start();
+        cam.NewParent(transform);
     }
 
     //move actions
