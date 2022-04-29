@@ -9,21 +9,20 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private int mana;
     [SerializeField] private int atk;
     [SerializeField] private float energy;
+    [SerializeField] private EnergyScript energyLo;
 
     private float maxLife;
     private float maxMana;
     public float maxEnergy;
 
-    [SerializeField] private Slider lifeSld;
-    [SerializeField] private Slider manaSld;
-    [SerializeField] private Text energyTxt;
+    [SerializeField] private Scrollbar lifeSld;
+    [SerializeField] private Scrollbar manaSld;
 
     void Start()
     {
         maxLife = life;
         maxMana = mana;
         maxEnergy = energy;
-        energyTxt.text = energy.ToString();
     }
 
     void Update()
@@ -34,25 +33,25 @@ public class PlayerStats : MonoBehaviour
     public void SetLife(int n)
     {
         life += n;
-        lifeSld.value = (life / maxLife);
+        lifeSld.size = (life / maxLife);
     }
 
     public void SetMana(int n)
     {
         mana += n;
-        manaSld.value = (mana / maxMana);
+        manaSld.size = (mana / maxMana);
     }
 
     public void SetEnergy(float n)
     {
         energy += n;
-        energyTxt.text = energy.ToString();
+        energyLo.NewEnergyIcon(energy);
     }
 
     public void FullEnergy()
     {
         energy = maxEnergy;
-        energyTxt.text = energy.ToString();
+        energyLo.NewEnergyIcon(energy);
     }
 
     public int GetAtk()

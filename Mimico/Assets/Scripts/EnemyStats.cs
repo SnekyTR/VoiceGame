@@ -12,7 +12,8 @@ public class EnemyStats : MonoBehaviour
 
     private float maxLife;
 
-    [SerializeField] private Slider lifeSld;
+    [SerializeField] private Scrollbar lifeSld1;
+    [SerializeField] private Slider lifeSld2;
 
     void Start()
     {
@@ -29,6 +30,7 @@ public class EnemyStats : MonoBehaviour
         {
             Destroy(transform.gameObject);
         }
-        lifeSld.value = (life / maxLife);
+        lifeSld1.size = (life / maxLife);
+        lifeSld2.value = (life / maxLife);
     }
 }
