@@ -11,6 +11,7 @@ public class StateManager : MonoBehaviour
     private Transform[] casillas;
     private PlayerMove player;
     private CameraFollow gameM;
+    private Animator animator;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class StateManager : MonoBehaviour
         enemyNM = GetComponent<NavMeshAgent>();
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
         player = GameObject.Find("Player").GetComponent<PlayerMove>();
+        animator = GetComponent<Animator>();
 
         isOnRoute = false;
 
@@ -29,10 +31,11 @@ public class StateManager : MonoBehaviour
     {
         if (isOnRoute)
         {
-            if(enemyNM.velocity != Vector3.zero)
+            if(enemyNM.velocity == Vector3.zero)
             {
                 StatesManager();
                 isOnRoute = false;
+                animator.SetInteger("A_Movement", 0);
             }
         }
     }
@@ -46,11 +49,13 @@ public class StateManager : MonoBehaviour
     {
         if (enemyStats.GetEnergy() > 0)
         {
-            if(Vector3.Distance(transform.position, player.transform.position) < 4 && enemyStats.GetEnergy() > 4)
+            print(Vector3.Distance(transform.position, player.transform.position));
+            if(Vector3.Distance(transform.position, player.transform.position) < 4f && enemyStats.GetEnergy() > 4)
             {
                 player.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
                 enemyStats.SetEnergy(-4);
                 StatesManager();
+                StartCoroutine(AttackAnim());
                 print("ataco");
             }
             else
@@ -75,8 +80,10 @@ public class StateManager : MonoBehaviour
                 enemyStats.SetEnergy(-energy);
 
                 enemyNM.SetDestination(casillas[destiny].position);
+                animator.SetInteger("A_Movement", 1);
                 StartCoroutine(StartRoute());
                 print("en ruta");
+                print(enemyStats.GetEnergy());
             }
         }
         else
@@ -85,10 +92,14 @@ public class StateManager : MonoBehaviour
             print("0 energia");
         }
     }
-
+    private IEnumerator AttackAnim()
+    {
+        animator.SetInteger("A_Attack", 1);
+        yield return new WaitForSeconds(0.5f);
+    }
     private IEnumerator StartRoute()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
         isOnRoute = true;
     }
 

@@ -6,10 +6,14 @@ public class Fireball_Int : StateMachineBehaviour
 {
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("Entra1");
-        animator.SetInteger("A_FireBall", 5400);
-        animator.SetInteger("A_Movement", 5400);
-        animator.SetInteger("A_FireBall", 5400);
+        animator.SetInteger("A_FireBall", 0);
     }
-
+    public override void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
+    {
+        //animator.SetInteger("A_FireBall", 0);
+    }
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        //animator.SetInteger("A_FireBall", 0);
+    }
 }
