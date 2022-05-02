@@ -12,12 +12,14 @@ public class PlayerMove : MonoBehaviour
     //player
     private NavMeshAgent playerNM;
     private PlayerStats playerStats;
+    private CameraFollow gameM;
     public GridActivation gridA;
-    public CameraFollow cam;
     [SerializeField] private Image stateImg;
-    [SerializeField] private Text turnTxt;
     [SerializeField] private Image range;
-    private int turn = 1;
+    private bool voice1 = false;
+    private bool voice2 = false;
+    private bool voice3 = false;
+    private bool voice4 = false;
 
     [Header("Locations")]
     private Transform[] positionTr;
@@ -28,10 +30,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private string[] enemyNames;
     private GameObject target;
     private bool inAtk;
-
-    //voice commands start turn
-    private Dictionary<string, Action<string>> selectPJCmd = new Dictionary<string, Action<string>>();
-    private KeywordRecognizer selectPJCmdR;
 
     //voice commands select action
     private Dictionary<string, Action> startCmd = new Dictionary<string, Action>();
@@ -53,13 +51,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         playerStats = GetComponent<PlayerStats>();
-        turnTxt.text = "Turn " + turn;
-
-        //start turn
-        selectPJCmd.Add("player uno", SelectPJ);
-
-        selectPJCmdR = new KeywordRecognizer(selectPJCmd.Keys.ToArray());
-        selectPJCmdR.OnPhraseRecognized += RecognizedVoice4;
+        gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
 
         //select action
         startCmd.Add("mover", StartMove);
@@ -96,7 +88,37 @@ public class PlayerMove : MonoBehaviour
         spellCmdR.OnPhraseRecognized += RecognizedVoice5;
 
         //initial voice
-        selectPJCmdR.Start();
+        startCmdR.Start();
+        voice1 = true;
+    }
+
+    public void PlayerDeselect()
+    {
+        
+        if(startCmdR.IsRunning) startCmdR.Stop();
+        if(moveCmdR.IsRunning) moveCmdR.Stop();
+        if(atkCmdR.IsRunning) atkCmdR.Stop();
+        if(spellCmdR.IsRunning) spellCmdR.Stop();
+    }
+
+    public void PlayerSelect()
+    {
+        if (voice1 && !startCmdR.IsRunning)
+        {
+            startCmdR.Start();
+        }
+        if (voice2 && !moveCmdR.IsRunning)
+        {
+            moveCmdR.Start();
+        }
+        if (voice3 && !atkCmdR.IsRunning)
+        {
+            atkCmdR.Start();
+        }
+        if (voice4 && !spellCmdR.IsRunning)
+        {
+            spellCmdR.Start();
+        }
     }
 
     public void SetList(Transform[] go, string[] ns)
@@ -119,10 +141,7 @@ public class PlayerMove : MonoBehaviour
 
     void LateUpdate()
     {
-        if (playerNM.isStopped)
-        {
-            print("hi");
-        }
+        
     }
 
     public void RecognizedVoice1(PhraseRecognizedEventArgs speech)
@@ -130,7 +149,6 @@ public class PlayerMove : MonoBehaviour
         Debug.Log(speech.text);
         startCmd[speech.text].Invoke();
     }
-
     public void RecognizedVoice2(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
@@ -142,30 +160,21 @@ public class PlayerMove : MonoBehaviour
         Debug.Log(speech.text);
         atkCmd[speech.text].Invoke(speech.text);
     }
-    public void RecognizedVoice4(PhraseRecognizedEventArgs speech)
-    {
-        Debug.Log(speech.text);
-        selectPJCmd[speech.text].Invoke(speech.text);
-    }
     public void RecognizedVoice5(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
         spellCmd[speech.text].Invoke(speech.text);
     }
 
-    //select pj actions
-    private void SelectPJ(string n)
-    {
-        selectPJCmdR.Stop();
-        startCmdR.Start();
-        cam.NewParent(transform);
-    }
-
     //move actions
     private void StartMove()
     {
         startCmdR.Stop();
+        voice1 = false;
+
         moveCmdR.Start();
+        voice2 = true;
+
         gridA.EnableGrid();
         stateImg.color = Color.blue;
 
@@ -173,10 +182,9 @@ public class PlayerMove : MonoBehaviour
 
     private void NewTurn()
     {
-        playerStats.FullEnergy();
-        turn++;
-        turnTxt.text = "Turno " + turn;
+        gameM.NextTurn();
     }
+
     //movement
     private void MoveCasilla(string i)
     {
@@ -192,23 +200,35 @@ public class PlayerMove : MonoBehaviour
             if (TurnEnergy(energy))
             {
                 playerNM.destination = GameObject.Find(i).transform.position;
-                selectPJCmdR.Start();
+                startCmdR.Start();
+                voice1 = true;
+
                 moveCmdR.Stop();
+                voice2 = false;
+
                 stateImg.color = Color.white;
                 gridA.DisableGrid();
             }
             else
             {
-                selectPJCmdR.Start();
+                startCmdR.Start();
+                voice1 = true;
+
                 moveCmdR.Stop();
+                voice2 = false;
+
                 stateImg.color = Color.white;
                 gridA.DisableGrid();
             }
         }
         else
         {
-            selectPJCmdR.Start();
+            startCmdR.Start();
+            voice1 = true;
+
             moveCmdR.Stop();
+            voice2 = false;
+
             stateImg.color = Color.white;
             gridA.DisableGrid();
         }
@@ -217,14 +237,22 @@ public class PlayerMove : MonoBehaviour
     private void StartAttack()
     {
         startCmdR.Stop();
+        voice1 = false;
+
         spellCmdR.Start();
+        voice4 = true;
+
         atkCmdR.Start();
+        voice3 = true;
+
         stateImg.color = Color.red;
     }
     //spells actions
     private void Spells(string n)
     {
         spellCmdR.Stop();
+        voice4 = false;
+
         stateImg.color = Color.red;
     }
     private void Enemy(string n)
@@ -235,25 +263,42 @@ public class PlayerMove : MonoBehaviour
             {
                 target = enemyTr[0].gameObject;
                 target.GetComponent<EnemyStats>().SetLife(-playerStats.GetAtk());
-                selectPJCmdR.Start();
+                startCmdR.Start();
+                voice1 = true;
+
                 atkCmdR.Stop();
+                voice3 = false;
+
                 stateImg.color = Color.white;
             }
             else
             {
-                selectPJCmdR.Start();
+                startCmdR.Start();
+                voice1 = true;
+
                 atkCmdR.Stop();
+                voice3 = false;
+
                 stateImg.color = Color.white;
             }
         }
         else
         {
-            selectPJCmdR.Start();
+            startCmdR.Start();
+            voice1 = true;
+
             atkCmdR.Stop();
+            voice3 = false;
+
             stateImg.color = Color.white;
             print("fuera de alcance");
         }
 
-        if (spellCmdR.IsRunning) spellCmdR.Stop();
+        if (spellCmdR.IsRunning)
+        {
+            spellCmdR.Stop();
+            voice4 = false;
+        }
+
     }
 }

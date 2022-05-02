@@ -9,8 +9,10 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] private int life;
     [SerializeField] private int mana;
     [SerializeField] private int atk;
+    [SerializeField] private float energy;
 
     private float maxLife;
+    private float maxEnergy;
 
     [SerializeField] private Scrollbar lifeSld1;
     [SerializeField] private Slider lifeSld2;
@@ -18,6 +20,7 @@ public class EnemyStats : MonoBehaviour
     void Start()
     {
         maxLife = life;
+        maxEnergy = energy;
     }
     void Update()
     {
@@ -32,5 +35,25 @@ public class EnemyStats : MonoBehaviour
         }
         lifeSld1.size = (life / maxLife);
         lifeSld2.value = (life / maxLife);
+    }
+
+    public float GetEnergy()
+    {
+        return energy;
+    }
+
+    public int GetAtk()
+    {
+        return atk;
+    }
+
+    public void SetEnergy(float n)
+    {
+        energy += n;
+    }
+
+    public void FullEnergy()
+    {
+        energy = maxEnergy;
     }
 }
