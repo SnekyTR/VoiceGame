@@ -56,7 +56,8 @@ public class PlayerStats : MonoBehaviour
 
     public int GetAtk()
     {
-        return atk;
+        int newAtk = Random.Range((atk - 2), atk);
+        return newAtk;
     }
 
     public float GetEnergy()

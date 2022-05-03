@@ -44,7 +44,8 @@ public class EnemyStats : MonoBehaviour
 
     public int GetAtk()
     {
-        return atk;
+        int newAtk = Random.Range((atk - 2), atk);
+        return newAtk;
     }
 
     public void SetEnergy(float n)

@@ -50,11 +50,10 @@ public class StateManager : MonoBehaviour
         if (enemyStats.GetEnergy() > 0)
         {
             print(Vector3.Distance(transform.position, player.transform.position));
-            if(Vector3.Distance(transform.position, player.transform.position) < 4f && enemyStats.GetEnergy() > 4)
+            if(Vector3.Distance(transform.position, player.transform.position) < 4f && enemyStats.GetEnergy() >= 4)
             {
                 player.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
                 enemyStats.SetEnergy(-4);
-                StatesManager();
                 StartCoroutine(AttackAnim());
                 print("ataco");
             }
@@ -95,7 +94,8 @@ public class StateManager : MonoBehaviour
     private IEnumerator AttackAnim()
     {
         animator.SetInteger("A_Attack", 1);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
+        StatesManager();
     }
     private IEnumerator StartRoute()
     {
@@ -106,7 +106,8 @@ public class StateManager : MonoBehaviour
     private int RandomPlayerPiece()
     {
         int e = Random.Range(0, casillas.Length);
-        if (Vector3.Distance(player.transform.position, casillas[e].position) > 3)
+        float dist = Vector3.Distance(player.transform.position, casillas[e].position);
+        if (dist > 3f || dist < 1f)
         {
             return RandomPlayerPiece();
         }
