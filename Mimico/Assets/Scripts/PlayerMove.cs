@@ -29,7 +29,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Transform[] enemyTr;
     [SerializeField] private string[] enemyNames;
     private GameObject target;
-    private bool inAtk;
+    private bool inAtk, setTarget;
 
     //voice commands select action
     private Dictionary<string, Action> startCmd = new Dictionary<string, Action>();
@@ -141,7 +141,12 @@ public class PlayerMove : MonoBehaviour
 
     void LateUpdate()
     {
-        
+        if (setTarget)
+        {
+            Vector3 direction = enemyTr[0].transform.position - transform.position;
+            Quaternion rotacion = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotacion, 7f * Time.deltaTime);
+        }
     }
 
     public void RecognizedVoice1(PhraseRecognizedEventArgs speech)
@@ -261,15 +266,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (TurnEnergy(5))
             {
-                target = enemyTr[0].gameObject;
-                target.GetComponent<EnemyStats>().SetLife(-playerStats.GetAtk());
-                startCmdR.Start();
-                voice1 = true;
-
-                atkCmdR.Stop();
-                voice3 = false;
-
-                stateImg.color = Color.white;
+                StartCoroutine(StartAtkAnim());
             }
             else
             {
@@ -300,5 +297,24 @@ public class PlayerMove : MonoBehaviour
             voice4 = false;
         }
 
+    }
+
+    private IEnumerator StartAtkAnim()
+    {
+        atkCmdR.Stop();
+        voice3 = false;
+
+        setTarget = true;
+
+        yield return new WaitForSeconds(0.7f);
+
+        setTarget = false;
+
+        target = enemyTr[0].gameObject;
+        target.GetComponent<EnemyStats>().SetLife(-playerStats.GetAtk());
+        startCmdR.Start();
+        voice1 = true;
+
+        stateImg.color = Color.white;
     }
 }

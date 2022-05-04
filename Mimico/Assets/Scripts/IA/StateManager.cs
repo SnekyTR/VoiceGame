@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class StateManager : MonoBehaviour
 {
-    public bool isOnRoute;
+    public bool isOnRoute, setTarget;
     private EnemyStats enemyStats;
     private NavMeshAgent enemyNM;
     private Transform[] casillas;
@@ -23,8 +23,7 @@ public class StateManager : MonoBehaviour
         animator = GetComponent<Animator>();
 
         isOnRoute = false;
-
-        print(casillas[RandomPlayerPiece()].name);
+        setTarget = false;
     }
 
     void LateUpdate()
@@ -37,6 +36,13 @@ public class StateManager : MonoBehaviour
                 isOnRoute = false;
                 animator.SetInteger("A_Movement", 0);
             }
+        }
+
+        if (setTarget)
+        {
+            Vector3 direction = player.transform.position - transform.position;
+            Quaternion rotacion = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotacion, 7f * Time.deltaTime);
         }
     }
 
@@ -52,12 +58,10 @@ public class StateManager : MonoBehaviour
             print(Vector3.Distance(transform.position, player.transform.position));
             if(Vector3.Distance(transform.position, player.transform.position) < 4f && enemyStats.GetEnergy() >= 4)
             {
-                player.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
-                enemyStats.SetEnergy(-4);
                 StartCoroutine(AttackAnim());
                 print("ataco");
             }
-            else
+            else if(Vector3.Distance(transform.position, player.transform.position) > 4f)
             {
                 int destiny = RandomPlayerPiece();
 
@@ -84,6 +88,10 @@ public class StateManager : MonoBehaviour
                 print("en ruta");
                 print(enemyStats.GetEnergy());
             }
+            else
+            {
+                gameM.NextIA(GetComponent<StateManager>());
+            }
         }
         else
         {
@@ -93,8 +101,14 @@ public class StateManager : MonoBehaviour
     }
     private IEnumerator AttackAnim()
     {
+        setTarget = true;
+        yield return new WaitForSeconds(0.8f);
         animator.SetInteger("A_Attack", 1);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
+        player.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
+        enemyStats.SetEnergy(-4);
+        yield return new WaitForSeconds(0.5f);
+        setTarget = false;
         StatesManager();
     }
     private IEnumerator StartRoute()
