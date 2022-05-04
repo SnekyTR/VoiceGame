@@ -20,6 +20,8 @@ public class PlayerMove : MonoBehaviour
     private bool voice2 = false;
     private bool voice3 = false;
     private bool voice4 = false;
+    private bool isOnRoute =false;
+    private Animator animator;
 
     [Header("Locations")]
     private Transform[] positionTr;
@@ -50,6 +52,7 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         playerStats = GetComponent<PlayerStats>();
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
 
@@ -60,7 +63,7 @@ public class PlayerMove : MonoBehaviour
         startCmd.Add("ataca", StartAttack);
         startCmd.Add("ataca a", StartAttack);
         startCmd.Add("atacar a", StartAttack);
-        startCmd.Add("nuevo turno", NewTurn);
+        startCmd.Add("pasar", NewTurn);
 
         //movement
         playerNM = GetComponent<NavMeshAgent>();
@@ -145,7 +148,13 @@ public class PlayerMove : MonoBehaviour
         {
             Vector3 direction = enemyTr[0].transform.position - transform.position;
             Quaternion rotacion = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotacion, 7f * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotacion, 6f * Time.deltaTime);
+        }
+       if (isOnRoute && playerNM.velocity == Vector3.zero)
+        {
+            print("ss");
+            animator.SetInteger("A_Movement", 0);
+            isOnRoute = false;
         }
     }
 
@@ -204,6 +213,8 @@ public class PlayerMove : MonoBehaviour
         {
             if (TurnEnergy(energy))
             {
+                animator.SetInteger("A_Movement", 1);
+                StartCoroutine(StopAnimation());
                 playerNM.destination = GameObject.Find(i).transform.position;
                 startCmdR.Start();
                 voice1 = true;
@@ -237,6 +248,12 @@ public class PlayerMove : MonoBehaviour
             stateImg.color = Color.white;
             gridA.DisableGrid();
         }
+    }
+
+    IEnumerator StopAnimation()
+    {
+        yield return new WaitForSeconds(0.5f);
+        isOnRoute = true;
     }
     //attack actions
     private void StartAttack()
@@ -301,6 +318,7 @@ public class PlayerMove : MonoBehaviour
 
     private IEnumerator StartAtkAnim()
     {
+        animator.SetInteger("A_FireBall", 1);
         atkCmdR.Stop();
         voice3 = false;
 

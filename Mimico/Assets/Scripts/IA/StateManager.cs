@@ -42,7 +42,7 @@ public class StateManager : MonoBehaviour
         {
             Vector3 direction = player.transform.position - transform.position;
             Quaternion rotacion = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotacion, 7f * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotacion, 5f * Time.deltaTime);
         }
     }
 

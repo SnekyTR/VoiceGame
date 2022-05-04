@@ -10,6 +10,7 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] private int mana;
     [SerializeField] private int atk;
     [SerializeField] private float energy;
+    private Animator animator;
 
     private float maxLife;
     private float maxEnergy;
@@ -19,6 +20,7 @@ public class EnemyStats : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         maxLife = life;
         maxEnergy = energy;
     }
@@ -31,8 +33,12 @@ public class EnemyStats : MonoBehaviour
         life += n;
         if(life <= 0)
         {
-            Destroy(transform.gameObject);
+            animator.SetInteger("A_Death", 1);
+        }else if(n < 0)
+        {
+            animator.SetInteger("A_Recieve", 1);
         }
+        
         lifeSld1.size = (life / maxLife);
         lifeSld2.value = (life / maxLife);
     }
