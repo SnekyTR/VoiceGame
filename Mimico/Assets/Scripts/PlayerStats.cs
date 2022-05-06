@@ -10,6 +10,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private int atk;
     [SerializeField] private float energy;
     [SerializeField] private EnergyScript energyLo;
+    private Animator animator;
 
     private float maxLife;
     private float maxMana;
@@ -20,6 +21,7 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         maxLife = life;
         maxMana = mana;
         maxEnergy = energy;
@@ -32,7 +34,17 @@ public class PlayerStats : MonoBehaviour
 
     public void SetLife(int n)
     {
+        
         life += n;
+        
+        if (life <= 0)
+        {
+            animator.SetInteger("A_Death", 1);
+        }
+        else if (n < 0)
+        {
+            animator.SetInteger("A_Recieve", 1);
+        }
         lifeSld.size = (life / maxLife);
     }
 
