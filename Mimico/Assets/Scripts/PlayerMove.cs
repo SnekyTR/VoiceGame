@@ -80,6 +80,7 @@ public class PlayerMove : MonoBehaviour
 
         //player attack
         atkCmd.Add(enemyNames[0], Enemy);
+        atkCmd.Add(enemyNames[1], Enemy);
 
         atkCmdR = new KeywordRecognizer(atkCmd.Keys.ToArray());
         atkCmdR.OnPhraseRecognized += RecognizedVoice3;
@@ -93,6 +94,8 @@ public class PlayerMove : MonoBehaviour
         //initial voice
         startCmdR.Start();
         voice1 = true;
+
+        PlayerDeselect();
     }
 
     public void PlayerDeselect()
@@ -279,7 +282,16 @@ public class PlayerMove : MonoBehaviour
     }
     private void Enemy(string n)
     {
-        if (Vector3.Distance(playerNM.transform.position, enemyTr[0].position) < 5)
+        for(int i = 0; i < enemyNames.Length; i++)
+        {
+            if(n == enemyNames[i])
+            {
+                target = enemyTr[i].gameObject;
+                break;
+            }
+        }
+
+        if (Vector3.Distance(playerNM.transform.position, target.transform.position) < 5)
         {
             if (TurnEnergy(5))
             {
@@ -328,7 +340,6 @@ public class PlayerMove : MonoBehaviour
 
         setTarget = false;
 
-        target = enemyTr[0].gameObject;
         target.GetComponent<EnemyStats>().SetLife(-playerStats.GetAtk());
         startCmdR.Start();
         voice1 = true;

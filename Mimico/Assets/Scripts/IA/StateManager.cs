@@ -9,7 +9,7 @@ public class StateManager : MonoBehaviour
     private EnemyStats enemyStats;
     private NavMeshAgent enemyNM;
     private Transform[] casillas;
-    private PlayerMove player;
+    private PlayerMove target;
     private CameraFollow gameM;
     private Animator animator;
 
@@ -19,7 +19,6 @@ public class StateManager : MonoBehaviour
         enemyStats = GetComponent<EnemyStats>();
         enemyNM = GetComponent<NavMeshAgent>();
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
-        player = GameObject.Find("Player").GetComponent<PlayerMove>();
         animator = GetComponent<Animator>();
 
         isOnRoute = false;
@@ -35,12 +34,13 @@ public class StateManager : MonoBehaviour
                 StatesManager();
                 isOnRoute = false;
                 animator.SetInteger("A_Movement", 0);
+                enemyNM.isStopped = true;
             }
         }
 
         if (setTarget)
         {
-            Vector3 direction = player.transform.position - transform.position;
+            Vector3 direction = target.transform.position - transform.position;
             Quaternion rotacion = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotacion, 5f * Time.deltaTime);
         }
@@ -48,6 +48,16 @@ public class StateManager : MonoBehaviour
 
     public void StarIA()
     {
+        float dis = 10000;
+        for (int i = 0; i < gameM.players.Length; i++)
+        {
+            if(Vector3.Distance(transform.position, gameM.players[i].transform.position) < dis)
+            {
+                target = gameM.players[i].GetComponent<PlayerMove>();
+                dis = Vector3.Distance(transform.position, gameM.players[i].transform.position);
+            }
+        }
+
         StatesManager();
     }
 
@@ -55,13 +65,12 @@ public class StateManager : MonoBehaviour
     {
         if (enemyStats.GetEnergy() > 0)
         {
-            print(Vector3.Distance(transform.position, player.transform.position));
-            if(Vector3.Distance(transform.position, player.transform.position) < 4f && enemyStats.GetEnergy() >= 4)
+            print(Vector3.Distance(transform.position, target.transform.position));
+            if(Vector3.Distance(transform.position, target.transform.position) < 4f && enemyStats.GetEnergy() >= 4)
             {
                 StartCoroutine(AttackAnim());
-                print("ataco");
             }
-            else if(Vector3.Distance(transform.position, player.transform.position) > 4f)
+            else if(Vector3.Distance(transform.position, target.transform.position) > 4f)
             {
                 int destiny = RandomPlayerPiece();
 
@@ -76,7 +85,6 @@ public class StateManager : MonoBehaviour
                 if (energy > enemyStats.GetEnergy())
                 {
                     gameM.NextIA(GetComponent<StateManager>());
-                    print("energia insuficiente");
                     return;
                 }
 
@@ -85,7 +93,6 @@ public class StateManager : MonoBehaviour
                 enemyNM.SetDestination(casillas[destiny].position);
                 animator.SetInteger("A_Movement", 1);
                 StartCoroutine(StartRoute());
-                print("en ruta");
                 print(enemyStats.GetEnergy());
             }
             else
@@ -96,7 +103,6 @@ public class StateManager : MonoBehaviour
         else
         {
             gameM.NextIA(GetComponent<StateManager>());
-            print("0 energia");
         }
     }
     private IEnumerator AttackAnim()
@@ -105,7 +111,7 @@ public class StateManager : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         animator.SetInteger("A_Attack", 1);
         yield return new WaitForSeconds(0.5f);
-        player.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
+        target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
         enemyStats.SetEnergy(-4);
         yield return new WaitForSeconds(0.5f);
         setTarget = false;
@@ -120,7 +126,7 @@ public class StateManager : MonoBehaviour
     private int RandomPlayerPiece()
     {
         int e = Random.Range(0, casillas.Length);
-        float dist = Vector3.Distance(player.transform.position, casillas[e].position);
+        float dist = Vector3.Distance(target.transform.position, casillas[e].position);
         if (dist > 3f || dist < 1f)
         {
             return RandomPlayerPiece();

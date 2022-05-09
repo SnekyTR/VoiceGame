@@ -11,8 +11,8 @@ public class CameraFollow : MonoBehaviour
 {
     private Transform playerParent;
     public bool whoTurn;
-    [SerializeField] private PlayerMove[] players;
-    [SerializeField] private StateManager[] enemys;
+    public PlayerMove[] players;
+    public StateManager[] enemys;
 
     private Dictionary<string, Action<string>> selectPJCmd = new Dictionary<string, Action<string>>();
     private KeywordRecognizer selectPJCmdR;
@@ -21,7 +21,10 @@ public class CameraFollow : MonoBehaviour
     {
         whoTurn = true;         //player turn
 
-        selectPJCmd.Add(players[0].name, SelectPJ);
+        for (int i = 0; i < players.Length; i++)
+        {
+            selectPJCmd.Add(players[i].name, SelectPJ);
+        }
 
         for (int i = 0; i < enemys.Length; i++)
         {
@@ -52,16 +55,42 @@ public class CameraFollow : MonoBehaviour
     {
         if(n == players[0].name)
         {
-            if(whoTurn) players[0].PlayerSelect();
+            if (whoTurn)
+            {
+                players[0].PlayerSelect();
+                if (players.Length > 1) players[1].PlayerDeselect();
+                if (players.Length > 2) players[2].PlayerDeselect();
+            }
 
             NewParent(players[0].transform);
         }
+        else if(players.Length > 1 && n == players[1].name)
+        {
+            if (whoTurn)
+            {
+                if (players.Length > 1) players[1].PlayerSelect();
+                players[0].PlayerDeselect();
+                if (players.Length > 2) players[2].PlayerDeselect();
+            }
+
+            NewParent(players[1].transform);
+        }
+        else if(players.Length > 2 &&n == players[2].name)
+        {
+            if (whoTurn)
+            {
+                if (players.Length > 2) players[2].PlayerSelect();
+                players[0].PlayerDeselect();
+                if (players.Length > 1) players[1].PlayerDeselect();
+            }
+
+            NewParent(players[2].transform);
+        }
         else
         {
-            for(int i = 0; i < players.Length; i++)
-            {
-                if(whoTurn) players[i].PlayerDeselect();
-            }
+            if (whoTurn) players[0].PlayerDeselect();
+            if (whoTurn && players.Length > 1) players[1].PlayerDeselect();
+            if (whoTurn && players.Length > 2) players[2].PlayerDeselect();
         }
 
         for(int i = 0;i < enemys.Length; i++)
@@ -116,10 +145,12 @@ public class CameraFollow : MonoBehaviour
             if(n == enemys[i] && n != enemys[(enemys.Length)-1])
             {
                 enemys[(i + 1)].StarIA();
+                return;
             }
             else if(n == enemys[(enemys.Length) - 1])
             {
                 NextTurn();
+                return;
             }
         }
     }
