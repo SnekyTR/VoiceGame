@@ -28,7 +28,16 @@ public class PlayerStats : MonoBehaviour
         maxMana = mana;
         maxEnergy = energy;
     }
+    //Coge los stats guardados en el fichero antes de abrir el nivel
+    private void LoadStatsPlayer()
+    {
+        GameData data = SaveSystem.LoadPlayer();
 
+        lifePoints = data.healthStat;
+        strengthPoints = data.strength;
+        agilityPoints = data.agility;
+        intellectPoints = data.intellectStat;
+    }
     void Update()
     {
         

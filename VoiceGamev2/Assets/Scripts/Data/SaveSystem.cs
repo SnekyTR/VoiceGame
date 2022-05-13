@@ -10,13 +10,13 @@ public static class SaveSystem
 
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerData data = new PlayerData(player);
+        GameData data = new GameData(player);
 
         formatter.Serialize(stream, data);
         stream.Close();
     }
 
-    public static PlayerData LoadPlayer()
+    public static GameData LoadPlayer()
     {
         string path = Application.persistentDataPath + "/player.fun";
         if (File.Exists(path))
@@ -24,7 +24,7 @@ public static class SaveSystem
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            PlayerData data = formatter.Deserialize(stream) as PlayerData;
+            GameData data = formatter.Deserialize(stream) as GameData;
             stream.Close();
             return data;
         }
@@ -34,4 +34,34 @@ public static class SaveSystem
             return null;
         }
     }
+    /*public static void SaveGame(GeneralStats player)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/game.fun";
+
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        GameData data = new GameData(manager);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+    public static GameData LoadData ()
+    {
+        string path = Application.persistentDataPath + "/player.fun";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            GameData data = formatter.Deserialize(stream) as GameData;
+            stream.Close();
+            return data;
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + path);
+            return null;
+        }
+    }*/
 }

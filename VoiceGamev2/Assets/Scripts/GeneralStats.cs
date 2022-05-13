@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class GeneralStats : MonoBehaviour
 {
+    public int playerLevel;
+    public int playerExperience;
     public int lifePoints;
     public int strengthPoints;
     public int intellectPoints;
     public int agilityPoints;
+    public int critStrikePoints;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +27,8 @@ public class GeneralStats : MonoBehaviour
     {
         SaveSystem.SavePlayer(this);
     }
-    public void LoadPlayer()
+
+    /*public void LoadPlayer(LoadCharacters characters)
     {
         PlayerData data = SaveSystem.LoadPlayer();
 
@@ -33,9 +37,10 @@ public class GeneralStats : MonoBehaviour
         agilityPoints = data.agility;
         intellectPoints = data.intellectStat;
 
+
         Vector3 position;
         position.x = data.position[0];
         position.y = data.position[1];
         position.z = data.position[2];
-    }
+    }*/
 }
