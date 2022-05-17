@@ -15,7 +15,7 @@ public class GridActivation : MonoBehaviour
         {
             nameC[i] = casillas[i].name;
         }
-        playerM.SetList(casillas, nameC);
+        playerM.SetList(nameC);
     }
     void Start()
     {
@@ -27,9 +27,9 @@ public class GridActivation : MonoBehaviour
         
     }
 
-    public void EnableGrid()
+    public void EnableGrid(Transform tr)
     {
-        transform.position = new Vector3(playerM.transform.position.x, transform.position.y, playerM.transform.position.z);
+        transform.position = new Vector3(tr.position.x, transform.position.y, tr.position.z);
         for(int i = 0; i < rays.Length; i++)
         {
             rays[i].SetActive(true);

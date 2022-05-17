@@ -12,19 +12,16 @@ public class PlayerMove : MonoBehaviour
     //player
     private NavMeshAgent playerNM;
     private PlayerStats playerStats;
+    private Animator animator;
+    private Transform playerTr;
+
     private CameraFollow gameM;
     public GridActivation gridA;
     [SerializeField] private Image stateImg;
     [SerializeField] private Image range;
-    private bool voice1 = false;
-    private bool voice2 = false;
-    private bool voice3 = false;
-    private bool voice4 = false;
     private bool isOnRoute =false;
-    private Animator animator;
 
     [Header("Locations")]
-    private Transform[] positionTr;
     private string[] posNames;
 
     [Header("Enemys")]
@@ -52,8 +49,6 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
-        playerStats = GetComponent<PlayerStats>();
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
 
         //select action
@@ -66,7 +61,6 @@ public class PlayerMove : MonoBehaviour
         startCmd.Add("pasar", NewTurn);
 
         //movement
-        playerNM = GetComponent<NavMeshAgent>();
 
         for(int i = 0; i < posNames.Length; i++)
         {
@@ -79,8 +73,10 @@ public class PlayerMove : MonoBehaviour
         moveCmdR.OnPhraseRecognized += RecognizedVoice2;
 
         //player attack
-        atkCmd.Add(enemyNames[0], Enemy);
-        atkCmd.Add(enemyNames[1], Enemy);
+        for (int i = 0; i < gameM.enemys.Length; i++)
+        {
+            atkCmd.Add(gameM.enemys[i].name, Enemy);
+        }
 
         atkCmdR = new KeywordRecognizer(atkCmd.Keys.ToArray());
         atkCmdR.OnPhraseRecognized += RecognizedVoice3;
@@ -93,43 +89,34 @@ public class PlayerMove : MonoBehaviour
 
         //initial voice
         startCmdR.Start();
-        voice1 = true;
 
         PlayerDeselect();
     }
 
+    public void NewPlayer(GameObject Pl)
+    {
+        animator = Pl.GetComponent<Animator>();
+        playerStats = Pl.GetComponent<PlayerStats>();
+        playerNM = Pl.GetComponent<NavMeshAgent>();
+        playerTr = Pl.transform;
+    }
+
     public void PlayerDeselect()
     {
-        
         if(startCmdR.IsRunning) startCmdR.Stop();
         if(moveCmdR.IsRunning) moveCmdR.Stop();
         if(atkCmdR.IsRunning) atkCmdR.Stop();
         if(spellCmdR.IsRunning) spellCmdR.Stop();
+        gridA.DisableGrid();
     }
 
     public void PlayerSelect()
     {
-        if (voice1 && !startCmdR.IsRunning)
-        {
-            startCmdR.Start();
-        }
-        if (voice2 && !moveCmdR.IsRunning)
-        {
-            moveCmdR.Start();
-        }
-        if (voice3 && !atkCmdR.IsRunning)
-        {
-            atkCmdR.Start();
-        }
-        if (voice4 && !spellCmdR.IsRunning)
-        {
-            spellCmdR.Start();
-        }
+        startCmdR.Start();
     }
 
-    public void SetList(Transform[] go, string[] ns)
+    public void SetList(string[] ns)
     {
-        positionTr = go;
         posNames = ns;
     }
 
@@ -151,7 +138,7 @@ public class PlayerMove : MonoBehaviour
         {
             Vector3 direction = enemyTr[0].transform.position - transform.position;
             Quaternion rotacion = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotacion, 6f * Time.deltaTime);
+            playerTr.transform.rotation = Quaternion.Slerp(transform.rotation, rotacion, 6f * Time.deltaTime);
         }
        if (isOnRoute && playerNM.velocity == Vector3.zero)
         {
@@ -187,12 +174,11 @@ public class PlayerMove : MonoBehaviour
     private void StartMove()
     {
         startCmdR.Stop();
-        voice1 = false;
 
         moveCmdR.Start();
-        voice2 = true;
+        print(playerTr.name);
 
-        gridA.EnableGrid();
+        gridA.EnableGrid(playerTr);
         stateImg.color = Color.blue;
 
     }
@@ -219,11 +205,10 @@ public class PlayerMove : MonoBehaviour
                 animator.SetInteger("A_Movement", 1);
                 StartCoroutine(StopAnimation());
                 playerNM.destination = GameObject.Find(i).transform.position;
+
                 startCmdR.Start();
-                voice1 = true;
 
                 moveCmdR.Stop();
-                voice2 = false;
 
                 stateImg.color = Color.white;
                 gridA.DisableGrid();
@@ -231,10 +216,8 @@ public class PlayerMove : MonoBehaviour
             else
             {
                 startCmdR.Start();
-                voice1 = true;
 
                 moveCmdR.Stop();
-                voice2 = false;
 
                 stateImg.color = Color.white;
                 gridA.DisableGrid();
@@ -243,10 +226,8 @@ public class PlayerMove : MonoBehaviour
         else
         {
             startCmdR.Start();
-            voice1 = true;
 
             moveCmdR.Stop();
-            voice2 = false;
 
             stateImg.color = Color.white;
             gridA.DisableGrid();
@@ -262,13 +243,10 @@ public class PlayerMove : MonoBehaviour
     private void StartAttack()
     {
         startCmdR.Stop();
-        voice1 = false;
 
         spellCmdR.Start();
-        voice4 = true;
 
         atkCmdR.Start();
-        voice3 = true;
 
         stateImg.color = Color.red;
     }
@@ -276,17 +254,16 @@ public class PlayerMove : MonoBehaviour
     private void Spells(string n)
     {
         spellCmdR.Stop();
-        voice4 = false;
 
         stateImg.color = Color.red;
     }
     private void Enemy(string n)
     {
-        for(int i = 0; i < enemyNames.Length; i++)
+        for(int i = 0; i < gameM.enemys.Length; i++)
         {
-            if(n == enemyNames[i])
+            if(n == gameM.enemys[i].name)
             {
-                target = enemyTr[i].gameObject;
+                target = gameM.enemys[i].gameObject;
                 break;
             }
         }
@@ -300,10 +277,8 @@ public class PlayerMove : MonoBehaviour
             else
             {
                 startCmdR.Start();
-                voice1 = true;
 
                 atkCmdR.Stop();
-                voice3 = false;
 
                 stateImg.color = Color.white;
             }
@@ -311,10 +286,8 @@ public class PlayerMove : MonoBehaviour
         else
         {
             startCmdR.Start();
-            voice1 = true;
 
             atkCmdR.Stop();
-            voice3 = false;
 
             stateImg.color = Color.white;
             print("fuera de alcance");
@@ -323,7 +296,6 @@ public class PlayerMove : MonoBehaviour
         if (spellCmdR.IsRunning)
         {
             spellCmdR.Stop();
-            voice4 = false;
         }
 
     }
@@ -332,7 +304,6 @@ public class PlayerMove : MonoBehaviour
     {
         animator.SetInteger("A_FireBall", 1);
         atkCmdR.Stop();
-        voice3 = false;
 
         setTarget = true;
 
@@ -342,7 +313,6 @@ public class PlayerMove : MonoBehaviour
 
         target.GetComponent<EnemyStats>().SetLife(-playerStats.GetAtk());
         startCmdR.Start();
-        voice1 = true;
 
         stateImg.color = Color.white;
     }

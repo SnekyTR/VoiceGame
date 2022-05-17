@@ -9,7 +9,7 @@ public class StateManager : MonoBehaviour
     private EnemyStats enemyStats;
     private NavMeshAgent enemyNM;
     private Transform[] casillas;
-    private PlayerMove target;
+    private Transform target;
     private CameraFollow gameM;
     private Animator animator;
 
@@ -53,7 +53,7 @@ public class StateManager : MonoBehaviour
         {
             if(Vector3.Distance(transform.position, gameM.players[i].transform.position) < dis)
             {
-                target = gameM.players[i].GetComponent<PlayerMove>();
+                target = gameM.players[i].transform;
                 dis = Vector3.Distance(transform.position, gameM.players[i].transform.position);
             }
         }
@@ -65,12 +65,12 @@ public class StateManager : MonoBehaviour
     {
         if (enemyStats.GetEnergy() > 0)
         {
-            print(Vector3.Distance(transform.position, target.transform.position));
-            if(Vector3.Distance(transform.position, target.transform.position) < 4f && enemyStats.GetEnergy() >= 4)
+            print(Vector3.Distance(transform.position, target.position));
+            if(Vector3.Distance(transform.position, target.position) < 4f && enemyStats.GetEnergy() >= 4)
             {
                 StartCoroutine(AttackAnim());
             }
-            else if(Vector3.Distance(transform.position, target.transform.position) > 4f)
+            else if(Vector3.Distance(transform.position, target.position) > 4f)
             {
                 int destiny = RandomPlayerPiece();
 
@@ -126,7 +126,7 @@ public class StateManager : MonoBehaviour
     private int RandomPlayerPiece()
     {
         int e = Random.Range(0, casillas.Length);
-        float dist = Vector3.Distance(target.transform.position, casillas[e].position);
+        float dist = Vector3.Distance(target.position, casillas[e].position);
         if (dist > 3f || dist < 1f)
         {
             return RandomPlayerPiece();

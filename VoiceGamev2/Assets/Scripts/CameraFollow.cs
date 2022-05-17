@@ -9,10 +9,12 @@ using UnityEngine.UI;
 
 public class CameraFollow : MonoBehaviour
 {
-    private Transform playerParent;
+    public Transform playerParent = null;
     public bool whoTurn;
-    public PlayerMove[] players;
+    public Transform[] players;
     public StateManager[] enemys;
+    public GameObject[] playerSelected;
+    private PlayerMove moveLogic;
 
     private Dictionary<string, Action<string>> selectPJCmd = new Dictionary<string, Action<string>>();
     private KeywordRecognizer selectPJCmdR;
@@ -21,6 +23,8 @@ public class CameraFollow : MonoBehaviour
     {
         whoTurn = true;         //player turn
 
+        moveLogic = GetComponent<PlayerMove>();
+
         for (int i = 0; i < players.Length; i++)
         {
             selectPJCmd.Add(players[i].name, SelectPJ);
@@ -28,7 +32,7 @@ public class CameraFollow : MonoBehaviour
 
         for (int i = 0; i < enemys.Length; i++)
         {
-            selectPJCmd.Add(enemys[i].name, SelectPJ);
+            selectPJCmd.Add("mira a " + enemys[i].name, SelectPJ);
         }
 
         selectPJCmdR = new KeywordRecognizer(selectPJCmd.Keys.ToArray());
@@ -57,40 +61,49 @@ public class CameraFollow : MonoBehaviour
         {
             if (whoTurn)
             {
-                players[0].PlayerSelect();
-                if (players.Length > 1) players[1].PlayerDeselect();
-                if (players.Length > 2) players[2].PlayerDeselect();
+                moveLogic.PlayerDeselect();
+                moveLogic.PlayerSelect();
+                moveLogic.NewPlayer(players[0].gameObject);
+                print("hola");
             }
 
             NewParent(players[0].transform);
+            playerSelected[0].SetActive(true);
+            playerSelected[1].SetActive(false);
+            playerSelected[2].SetActive(false);
         }
         else if(players.Length > 1 && n == players[1].name)
         {
             if (whoTurn)
             {
-                if (players.Length > 1) players[1].PlayerSelect();
-                players[0].PlayerDeselect();
-                if (players.Length > 2) players[2].PlayerDeselect();
+                moveLogic.PlayerDeselect();
+                moveLogic.PlayerSelect();
+                moveLogic.NewPlayer(players[1].gameObject);
             }
 
             NewParent(players[1].transform);
+            playerSelected[1].SetActive(true);
+            playerSelected[0].SetActive(false);
+            playerSelected[2].SetActive(false);
         }
         else if(players.Length > 2 &&n == players[2].name)
         {
             if (whoTurn)
             {
-                if (players.Length > 2) players[2].PlayerSelect();
-                players[0].PlayerDeselect();
-                if (players.Length > 1) players[1].PlayerDeselect();
+                moveLogic.PlayerDeselect();
+                moveLogic.PlayerSelect();
+                moveLogic.NewPlayer(players[2].gameObject);
             }
 
             NewParent(players[2].transform);
+            playerSelected[2].SetActive(true);
+            playerSelected[0].SetActive(false);
+            playerSelected[1].SetActive(false);
         }
         else
         {
-            if (whoTurn) players[0].PlayerDeselect();
-            if (whoTurn && players.Length > 1) players[1].PlayerDeselect();
-            if (whoTurn && players.Length > 2) players[2].PlayerDeselect();
+            moveLogic.PlayerDeselect();
+            moveLogic.PlayerSelect();
         }
 
         for(int i = 0;i < enemys.Length; i++)
@@ -117,7 +130,7 @@ public class CameraFollow : MonoBehaviour
 
             for(int i = 0; i<players.Length; i++)
             {
-                players[i].PlayerDeselect();
+                moveLogic.PlayerDeselect();
             }
 
             for (int i = 0; i < players.Length; i++)
