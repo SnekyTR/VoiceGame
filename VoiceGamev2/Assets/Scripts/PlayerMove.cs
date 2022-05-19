@@ -26,9 +26,8 @@ public class PlayerMove : MonoBehaviour
 
     [Header("Enemys")]
     [SerializeField] private Transform[] enemyTr;
-    [SerializeField] private string[] enemyNames;
     private GameObject target;
-    private bool inAtk, setTarget;
+    private bool setTarget;
 
     //voice commands select action
     private Dictionary<string, Action> startCmd = new Dictionary<string, Action>();
@@ -73,7 +72,7 @@ public class PlayerMove : MonoBehaviour
         moveCmdR.OnPhraseRecognized += RecognizedVoice2;
 
         //player attack
-        for (int i = 0; i < gameM.enemys.Length; i++)
+        for (int i = 0; i < gameM.enemys.Count; i++)
         {
             atkCmd.Add(gameM.enemys[i].name, Enemy);
         }
@@ -136,9 +135,9 @@ public class PlayerMove : MonoBehaviour
     {
         if (setTarget)
         {
-            Vector3 direction = enemyTr[0].transform.position - transform.position;
+            Vector3 direction = target.transform.position - playerTr.transform.position;
             Quaternion rotacion = Quaternion.LookRotation(direction);
-            playerTr.transform.rotation = Quaternion.Slerp(transform.rotation, rotacion, 6f * Time.deltaTime);
+            playerTr.transform.rotation = Quaternion.Slerp(playerTr.transform.rotation, rotacion, 6f * Time.deltaTime);
         }
        if (isOnRoute && playerNM.velocity == Vector3.zero)
         {
@@ -259,7 +258,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void Enemy(string n)
     {
-        for(int i = 0; i < gameM.enemys.Length; i++)
+        for(int i = 0; i < gameM.enemys.Count; i++)
         {
             if(n == gameM.enemys[i].name)
             {

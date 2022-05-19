@@ -11,8 +11,8 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform playerParent = null;
     public bool whoTurn;
-    public Transform[] players;
-    public StateManager[] enemys;
+    public List<Transform> players;
+    public List<StateManager> enemys;
     public GameObject[] playerSelected;
     private PlayerMove moveLogic;
 
@@ -25,12 +25,12 @@ public class CameraFollow : MonoBehaviour
 
         moveLogic = GetComponent<PlayerMove>();
 
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < players.Count; i++)
         {
             selectPJCmd.Add(players[i].name, SelectPJ);
         }
 
-        for (int i = 0; i < enemys.Length; i++)
+        for (int i = 0; i < enemys.Count; i++)
         {
             selectPJCmd.Add("mira a " + enemys[i].name, SelectPJ);
         }
@@ -72,7 +72,7 @@ public class CameraFollow : MonoBehaviour
             playerSelected[1].SetActive(false);
             playerSelected[2].SetActive(false);
         }
-        else if(players.Length > 1 && n == players[1].name)
+        else if(players.Count > 1 && n == players[1].name)
         {
             if (whoTurn)
             {
@@ -86,7 +86,7 @@ public class CameraFollow : MonoBehaviour
             playerSelected[0].SetActive(false);
             playerSelected[2].SetActive(false);
         }
-        else if(players.Length > 2 &&n == players[2].name)
+        else if(players.Count > 2 && n == players[2].name)
         {
             if (whoTurn)
             {
@@ -106,7 +106,7 @@ public class CameraFollow : MonoBehaviour
             moveLogic.PlayerSelect();
         }
 
-        for(int i = 0;i < enemys.Length; i++)
+        for(int i = 0;i < enemys.Count; i++)
         {
             if(n == enemys[i].name)
             {
@@ -128,12 +128,12 @@ public class CameraFollow : MonoBehaviour
         {
             whoTurn = false;
 
-            for(int i = 0; i<players.Length; i++)
+            for(int i = 0; i<players.Count; i++)
             {
                 moveLogic.PlayerDeselect();
             }
 
-            for (int i = 0; i < players.Length; i++)
+            for (int i = 0; i < enemys.Count; i++)
             {
                 enemys[i].GetComponent<EnemyStats>().FullEnergy();
             }
@@ -144,7 +144,7 @@ public class CameraFollow : MonoBehaviour
         {
             whoTurn = true;
 
-            for (int i = 0; i < players.Length; i++)
+            for (int i = 0; i < players.Count; i++)
             {
                 players[i].GetComponent<PlayerStats>().FullEnergy();
             }
@@ -153,18 +153,30 @@ public class CameraFollow : MonoBehaviour
 
     public void NextIA(StateManager n)
     {
-        for(int i = 0; i < enemys.Length; i++)
+        for(int i = 0; i < enemys.Count; i++)
         {
-            if(n == enemys[i] && n != enemys[(enemys.Length)-1])
+            if(n == enemys[i] && n != enemys[(enemys.Count)-1])
             {
                 enemys[(i + 1)].StarIA();
                 return;
             }
-            else if(n == enemys[(enemys.Length) - 1])
+            else if(n == enemys[(enemys.Count) - 1])
             {
                 NextTurn();
                 return;
             }
+        }
+    }
+
+    public void EliminateElement(GameObject el)
+    {
+        if (el.GetComponent<PlayerStats>())
+        {
+            players.Remove(el.transform);
+        }
+        else if (el.GetComponent<EnemyStats>())
+        {
+            enemys.Remove(el.GetComponent<StateManager>());
         }
     }
 }

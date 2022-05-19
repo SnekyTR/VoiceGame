@@ -49,7 +49,7 @@ public class StateManager : MonoBehaviour
     public void StarIA()
     {
         float dis = 10000;
-        for (int i = 0; i < gameM.players.Length; i++)
+        for (int i = 0; i < gameM.players.Count; i++)
         {
             if(Vector3.Distance(transform.position, gameM.players[i].transform.position) < dis)
             {

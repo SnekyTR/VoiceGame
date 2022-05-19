@@ -56,13 +56,17 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <Compile Include="Assets\Scripts\ScriptableObjects\Encounters\Single\CombatEnter.cs" />
+=======
+>>>>>>> Stashed changes
     <Compile Include="Assets\Scripts\ScriptableObjects\Weapons\Scripteable_Sword.cs" />
     <Compile Include="Assets\Scripts\SectionGenerate.cs" />
     <Compile Include="Assets\Animations\Mage\Fireball_Int.cs" />
     <Compile Include="Assets\Scripts\EnemyStats.cs" />
     <Compile Include="Assets\Scripts\IA\StateManager.cs" />
     <Compile Include="Assets\Scripts\GenerateGrid.cs" />
+<<<<<<< Updated upstream
     <Compile Include="Assets\Scripts\ScriptableObjects\Encounters\DoubleCombatChanger.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Encounters\Single\LoadSingle.cs" />
     <Compile Include="Assets\Scripts\SectionControl.cs" />
@@ -86,6 +90,18 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\Armor\Scripteable_Light.cs" />
     <Compile Include="Assets\Scripts\IA\AttackState.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Encounters\LoadDouble.cs" />
+=======
+    <Compile Include="Assets\Scripts\SectionControl.cs" />
+    <Compile Include="Assets\Scripts\World Map\MovementPointClick.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Weapons\Scripteable_Bow.cs" />
+    <Compile Include="Assets\Scripts\GeneralStats.cs" />
+    <Compile Include="Assets\Scripts\PlayerMove.cs" />
+    <Compile Include="Assets\Scripts\GridActivation.cs" />
+    <Compile Include="Assets\Scripts\Data\SaveSystem.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Weapons\Scripteable_Staff.cs" />
+    <Compile Include="Assets\Scripts\Data\GameData.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Armor\Scripteable_Light.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Assets\Scripts\EnergyScript.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Weapons\Scripteable_Axe.cs" />
     <Compile Include="Assets\Scripts\PlayerStats.cs" />
@@ -94,9 +110,13 @@
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Animations\Spider\RecieveDamage.cs" />
     <Compile Include="Assets\Animations\Spider\SpiderIntAttack.cs" />
+<<<<<<< Updated upstream
     <Compile Include="Assets\Scripts\Level\LevelSystem.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Weapons\Scripteable_GreatSword.cs" />
     <Compile Include="Assets\Scripts\UI\PartyInformation.cs" />
+=======
+    <Compile Include="Assets\Scripts\ScriptableObjects\Weapons\Scripteable_GreatSword.cs" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

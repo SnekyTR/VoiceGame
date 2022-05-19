@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class EnemyStats : MonoBehaviour
 {
     [SerializeField] private int life;
-    [SerializeField] private int mana;
     [SerializeField] private int atk;
     [SerializeField] private float energy;
     private Animator animator;
@@ -17,9 +16,11 @@ public class EnemyStats : MonoBehaviour
 
     [SerializeField] private Scrollbar lifeSld1;
     [SerializeField] private Slider lifeSld2;
+    private CameraFollow gameM;
 
     void Start()
     {
+        gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
         animator = GetComponent<Animator>();
         maxLife = life;
         maxEnergy = energy;
@@ -31,10 +32,12 @@ public class EnemyStats : MonoBehaviour
     public void SetLife(int n)
     {
         life += n;
-        if(life <= 0)
+        if(life <= 0)                       //death
         {
             animator.SetInteger("A_Death", 1);
-        }else if(n < 0)
+            gameM.EliminateElement(this.gameObject);
+        }
+        else if(n < 0)                      //dmg recieve
         {
             animator.SetInteger("A_Recieve", 1);
         }
