@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -86,6 +87,7 @@ public class PlayerStats : MonoBehaviour
         {
             animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
+            GetComponent<NavMeshAgent>().enabled = false;
         }
         else if (n < 0)                         //dmg recieve
         {

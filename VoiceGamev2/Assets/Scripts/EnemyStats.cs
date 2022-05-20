@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class EnemyStats : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class EnemyStats : MonoBehaviour
         {
             animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
+            Destroy(transform.GetChild(2).gameObject);
+            GetComponent<NavMeshAgent>().enabled = false;
         }
         else if(n < 0)                      //dmg recieve
         {
