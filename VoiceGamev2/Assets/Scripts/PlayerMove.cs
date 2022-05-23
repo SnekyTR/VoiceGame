@@ -107,6 +107,7 @@ public class PlayerMove : MonoBehaviour
         if(atkCmdR.IsRunning) atkCmdR.Stop();
         if(spellCmdR.IsRunning) spellCmdR.Stop();
         gridA.DisableGrid();
+        stateImg.color = Color.white;
     }
 
     public void PlayerSelect()
@@ -265,9 +266,14 @@ public class PlayerMove : MonoBehaviour
                 target = gameM.enemys[i].gameObject;
                 break;
             }
+            else if(i == (gameM.enemys.Count - 1))
+            {
+                target = null;
+                break;
+            }
         }
 
-        if (Vector3.Distance(playerNM.transform.position, target.transform.position) < 5)
+        if (target != null && Vector3.Distance(playerNM.transform.position, target.transform.position) < 4)
         {
             if (TurnEnergy(5))
             {

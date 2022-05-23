@@ -14,7 +14,10 @@ public class CameraFollow : MonoBehaviour
     public List<Transform> players;
     public List<StateManager> enemys;
     public GameObject[] playerSelected;
+    public GameObject[] playerStructure;
+    private List<string> playersNames = new List<string>();
     private PlayerMove moveLogic;
+    [SerializeField] private Image turnImg;
 
     private Dictionary<string, Action<string>> selectPJCmd = new Dictionary<string, Action<string>>();
     private KeywordRecognizer selectPJCmdR;
@@ -22,12 +25,14 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         whoTurn = true;         //player turn
+        turnImg.color = Color.blue;
 
         moveLogic = GetComponent<PlayerMove>();
 
         for (int i = 0; i < players.Count; i++)
         {
             selectPJCmd.Add(players[i].name, SelectPJ);
+            playersNames.Add(players[i].name);
         }
 
         for (int i = 0; i < enemys.Count; i++)
@@ -57,63 +62,73 @@ public class CameraFollow : MonoBehaviour
     }
     private void SelectPJ(string n)
     {
-        if(n == players[0].name)
+        string[] names = n.Split(' ');
+        if(names.Length > 2)
         {
-            if (whoTurn)
+            for (int i = 0; i < enemys.Count; i++)
             {
-                moveLogic.PlayerDeselect();
-                moveLogic.PlayerSelect();
-                moveLogic.NewPlayer(players[0].gameObject);
-                print("hola");
+                if (names[2] + " " + names[3] == enemys[i].name)
+                {
+                    NewParent(enemys[i].transform);
+                    print(names[2]);
+                    return;
+                }
             }
-
-            NewParent(players[0].transform);
-            playerSelected[0].SetActive(true);
-            playerSelected[1].SetActive(false);
-            playerSelected[2].SetActive(false);
         }
-        else if(players.Count > 1 && n == players[1].name)
-        {
-            if (whoTurn)
-            {
-                moveLogic.PlayerDeselect();
-                moveLogic.PlayerSelect();
-                moveLogic.NewPlayer(players[1].gameObject);
-            }
 
-            NewParent(players[1].transform);
+        Transform actualPlayer = null;
+        for(int i = 0; i < players.Count; i++)
+        {
+            if(n == players[i].name)
+            {
+                actualPlayer = players[i];
+                break;
+            }
+        }
+
+        if (whoTurn)
+        {
+            moveLogic.PlayerDeselect();
+            moveLogic.PlayerSelect();
+            moveLogic.NewPlayer(actualPlayer.gameObject);
+        }
+
+        NewParent(actualPlayer.transform);
+
+        if(n == playersNames[0])
+        {
+            playerSelected[0].SetActive(true);
+            if (players.Count > 1) playerSelected[1].SetActive(false);
+            if (players.Count > 2) playerSelected[2].SetActive(false);
+
+            playerStructure[0].SetActive(false);
+            if (players.Count > 1) playerStructure[1].SetActive(true);
+            if (players.Count > 2) playerStructure[2].SetActive(true);
+        }
+        else if (playersNames.Count > 1 && n == playersNames[1])
+        {
             playerSelected[1].SetActive(true);
             playerSelected[0].SetActive(false);
-            playerSelected[2].SetActive(false);
-        }
-        else if(players.Count > 2 && n == players[2].name)
-        {
-            if (whoTurn)
-            {
-                moveLogic.PlayerDeselect();
-                moveLogic.PlayerSelect();
-                moveLogic.NewPlayer(players[2].gameObject);
-            }
+            if (players.Count > 2) playerSelected[2].SetActive(false);
 
-            NewParent(players[2].transform);
+            playerStructure[1].SetActive(false);
+            playerStructure[0].SetActive(true);
+            if (players.Count > 2) playerStructure[2].SetActive(true);
+        }
+        else if (playersNames.Count > 2 && n == playersNames[2])
+        {
             playerSelected[2].SetActive(true);
             playerSelected[0].SetActive(false);
             playerSelected[1].SetActive(false);
+
+            playerStructure[2].SetActive(false);
+            playerStructure[0].SetActive(true);
+            playerStructure[1].SetActive(true);
         }
         else
         {
             moveLogic.PlayerDeselect();
             moveLogic.PlayerSelect();
-        }
-
-        for(int i = 0;i < enemys.Count; i++)
-        {
-            if(n == enemys[i].name)
-            {
-                NewParent(enemys[i].transform);
-
-                return;
-            }
         }
     }
 
@@ -139,6 +154,7 @@ public class CameraFollow : MonoBehaviour
             }
 
             enemys[0].StarIA();
+            turnImg.color = Color.red;
         }
         else
         {
@@ -148,6 +164,8 @@ public class CameraFollow : MonoBehaviour
             {
                 players[i].GetComponent<PlayerStats>().FullEnergy();
             }
+
+            turnImg.color = Color.blue;
         }
     }
 

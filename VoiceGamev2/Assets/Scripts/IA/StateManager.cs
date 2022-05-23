@@ -49,6 +49,8 @@ public class StateManager : MonoBehaviour
     public void StarIA()
     {
         float dis = 10000;
+
+        if (gameM.players.Count == 0) return;
         for (int i = 0; i < gameM.players.Count; i++)
         {
             if(Vector3.Distance(transform.position, gameM.players[i].transform.position) < dis)
@@ -66,11 +68,18 @@ public class StateManager : MonoBehaviour
         if (enemyStats.GetEnergy() > 0)
         {
             print(Vector3.Distance(transform.position, target.position));
-            if(Vector3.Distance(transform.position, target.position) < 4f && enemyStats.GetEnergy() >= 4)
+            if(Vector3.Distance(transform.position, target.position) < enemyStats.GetRange() && enemyStats.GetEnergy() >= 4)
             {
-                StartCoroutine(AttackAnim());
+                if(target.GetComponent<PlayerStats>().GetLife() > 0)
+                {
+                    StartCoroutine(AttackAnim());
+                }
+                else
+                {
+                    StarIA();
+                }
             }
-            else if(Vector3.Distance(transform.position, target.position) > 4f)
+            else if(Vector3.Distance(transform.position, target.position) > enemyStats.GetRange())
             {
                 int destiny = RandomPlayerPiece();
 

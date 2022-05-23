@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8022926636653982289}
   - component: {fileID: 8022926636653982288}
+  - component: {fileID: 7636097002350615101}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,11 +45,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f61719615cd864fa30bb91941957fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerParent: {fileID: 0}
   whoTurn: 0
   players:
   - {fileID: 0}
   enemys:
   - {fileID: 0}
+  playerSelected: []
+  playerStructure: []
+  turnImg: {fileID: 0}
+--- !u!114 &7636097002350615101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8022926636653982318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e4dbd35b9a4294db453aa14c702398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridA: {fileID: 0}
+  stateImg: {fileID: 0}
+  range: {fileID: 0}
+  enemyTr: []
 --- !u!1 &8022926637128795510
 GameObject:
   m_ObjectHideFlags: 0

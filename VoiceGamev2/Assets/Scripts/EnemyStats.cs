@@ -9,6 +9,7 @@ public class EnemyStats : MonoBehaviour
 {
     [SerializeField] private int life;
     [SerializeField] private int atk;
+    [SerializeField] private int range;
     [SerializeField] private float energy;
     private Animator animator;
 
@@ -58,6 +59,11 @@ public class EnemyStats : MonoBehaviour
     {
         int newAtk = Random.Range((atk - 2), atk);
         return newAtk;
+    }
+
+    public int GetRange()
+    {
+        return range;
     }
 
     public void SetEnergy(float n)

@@ -26,6 +26,9 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private Scrollbar lifeSld;
     [SerializeField] private Scrollbar manaSld;
+    [SerializeField] private Scrollbar lifeSld2;
+    [SerializeField] private Scrollbar manaSld2;
+
     private CameraFollow gameM;
     void Start()
     {
@@ -94,12 +97,14 @@ public class PlayerStats : MonoBehaviour
             animator.SetInteger("A_Recieve", 1);
         }
         lifeSld.size = (lifeValue / maxLife);
+        lifeSld2.size = (lifeValue / maxLife);
     }
 
     public void SetMana(int n)
     {
         manaValue += n;
         manaSld.size = (manaValue / maxMana);
+        manaSld2.size = (manaValue / maxMana);
     }
 
     public void SetEnergy(float n)
@@ -123,5 +128,10 @@ public class PlayerStats : MonoBehaviour
     public float GetEnergy()
     {
         return energy;
+    }
+
+    public int GetLife()
+    {
+        return lifeValue;
     }
 }
