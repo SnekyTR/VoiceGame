@@ -418,36 +418,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129102780}
   m_CullTransparentMesh: 1
---- !u!1 &147870213
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 147870214}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &147870214
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 147870213}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 48.70972, y: 1.8800001, z: -184.21}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,7 +1081,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 344659047}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd20e6e944ec6a149990832e14a0f8c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 74cf2d1f7ba07ba4c809352272a0c141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   partyInfo: {fileID: 396894665}
@@ -1120,8 +1090,8 @@ MonoBehaviour:
   requiredXp: 0
   frontXpBar: {fileID: 1527528329090056419}
   backXpBar: {fileID: 1527528329352093808}
-  additionMultiplier: 194
-  powerMultiplier: 4
+  additionMultiplier: 300
+  powerMultiplier: 2
   divisionMultiplier: 7
 --- !u!136 &344659054
 CapsuleCollider:
@@ -1165,10 +1135,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 344659047}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c04b8cbe12c9ff842aa5af5bb33517ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c62b81392924b748b704aa01bde99e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectTransform: {fileID: 147870214}
+  objectTransform: {fileID: 0}
   combatEnter: {fileID: 0}
   combat: 0
 --- !u!1 &347739249
@@ -1723,7 +1693,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 396894661}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ad51a49f543f9945af91482cd2a65ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 84941f244fa378640b29b8becdf5bb95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   levelSystem: {fileID: 344659053}
@@ -2367,6 +2337,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27979be9f26d3cb44b84c4e9da7bfc9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  title: {fileID: 0}
+  description: {fileID: 0}
+  image: {fileID: 0}
+  reward: {fileID: 0}
+  level: {fileID: 0}
+  level2: {fileID: 0}
+  enemies: {fileID: 0}
+  enemies2: {fileID: 0}
 --- !u!114 &552933863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2379,6 +2357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630213bfe71ac87439a9b0a5322252e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializableObjects: []
 --- !u!1 &573079042
 GameObject:
   m_ObjectHideFlags: 0
@@ -3020,6 +2999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8d8a16311fd8449a411aecc4370961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 0}
 --- !u!114 &808314475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3166,6 +3146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b4aadeb174f3ae428a2611ccfd25181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  general: {fileID: 0}
 --- !u!114 &819240667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3442,7 +3423,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &912407784
 GameObject:
@@ -3474,11 +3455,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 912407784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54eacab738f68324f83d61cc4b313234, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e32e2f4a55260a4caa546d145fddab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   combat: 0
-  combatSingle: 1
+  combatSingle: 0
   single: {fileID: 189538485}
   panelSingle: {fileID: 189538480}
   panelDouble: {fileID: 552933858}
@@ -4443,7 +4424,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 51677d4ff3378de40afdabfef0a0ef98, type: 2}
+  - {fileID: 2100000, guid: 0d8b18d85c5755249ac7602373dbff19, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6625,8 +6606,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e5a3fd138524840bdb733ab8665aa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partyInf: {fileID: 396894661}
-  characterInf: {fileID: 0}
 --- !u!1 &2019685897
 GameObject:
   m_ObjectHideFlags: 0
