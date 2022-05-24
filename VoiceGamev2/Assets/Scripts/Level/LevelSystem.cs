@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LevelSystem : MonoBehaviour
 {
-    [SerializeField] private GameObject partyInfo;
+    [SerializeField] private PartyInformation partyInfo;
     public int level;
     public float currentXp;
     public float requiredXp;
@@ -69,6 +69,7 @@ public class LevelSystem : MonoBehaviour
         backXpBar.fillAmount = 0f;
         currentXp = Mathf.RoundToInt(currentXp - requiredXp);
         requiredXp = CalculateRequireXp();
+        UpdateLevel();
     }
     private int CalculateRequireXp()
     {
@@ -94,11 +95,12 @@ public class LevelSystem : MonoBehaviour
         delayTimer = 0f;
     }
     
-    public string UpdateLevel()
+    public void UpdateLevel()
     {
         string actualLevel;
+        string actualPlayer = transform.name.ToString();
         actualLevel = level.ToString();
-        return actualLevel;
+        partyInfo.UpdateLevel(actualLevel, actualPlayer);
     }
     public string UpdateXP()
     {
