@@ -7,6 +7,7 @@ public class SectionControl : MonoBehaviour
 {
     [SerializeField] private Text nameTxt, costTxt;
     [SerializeField] private GameObject canvasObj;
+    public bool isOcuped = false;
 
     public void EnableSection(Transform tr)
     {
@@ -33,5 +34,15 @@ public class SectionControl : MonoBehaviour
     public void DisableSection()
     {
         canvasObj.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        isOcuped = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        isOcuped = false;
     }
 }

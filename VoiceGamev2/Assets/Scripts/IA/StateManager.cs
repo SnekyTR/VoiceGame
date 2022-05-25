@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class StateManager : MonoBehaviour
 {
+    public int nSpider;
     public bool isOnRoute, setTarget;
     private EnemyStats enemyStats;
     private NavMeshAgent enemyNM;
@@ -67,7 +68,6 @@ public class StateManager : MonoBehaviour
     {
         if (enemyStats.GetEnergy() > 0)
         {
-            print(Vector3.Distance(transform.position, target.position));
             if(Vector3.Distance(transform.position, target.position) < enemyStats.GetRange() && enemyStats.GetEnergy() >= 4)
             {
                 if(target.GetComponent<PlayerStats>().GetLife() > 0)
@@ -102,7 +102,6 @@ public class StateManager : MonoBehaviour
                 enemyNM.SetDestination(casillas[destiny].position);
                 animator.SetInteger("A_Movement", 1);
                 StartCoroutine(StartRoute());
-                print(enemyStats.GetEnergy());
             }
             else
             {
@@ -136,12 +135,26 @@ public class StateManager : MonoBehaviour
     {
         int e = Random.Range(0, casillas.Length);
         float dist = Vector3.Distance(target.position, casillas[e].position);
-        if (dist > 3f || dist < 1f)
+
+        int n = 3;
+        int f = 3;
+        if (nSpider == 2)
+        {
+            n = 6;
+            f = 3;
+        }
+
+        if (dist > n || dist < f)
         {
             return RandomPlayerPiece();
         }
         else
         {
+            if (casillas[e].GetComponent<SectionControl>().isOcuped)
+            {
+                print("hi");
+                return RandomPlayerPiece();
+            }
             return e;
         }
     }

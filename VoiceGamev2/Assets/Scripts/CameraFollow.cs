@@ -84,6 +84,10 @@ public class CameraFollow : MonoBehaviour
                 actualPlayer = players[i];
                 break;
             }
+            else if((i+1) == players.Count)
+            {
+                return;
+            }
         }
 
         if (whoTurn)
