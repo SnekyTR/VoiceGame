@@ -137,7 +137,7 @@ public class StateManager : MonoBehaviour
         float dist = Vector3.Distance(target.position, casillas[e].position);
 
         int n = 3;
-        int f = 3;
+        int f = 1;
         if (nSpider == 2)
         {
             n = 6;
