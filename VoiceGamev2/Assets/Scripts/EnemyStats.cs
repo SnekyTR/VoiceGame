@@ -13,8 +13,11 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] private float energy;
     private Animator animator;
 
+    private VictoryReward vr;
+
     private float maxLife;
     private float maxEnergy;
+    public float xp = 50;
 
     [SerializeField] private Scrollbar lifeSld1;
     [SerializeField] private Slider lifeSld2;
@@ -26,6 +29,8 @@ public class EnemyStats : MonoBehaviour
         animator = GetComponent<Animator>();
         maxLife = life;
         maxEnergy = energy;
+        vr = GameObject.Find("GameManager").GetComponent<VictoryReward>();
+        
     }
     void Update()
     {
@@ -36,6 +41,7 @@ public class EnemyStats : MonoBehaviour
         life += n;
         if(life <= 0)                       //death
         {
+            //vr.RemoveFromList(this.gameObject);
             animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
             Destroy(transform.GetChild(2).gameObject);

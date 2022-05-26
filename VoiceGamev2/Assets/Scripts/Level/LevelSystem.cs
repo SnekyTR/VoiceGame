@@ -35,6 +35,13 @@ public class LevelSystem : MonoBehaviour
     }
 
     // Update is called once per frame
+    public void LoadLevel()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+
+        level = data.level;
+        currentXp = data.experience;
+    }
     void Update()
     {
         UpdateXpUI();

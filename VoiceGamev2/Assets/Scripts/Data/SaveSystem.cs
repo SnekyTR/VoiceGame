@@ -3,28 +3,28 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 public static class SaveSystem
 {
-    public static void SavePlayer(GeneralStats player)
+    public static void SavePlayer(GeneralStats player, LevelSystem level)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/player.fun";
+        string path = Application.persistentDataPath + "/player.data";
 
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        GameData data = new GameData(player);
+        PlayerData data = new PlayerData(player, level);
 
         formatter.Serialize(stream, data);
         stream.Close();
     }
 
-    public static GameData LoadPlayer()
+    public static PlayerData LoadPlayer()
     {
-        string path = Application.persistentDataPath + "/player.fun";
+        string path = Application.persistentDataPath + "/player.data";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            GameData data = formatter.Deserialize(stream) as GameData;
+            PlayerData data = formatter.Deserialize(stream) as PlayerData;
             stream.Close();
             return data;
         }
@@ -34,28 +34,29 @@ public static class SaveSystem
             return null;
         }
     }
-    /*public static void SaveGame(GeneralStats player)
+    /*public static void SaveProgression(SingleCombatChanger single)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/game.fun";
+        string path = Application.persistentDataPath + "/progression.data";
 
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        GameData data = new GameData(manager);
+        GameProgressionData data = new GameProgressionData(single);
 
         formatter.Serialize(stream, data);
         stream.Close();
     }
-    public static GameData LoadData ()
+
+    public static GameProgressionData LoadProgression()
     {
-        string path = Application.persistentDataPath + "/player.fun";
+        string path = Application.persistentDataPath + "/progression.data";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
+            FileStream stram = new FileStream(path, FileMode.Open);
 
-            GameData data = formatter.Deserialize(stream) as GameData;
-            stream.Close();
+            GameProgressionData data = formatter.Deserialize(stram) as GameProgressionData;
+            stram.Close();
             return data;
         }
         else

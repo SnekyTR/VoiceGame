@@ -5,10 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class FightButton : MonoBehaviour
 {
-    [SerializeField] private GeneralStats general;
+    GameSave gameSave;
+    
+
+    private void Start()
+    {
+        gameSave = GameObject.Find("GameSaver").GetComponent<GameSave>();
+    }
     public void EnterBattle()
     {
-        SceneManager.LoadScene(1);
-        SaveSystem.SavePlayer(general);
+        gameSave.SaveGame();
     }
 }

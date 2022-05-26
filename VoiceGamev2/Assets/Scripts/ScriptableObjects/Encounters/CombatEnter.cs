@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CombatEnter : MonoBehaviour
 {
@@ -11,6 +12,14 @@ public class CombatEnter : MonoBehaviour
     [SerializeField] private GameObject panelSingle;
     [SerializeField] private GameObject panelDouble;
     [SerializeField] private Transform player;
+    private GeneralStats general;
+    private LevelSystem level;
+
+    private void Start()
+    {
+        general = player.gameObject.GetComponent<GeneralStats>();
+        level = player.gameObject.GetComponent<LevelSystem>();
+    }
     private void Update()
     {
         
@@ -71,5 +80,10 @@ public class CombatEnter : MonoBehaviour
         {
             panelDouble.SetActive(true);
         }
+    }
+    public void EnterBattle()
+    {
+        SceneManager.LoadScene(1);
+        SaveSystem.SavePlayer(general, level);
     }
 }
