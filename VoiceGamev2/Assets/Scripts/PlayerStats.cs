@@ -36,7 +36,7 @@ public class PlayerStats : MonoBehaviour
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
 
         //calculo de valor de los stats
-        lifeValue = 5;
+        lifeValue = 10;
         for(int i = 2; i <= lifePoints; i++)
         {
             lifeValue += (int)i / 2;
