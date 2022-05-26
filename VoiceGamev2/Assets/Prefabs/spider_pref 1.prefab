@@ -537,7 +537,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926555000}
-  m_LocalRotation: {x: -0.33196333, y: -0, z: -0, w: 0.9432923}
+  m_LocalRotation: {x: -0.23473376, y: -0.66700834, z: -0.23473376, w: 0.66700834}
   m_LocalPosition: {x: 0, y: 0, z: -0.007999965}
   m_LocalScale: {x: 0.0028571424, y: 0.0028571424, z: 0.28571424}
   m_Children:
@@ -545,7 +545,7 @@ RectTransform:
   - {fileID: 53552963}
   m_Father: {fileID: 1397318910}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -38.776, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -38.776, y: -90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.008000033, y: 0.43699998}
@@ -2031,6 +2031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea43d56273d9ec47a357d09a24998fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nSpider: 0
   isOnRoute: 0
   setTarget: 0
 --- !u!114 &451701982
@@ -2046,8 +2047,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 4
-  mana: 0
   atk: 5
+  range: 0
   energy: 10
   lifeSld1: {fileID: 0}
   lifeSld2: {fileID: 1697240445}
