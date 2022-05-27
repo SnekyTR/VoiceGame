@@ -6,14 +6,14 @@ public class GameSave : MonoBehaviour
 {
     [SerializeField] private GeneralStats general;
     [SerializeField] private LevelSystem level;
-    [SerializeField] private SingleCombatChanger single;
+    [SerializeField] private Progression pro;
     //[SerializeField] private SingleCombatChanger single;
     // Start is called before the first frame update
     void Awake()
     {
         general = GameObject.Find("Player 1").GetComponent<GeneralStats>();
         level = GameObject.Find("Player 1").GetComponent<LevelSystem>();
-        single = GameObject.Find("EncounterPanelSingle").GetComponent<SingleCombatChanger>();       
+        pro = gameObject.GetComponent<Progression>();
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class GameSave : MonoBehaviour
     public void SaveGame()
     {
         SaveSystem.SavePlayer(general, level);
-        //SaveSystem.SaveProgression(single);
+        SaveSystem.SaveProgression(pro);
     }
     public void LoadGame()
     {

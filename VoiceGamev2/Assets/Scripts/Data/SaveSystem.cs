@@ -34,14 +34,14 @@ public static class SaveSystem
             return null;
         }
     }
-    /*public static void SaveProgression(SingleCombatChanger single)
+    public static void SaveProgression(Progression pro)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/progression.data";
 
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        GameProgressionData data = new GameProgressionData(single);
+        GameProgressionData data = new GameProgressionData(pro);
 
         formatter.Serialize(stream, data);
         stream.Close();
@@ -64,5 +64,5 @@ public static class SaveSystem
             Debug.LogError("Save file not found in " + path);
             return null;
         }
-    }*/
+    }
 }

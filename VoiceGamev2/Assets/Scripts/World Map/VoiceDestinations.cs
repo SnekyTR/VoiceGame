@@ -30,7 +30,9 @@ public class VoiceDestinations : MonoBehaviour
 
     private void AddDestinations()
     {
+        mapActions.Add("reposo",Caca);
         mapActions.Add("koko",Caca);
+        print("Se han añadido");
         mapDestinations = new KeywordRecognizer(mapActions.Keys.ToArray());
         mapDestinations.OnPhraseRecognized += RecognizedVoice;
         mapDestinations.Start();
@@ -42,8 +44,9 @@ public class VoiceDestinations : MonoBehaviour
     }
     private void Caca()
     {
+        objectTransform = GameObject.Find("Rest of the Giant").transform;
         agent.SetDestination(objectTransform.position);
-        combatEnter.www();
+        //combatEnter.www();
         //if (combatEnter.combat == true) { print("Se ha parado player"); StopPlayer(); }
         //else { ); }
         

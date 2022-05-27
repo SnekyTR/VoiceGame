@@ -9,8 +9,12 @@ public class GameProgressionData
    
     // Update is called once per frame
     
-    public GameProgressionData(int incr)
+    public GameProgressionData(Progression pro)
     {
-        progressionNumber += incr; 
+        progressionNumber = pro.progression;
+    }
+    public void SummProgression(int incr)
+    {
+        progressionNumber += incr;
     }
 }

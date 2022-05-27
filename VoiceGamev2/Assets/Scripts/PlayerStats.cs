@@ -30,11 +30,16 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Scrollbar manaSld2;
 
     private CameraFollow gameM;
+    private WinLoose winLoose;
     void Start()
     {
         //LoadStatsPlayer();
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
-
+        winLoose = GameObject.Find("GameManager").GetComponent<WinLoose>();
+        for (int i = 0; i< GameObject.FindGameObjectsWithTag("Enemy").Length; i++)
+        {
+            ++winLoose.totalEnemies;
+        }
         //calculo de valor de los stats
         lifeValue = 10;
         for(int i = 2; i <= lifePoints; i++)
@@ -88,6 +93,7 @@ public class PlayerStats : MonoBehaviour
         
         if (lifeValue <= 0)                    //death
         {
+            winLoose.totalEnemies--;
             animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
             GetComponent<NavMeshAgent>().enabled = false;

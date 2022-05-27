@@ -13,15 +13,16 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] private float energy;
     private Animator animator;
 
-    private VictoryReward vr;
+    private WinLoose winLoose;
 
     private float maxLife;
     private float maxEnergy;
-    public float xp = 50;
+    public int xp = 50;
 
     [SerializeField] private Scrollbar lifeSld1;
     [SerializeField] private Slider lifeSld2;
     private CameraFollow gameM;
+    private MoveDataToMain moveData;
 
     void Start()
     {
@@ -29,8 +30,10 @@ public class EnemyStats : MonoBehaviour
         animator = GetComponent<Animator>();
         maxLife = life;
         maxEnergy = energy;
-        vr = GameObject.Find("GameManager").GetComponent<VictoryReward>();
-        
+        winLoose = GameObject.Find("GameManager").GetComponent<WinLoose>();
+        moveData = GameObject.Find("Do not destroy").GetComponent<MoveDataToMain>();
+        moveData.totalEXP = moveData.totalEXP + xp;
+
     }
     void Update()
     {
@@ -41,7 +44,8 @@ public class EnemyStats : MonoBehaviour
         life += n;
         if(life <= 0)                       //death
         {
-            //vr.RemoveFromList(this.gameObject);
+            winLoose.totalEnemies--;
+            
             animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
             Destroy(transform.GetChild(2).gameObject);
