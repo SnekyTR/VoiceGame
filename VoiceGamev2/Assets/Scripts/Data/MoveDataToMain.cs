@@ -8,6 +8,7 @@ public class MoveDataToMain : MonoBehaviour
     private Progression pro;
     private GameSave gameSave;
     private LevelSystem level;
+    private CombatEnter combatEnter;
     public int totalEXP;
     private void Awake()
     {
@@ -48,5 +49,6 @@ public class MoveDataToMain : MonoBehaviour
         gameSave.LoadGame();
         pro.CheckProgression();
         level.GainExperience(totalEXP);
+        gameSave.SaveGame();
     }
 }

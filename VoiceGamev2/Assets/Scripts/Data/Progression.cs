@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class Progression : MonoBehaviour
 {
-    private GameObject combat1;
-    private GameObject combat2;
-    private GameObject combat3;
-    private GameObject combat4;
-    private GameObject combat5;
-    private GameObject combat6;
-    private GameObject combat7;
-    private GameObject combat8;
+    public GameObject combat1;
+    public GameObject combat2;
+    public GameObject combat3;
+    public GameObject combat4;
+    public GameObject combat5;
+    public GameObject combat6;
+    public GameObject combat7;
+    public GameObject combat8;
     public int progression;
     GameSave gameSave;
     private void Start()
@@ -34,7 +34,7 @@ public class Progression : MonoBehaviour
     }*/
     
 
-    
+
     public void CheckProgression()
     {
         if (progression >= 1)
