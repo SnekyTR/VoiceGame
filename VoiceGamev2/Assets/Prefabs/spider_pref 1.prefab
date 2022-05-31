@@ -1884,6 +1884,7 @@ GameObject:
   - component: {fileID: 451701979}
   - component: {fileID: 451701981}
   - component: {fileID: 451701982}
+  - component: {fileID: 3242782882943312139}
   m_Layer: 0
   m_Name: spider_pref 1
   m_TagString: Enemy
@@ -2006,7 +2007,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3385508809172059136}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.23
+  m_Radius: 0.001
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -2015,9 +2016,9 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 0.15
+  m_Height: 0.001
   m_BaseOffset: -0.02
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &451701981
 MonoBehaviour:
@@ -2031,9 +2032,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea43d56273d9ec47a357d09a24998fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nSpider: 0
-  isOnRoute: 0
-  setTarget: 0
 --- !u!114 &451701982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2050,8 +2048,24 @@ MonoBehaviour:
   atk: 5
   range: 0
   energy: 10
+  xp: 50
   lifeSld1: {fileID: 0}
   lifeSld2: {fileID: 1697240445}
+--- !u!114 &3242782882943312139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3385508809172059136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b809ea0ea7fc3f4e9b6bd36fca8edee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nSpider: 0
+  isOnRoute: 0
+  setTarget: 0
 --- !u!1 &3385552843081807846
 GameObject:
   m_ObjectHideFlags: 0
