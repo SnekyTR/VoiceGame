@@ -16,12 +16,12 @@ public class CombatEnter : MonoBehaviour
     [SerializeField] private GameObject panelDouble;
     [SerializeField] private Transform player;
 
+    [SerializeField] private ScriptableObject actualCombat;
+
     private GeneralStats general;
     private LevelSystem level;
 
     public int sceneIndex;
-
-    
 
     private BattleWindow battleWindow;
 
@@ -36,7 +36,7 @@ public class CombatEnter : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")){
-
+            single.scriptableObjects.Add(actualCombat);
             battleWindow.GetCombatEnter(this.gameObject);
             voices = other.gameObject.GetComponent<VoiceDestinations>();
             voices.combatEnter = GetComponent<CombatEnter>();
@@ -60,10 +60,10 @@ public class CombatEnter : MonoBehaviour
             print("Ha entrado"); 
         }
     }
-    private void GetIndex(SingleEncounterStructure singleEsctructure)
+   /* private void GetIndex(SingleEncounterStructure singleEsctructure)
     {
         sceneIndex = singleEsctructure.sceneIndex;
-    }
+    }*/
     public void www()
     {
         if (combat == true) { 

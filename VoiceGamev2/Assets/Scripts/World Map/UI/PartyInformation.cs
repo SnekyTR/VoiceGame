@@ -7,7 +7,7 @@ public class PartyInformation : MonoBehaviour
 {
     [SerializeField] private LevelSystem levelSystem;
 
-    [SerializeField] private Transform[] players;
+    [SerializeField] public Transform[] players;
     [SerializeField] private TextMeshProUGUI[] playersName;
        //string actualLevel;
 
@@ -35,14 +35,7 @@ public class PartyInformation : MonoBehaviour
     private void AssignPlayer1()
     {
 
-        /*TextMeshPro textplayer = playerName.GetComponent<TextMeshPro>();
-        textplayer.text = player.name;
-        
-        TextMeshPro textLevel = playerName.GetComponent<TextMeshPro>();
-        textLevel.text = actualLevel.ToString();*/
-        //actualLevel = levelSystem.UpdateLevel();
-        //playerName.text = player.name;
-        //level.text = "Level " + actualLevel.ToString();
+
         for(int i = 0; i < playersName.Length; i++){
             playersName[i].text = players[i].name;
         }
@@ -61,7 +54,6 @@ public class PartyInformation : MonoBehaviour
                 }
             }
         }
-        
     }
 
     // Update is called once per frame

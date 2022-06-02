@@ -9,20 +9,16 @@ public class SingleCombatChanger : MonoBehaviour
 
     public List<ScriptableObject> scriptableObjects = new List<ScriptableObject>();
 
-    //private ScriptableObject[] hehe;
-
-    public string caca = "edsjfjsikdnfjsdnfsjoudfsdjfjsdfnbsjfhsjdlkfnbjls";
-
     private LoadSingle loadSingle;
     private LoadDouble loadDouble;
     private void Awake()
     {
         //LoadProgression();
         
-        for (int i = 0; i < singleCombats.Length; i++)
+        /*for (int i = 0; i < singleCombats.Length; i++)
         {
             scriptableObjects.Add(singleCombats[i]);
-        }
+        }*/
         
         
     }
@@ -31,12 +27,12 @@ public class SingleCombatChanger : MonoBehaviour
         if (combatSingle)
         {
             loadSingle = gameObject.GetComponent<LoadSingle>();
-            loadSingle.DisplayLevelInf((SingleEncounterStructure)singleCombats[0]);
+            loadSingle.DisplayLevelInf((SingleEncounterStructure)scriptableObjects[0]);
         }
         else
         {
             loadDouble = gameObject.GetComponent<LoadDouble>();
-            loadDouble.DisplayLevelInf((DoubleEncounterStructure)doubleCombats[0]);
+            loadDouble.DisplayLevelInf((DoubleEncounterStructure)scriptableObjects[0]);
         }
         
     }

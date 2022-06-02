@@ -11,7 +11,7 @@ public class BattleWindow : MonoBehaviour
     private Dictionary<string, Action> combatPanelActions = new Dictionary<string, Action>();
     public KeywordRecognizer combatPanel;
     private GameSave gameSave;
-
+    int index;
     private CombatEnter combatEnter;
 
     // Start is called before the first frame update
@@ -39,7 +39,8 @@ public class BattleWindow : MonoBehaviour
     public void EnterBatle()
     {
         gameSave.SaveGame();
-        SceneManager.LoadScene(1);
+        print(index);
+        SceneManager.LoadScene(combatEnter.sceneIndex);
     }
     private void ClosePannel()
     {

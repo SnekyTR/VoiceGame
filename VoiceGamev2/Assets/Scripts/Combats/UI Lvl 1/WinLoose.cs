@@ -20,7 +20,7 @@ public class WinLoose : MonoBehaviour
     void Start()
     {
 
-        moveData = GameObject.Find("Do not destroy").GetComponent<MoveDataToMain>();
+        //moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
         //wPanel = GameObject.Find("VPanel");
         //lPanel = GameObject.Find("LPanel");
         WinAsignOrders();
