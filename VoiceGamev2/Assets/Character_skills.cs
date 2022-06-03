@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Character_skills : MonoBehaviour
 {
-    private Scrollbar magicBar;
+    private Image magicBar;
     private Slider physicalBar;
 
     private Image image;
@@ -16,6 +16,8 @@ public class Character_skills : MonoBehaviour
     [SerializeField] private TextMeshProUGUI AGI;
     [SerializeField] private TextMeshProUGUI INT;
     [SerializeField] private TextMeshProUGUI CRIT;
+
+    private GeneralStats general;
 
     private void Awake()
     {
@@ -27,28 +29,20 @@ public class Character_skills : MonoBehaviour
 
     public void DisplayCharacterInf(GameObject actualCharacter)
     {
-        
-        //string player = actualCharacter.transform
-        print(actualCharacter.transform.name);
         GeneralStats stats = GameObject.Find(actualCharacter.transform.name).GetComponent<GeneralStats>();
         CallThings();
-        float intelligence = (float)stats.intellectPoints / 13;
-        print(stats.intellectPoints);
-        
-        print(intelligence);
-        magicBar.size = intelligence;
+        magicBar.fillAmount = (float)stats.intellectPoints / 10;
         HP.text = stats.lifePoints.ToString();
         STR.text = stats.strengthPoints.ToString();
         AGI.text = stats.agilityPoints.ToString();
         INT.text = stats.intellectPoints.ToString();
         CRIT.text = stats.critStrikePoints.ToString();
-        image.fillAmount = stats.strengthPoints / 10;
 
 
     }
     private void CallThings()
     {
-        magicBar = GameObject.Find("magic_bar").GetComponent<Scrollbar>();
+        magicBar = GameObject.Find("magic_bar").GetComponent<Image>();
         //physicalBar = GameObject.Find("physical_bar").GetComponent<Scrollbar>();
         image = GameObject.Find("magic_image").GetComponent<Image>();
         
@@ -59,5 +53,25 @@ public class Character_skills : MonoBehaviour
         AGI = GameObject.Find("agi_stat").GetComponent<TextMeshProUGUI>();
         INT = GameObject.Find("int_stat").GetComponent<TextMeshProUGUI>();
         CRIT = GameObject.Find("crit_stat").GetComponent<TextMeshProUGUI>();
+    }
+    public void UpdateSRT(GeneralStats general)
+    {
+        STR.text = general.strengthPoints.ToString();
+    }
+    public void UpdateHP(GeneralStats general)
+    {
+        HP.text = general.lifePoints.ToString();
+    }
+    public void UpdateAGI(GeneralStats general)
+    {
+        AGI.text = general.agilityPoints.ToString();
+    }
+    public void UpdateINT(GeneralStats general)
+    {
+        INT.text = general.intellectPoints.ToString();
+    }
+    public void UpdateCRIT(GeneralStats general)
+    {
+        CRIT.text = general.critStrikePoints.ToString();
     }
 }

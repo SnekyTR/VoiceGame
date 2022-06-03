@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class WinLoose : MonoBehaviour
 {
-    [SerializeField ]private GameObject wPanel;
+    [SerializeField]private GameObject wPanel;
     [SerializeField]private GameObject lPanel;
 
     private Dictionary<string, Action> winOrders = new Dictionary<string, Action>();
@@ -20,9 +20,9 @@ public class WinLoose : MonoBehaviour
     void Start()
     {
 
-        //moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
-        //wPanel = GameObject.Find("VPanel");
-        //lPanel = GameObject.Find("LPanel");
+        moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
+        wPanel = GameObject.Find("VPanel");
+        lPanel = GameObject.Find("LPanel");
         WinAsignOrders();
         LooseAsignOrders();
     }
@@ -43,11 +43,18 @@ public class WinLoose : MonoBehaviour
     private void LooseAsignOrders()
     {
         looseOrders.Add("Salir", Exit);
+        lOrders = new KeywordRecognizer(looseOrders.Keys.ToArray());
+        lOrders.OnPhraseRecognized += RecognizedVoice;
     }
     public void WinActivateVoice()
     {
         wPanel.SetActive(true);
         wOrders.Start();
+    }
+    public void LooseActivateVoice()
+    {
+        lPanel.SetActive(true);
+        lOrders.Start();
     }
     public void RecognizedVoice(PhraseRecognizedEventArgs speech)
     {

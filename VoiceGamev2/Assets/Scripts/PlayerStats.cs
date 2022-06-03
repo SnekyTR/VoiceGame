@@ -121,7 +121,7 @@ public class PlayerStats : MonoBehaviour
         
         if (lifeValue <= 0)                    //death
         {
-            winLoose.totalEnemies--;
+            winLoose.LooseActivateVoice();
             animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
             GetComponent<NavMeshAgent>().enabled = false;

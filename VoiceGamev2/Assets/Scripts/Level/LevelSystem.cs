@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class LevelSystem : MonoBehaviour
 {
     [SerializeField] private PartyInformation partyInfo;
+    private IncreaseStats increaseStats;
     public int level;
+
     public float currentXp;
     public float requiredXp;
-
     private float lerpTimer;
     private float delayTimer;
+
+    private GameObject buttonsStats;
 
     [Header("UI")]
     public Image frontXpBar;
@@ -32,6 +35,9 @@ public class LevelSystem : MonoBehaviour
         frontXpBar.fillAmount = currentXp / requiredXp;
         backXpBar.fillAmount = currentXp / requiredXp;
         requiredXp = CalculateRequireXp();
+        buttonsStats = GameObject.Find("buttons_stats");
+        increaseStats = GameObject.Find("buttons_stats").GetComponent<IncreaseStats>();
+
     }
 
     // Update is called once per frame
@@ -76,6 +82,7 @@ public class LevelSystem : MonoBehaviour
         backXpBar.fillAmount = 0f;
         currentXp = Mathf.RoundToInt(currentXp - requiredXp);
         requiredXp = CalculateRequireXp();
+        ActivateButtons();
         UpdateLevel();
     }
     private int CalculateRequireXp()
@@ -101,7 +108,19 @@ public class LevelSystem : MonoBehaviour
         lerpTimer = 0f;
         delayTimer = 0f;
     }
-    
+    public void ActivateButtons()
+    {
+        increaseStats.GetPlayer(this.gameObject);
+        buttonsStats.SetActive(true);
+    }
+    public GameObject PlayerLvlUp()
+    {
+        return this.gameObject;
+    }
+    public void DeactivateButtons()
+    {
+        buttonsStats.SetActive(false);
+    }
     public void UpdateLevel()
     {
         string actualLevel;
