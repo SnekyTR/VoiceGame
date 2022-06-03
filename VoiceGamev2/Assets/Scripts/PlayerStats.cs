@@ -18,16 +18,14 @@ public class PlayerStats : MonoBehaviour
     private int strengthValue;
     private int agilityValue;
     private int intellectValue;
-    private int manaValue;
+    private int shieldValue;
 
     private float maxLife;
-    private float maxMana;
+    private float maxShield;
     public float maxEnergy;
 
-    [SerializeField] private Scrollbar lifeSld;
-    [SerializeField] private Scrollbar manaSld;
-    [SerializeField] private Scrollbar lifeSld2;
-    [SerializeField] private Scrollbar manaSld2;
+    [SerializeField] private GameObject structure;
+    [SerializeField] private GameObject selected;
 
     private CameraFollow gameM;
     private WinLoose winLoose;
@@ -35,11 +33,11 @@ public class PlayerStats : MonoBehaviour
     {
         //LoadStatsPlayer();
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
-        winLoose = GameObject.Find("GameManager").GetComponent<WinLoose>();
+        /*winLoose = GameObject.Find("GameManager").GetComponent<WinLoose>();
         for (int i = 0; i< GameObject.FindGameObjectsWithTag("Enemy").Length; i++)
         {
             ++winLoose.totalEnemies;
-        }
+        }*/
         //calculo de valor de los stats
         lifeValue = 10;
         for(int i = 2; i <= lifePoints; i++)
@@ -60,7 +58,6 @@ public class PlayerStats : MonoBehaviour
         }
 
         intellectValue = 5;
-        manaValue = 2 * intellectPoints;
         for(int i = 2; i <= intellectPoints; i++)
         {
             intellectValue += (int)i / 3;
@@ -68,8 +65,10 @@ public class PlayerStats : MonoBehaviour
 
         animator = GetComponent<Animator>();
         maxLife = lifeValue;
-        maxMana = manaValue;
+        maxShield = shieldValue;
         maxEnergy = energy;
+
+        selected.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
     }
     //Coge los stats guardados en el fichero antes de abrir el nivel
     private void LoadStatsPlayer()
@@ -83,12 +82,41 @@ public class PlayerStats : MonoBehaviour
     }
     void Update()
     {
-        
+
     }
 
     public void SetLife(int n)
     {
-        
+        if(shieldValue > 0 && n < 0)
+        {
+            shieldValue += n;
+
+            if(shieldValue <= 0)
+            {
+                structure.transform.GetChild(2).GetComponent<Scrollbar>().size = 0;
+                selected.transform.GetChild(1).GetComponent<Scrollbar>().size = 0;
+                selected.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = "";
+
+                structure.transform.GetChild(2).gameObject.SetActive(false);
+                selected.transform.GetChild(1).gameObject.SetActive(false);
+
+                animator.SetInteger("A_Recieve", 1);
+
+                n = shieldValue;
+            }
+            else
+            {
+                structure.transform.GetChild(2).GetComponent<Scrollbar>().size = (shieldValue / maxShield);
+                selected.transform.GetChild(1).GetComponent<Scrollbar>().size = (shieldValue / maxShield);
+                selected.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = (shieldValue + " / " + maxShield);
+
+                animator.SetInteger("A_Recieve", 1);
+
+                return;
+            }
+        }
+
+
         lifeValue += n;
         
         if (lifeValue <= 0)                    //death
@@ -102,15 +130,9 @@ public class PlayerStats : MonoBehaviour
         {
             animator.SetInteger("A_Recieve", 1);
         }
-        lifeSld.size = (lifeValue / maxLife);
-        lifeSld2.size = (lifeValue / maxLife);
-    }
-
-    public void SetMana(int n)
-    {
-        manaValue += n;
-        manaSld.size = (manaValue / maxMana);
-        manaSld2.size = (manaValue / maxMana);
+        structure.transform.GetChild(1).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
+        selected.transform.GetChild(0).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
+        selected.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
     }
 
     public void SetEnergy(float n)
@@ -139,5 +161,18 @@ public class PlayerStats : MonoBehaviour
     public int GetLife()
     {
         return lifeValue;
+    }
+
+    public void NewShield(int s)
+    {
+        structure.transform.GetChild(2).gameObject.SetActive(true);
+        selected.transform.GetChild(1).gameObject.SetActive(true);
+
+        shieldValue = s;
+        maxShield = s;
+
+        structure.transform.GetChild(2).GetComponent<Scrollbar>().size = (shieldValue / maxShield);
+        selected.transform.GetChild(1).GetComponent<Scrollbar>().size = (shieldValue / maxShield);
+        selected.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = (shieldValue + " / " + maxShield);
     }
 }

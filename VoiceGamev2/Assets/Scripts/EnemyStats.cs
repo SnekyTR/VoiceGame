@@ -30,9 +30,9 @@ public class EnemyStats : MonoBehaviour
         animator = GetComponent<Animator>();
         maxLife = life;
         maxEnergy = energy;
-        winLoose = GameObject.Find("GameManager").GetComponent<WinLoose>();
+        /*winLoose = GameObject.Find("GameManager").GetComponent<WinLoose>();
         moveData = GameObject.Find("Do not destroy").GetComponent<MoveDataToMain>();
-        moveData.totalEXP = moveData.totalEXP + xp;
+        moveData.totalEXP = moveData.totalEXP + xp;*/
 
     }
     void Update()
@@ -46,14 +46,14 @@ public class EnemyStats : MonoBehaviour
         {
             winLoose.totalEnemies--;
             
-            animator.SetInteger("A_Death", 1);
+            //animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
             Destroy(transform.GetChild(2).gameObject);
             GetComponent<NavMeshAgent>().enabled = false;
         }
         else if(n < 0)                      //dmg recieve
         {
-            animator.SetInteger("A_Recieve", 1);
+            //animator.SetInteger("A_Recieve", 1);
         }
         
         lifeSld1.size = (life / maxLife);

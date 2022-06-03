@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: ed59d53088eab5d40981537f19649b6f, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: bcc7117aa3826d849bff4b0f197ce997, type: 2}
 --- !u!1 &9628656
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,6 +725,7 @@ MonoBehaviour:
   nameTxt: {fileID: 132968816}
   costTxt: {fileID: 1553774663}
   canvasObj: {fileID: 1698270877}
+  isOcuped: 0
 --- !u!65 &30059905
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -939,6 +940,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1289639021}
   costTxt: {fileID: 880279319}
   canvasObj: {fileID: 333839497}
+  isOcuped: 0
 --- !u!65 &32125450
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1284,6 +1286,7 @@ MonoBehaviour:
   nameTxt: {fileID: 2110569519}
   costTxt: {fileID: 1880591363}
   canvasObj: {fileID: 366968388}
+  isOcuped: 0
 --- !u!65 &45770836
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1396,6 +1399,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1048791171}
   costTxt: {fileID: 2021195532}
   canvasObj: {fileID: 1075097991}
+  isOcuped: 0
 --- !u!65 &48328560
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1508,6 +1512,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1356898132}
   costTxt: {fileID: 683977133}
   canvasObj: {fileID: 420866953}
+  isOcuped: 0
 --- !u!65 &58439734
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1928,6 +1933,7 @@ MonoBehaviour:
   nameTxt: {fileID: 865296356}
   costTxt: {fileID: 1428262597}
   canvasObj: {fileID: 160132048}
+  isOcuped: 0
 --- !u!65 &72020411
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3111,6 +3117,7 @@ MonoBehaviour:
   nameTxt: {fileID: 853397314}
   costTxt: {fileID: 1467361769}
   canvasObj: {fileID: 2118615006}
+  isOcuped: 0
 --- !u!65 &105824365
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3223,6 +3230,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1267161530}
   costTxt: {fileID: 2055849426}
   canvasObj: {fileID: 545348788}
+  isOcuped: 0
 --- !u!65 &106017027
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4047,6 +4055,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1236537940}
   costTxt: {fileID: 865220773}
   canvasObj: {fileID: 202025728}
+  isOcuped: 0
 --- !u!65 &134424695
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4671,6 +4680,7 @@ MonoBehaviour:
   nameTxt: {fileID: 752396777}
   costTxt: {fileID: 1006215946}
   canvasObj: {fileID: 1794871670}
+  isOcuped: 0
 --- !u!65 &156912377
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5039,6 +5049,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1122614998}
   costTxt: {fileID: 1003348269}
   canvasObj: {fileID: 31453810}
+  isOcuped: 0
 --- !u!65 &182687458
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5355,6 +5366,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1566457180}
   costTxt: {fileID: 535291938}
   canvasObj: {fileID: 1654560097}
+  isOcuped: 0
 --- !u!65 &195050009
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5467,6 +5479,7 @@ MonoBehaviour:
   nameTxt: {fileID: 197953455}
   costTxt: {fileID: 541164343}
   canvasObj: {fileID: 1691209449}
+  isOcuped: 0
 --- !u!65 &195487776
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6316,6 +6329,7 @@ MonoBehaviour:
   nameTxt: {fileID: 825042132}
   costTxt: {fileID: 270092958}
   canvasObj: {fileID: 326331111}
+  isOcuped: 0
 --- !u!65 &220706589
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6428,6 +6442,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1037006012}
   costTxt: {fileID: 1700598859}
   canvasObj: {fileID: 1280557833}
+  isOcuped: 0
 --- !u!65 &223771503
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6619,6 +6634,7 @@ MonoBehaviour:
   nameTxt: {fileID: 12795011}
   costTxt: {fileID: 734881216}
   canvasObj: {fileID: 1942945253}
+  isOcuped: 0
 --- !u!65 &224317096
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6833,6 +6849,7 @@ MonoBehaviour:
   nameTxt: {fileID: 362829751}
   costTxt: {fileID: 128584415}
   canvasObj: {fileID: 2005577639}
+  isOcuped: 0
 --- !u!65 &236489123
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7201,6 +7218,7 @@ MonoBehaviour:
   nameTxt: {fileID: 425202998}
   costTxt: {fileID: 1590663116}
   canvasObj: {fileID: 505103443}
+  isOcuped: 0
 --- !u!65 &258766444
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7517,6 +7535,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1415978179}
   costTxt: {fileID: 1686419310}
   canvasObj: {fileID: 505727397}
+  isOcuped: 0
 --- !u!65 &270067903
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8087,6 +8106,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1478371128}
   costTxt: {fileID: 164321938}
   canvasObj: {fileID: 1533980147}
+  isOcuped: 0
 --- !u!65 &280522089
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8432,6 +8452,7 @@ MonoBehaviour:
   nameTxt: {fileID: 573282927}
   costTxt: {fileID: 1302095264}
   canvasObj: {fileID: 1554134100}
+  isOcuped: 0
 --- !u!65 &293264753
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8619,6 +8640,7 @@ MonoBehaviour:
   nameTxt: {fileID: 559625174}
   costTxt: {fileID: 9628658}
   canvasObj: {fileID: 1465558072}
+  isOcuped: 0
 --- !u!65 &303932762
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9037,6 +9059,7 @@ MonoBehaviour:
   nameTxt: {fileID: 290401512}
   costTxt: {fileID: 1978602370}
   canvasObj: {fileID: 405016661}
+  isOcuped: 0
 --- !u!65 &328327845
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9149,6 +9172,7 @@ MonoBehaviour:
   nameTxt: {fileID: 425807265}
   costTxt: {fileID: 570799238}
   canvasObj: {fileID: 1311334578}
+  isOcuped: 0
 --- !u!65 &329859965
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9954,6 +9978,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1611198105}
   costTxt: {fileID: 510652231}
   canvasObj: {fileID: 675920894}
+  isOcuped: 0
 --- !u!65 &353135470
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10066,6 +10091,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1112363899}
   costTxt: {fileID: 2133702400}
   canvasObj: {fileID: 1732271418}
+  isOcuped: 0
 --- !u!65 &357124795
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10513,6 +10539,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1862344834}
   costTxt: {fileID: 1492466666}
   canvasObj: {fileID: 828795656}
+  isOcuped: 0
 --- !u!65 &367430553
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11039,6 +11066,7 @@ MonoBehaviour:
   nameTxt: {fileID: 223778002}
   costTxt: {fileID: 1474953310}
   canvasObj: {fileID: 823583697}
+  isOcuped: 0
 --- !u!65 &374532927
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11384,6 +11412,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1441916491}
   costTxt: {fileID: 77819495}
   canvasObj: {fileID: 1761525950}
+  isOcuped: 0
 --- !u!65 &382056979
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12443,6 +12472,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1475420708}
   costTxt: {fileID: 748912399}
   canvasObj: {fileID: 710270300}
+  isOcuped: 0
 --- !u!65 &423208427
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12942,6 +12972,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1175442281}
   costTxt: {fileID: 756905222}
   canvasObj: {fileID: 154210342}
+  isOcuped: 0
 --- !u!65 &440933683
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13366,6 +13397,7 @@ MonoBehaviour:
   nameTxt: {fileID: 662382227}
   costTxt: {fileID: 440065021}
   canvasObj: {fileID: 1947620678}
+  isOcuped: 0
 --- !u!65 &454884344
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14062,6 +14094,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1523231456}
   costTxt: {fileID: 736455728}
   canvasObj: {fileID: 330382005}
+  isOcuped: 0
 --- !u!65 &500958820
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14351,6 +14384,7 @@ MonoBehaviour:
   nameTxt: {fileID: 334100177}
   costTxt: {fileID: 368127752}
   canvasObj: {fileID: 216329292}
+  isOcuped: 0
 --- !u!65 &504331437
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15318,6 +15352,7 @@ MonoBehaviour:
   nameTxt: {fileID: 510882999}
   costTxt: {fileID: 2033608801}
   canvasObj: {fileID: 93003691}
+  isOcuped: 0
 --- !u!65 &524267278
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15761,6 +15796,7 @@ MonoBehaviour:
   nameTxt: {fileID: 914545539}
   costTxt: {fileID: 1518716378}
   canvasObj: {fileID: 1605559108}
+  isOcuped: 0
 --- !u!65 &538969879
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16031,6 +16067,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1213379297}
   costTxt: {fileID: 1093436801}
   canvasObj: {fileID: 2090037257}
+  isOcuped: 0
 --- !u!65 &544783861
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16580,6 +16617,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1657010638}
   costTxt: {fileID: 1058310673}
   canvasObj: {fileID: 501346424}
+  isOcuped: 0
 --- !u!65 &559455479
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17343,6 +17381,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1732022507}
   costTxt: {fileID: 27484459}
   canvasObj: {fileID: 1867479293}
+  isOcuped: 0
 --- !u!65 &573418227
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17530,6 +17569,7 @@ MonoBehaviour:
   nameTxt: {fileID: 777542146}
   costTxt: {fileID: 2039322761}
   canvasObj: {fileID: 2035569259}
+  isOcuped: 0
 --- !u!65 &583233268
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18460,6 +18500,7 @@ MonoBehaviour:
   nameTxt: {fileID: 124046261}
   costTxt: {fileID: 97044960}
   canvasObj: {fileID: 1510950541}
+  isOcuped: 0
 --- !u!65 &614584047
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18572,6 +18613,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1012621036}
   costTxt: {fileID: 891485807}
   canvasObj: {fileID: 782423568}
+  isOcuped: 0
 --- !u!65 &627090966
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18759,6 +18801,7 @@ MonoBehaviour:
   nameTxt: {fileID: 273446096}
   costTxt: {fileID: 454707333}
   canvasObj: {fileID: 2078996263}
+  isOcuped: 0
 --- !u!65 &629646664
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19108,6 +19151,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1904267832}
   costTxt: {fileID: 2094629071}
   canvasObj: {fileID: 1679315136}
+  isOcuped: 0
 --- !u!65 &641546954
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19607,6 +19651,7 @@ MonoBehaviour:
   nameTxt: {fileID: 737026634}
   costTxt: {fileID: 2083954847}
   canvasObj: {fileID: 1517284758}
+  isOcuped: 0
 --- !u!65 &673647398
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20337,6 +20382,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1107227825}
   costTxt: {fileID: 132418262}
   canvasObj: {fileID: 835221016}
+  isOcuped: 0
 --- !u!65 &691334449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20784,6 +20830,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1711693332}
   costTxt: {fileID: 631257842}
   canvasObj: {fileID: 263451554}
+  isOcuped: 0
 --- !u!65 &710297426
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21279,6 +21326,7 @@ MonoBehaviour:
   nameTxt: {fileID: 2101305419}
   costTxt: {fileID: 2044984359}
   canvasObj: {fileID: 1089578143}
+  isOcuped: 0
 --- !u!65 &729069376
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22157,6 +22205,7 @@ MonoBehaviour:
   nameTxt: {fileID: 882374127}
   costTxt: {fileID: 1244749736}
   canvasObj: {fileID: 80299719}
+  isOcuped: 0
 --- !u!65 &750587095
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23701,6 +23750,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1616896706}
   costTxt: {fileID: 892230643}
   canvasObj: {fileID: 1486263584}
+  isOcuped: 0
 --- !u!65 &800633018
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23813,6 +23863,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1693849273}
   costTxt: {fileID: 632509421}
   canvasObj: {fileID: 1981643142}
+  isOcuped: 0
 --- !u!65 &801478120
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24273,6 +24324,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1321103944}
   costTxt: {fileID: 1285351501}
   canvasObj: {fileID: 199899793}
+  isOcuped: 0
 --- !u!65 &816520717
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25172,6 +25224,7 @@ MonoBehaviour:
   nameTxt: {fileID: 973406568}
   costTxt: {fileID: 515049675}
   canvasObj: {fileID: 606549711}
+  isOcuped: 0
 --- !u!65 &837282073
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25769,6 +25822,7 @@ MonoBehaviour:
   nameTxt: {fileID: 71253039}
   costTxt: {fileID: 1756663141}
   canvasObj: {fileID: 957960415}
+  isOcuped: 0
 --- !u!65 &856194761
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25881,6 +25935,7 @@ MonoBehaviour:
   nameTxt: {fileID: 2092301308}
   costTxt: {fileID: 566195127}
   canvasObj: {fileID: 1986726347}
+  isOcuped: 0
 --- !u!65 &857117752
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26151,6 +26206,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1158351633}
   costTxt: {fileID: 671803691}
   canvasObj: {fileID: 791535227}
+  isOcuped: 0
 --- !u!65 &870212910
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26365,6 +26421,7 @@ MonoBehaviour:
   nameTxt: {fileID: 881629676}
   costTxt: {fileID: 1084243846}
   canvasObj: {fileID: 1555502680}
+  isOcuped: 0
 --- !u!65 &877212708
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26947,6 +27004,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1156775304}
   costTxt: {fileID: 783615728}
   canvasObj: {fileID: 1734226177}
+  isOcuped: 0
 --- !u!65 &893175749
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27059,6 +27117,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1551344805}
   costTxt: {fileID: 1857434253}
   canvasObj: {fileID: 416229122}
+  isOcuped: 0
 --- !u!65 &894802935
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27668,6 +27727,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1466962214}
   costTxt: {fileID: 2015552539}
   canvasObj: {fileID: 835318665}
+  isOcuped: 0
 --- !u!65 &938639403
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28702,6 +28762,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1032311869}
   costTxt: {fileID: 1376337055}
   canvasObj: {fileID: 844300148}
+  isOcuped: 0
 --- !u!65 &980041985
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28916,6 +28977,7 @@ MonoBehaviour:
   nameTxt: {fileID: 73626707}
   costTxt: {fileID: 118370398}
   canvasObj: {fileID: 686516961}
+  isOcuped: 0
 --- !u!65 &982218609
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29103,6 +29165,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1266315393}
   costTxt: {fileID: 723484002}
   canvasObj: {fileID: 597466176}
+  isOcuped: 0
 --- !u!65 &989059338
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29215,6 +29278,7 @@ MonoBehaviour:
   nameTxt: {fileID: 2025984841}
   costTxt: {fileID: 106139019}
   canvasObj: {fileID: 147173827}
+  isOcuped: 0
 --- !u!65 &990579577
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29741,6 +29805,7 @@ MonoBehaviour:
   nameTxt: {fileID: 2009547459}
   costTxt: {fileID: 58962925}
   canvasObj: {fileID: 2145362080}
+  isOcuped: 0
 --- !u!65 &998992709
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30398,6 +30463,7 @@ MonoBehaviour:
   nameTxt: {fileID: 592654275}
   costTxt: {fileID: 1092152685}
   canvasObj: {fileID: 1591227254}
+  isOcuped: 0
 --- !u!65 &1021502812
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31746,6 +31812,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1432946013}
   costTxt: {fileID: 1564966994}
   canvasObj: {fileID: 251797186}
+  isOcuped: 0
 --- !u!65 &1076902773
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31858,6 +31925,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1548153538}
   costTxt: {fileID: 43222663}
   canvasObj: {fileID: 1153453359}
+  isOcuped: 0
 --- !u!65 &1080175062
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32049,6 +32117,7 @@ MonoBehaviour:
   nameTxt: {fileID: 331058311}
   costTxt: {fileID: 1382353867}
   canvasObj: {fileID: 1598476785}
+  isOcuped: 0
 --- !u!65 &1083098023
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33095,6 +33164,7 @@ MonoBehaviour:
   nameTxt: {fileID: 523946145}
   costTxt: {fileID: 460576845}
   canvasObj: {fileID: 1548736605}
+  isOcuped: 0
 --- !u!65 &1108570949
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33444,6 +33514,7 @@ MonoBehaviour:
   nameTxt: {fileID: 368596372}
   costTxt: {fileID: 411435189}
   canvasObj: {fileID: 371669050}
+  isOcuped: 0
 --- !u!65 &1121816751
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33864,6 +33935,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1055454198}
   costTxt: {fileID: 994870779}
   canvasObj: {fileID: 110864125}
+  isOcuped: 0
 --- !u!65 &1138254132
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34051,6 +34123,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1833973520}
   costTxt: {fileID: 690941626}
   canvasObj: {fileID: 1634965644}
+  isOcuped: 0
 --- !u!65 &1147019813
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34163,6 +34236,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1406237898}
   costTxt: {fileID: 637566754}
   canvasObj: {fileID: 1255364129}
+  isOcuped: 0
 --- !u!65 &1149217918
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34610,6 +34684,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1006934362}
   costTxt: {fileID: 1681667577}
   canvasObj: {fileID: 2133659256}
+  isOcuped: 0
 --- !u!65 &1168703788
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35421,6 +35496,7 @@ MonoBehaviour:
   nameTxt: {fileID: 508081116}
   costTxt: {fileID: 606945610}
   canvasObj: {fileID: 597040439}
+  isOcuped: 0
 --- !u!65 &1219068377
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35691,6 +35767,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1118461679}
   costTxt: {fileID: 454257615}
   canvasObj: {fileID: 1108275559}
+  isOcuped: 0
 --- !u!65 &1230455861
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37629,6 +37706,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1866254730}
   costTxt: {fileID: 370504750}
   canvasObj: {fileID: 1543348041}
+  isOcuped: 0
 --- !u!65 &1285910119
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37820,6 +37898,7 @@ MonoBehaviour:
   nameTxt: {fileID: 411780141}
   costTxt: {fileID: 1221694037}
   canvasObj: {fileID: 1850308176}
+  isOcuped: 0
 --- !u!65 &1290216812
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38136,6 +38215,7 @@ MonoBehaviour:
   nameTxt: {fileID: 780180935}
   costTxt: {fileID: 1051171055}
   canvasObj: {fileID: 523117611}
+  isOcuped: 0
 --- !u!65 &1298886343
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38248,6 +38328,7 @@ MonoBehaviour:
   nameTxt: {fileID: 922333774}
   costTxt: {fileID: 1226930487}
   canvasObj: {fileID: 679555131}
+  isOcuped: 0
 --- !u!65 &1299734688
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38360,6 +38441,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1329004265}
   costTxt: {fileID: 1798275667}
   canvasObj: {fileID: 1981644675}
+  isOcuped: 0
 --- !u!65 &1300210740
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38803,6 +38885,7 @@ MonoBehaviour:
   nameTxt: {fileID: 542564306}
   costTxt: {fileID: 16218463}
   canvasObj: {fileID: 1293959131}
+  isOcuped: 0
 --- !u!65 &1318910011
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39989,6 +40072,7 @@ MonoBehaviour:
   nameTxt: {fileID: 203221872}
   costTxt: {fileID: 662295548}
   canvasObj: {fileID: 1904703948}
+  isOcuped: 0
 --- !u!65 &1392584149
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40334,6 +40418,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1089959198}
   costTxt: {fileID: 1086416965}
   canvasObj: {fileID: 1296704183}
+  isOcuped: 0
 --- !u!65 &1410404270
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41176,6 +41261,7 @@ MonoBehaviour:
   nameTxt: {fileID: 838450428}
   costTxt: {fileID: 799976634}
   canvasObj: {fileID: 1746762513}
+  isOcuped: 0
 --- !u!65 &1448023962
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41288,6 +41374,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1115698336}
   costTxt: {fileID: 937048260}
   canvasObj: {fileID: 1096535443}
+  isOcuped: 0
 --- !u!65 &1450696963
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41400,6 +41487,7 @@ MonoBehaviour:
   nameTxt: {fileID: 955923394}
   costTxt: {fileID: 693152590}
   canvasObj: {fileID: 1705296984}
+  isOcuped: 0
 --- !u!65 &1458115440
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41614,6 +41702,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1093308064}
   costTxt: {fileID: 490085949}
   canvasObj: {fileID: 476228935}
+  isOcuped: 0
 --- !u!65 &1460974593
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43445,6 +43534,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1253144326}
   costTxt: {fileID: 359580130}
   canvasObj: {fileID: 346226243}
+  isOcuped: 0
 --- !u!65 &1519317425
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43915,6 +44005,7 @@ MonoBehaviour:
   nameTxt: {fileID: 964183397}
   costTxt: {fileID: 1393878806}
   canvasObj: {fileID: 1781556197}
+  isOcuped: 0
 --- !u!65 &1535323080
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -44027,6 +44118,7 @@ MonoBehaviour:
   nameTxt: {fileID: 780276926}
   costTxt: {fileID: 380872817}
   canvasObj: {fileID: 1568924468}
+  isOcuped: 0
 --- !u!65 &1536106489
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -45198,6 +45290,7 @@ MonoBehaviour:
   nameTxt: {fileID: 352190361}
   costTxt: {fileID: 210542263}
   canvasObj: {fileID: 538207748}
+  isOcuped: 0
 --- !u!65 &1572320956
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -45460,6 +45553,7 @@ MonoBehaviour:
   nameTxt: {fileID: 239483901}
   costTxt: {fileID: 552605249}
   canvasObj: {fileID: 388176215}
+  isOcuped: 0
 --- !u!65 &1588843499
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -46134,6 +46228,7 @@ MonoBehaviour:
   nameTxt: {fileID: 453938766}
   costTxt: {fileID: 1659450108}
   canvasObj: {fileID: 1458678762}
+  isOcuped: 0
 --- !u!65 &1609534509
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -46676,6 +46771,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1794468985}
   costTxt: {fileID: 2061743494}
   canvasObj: {fileID: 1067224529}
+  isOcuped: 0
 --- !u!65 &1652630829
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48005,6 +48101,7 @@ MonoBehaviour:
   nameTxt: {fileID: 689233747}
   costTxt: {fileID: 903000535}
   canvasObj: {fileID: 188554079}
+  isOcuped: 0
 --- !u!65 &1708805832
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48117,6 +48214,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1283572435}
   costTxt: {fileID: 83201793}
   canvasObj: {fileID: 325870441}
+  isOcuped: 0
 --- !u!65 &1709777486
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48903,6 +49001,7 @@ MonoBehaviour:
   nameTxt: {fileID: 375596498}
   costTxt: {fileID: 78702779}
   canvasObj: {fileID: 320376152}
+  isOcuped: 0
 --- !u!65 &1740579468
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -49889,6 +49988,7 @@ MonoBehaviour:
   nameTxt: {fileID: 711744514}
   costTxt: {fileID: 1787627497}
   canvasObj: {fileID: 964228260}
+  isOcuped: 0
 --- !u!65 &1774803943
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50103,6 +50203,7 @@ MonoBehaviour:
   nameTxt: {fileID: 555757208}
   costTxt: {fileID: 1041602095}
   canvasObj: {fileID: 1423428622}
+  isOcuped: 0
 --- !u!65 &1785860096
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50783,6 +50884,7 @@ MonoBehaviour:
   nameTxt: {fileID: 693501592}
   costTxt: {fileID: 2129978258}
   canvasObj: {fileID: 757836345}
+  isOcuped: 0
 --- !u!65 &1815243758
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51049,6 +51151,7 @@ MonoBehaviour:
   nameTxt: {fileID: 76795540}
   costTxt: {fileID: 2024529216}
   canvasObj: {fileID: 599328260}
+  isOcuped: 0
 --- !u!65 &1824619642
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51458,6 +51561,7 @@ MonoBehaviour:
   nameTxt: {fileID: 35744999}
   costTxt: {fileID: 1935898707}
   canvasObj: {fileID: 1368516333}
+  isOcuped: 0
 --- !u!65 &1837466713
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51570,6 +51674,7 @@ MonoBehaviour:
   nameTxt: {fileID: 792638414}
   costTxt: {fileID: 1820582111}
   canvasObj: {fileID: 873952143}
+  isOcuped: 0
 --- !u!65 &1845895657
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51863,6 +51968,7 @@ MonoBehaviour:
   nameTxt: {fileID: 145561732}
   costTxt: {fileID: 2091810149}
   canvasObj: {fileID: 1833442144}
+  isOcuped: 0
 --- !u!65 &1858416465
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51975,6 +52081,7 @@ MonoBehaviour:
   nameTxt: {fileID: 273003931}
   costTxt: {fileID: 2111143747}
   canvasObj: {fileID: 229929312}
+  isOcuped: 0
 --- !u!65 &1860828545
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52241,6 +52348,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1384494636}
   costTxt: {fileID: 1723600930}
   canvasObj: {fileID: 1461089038}
+  isOcuped: 0
 --- !u!65 &1865832828
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52432,6 +52540,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1447684197}
   costTxt: {fileID: 1363325110}
   canvasObj: {fileID: 944050963}
+  isOcuped: 0
 --- !u!65 &1866284659
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52950,6 +53059,7 @@ MonoBehaviour:
   nameTxt: {fileID: 2096936236}
   costTxt: {fileID: 2006726036}
   canvasObj: {fileID: 569547402}
+  isOcuped: 0
 --- !u!65 &1897537942
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53062,6 +53172,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1536366951}
   costTxt: {fileID: 1423264573}
   canvasObj: {fileID: 190435993}
+  isOcuped: 0
 --- !u!65 &1902214696
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53457,6 +53568,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1016346113}
   costTxt: {fileID: 1985041003}
   canvasObj: {fileID: 738246281}
+  isOcuped: 0
 --- !u!65 &1913682116
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53644,6 +53756,7 @@ MonoBehaviour:
   nameTxt: {fileID: 98772008}
   costTxt: {fileID: 794713243}
   canvasObj: {fileID: 280394609}
+  isOcuped: 0
 --- !u!65 &1927520209
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53835,6 +53948,7 @@ MonoBehaviour:
   nameTxt: {fileID: 990744900}
   costTxt: {fileID: 1062370808}
   canvasObj: {fileID: 1958566351}
+  isOcuped: 0
 --- !u!65 &1937312397
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53947,6 +54061,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1664483890}
   costTxt: {fileID: 1719658318}
   canvasObj: {fileID: 1596066822}
+  isOcuped: 0
 --- !u!65 &1940437024
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -54236,6 +54351,7 @@ MonoBehaviour:
   nameTxt: {fileID: 2134244087}
   costTxt: {fileID: 568359868}
   canvasObj: {fileID: 2034965093}
+  isOcuped: 0
 --- !u!65 &1942968862
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -54548,6 +54664,7 @@ MonoBehaviour:
   nameTxt: {fileID: 936123691}
   costTxt: {fileID: 1699273913}
   canvasObj: {fileID: 1264293555}
+  isOcuped: 0
 --- !u!65 &1958129201
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -55199,6 +55316,7 @@ MonoBehaviour:
   nameTxt: {fileID: 2016950879}
   costTxt: {fileID: 1202789724}
   canvasObj: {fileID: 103196256}
+  isOcuped: 0
 --- !u!65 &1986542598
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -55673,6 +55791,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1736362933}
   costTxt: {fileID: 1751175312}
   canvasObj: {fileID: 1524037941}
+  isOcuped: 0
 --- !u!65 &2010371212
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -56022,6 +56141,7 @@ MonoBehaviour:
   nameTxt: {fileID: 2034761611}
   costTxt: {fileID: 2036912660}
   canvasObj: {fileID: 2112052520}
+  isOcuped: 0
 --- !u!65 &2022456722
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -56521,6 +56641,7 @@ MonoBehaviour:
   nameTxt: {fileID: 998388544}
   costTxt: {fileID: 1024647890}
   canvasObj: {fileID: 1906103911}
+  isOcuped: 0
 --- !u!65 &2033937755
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57074,6 +57195,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1787728197}
   costTxt: {fileID: 520616431}
   canvasObj: {fileID: 994752803}
+  isOcuped: 0
 --- !u!65 &2042732286
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57265,6 +57387,7 @@ MonoBehaviour:
   nameTxt: {fileID: 738326378}
   costTxt: {fileID: 941264463}
   canvasObj: {fileID: 1502538138}
+  isOcuped: 0
 --- !u!65 &2055615650
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57456,6 +57579,7 @@ MonoBehaviour:
   nameTxt: {fileID: 571185513}
   costTxt: {fileID: 1505201362}
   canvasObj: {fileID: 592336208}
+  isOcuped: 0
 --- !u!65 &2056388156
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57797,6 +57921,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1080837931}
   costTxt: {fileID: 152053861}
   canvasObj: {fileID: 980796132}
+  isOcuped: 0
 --- !u!65 &2071554968
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -58662,6 +58787,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1514124193}
   costTxt: {fileID: 465989660}
   canvasObj: {fileID: 927542774}
+  isOcuped: 0
 --- !u!65 &2105946924
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -59550,6 +59676,7 @@ MonoBehaviour:
   nameTxt: {fileID: 1134093599}
   costTxt: {fileID: 1421904349}
   canvasObj: {fileID: 548990346}
+  isOcuped: 0
 --- !u!65 &2136545685
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -59662,6 +59789,7 @@ MonoBehaviour:
   nameTxt: {fileID: 282364817}
   costTxt: {fileID: 809424478}
   canvasObj: {fileID: 258791708}
+  isOcuped: 0
 --- !u!65 &2138336929
 BoxCollider:
   m_ObjectHideFlags: 0
