@@ -7,8 +7,9 @@ using UnityEngine.AI;
 
 public class EnemyStats : MonoBehaviour
 {
-    [SerializeField] private int life;
-    [SerializeField] private int atk;
+    [SerializeField] private int lifeValue;
+    [SerializeField] private int shieldValue;
+    [SerializeField] private int atkValue;
     [SerializeField] private int range;
     [SerializeField] private float energy;
     private Animator animator;
@@ -28,7 +29,7 @@ public class EnemyStats : MonoBehaviour
     {
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
         animator = GetComponent<Animator>();
-        maxLife = life;
+        maxLife = lifeValue;
         maxEnergy = energy;
         winLoose = GameObject.Find("GameManager").GetComponent<WinLoose>();
        // moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
@@ -41,23 +42,55 @@ public class EnemyStats : MonoBehaviour
     }
     public void SetLife(int n)
     {
-        life += n;
-        if(life <= 0)                       //death
+        if (shieldValue > 0 && n < 0)
         {
-            winLoose.totalEnemies--;
-            
-            //animator.SetInteger("A_Death", 1);
+            shieldValue += n;
+
+            if (shieldValue <= 0)
+            {
+                /*structure.transform.GetChild(2).GetComponent<Scrollbar>().size = 0;
+                selected.transform.GetChild(1).GetComponent<Scrollbar>().size = 0;
+                selected.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = "";
+
+                structure.transform.GetChild(2).gameObject.SetActive(false);
+                selected.transform.GetChild(1).gameObject.SetActive(false);
+
+                animator.SetInteger("A_Recieve", 1);*/
+
+                n = shieldValue;
+            }
+            else
+            {
+                /*structure.transform.GetChild(2).GetComponent<Scrollbar>().size = (shieldValue / maxShield);
+                selected.transform.GetChild(1).GetComponent<Scrollbar>().size = (shieldValue / maxShield);
+                selected.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = (shieldValue + " / " + maxShield);
+
+                animator.SetInteger("A_Recieve", 1);*/
+
+                return;
+            }
+        }
+
+
+        lifeValue += n;
+
+        if (lifeValue <= 0)                    //death
+        {
+            winLoose.LooseActivateVoice();
+            animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
-            Destroy(transform.GetChild(2).gameObject);
             GetComponent<NavMeshAgent>().enabled = false;
         }
-        else if(n < 0)                      //dmg recieve
+        else if (n < 0)                         //dmg recieve
         {
-            //animator.SetInteger("A_Recieve", 1);
+            animator.SetInteger("A_Recieve", 1);
         }
-        
-        lifeSld1.size = (life / maxLife);
-        lifeSld2.value = (life / maxLife);
+        /*structure.transform.GetChild(1).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
+        selected.transform.GetChild(0).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
+        selected.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = (lifeValue + " / " + maxLife);*/
+
+        lifeSld1.size = (lifeValue / maxLife);
+        lifeSld2.value = (lifeValue / maxLife);
     }
 
     public float GetEnergy()
@@ -67,7 +100,7 @@ public class EnemyStats : MonoBehaviour
 
     public int GetAtk()
     {
-        int newAtk = Random.Range((atk - 2), atk);
+        int newAtk = Random.Range((atkValue - 2), atkValue);
         return newAtk;
     }
 

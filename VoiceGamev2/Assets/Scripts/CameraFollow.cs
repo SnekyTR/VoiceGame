@@ -70,6 +70,16 @@ public class CameraFollow : MonoBehaviour
                 {
                     NewParent(enemys[i].transform);
                     print(names[2]);
+                    moveLogic.PlayerDeselect();
+
+                    playerSelected[0].SetActive(false);
+                    if (players.Count > 1) playerSelected[1].SetActive(false);
+                    if (players.Count > 2) playerSelected[2].SetActive(false);
+
+                    playerStructure[0].SetActive(true);
+                    if (players.Count > 1) playerStructure[1].SetActive(true);
+                    if (players.Count > 2) playerStructure[2].SetActive(true);
+
                     return;
                 }
             }
