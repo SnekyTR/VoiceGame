@@ -30,9 +30,9 @@ public class EnemyStats : MonoBehaviour
         animator = GetComponent<Animator>();
         maxLife = life;
         maxEnergy = energy;
-        /*winLoose = GameObject.Find("GameManager").GetComponent<WinLoose>();
-        moveData = GameObject.Find("Do not destroy").GetComponent<MoveDataToMain>();
-        moveData.totalEXP = moveData.totalEXP + xp;*/
+        winLoose = GameObject.Find("GameManager").GetComponent<WinLoose>();
+       // moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
+        //moveData.totalEXP = moveData.totalEXP + xp;
 
     }
     void Update()
