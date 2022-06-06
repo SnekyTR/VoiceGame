@@ -10,25 +10,48 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform playerParent = null;
     public bool whoTurn;
-    public List<Transform> players;
-    public List<StateManager> enemys;
-    public GameObject[] playerSelected;
-    public GameObject[] playerStructure;
+    public List<Transform> players = new List<Transform>();
+    public List<StateManager> enemys = new List<StateManager>();
+    public List<GameObject> playerSelected = new List<GameObject>();
+    public List<GameObject> playerStructure = new List<GameObject>();
     private List<string> playersNames = new List<string>();
     private PlayerMove moveLogic;
-    [SerializeField] private Image turnImg;
+    private Image turnImg;
 
     private Dictionary<string, Action<string>> selectPJCmd = new Dictionary<string, Action<string>>();
     private KeywordRecognizer selectPJCmdR;
 
-    void Start()
+    private void Awake()
     {
         whoTurn = true;         //player turn
-        turnImg.color = Color.blue;
 
         moveLogic = GetComponent<PlayerMove>();
+        turnImg = GameObject.Find("Turno").GetComponent<Image>();
+        turnImg.color = Color.blue;
 
-        for (int i = 0; i < players.Count; i++)
+        Transform ply = GameObject.Find("Players").transform;
+        Transform cnv = GameObject.Find("CanvasManager").transform;
+
+        for (int i = 0; i < ply.childCount; i++)
+        {
+            players.Add(ply.GetChild(i));
+            playerSelected.Add(cnv.GetChild(i+3).gameObject);
+            playerStructure.Add(cnv.GetChild(i).gameObject);
+
+            playerSelected[i].SetActive(false);
+        }
+
+        Transform eny = GameObject.Find("Enemys").transform;
+
+        for (int i = 0; i < eny.childCount; i++)
+        {
+            enemys.Add(eny.GetChild(i).GetComponent<StateManager>());
+        }
+    }
+
+    void Start()
+    {
+        for (int i = 0; i < players.Count; i++)                         //speech
         {
             selectPJCmd.Add(players[i].name, SelectPJ);
             playersNames.Add(players[i].name);

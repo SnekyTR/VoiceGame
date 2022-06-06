@@ -9,7 +9,7 @@ public class SpiderAI : MonoBehaviour
     public bool isOnRoute, setTarget;
     private EnemyStats enemyStats;
     private NavMeshAgent enemyNM;
-    private Transform[] casillas;
+    private List<Transform> casillas = new List<Transform>();
     private Transform target;
     private CameraFollow gameM;
     private Animator animator;
@@ -150,7 +150,7 @@ public class SpiderAI : MonoBehaviour
 
     private int RandomPlayerPiece()
     {
-        int e = Random.Range(0, casillas.Length);
+        int e = Random.Range(0, casillas.Count);
         float dist = Vector3.Distance(target.position, casillas[e].position);
 
         int n = 3;

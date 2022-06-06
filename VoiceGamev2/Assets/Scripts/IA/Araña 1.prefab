@@ -1480,6 +1480,7 @@ GameObject:
   - component: {fileID: 8572994706966986501}
   - component: {fileID: 8572994706966986499}
   - component: {fileID: 8572994706966986496}
+  - component: {fileID: -7520687688447244144}
   m_Layer: 0
   m_Name: "Ara\xF1a 1"
   m_TagString: Enemy
@@ -1639,14 +1640,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b2770ac20d2244ea0755821f5bc6fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nEnemy: 0
   lifeValue: 0
   shieldValue: 0
   atkValue: 0
   range: 0
   energy: 10
   xp: 50
-  lifeSld1: {fileID: 0}
-  lifeSld2: {fileID: 8572994707701335715}
+  intBars: {fileID: 8572994707371243174}
+--- !u!114 &-7520687688447244144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6341872089512171486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b809ea0ea7fc3f4e9b6bd36fca8edee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nSpider: 0
+  isOnRoute: 0
+  setTarget: 0
 --- !u!1 &6341894526521195372
 GameObject:
   m_ObjectHideFlags: 0

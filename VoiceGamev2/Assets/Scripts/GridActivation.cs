@@ -5,16 +5,26 @@ using UnityEngine;
 public class GridActivation : MonoBehaviour
 {
     public GameObject[] rays;
-    public Transform[] casillas;
+    public List<Transform> casillas = new List<Transform>();
     public string[] nameC;
-    public PlayerMove playerM;
+    private PlayerMove playerM;
 
     private void Awake()
     {
-        for(int i = 0; i < casillas.Length ; i++)
+        GameObject[] casO = GameObject.FindGameObjectsWithTag("Section");
+
+        for(int i = 0; i < casO.Length; i++)
+        {
+            casillas.Add(casO[i].transform);
+        }
+
+        nameC = new string[casillas.Count];
+
+        for(int i = 0; i < casillas.Count ; i++)
         {
             nameC[i] = casillas[i].name;
         }
+        playerM = GameObject.Find("GameManager").GetComponent<PlayerMove>();
         playerM.SetList(nameC);
     }
     void Start()

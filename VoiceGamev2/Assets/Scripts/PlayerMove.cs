@@ -16,16 +16,15 @@ public class PlayerMove : MonoBehaviour
     private Transform playerTr;
 
     private CameraFollow gameM;
-    public GridActivation gridA;
-    [SerializeField] private Image stateImg;
-    [SerializeField] private Image range;
+    private GridActivation gridA;
+    private Image stateImg;
+    private Image range;
     private bool isOnRoute =false;
 
     [Header("Locations")]
     private string[] posNames;
 
     [Header("Enemys")]
-    [SerializeField] private Transform[] enemyTr;
     private GameObject target;
     private bool setTarget;
 
@@ -49,6 +48,8 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
+        gridA = GameObject.Find("RayCast").GetComponent<GridActivation>();
+        stateImg = GameObject.Find("PasarTurno").GetComponent<Image>();
 
         //select action
         startCmd.Add("mover", StartMove);

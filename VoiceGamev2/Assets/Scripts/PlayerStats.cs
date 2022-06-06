@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int intellectPoints;
     [SerializeField] public int agilityPoints;
     [SerializeField] private float energy;
-    [SerializeField] private EnergyScript energyLo;
+    private EnergyScript energyLo;
     private Animator animator;
 
     private int lifeValue;
@@ -24,8 +24,8 @@ public class PlayerStats : MonoBehaviour
     private float maxShield;
     public float maxEnergy;
 
-    [SerializeField] private GameObject structure;
-    [SerializeField] private GameObject selected;
+    private GameObject structure;
+    private GameObject selected;
 
     private CameraFollow gameM;
     private WinLoose winLoose;
@@ -39,6 +39,26 @@ public class PlayerStats : MonoBehaviour
             ++winLoose.totalEnemies;
         }*/
         //calculo de valor de los stats
+
+        if(transform.name == "Magnus")
+        {
+            energyLo = gameM.playerSelected[0].transform.GetChild(1).GetComponent<EnergyScript>();
+            structure = gameM.playerStructure[0];
+            selected = gameM.playerSelected[0].transform.GetChild(0).GetChild(1).gameObject;
+        }
+        else if(transform.name == "Vagnar")
+        {
+            energyLo = gameM.playerSelected[1].transform.GetChild(1).GetComponent<EnergyScript>();
+            structure = gameM.playerStructure[1];
+            selected = gameM.playerSelected[1].transform.GetChild(0).GetChild(1).gameObject;
+        }
+        else
+        {
+            energyLo = gameM.playerSelected[2].transform.GetChild(1).GetComponent<EnergyScript>();
+            structure = gameM.playerStructure[2];
+            selected = gameM.playerSelected[2].transform.GetChild(0).GetChild(1).gameObject;
+        }
+
         lifeValue = 10;
         for(int i = 2; i <= lifePoints; i++)
         {
