@@ -10,6 +10,7 @@ public class VoiceDestinations : MonoBehaviour
 {
     [SerializeField]Transform objectTransform;
     public CombatEnter combatEnter;
+    public bool entered;
     private NavMeshAgent agent;
     private Dictionary<string, Action> mapActions = new Dictionary<string, Action>();
     private KeywordRecognizer mapDestinations;
@@ -30,8 +31,7 @@ public class VoiceDestinations : MonoBehaviour
 
     private void AddDestinations()
     {
-        mapActions.Add("reposo",Caca);
-        mapActions.Add("koko",Caca);
+        mapActions.Add("reposo", SelectDestination);
         print("Se han añadido");
         mapDestinations = new KeywordRecognizer(mapActions.Keys.ToArray());
         mapDestinations.OnPhraseRecognized += RecognizedVoice;
@@ -42,19 +42,27 @@ public class VoiceDestinations : MonoBehaviour
         Debug.Log(speech.text);
         mapActions[speech.text].Invoke();
     }
-    private void Caca()
+    private void SelectDestination()
     {
         objectTransform = GameObject.Find("Rest of the Giant").transform;
-        agent.SetDestination(objectTransform.position);
+
         //combatEnter.www();
-        //if (combatEnter.combat == true) { print("Se ha parado player"); StopPlayer(); }
+        if (entered)
+        {
+            StopPlayer();
+            combatEnter.CheckLvlPanel();
+        }
+        else
+        {
+            agent.SetDestination(objectTransform.position);
+        }
+        //if (combatEnter.combat == true) { print("Se ha parado player"); StopPlayer(); } else {  }
         //else { ); }
-        
-        
     }
     public void StopPlayer()
     {
         agent.SetDestination(transform.position);
+        
     }
 
 }

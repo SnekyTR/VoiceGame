@@ -36,9 +36,11 @@ public class CombatEnter : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")){
+            
             single.scriptableObjects.Add(actualCombat);
             battleWindow.GetCombatEnter(this.gameObject);
             voices = other.gameObject.GetComponent<VoiceDestinations>();
+            voices.entered = true;
             voices.combatEnter = GetComponent<CombatEnter>();
             if (combatSingle)
             {
@@ -64,7 +66,7 @@ public class CombatEnter : MonoBehaviour
     {
         sceneIndex = singleEsctructure.sceneIndex;
     }*/
-    public void www()
+    public void CheckLvlPanel()
     {
         if (combat == true) { 
 

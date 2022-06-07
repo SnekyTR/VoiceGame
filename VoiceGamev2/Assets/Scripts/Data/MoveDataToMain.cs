@@ -25,14 +25,14 @@ public class MoveDataToMain : MonoBehaviour
     {
         
     }
-    public void IncrementProgresion(int num)
+    public void IncrementProgresion()
     {
         SceneManager.LoadScene(0);
         StartCoroutine(ReChargeObjects());  
     }
     IEnumerator ReChargeObjects()
     {
-        
+        print("Ha recargado");
         yield return new WaitForSeconds(0.5f);
         print("Entra despeus de destroy");
         pro = GameObject.Find("GameSaver").GetComponent<Progression>();
@@ -48,7 +48,12 @@ public class MoveDataToMain : MonoBehaviour
         print("Incrementa");
         gameSave.LoadGame();
         pro.CheckProgression();
-        level.GainExperience(totalEXP);
+        for(int i = 0; i< GameObject.FindGameObjectsWithTag("Player").Length; i++)
+        {
+            level = GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>();
+            level.GainExperience(totalEXP);
+
+        }
         gameSave.SaveGame();
     }
 }

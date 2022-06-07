@@ -46,18 +46,20 @@ public class UIMovement : MonoBehaviour
     }
     private void AddPartyInf()
     {
+
         for (int i = 0; i < partyInformation.players.Length; i++)
         {
+
             partyInf.Add(partyInformation.players[i].name, LoadCharacter);
             print(partyInformation.players[i].name);
         }
-        partyInf.Add("salir", DeActivatePartyInformation);
+        //partyInf.Add("salir", DeActivatePartyInformation);
         party = new KeywordRecognizer(partyInf.Keys.ToArray());
         party.OnPhraseRecognized += RecognizedVoiceParty;
     }
     private void AddCharacterInf()
     {
-        charInf.Add("salir", DeActivateCharInformation);
+        
         character = new KeywordRecognizer(charInf.Keys.ToArray());
         character.OnPhraseRecognized += RecognizedVoiceParty;
     }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class LevelSystem : MonoBehaviour
 {
     [SerializeField] private PartyInformation partyInfo;
-    private IncreaseStats increaseStats;
+    [SerializeField]private IncreaseStats increaseStats;
     public int level;
 
     public float currentXp;
@@ -36,7 +36,7 @@ public class LevelSystem : MonoBehaviour
         backXpBar.fillAmount = currentXp / requiredXp;
         requiredXp = CalculateRequireXp();
         buttonsStats = GameObject.Find("buttons_stats");
-        increaseStats = GameObject.Find("buttons_stats").GetComponent<IncreaseStats>();
+        //increaseStats = GameObject.Find("buttons_stats").GetComponent<IncreaseStats>();
 
     }
 

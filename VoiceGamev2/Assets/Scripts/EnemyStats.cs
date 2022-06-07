@@ -36,7 +36,7 @@ public class EnemyStats : MonoBehaviour
         maxShield = shieldValue;
         maxEnergy = energy;
         winLoose = gameM.GetComponent<WinLoose>();
-
+        winLoose.totalEnemies++;
         extBars = GameObject.Find("CanvasManager").transform.GetChild(6).GetChild(nEnemy).gameObject;
 
         // moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
@@ -88,7 +88,7 @@ public class EnemyStats : MonoBehaviour
 
         if (lifeValue <= 0)                    //death
         {
-            winLoose.LooseActivateVoice();
+            winLoose.totalEnemies--;
             animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
             GetComponent<NavMeshAgent>().enabled = false;

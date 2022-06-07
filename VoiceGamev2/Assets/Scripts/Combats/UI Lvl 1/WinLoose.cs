@@ -7,22 +7,19 @@ using UnityEngine.SceneManagement;
 
 public class WinLoose : MonoBehaviour
 {
-    [SerializeField]private GameObject wPanel;
-    [SerializeField]private GameObject lPanel;
+    [SerializeField] private GameObject wPanel;
+    [SerializeField] private GameObject lPanel;
 
     private Dictionary<string, Action> winOrders = new Dictionary<string, Action>();
     private KeywordRecognizer wOrders;
     private Dictionary<string, Action> looseOrders = new Dictionary<string, Action>();
     private KeywordRecognizer lOrders;
-    private MoveDataToMain moveData;
+    [SerializeField] private MoveDataToMain moveData;
     public int totalEnemies;
     // Start is called before the first frame update
     void Start()
     {
-
-        moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
-        wPanel = GameObject.Find("VPanel");
-        lPanel = GameObject.Find("LPanel");
+        Assign();
         WinAsignOrders();
         LooseAsignOrders();
     }
@@ -67,7 +64,7 @@ public class WinLoose : MonoBehaviour
     private void Continue()
     {
         wOrders.Stop();
-        moveData.IncrementProgresion(1);
+        moveData.IncrementProgresion();
         
     }
 
@@ -75,5 +72,11 @@ public class WinLoose : MonoBehaviour
     {
         lOrders.Stop();
         SceneManager.LoadScene(0);
+    }
+    private void Assign()
+    {
+        moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
+        //wPanel = GameObject.Find("VPanel");
+        //lPanel = GameObject.Find("LPanel");
     }
 }

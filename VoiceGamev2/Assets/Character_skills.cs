@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class Character_skills : MonoBehaviour
 {
-    private Image magicBar;
+    private Slider magicBar;
     private Slider physicalBar;
 
-    private Image image;
+    private Slider image;
 
     [SerializeField] private TextMeshProUGUI HP;
     [SerializeField] private TextMeshProUGUI STR;
@@ -31,23 +31,21 @@ public class Character_skills : MonoBehaviour
     {
         GeneralStats stats = GameObject.Find(actualCharacter.transform.name).GetComponent<GeneralStats>();
         CallThings();
-        magicBar.fillAmount = (float)stats.intellectPoints / 10;
+        //magicBar.fillAmount = (float)stats.intellectPoints / 10;
         HP.text = stats.lifePoints.ToString();
         STR.text = stats.strengthPoints.ToString();
         AGI.text = stats.agilityPoints.ToString();
         INT.text = stats.intellectPoints.ToString();
         CRIT.text = stats.critStrikePoints.ToString();
+        magicBar.value = stats.intellectPoints;
 
 
     }
     private void CallThings()
     {
-        magicBar = GameObject.Find("magic_bar").GetComponent<Image>();
+        magicBar = GameObject.Find("magic_bar").GetComponent<Slider>();
         //physicalBar = GameObject.Find("physical_bar").GetComponent<Scrollbar>();
-        image = GameObject.Find("magic_image").GetComponent<Image>();
-        
-        
-
+        //image = GameObject.Find("magic_image").GetComponent<Image>();
         HP = GameObject.Find("hp_stat").GetComponent<TextMeshProUGUI>();
         STR = GameObject.Find("str_stat").GetComponent<TextMeshProUGUI>();
         AGI = GameObject.Find("agi_stat").GetComponent<TextMeshProUGUI>();
