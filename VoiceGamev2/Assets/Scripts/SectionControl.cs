@@ -28,7 +28,7 @@ public class SectionControl : MonoBehaviour
 
         canvasObj.SetActive(true);
         nameTxt.text = transform.name;
-        costTxt.text = energy.ToString() + " E";
+        costTxt.text = energy.ToString();
     }
 
     public void DisableSection()

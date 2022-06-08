@@ -2044,13 +2044,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b2770ac20d2244ea0755821f5bc6fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 4
-  atk: 5
+  nEnemy: 0
+  lifeValue: 0
+  shieldValue: 0
+  atkValue: 0
   range: 0
   energy: 10
+  maxLife: 0
+  maxShield: 0
+  maxEnergy: 0
   xp: 50
-  lifeSld1: {fileID: 0}
-  lifeSld2: {fileID: 1697240445}
+  intBars: {fileID: 1926555000}
 --- !u!114 &3242782882943312139
 MonoBehaviour:
   m_ObjectHideFlags: 0

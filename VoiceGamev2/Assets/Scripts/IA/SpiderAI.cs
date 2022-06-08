@@ -104,6 +104,8 @@ public class SpiderAI : MonoBehaviour
 
                 enemyStats.SetEnergy(-energy);
 
+                enemyNM.isStopped = false;
+
                 enemyNM.SetDestination(casillas[destiny].position);
                 animator.SetInteger("A_Movement", 1);
                 StartCoroutine(StartRoute());

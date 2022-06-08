@@ -58,7 +58,6 @@ public class PlayerMove : MonoBehaviour
         startCmd.Add("ataca", StartAttack);
         startCmd.Add("ataca a", StartAttack);
         startCmd.Add("atacar a", StartAttack);
-        startCmd.Add("pasar", NewTurn);
 
         //movement
 
@@ -101,6 +100,23 @@ public class PlayerMove : MonoBehaviour
         playerTr = Pl.transform;
     }
 
+    public void ReasignateGrid()
+    {
+        if (moveCmdR.IsRunning)
+        {
+            gridA.DisableGrid();
+            gridA.EnableGrid(playerTr);
+        }
+        else if (atkCmdR.IsRunning)
+        {
+
+        }
+        else if (!startCmdR.IsRunning)
+        {
+            startCmdR.Start();
+        }
+    }
+
     public void PlayerDeselect()
     {
         if(startCmdR.IsRunning) startCmdR.Stop();
@@ -141,7 +157,7 @@ public class PlayerMove : MonoBehaviour
             Quaternion rotacion = Quaternion.LookRotation(direction);
             playerTr.transform.rotation = Quaternion.Slerp(playerTr.transform.rotation, rotacion, 6f * Time.deltaTime);
         }
-       if (isOnRoute && playerNM.velocity == Vector3.zero)
+        if (isOnRoute && playerNM.velocity == Vector3.zero)
         {
             print("ss");
             animator.SetInteger("A_Movement", 0);
@@ -182,11 +198,6 @@ public class PlayerMove : MonoBehaviour
         gridA.EnableGrid(playerTr);
         stateImg.color = Color.blue;
 
-    }
-
-    private void NewTurn()
-    {
-        gameM.NextTurn();
     }
 
     //movement

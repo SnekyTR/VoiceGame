@@ -21,6 +21,9 @@ public class CameraFollow : MonoBehaviour
     private Dictionary<string, Action<string>> selectPJCmd = new Dictionary<string, Action<string>>();
     private KeywordRecognizer selectPJCmdR;
 
+    private Dictionary<string, Action> passCmd = new Dictionary<string, Action>();
+    private KeywordRecognizer passCmdR;
+
     private void Awake()
     {
         whoTurn = true;         //player turn
@@ -62,10 +65,16 @@ public class CameraFollow : MonoBehaviour
             selectPJCmd.Add("mira a " + enemys[i].name, SelectPJ);
         }
 
+        passCmd.Add("pasar", NextTurn);
+        passCmd.Add("cancelar", CancelOrder);
+        passCmdR = new KeywordRecognizer(passCmd.Keys.ToArray());
+        passCmdR.OnPhraseRecognized += RecognizedVoice4;
+
         selectPJCmdR = new KeywordRecognizer(selectPJCmd.Keys.ToArray());
         selectPJCmdR.OnPhraseRecognized += RecognizedVoice;
 
         selectPJCmdR.Start();
+        passCmdR.Start();
     }
     
     void LateUpdate()
@@ -82,6 +91,13 @@ public class CameraFollow : MonoBehaviour
         Debug.Log(speech.text);
         selectPJCmd[speech.text].Invoke(speech.text);
     }
+
+    public void RecognizedVoice4(PhraseRecognizedEventArgs speech)
+    {
+        Debug.Log(speech.text);
+        passCmd[speech.text].Invoke();
+    }
+
     private void SelectPJ(string n)
     {
         string[] names = n.Split(' ');
@@ -124,9 +140,8 @@ public class CameraFollow : MonoBehaviour
 
         if (whoTurn)
         {
-            moveLogic.PlayerDeselect();
-            moveLogic.PlayerSelect();
             moveLogic.NewPlayer(actualPlayer.gameObject);
+            moveLogic.ReasignateGrid();
         }
 
         NewParent(actualPlayer.transform);
@@ -173,11 +188,18 @@ public class CameraFollow : MonoBehaviour
         playerParent = tr;
     }
 
+    public void CancelOrder()
+    {
+        moveLogic.PlayerDeselect();
+        moveLogic.PlayerSelect();
+    }
+
     public void NextTurn()
     {
         if (whoTurn)
         {
             whoTurn = false;
+            passCmdR.Stop();
 
             for(int i = 0; i<players.Count; i++)
             {
@@ -195,11 +217,20 @@ public class CameraFollow : MonoBehaviour
         else
         {
             whoTurn = true;
+            passCmdR.Start();
 
             for (int i = 0; i < players.Count; i++)
             {
                 players[i].GetComponent<PlayerStats>().FullEnergy();
             }
+
+            playerSelected[0].SetActive(false);
+            if (players.Count > 1) playerSelected[1].SetActive(false);
+            if (players.Count > 2) playerSelected[2].SetActive(false);
+
+            playerStructure[0].SetActive(true);
+            if (players.Count > 1) playerStructure[1].SetActive(true);
+            if (players.Count > 2) playerStructure[2].SetActive(true);
 
             turnImg.color = Color.blue;
         }

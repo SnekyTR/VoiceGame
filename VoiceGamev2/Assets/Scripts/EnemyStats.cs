@@ -46,6 +46,8 @@ public class EnemyStats : MonoBehaviour
         extBars.transform.GetChild(1).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
         intBars.transform.GetChild(1).GetComponent<Slider>().value = (lifeValue / maxLife);
         intBars.transform.GetChild(2).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
+
+        if (shieldValue > 0) NewShield(shieldValue);
     }
     void Update()
     {
@@ -88,10 +90,13 @@ public class EnemyStats : MonoBehaviour
 
         if (lifeValue <= 0)                    //death
         {
-            winLoose.totalEnemies--;
+            //winLoose.totalEnemies--;
             animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
             GetComponent<NavMeshAgent>().enabled = false;
+
+            intBars.SetActive(false);
+            
         }
         else if (n < 0)                         //dmg recieve
         {
