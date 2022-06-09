@@ -24,7 +24,7 @@ public class BattleWindow : MonoBehaviour
     private void AddVoice()
     {
         combatPanelActions.Add("luchar", EnterBatle);
-        combatPanelActions.Add("cancelar", ClosePannel);
+        //combatPanelActions.Add("cancelar", ClosePannel);
 
         combatPanel = new KeywordRecognizer(combatPanelActions.Keys.ToArray());
         combatPanel.OnPhraseRecognized += RecognizedVoice;

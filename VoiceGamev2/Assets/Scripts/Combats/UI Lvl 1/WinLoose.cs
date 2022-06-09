@@ -40,6 +40,7 @@ public class WinLoose : MonoBehaviour
     private void LooseAsignOrders()
     {
         looseOrders.Add("Salir", Exit);
+        looseOrders.Add("Reintentar", Exit);
         lOrders = new KeywordRecognizer(looseOrders.Keys.ToArray());
         lOrders.OnPhraseRecognized += RecognizedVoice;
     }
@@ -67,15 +68,14 @@ public class WinLoose : MonoBehaviour
         moveData.IncrementProgresion();
         
     }
-
     private void Exit()
     {
         lOrders.Stop();
-        SceneManager.LoadScene(0);
+        moveData.FailLevel();
     }
     private void Assign()
     {
-        moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
+        //moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
         //wPanel = GameObject.Find("VPanel");
         //lPanel = GameObject.Find("LPanel");
     }

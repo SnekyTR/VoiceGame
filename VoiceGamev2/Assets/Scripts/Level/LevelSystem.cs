@@ -14,7 +14,7 @@ public class LevelSystem : MonoBehaviour
     private float lerpTimer;
     private float delayTimer;
 
-    private GameObject buttonsStats;
+    [SerializeField]private GameObject buttonsStats;
 
     [Header("UI")]
     public Image frontXpBar;
@@ -35,7 +35,7 @@ public class LevelSystem : MonoBehaviour
         frontXpBar.fillAmount = currentXp / requiredXp;
         backXpBar.fillAmount = currentXp / requiredXp;
         requiredXp = CalculateRequireXp();
-        buttonsStats = GameObject.Find("buttons_stats");
+        //buttonsStats = GameObject.Find("buttons");
         //increaseStats = GameObject.Find("buttons_stats").GetComponent<IncreaseStats>();
 
     }
@@ -112,6 +112,7 @@ public class LevelSystem : MonoBehaviour
     {
         increaseStats.GetPlayer(this.gameObject);
         buttonsStats.SetActive(true);
+        
     }
     public GameObject PlayerLvlUp()
     {
@@ -120,6 +121,7 @@ public class LevelSystem : MonoBehaviour
     public void DeactivateButtons()
     {
         buttonsStats.SetActive(false);
+        increaseStats.statOrders.Stop();
     }
     public void UpdateLevel()
     {

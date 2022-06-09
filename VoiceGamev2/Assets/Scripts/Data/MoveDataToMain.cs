@@ -27,7 +27,7 @@ public class MoveDataToMain : MonoBehaviour
     }
     public void IncrementProgresion()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         StartCoroutine(ReChargeObjects());  
     }
     IEnumerator ReChargeObjects()
@@ -56,4 +56,19 @@ public class MoveDataToMain : MonoBehaviour
         }
         gameSave.SaveGame();
     }
+    public void FailLevel()
+    {
+        SceneManager.LoadScene(1);
+        StartCoroutine(FailMainScene());
+    }
+    IEnumerator FailMainScene()
+    {
+
+        yield return new WaitForSeconds(1f);
+        print("Ha fallado");
+        gameSave.LoadGame();
+        pro.CheckProgression();
+        gameSave.SaveGame();
+    }
+
 }

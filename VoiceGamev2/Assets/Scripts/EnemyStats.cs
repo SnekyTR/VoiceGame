@@ -39,7 +39,7 @@ public class EnemyStats : MonoBehaviour
         winLoose.totalEnemies++;
         extBars = GameObject.Find("CanvasManager").transform.GetChild(6).GetChild(nEnemy).gameObject;
 
-        // moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
+        //moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
         //moveData.totalEXP = moveData.totalEXP + xp;
 
 

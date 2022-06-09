@@ -30,6 +30,7 @@ public class Character_skills : MonoBehaviour
     public void DisplayCharacterInf(GameObject actualCharacter)
     {
         GeneralStats stats = GameObject.Find(actualCharacter.transform.name).GetComponent<GeneralStats>();
+        general = stats;
         CallThings();
         //magicBar.fillAmount = (float)stats.intellectPoints / 10;
         HP.text = stats.lifePoints.ToString();
@@ -55,6 +56,7 @@ public class Character_skills : MonoBehaviour
     public void UpdateSRT(GeneralStats general)
     {
         STR.text = general.strengthPoints.ToString();
+        magicBar.value = general.strengthPoints;
     }
     public void UpdateHP(GeneralStats general)
     {
@@ -67,6 +69,7 @@ public class Character_skills : MonoBehaviour
     public void UpdateINT(GeneralStats general)
     {
         INT.text = general.intellectPoints.ToString();
+        magicBar.value = general.intellectPoints;
     }
     public void UpdateCRIT(GeneralStats general)
     {

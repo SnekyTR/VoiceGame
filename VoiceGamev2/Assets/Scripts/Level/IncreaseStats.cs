@@ -10,21 +10,29 @@ public class IncreaseStats : MonoBehaviour
     [SerializeField] private LevelSystem level;
     [SerializeField] private GeneralStats general;
     //[SerializeField] private CharacterInformation character;
-    private Character_skills character_Skills;
+    [SerializeField] private Character_skills character_Skills;
     private Dictionary<string, Action> statsActions = new Dictionary<string, Action>();
-    private KeywordRecognizer statOrders;
+    public KeywordRecognizer statOrders;
     private GameObject player;
-
+    public bool levelear;
     private void Start()
     {
-       player = level.PlayerLvlUp();
+        AddControls();
+        player = level.PlayerLvlUp();
+        statOrders.Start();
     }
     public void GetPlayer(GameObject player)
     {
         level = player.GetComponent<LevelSystem>();
         general = player.GetComponent<GeneralStats>();
+        
+        if (levelear)
+        {
+            statOrders.Start();
+        }
+        else { levelear = true; }
         //character = player.GetComponent<CharacterInformation>();
-        character_Skills = GameObject.Find("Skills").GetComponent<Character_skills>();
+        //character_Skills = GameObject.Find("Skills").GetComponent<Character_skills>();
     }
     private void AddControls()
     {
@@ -35,7 +43,7 @@ public class IncreaseStats : MonoBehaviour
         statsActions.Add("critico", IncreaseCRIT);
         statOrders = new KeywordRecognizer(statsActions.Keys.ToArray());
         statOrders.OnPhraseRecognized += RecognizedVoice;
-        statOrders.Start();
+        
     }
     public void RecognizedVoice(PhraseRecognizedEventArgs speech)
     {
@@ -47,29 +55,34 @@ public class IncreaseStats : MonoBehaviour
         general.strengthPoints++;
         character_Skills.UpdateSRT(general);
         level.DeactivateButtons();
+        statOrders.Stop();
     }
     public void IncreaseHealth()
     {
         general.lifePoints++;
         character_Skills.UpdateHP(general);
         level.DeactivateButtons();
+        statOrders.Stop();
     }
     public void IncreaseAGI()
     {
         general.agilityPoints++;
         character_Skills.UpdateAGI(general);
         level.DeactivateButtons();
+        statOrders.Stop();
     }
     public void IncreaseINT()
     {
         general.intellectPoints++;
         character_Skills.UpdateINT(general);
         level.DeactivateButtons();
+        statOrders.Stop();
     }
     public void IncreaseCRIT()
     {
         general.critStrikePoints++;
         character_Skills.UpdateCRIT(general);
         level.DeactivateButtons();
+        statOrders.Stop();
     }
 }
