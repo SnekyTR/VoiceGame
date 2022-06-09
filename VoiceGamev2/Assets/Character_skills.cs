@@ -45,6 +45,7 @@ public class Character_skills : MonoBehaviour
     private void CallThings()
     {
         magicBar = GameObject.Find("magic_bar").GetComponent<Slider>();
+        physicalBar = GameObject.Find("physical_bar").GetComponent<Slider>();
         //physicalBar = GameObject.Find("physical_bar").GetComponent<Scrollbar>();
         //image = GameObject.Find("magic_image").GetComponent<Image>();
         HP = GameObject.Find("hp_stat").GetComponent<TextMeshProUGUI>();
@@ -56,7 +57,7 @@ public class Character_skills : MonoBehaviour
     public void UpdateSRT(GeneralStats general)
     {
         STR.text = general.strengthPoints.ToString();
-        magicBar.value = general.strengthPoints;
+        physicalBar.value = general.strengthPoints;
     }
     public void UpdateHP(GeneralStats general)
     {
