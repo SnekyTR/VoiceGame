@@ -10,7 +10,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int strengthPoints;
     [SerializeField] public int intellectPoints;
     [SerializeField] public int agilityPoints;
-    [SerializeField] private float energy;
+    private float energy = 5f;
+    private float energyActions = 5f;
     private EnergyScript energyLo;
     private Animator animator;
 
@@ -161,10 +162,18 @@ public class PlayerStats : MonoBehaviour
         energyLo.NewEnergyIcon(energy);
     }
 
+    public void SetEnergyActions(float n)
+    {
+        energyActions += n;
+        energyLo.NewEnergyActionsIcon(energyActions);
+    }
+
     public void FullEnergy()
     {
         energy = maxEnergy;
+        energyActions = maxEnergy;
         energyLo.NewEnergyIcon(energy);
+        energyLo.NewEnergyActionsIcon(energyActions);
     }
 
     public int GetAtk()
@@ -173,9 +182,10 @@ public class PlayerStats : MonoBehaviour
         return newAtk;
     }
 
-    public float GetEnergy()
+    public float GetEnergy(int i)
     {
-        return energy;
+        if (i == 1) return energy;
+        else return energyActions;
     }
 
     public int GetLife()

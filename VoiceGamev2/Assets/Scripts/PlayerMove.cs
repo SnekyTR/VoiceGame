@@ -140,9 +140,21 @@ public class PlayerMove : MonoBehaviour
     private bool TurnEnergy(float n)
     {
         bool isEnergy = false;
-        if (playerStats.GetEnergy() >= n)
+        if (playerStats.GetEnergy(1) >= n)
         {
             playerStats.SetEnergy(-n);
+            isEnergy = true;
+        }
+
+        return isEnergy;
+    }
+
+    private bool TurnEnergyActions(float n)
+    {
+        bool isEnergy = false;
+        if (playerStats.GetEnergy(2) >= n)
+        {
+            playerStats.SetEnergyActions(-n);
             isEnergy = true;
         }
 
@@ -287,7 +299,7 @@ public class PlayerMove : MonoBehaviour
 
         if (target != null && Vector3.Distance(playerNM.transform.position, target.transform.position) < 4)
         {
-            if (TurnEnergy(5))
+            if (TurnEnergyActions(2))
             {
                 StartCoroutine(StartAtkAnim());
             }

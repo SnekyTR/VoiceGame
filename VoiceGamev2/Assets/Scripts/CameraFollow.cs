@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 using UnityEngine.UI;
+using UnityEditor.AI;
 
 
 public class CameraFollow : MonoBehaviour
@@ -16,7 +17,7 @@ public class CameraFollow : MonoBehaviour
     public List<GameObject> playerStructure = new List<GameObject>();
     private List<string> playersNames = new List<string>();
     private PlayerMove moveLogic;
-    private Image turnImg;
+    private Text turnTxt;
 
     private Dictionary<string, Action<string>> selectPJCmd = new Dictionary<string, Action<string>>();
     private KeywordRecognizer selectPJCmdR;
@@ -29,8 +30,7 @@ public class CameraFollow : MonoBehaviour
         whoTurn = true;         //player turn
 
         moveLogic = GetComponent<PlayerMove>();
-        turnImg = GameObject.Find("Turno").GetComponent<Image>();
-        turnImg.color = Color.blue;
+        turnTxt = GameObject.Find("Turno").GetComponent<Text>();
 
         Transform ply = GameObject.Find("Players").transform;
         Transform cnv = GameObject.Find("CanvasManager").transform;
@@ -192,6 +192,11 @@ public class CameraFollow : MonoBehaviour
     {
         moveLogic.PlayerDeselect();
         moveLogic.PlayerSelect();
+
+        //NavMeshBuilder.ClearAllNavMeshes();
+        //NavMeshBuilder.BuildNavMesh();
+
+        
     }
 
     public void NextTurn()
@@ -212,7 +217,9 @@ public class CameraFollow : MonoBehaviour
             }
 
             enemys[0].StarIA();
-            turnImg.color = Color.red;
+            turnTxt.text = "Enemy";
+            turnTxt.color = Color.red;
+            turnTxt.transform.GetChild(0).GetComponent<Text>().color = Color.red;
         }
         else
         {
@@ -232,7 +239,9 @@ public class CameraFollow : MonoBehaviour
             if (players.Count > 1) playerStructure[1].SetActive(true);
             if (players.Count > 2) playerStructure[2].SetActive(true);
 
-            turnImg.color = Color.blue;
+            turnTxt.text = "Player";
+            turnTxt.color = Color.blue;
+            turnTxt.transform.GetChild(0).GetComponent<Text>().color = Color.blue;
         }
     }
 
