@@ -19,6 +19,9 @@ public class CameraFollow : MonoBehaviour
     private PlayerMove moveLogic;
     private Text turnTxt;
 
+    private Transform pos1, pos2;
+    private int cameraParent = 1;
+
     private Dictionary<string, Action<string>> selectPJCmd = new Dictionary<string, Action<string>>();
     private KeywordRecognizer selectPJCmdR;
 
@@ -28,6 +31,9 @@ public class CameraFollow : MonoBehaviour
     private void Awake()
     {
         whoTurn = true;         //player turn
+
+        pos1 = GameObject.Find("pos1").transform;
+        pos2 = GameObject.Find("pos2").transform;
 
         moveLogic = GetComponent<PlayerMove>();
         turnTxt = GameObject.Find("Turno").GetComponent<Text>();
@@ -81,8 +87,23 @@ public class CameraFollow : MonoBehaviour
     {
         if(playerParent != null)
         {
-            Vector3 newPos = Vector3.MoveTowards(transform.position,new Vector3(playerParent.position.x, transform.position.y, playerParent.position.z), 5*Time.deltaTime);
+            Vector3 newPos = Vector3.MoveTowards(transform.position,new Vector3(playerParent.position.x, transform.position.y, playerParent.position.z), 5 * Time.deltaTime);
             transform.position = newPos;
+
+            if(cameraParent == 1)
+            {
+                Vector3 newPos1 = Vector3.MoveTowards(transform.GetChild(0).position, pos1.position, 9 * Time.deltaTime);
+                transform.GetChild(0).position = newPos1;
+
+                transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos1.rotation, 2 * Time.deltaTime);
+            }
+            else if(cameraParent == 2)
+            {
+                Vector3 newPos2 = Vector3.MoveTowards(transform.GetChild(0).position, pos2.position, 9 * Time.deltaTime);
+                transform.GetChild(0).position = newPos2;
+
+                transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos2.rotation, 2 * Time.deltaTime);
+            }
         }
     }
 
@@ -107,7 +128,7 @@ public class CameraFollow : MonoBehaviour
             {
                 if (names[2] + " " + names[3] == enemys[i].name)
                 {
-                    NewParent(enemys[i].transform);
+                    NewParent(enemys[i].transform, 1);
                     print(names[2]);
                     moveLogic.PlayerDeselect();
 
@@ -144,7 +165,7 @@ public class CameraFollow : MonoBehaviour
             moveLogic.ReasignateGrid();
         }
 
-        NewParent(actualPlayer.transform);
+        NewParent(actualPlayer.transform, 1);
 
         if(n == playersNames[0])
         {
@@ -183,15 +204,19 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    public void NewParent(Transform tr)
+    public void NewParent(Transform tr, int o)
     {
         playerParent = tr;
+
+        cameraParent = o;
     }
 
     public void CancelOrder()
     {
         moveLogic.PlayerDeselect();
         moveLogic.PlayerSelect();
+
+        NewParent(playerParent, 1);
 
         //NavMeshBuilder.ClearAllNavMeshes();
         //NavMeshBuilder.BuildNavMesh();
@@ -205,6 +230,10 @@ public class CameraFollow : MonoBehaviour
         {
             whoTurn = false;
             passCmdR.Stop();
+            selectPJCmdR.Stop();
+
+            Transform nw = GameObject.Find("Center").transform;
+            NewParent(nw, 2);
 
             for(int i = 0; i<players.Count; i++)
             {
@@ -225,6 +254,7 @@ public class CameraFollow : MonoBehaviour
         {
             whoTurn = true;
             passCmdR.Start();
+            selectPJCmdR.Start();
 
             for (int i = 0; i < players.Count; i++)
             {

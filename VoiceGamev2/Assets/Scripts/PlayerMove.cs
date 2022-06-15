@@ -210,6 +210,7 @@ public class PlayerMove : MonoBehaviour
         gridA.EnableGrid(playerTr);
         stateImg.color = Color.blue;
 
+        gameM.NewParent(playerTr, 2);
     }
 
     //movement
@@ -273,6 +274,8 @@ public class PlayerMove : MonoBehaviour
         atkCmdR.Start();
 
         stateImg.color = Color.red;
+
+        gameM.NewParent(playerTr, 1);
     }
     //spells actions
     private void Spells(string n)
