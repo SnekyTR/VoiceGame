@@ -105,6 +105,7 @@ public class SkeletonGuardianAI : MonoBehaviour
                 }
 
                 enemyStats.SetEnergy(-energy);
+                print(1);
 
                 enemyNM.isStopped = false;
                 enemyNM.SetDestination(casillas[destiny].position);
@@ -142,6 +143,7 @@ public class SkeletonGuardianAI : MonoBehaviour
             }
         }
         enemyStats.SetEnergy(-4);
+        print(2);
         yield return new WaitForSeconds(0.5f);
         setTarget = false;
         StatesManager();
@@ -183,6 +185,7 @@ public class SkeletonGuardianAI : MonoBehaviour
 
             if (div < 0.75f && enemyStats.GetEnergy() >= 6)
             {
+                print("hi");
                 gameM.enemys[i].GetComponent<EnemyStats>().NewShield(ShielAport);
                 enemyStats.SetEnergy(-6);
             }
