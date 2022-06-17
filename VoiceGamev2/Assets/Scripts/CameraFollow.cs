@@ -232,9 +232,6 @@ public class CameraFollow : MonoBehaviour
             passCmdR.Stop();
             selectPJCmdR.Stop();
 
-            Transform nw = GameObject.Find("Center").transform;
-            NewParent(nw, 2);
-
             for(int i = 0; i<players.Count; i++)
             {
                 moveLogic.PlayerDeselect();
@@ -246,6 +243,8 @@ public class CameraFollow : MonoBehaviour
             }
 
             enemys[0].StarIA();
+            NewParent(enemys[0].transform, 1);
+
             turnTxt.text = "Enemy";
             turnTxt.color = Color.red;
             turnTxt.transform.GetChild(0).GetComponent<Text>().color = Color.red;
@@ -282,6 +281,7 @@ public class CameraFollow : MonoBehaviour
             if(n == enemys[i] && n != enemys[(enemys.Count)-1])
             {
                 enemys[(i + 1)].StarIA();
+                NewParent(enemys[(i + 1)].transform, 1);
                 return;
             }
             else if(n == enemys[(enemys.Count) - 1])

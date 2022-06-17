@@ -19,12 +19,13 @@ public class SectionControl : MonoBehaviour
         else if (energy > ((int)energy + 0.7f)) energy = (int)energy + 1;       //formula energia mov
         else energy = (int)energy;
 
-        if(tr.gameObject.GetComponent<PlayerStats>().GetEnergy(1) <= energy)
+        if (tr.gameObject.GetComponent<PlayerStats>().GetEnergy(1) < energy)
         {
             transform.tag = "Untagged";
             DisableSection();
             return;
         }
+
 
         canvasObj.SetActive(true);
         nameTxt.text = transform.name;

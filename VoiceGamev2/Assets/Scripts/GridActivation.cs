@@ -26,6 +26,11 @@ public class GridActivation : MonoBehaviour
         }
         playerM = GameObject.Find("GameManager").GetComponent<PlayerMove>();
         playerM.SetList(nameC);
+
+        for(int i = 0; i < casillas.Count; i++)
+        {
+            casillas[i].tag = "Untagged";
+        }
     }
     void Start()
     {

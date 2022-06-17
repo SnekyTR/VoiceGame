@@ -9,10 +9,6 @@ public class GenerateGrid : MonoBehaviour
     private PlayerMove playerM;
     private Transform playerS;
 
-    void LateUpdate()
-    {
-        
-    }
     private void OnEnable()
     {
         playerM = GameObject.Find("GameManager").GetComponent<PlayerMove>();

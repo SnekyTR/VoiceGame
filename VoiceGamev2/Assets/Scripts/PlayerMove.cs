@@ -223,6 +223,7 @@ public class PlayerMove : MonoBehaviour
         }
         else if (energy > ((int)energy + 0.7f)) energy = (int)energy + 1;
         else energy = (int)energy;   //formula energia distancia
+        
         if (GameObject.Find(i).CompareTag("Section"))
         {
             if (TurnEnergy(energy))
@@ -230,6 +231,8 @@ public class PlayerMove : MonoBehaviour
                 animator.SetInteger("A_Movement", 1);
                 StartCoroutine(StopAnimation());
                 playerNM.destination = GameObject.Find(i).transform.position;
+
+                gameM.NewParent(playerTr, 1);
 
                 startCmdR.Start();
 
