@@ -21,6 +21,7 @@ public class CameraFollow : MonoBehaviour
 
     private Transform pos1, pos2;
     private int cameraParent = 1;
+    private Quaternion initPos;
 
     private Dictionary<string, Action<string>> selectPJCmd = new Dictionary<string, Action<string>>();
     private KeywordRecognizer selectPJCmdR;
@@ -31,6 +32,7 @@ public class CameraFollow : MonoBehaviour
     private void Awake()
     {
         whoTurn = true;         //player turn
+        initPos = transform.rotation;
 
         pos1 = GameObject.Find("pos1").transform;
         pos2 = GameObject.Find("pos2").transform;
@@ -95,14 +97,25 @@ public class CameraFollow : MonoBehaviour
                 Vector3 newPos1 = Vector3.MoveTowards(transform.GetChild(0).position, pos1.position, 9 * Time.deltaTime);
                 transform.GetChild(0).position = newPos1;
 
-                transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos1.rotation, 2 * Time.deltaTime);
+                transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos1.rotation, 1.3f * Time.deltaTime);
+
+                transform.rotation = Quaternion.Lerp(transform.rotation, initPos, 3 * Time.deltaTime);
             }
             else if(cameraParent == 2)
             {
                 Vector3 newPos2 = Vector3.MoveTowards(transform.GetChild(0).position, pos2.position, 9 * Time.deltaTime);
                 transform.GetChild(0).position = newPos2;
 
-                transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos2.rotation, 2 * Time.deltaTime);
+                transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos2.rotation, 1.5f * Time.deltaTime);
+            }
+            else if(cameraParent == 3)
+            {
+                Vector3 newPos3 = Vector3.MoveTowards(transform.GetChild(0).position, pos1.position, 9 * Time.deltaTime);
+                transform.GetChild(0).position = newPos3;
+
+                transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos1.rotation, 2 * Time.deltaTime);
+
+                transform.rotation = Quaternion.Euler(transform.rotation.x, playerParent.rotation.y - 180, transform.rotation.z);
             }
         }
     }
@@ -121,6 +134,13 @@ public class CameraFollow : MonoBehaviour
 
     private void SelectPJ(string n)
     {
+        if (moveLogic.allieSpell)
+        {
+            moveLogic.Allie(n);
+            moveLogic.allieSpell = false;
+            return;
+        }
+
         string[] names = n.Split(' ');
         if(names.Length > 2)
         {
@@ -209,6 +229,15 @@ public class CameraFollow : MonoBehaviour
         playerParent = tr;
 
         cameraParent = o;
+
+        if (cameraParent == 3)
+        {
+            transform.position = new Vector3(playerParent.position.x, transform.position.y, playerParent.position.z);
+        }
+        else if(cameraParent == 1)
+        {
+            //transform.rotation = initPos;
+        }
     }
 
     public void CancelOrder()
@@ -243,7 +272,7 @@ public class CameraFollow : MonoBehaviour
             }
 
             enemys[0].StarIA();
-            NewParent(enemys[0].transform, 1);
+            NewParent(enemys[0].transform, 3);
 
             turnTxt.text = "Enemy";
             turnTxt.color = Color.red;
@@ -281,7 +310,7 @@ public class CameraFollow : MonoBehaviour
             if(n == enemys[i] && n != enemys[(enemys.Count)-1])
             {
                 enemys[(i + 1)].StarIA();
-                NewParent(enemys[(i + 1)].transform, 1);
+                NewParent(enemys[(i + 1)].transform, 3);
                 return;
             }
             else if(n == enemys[(enemys.Count) - 1])

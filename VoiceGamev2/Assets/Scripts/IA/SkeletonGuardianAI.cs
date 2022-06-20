@@ -136,7 +136,6 @@ public class SkeletonGuardianAI : MonoBehaviour
         Vector3 newDir = target.position - transform.position;
         if (Physics.Raycast(newPos, newDir, out hit, 7f, mask))
         {
-            print("hola");
             if (hit.transform == target)
             {
                 target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
@@ -157,6 +156,18 @@ public class SkeletonGuardianAI : MonoBehaviour
 
     private int RandomPlayerPiece()
     {
+        if ((Vector3.Distance(target.position, transform.position) / 2) > enemyStats.GetEnergy())
+        {
+            int o = Random.Range(0, casillas.Count);
+            float dist3 = Vector3.Distance(transform.position, casillas[o].position);
+
+            if ((dist3 / 2) <= enemyStats.GetEnergy())
+            {
+                return o;
+            }
+            else return RandomPlayerPiece();
+        }
+
         int e = Random.Range(0, casillas.Count);
         float dist = Vector3.Distance(target.position, casillas[e].position);
 
