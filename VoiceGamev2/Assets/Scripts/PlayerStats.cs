@@ -23,7 +23,7 @@ public class PlayerStats : MonoBehaviour
 
     private float maxLife;
     private float maxShield;
-    public float maxEnergy;
+    [HideInInspector] public float maxEnergy;
 
     private GameObject structure;
     private GameObject selected;
@@ -142,7 +142,7 @@ public class PlayerStats : MonoBehaviour
         
         if (lifeValue <= 0)                    //death
         {
-            winLoose.LooseActivateVoice();
+            //winLoose.LooseActivateVoice();
             animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
             GetComponent<NavMeshAgent>().enabled = false;
@@ -151,9 +151,18 @@ public class PlayerStats : MonoBehaviour
         {
             animator.SetInteger("A_Recieve", 1);
         }
+        else if(n > 0)
+        {
+            if (lifeValue > maxLife) lifeValue = (int)maxLife;
+        }
+
         structure.transform.GetChild(1).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
         selected.transform.GetChild(0).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
         selected.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
+
+        print((lifeValue / maxLife));
+        print(lifeValue + "vida");
+        print(maxLife + "maxvida");
     }
 
     public void SetEnergy(float n)
@@ -180,6 +189,12 @@ public class PlayerStats : MonoBehaviour
     {
         int newAtk = Random.Range((strengthValue - 2), strengthValue);
         return newAtk;
+    }
+
+    public int GetIntl()
+    {
+        int newIntl = Random.Range((intellectValue - 2), intellectValue);
+        return newIntl;
     }
 
     public float GetEnergy(int i)

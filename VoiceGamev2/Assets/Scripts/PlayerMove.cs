@@ -20,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     private Image stateImg;
     private Image range;
     private bool isOnRoute =false;
+    private string atkState;
 
     [Header("Locations")]
     private string[] posNames;
@@ -44,6 +45,8 @@ public class PlayerMove : MonoBehaviour
     private Dictionary<string, Action<string>> spellCmd = new Dictionary<string, Action<string>>();
     private KeywordRecognizer spellCmdR;
 
+    //spells to allies
+    [HideInInspector] public bool allieSpell = false;
 
     void Start()
     {
@@ -82,6 +85,8 @@ public class PlayerMove : MonoBehaviour
 
         //spells
         spellCmd.Add("meteor atack", Spells);
+        spellCmd.Add("curar", Spells);
+        spellCmd.Add("revivir", Spells);
 
         spellCmdR = new KeywordRecognizer(spellCmd.Keys.ToArray());
         spellCmdR.OnPhraseRecognized += RecognizedVoice5;
@@ -114,6 +119,7 @@ public class PlayerMove : MonoBehaviour
         else if (!startCmdR.IsRunning)
         {
             startCmdR.Start();
+            spellCmdR.Start();
         }
     }
 
@@ -130,6 +136,7 @@ public class PlayerMove : MonoBehaviour
     public void PlayerSelect()
     {
         startCmdR.Start();
+        spellCmdR.Start();
     }
 
     public void SetList(string[] ns)
@@ -171,7 +178,6 @@ public class PlayerMove : MonoBehaviour
         }
         if (isOnRoute && playerNM.velocity == Vector3.zero)
         {
-            print("ss");
             animator.SetInteger("A_Movement", 0);
             isOnRoute = false;
         }
@@ -271,12 +277,13 @@ public class PlayerMove : MonoBehaviour
     private void StartAttack()
     {
         startCmdR.Stop();
-
-        spellCmdR.Start();
+        spellCmdR.Stop();
 
         atkCmdR.Start();
 
         stateImg.color = Color.red;
+
+        atkState = "atk";
 
         gameM.NewParent(playerTr, 1);
     }
@@ -285,7 +292,18 @@ public class PlayerMove : MonoBehaviour
     {
         spellCmdR.Stop();
 
-        stateImg.color = Color.red;
+        atkState = n;
+
+        if(n == "meteor atack")
+        {
+            atkCmdR.Start();
+        }
+        else if(n == "curar" || n == "revivir")
+        {
+            allieSpell = true;
+        }
+
+        stateImg.color = Color.green;
     }
     private void Enemy(string n)
     {
@@ -303,7 +321,7 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        if (target != null && Vector3.Distance(playerNM.transform.position, target.transform.position) < 4)
+        if (target != null && Vector3.Distance(playerNM.transform.position, target.transform.position) < 4 && atkState == "atk")
         {
             if (TurnEnergyActions(2))
             {
@@ -312,6 +330,23 @@ public class PlayerMove : MonoBehaviour
             else
             {
                 startCmdR.Start();
+                spellCmdR.Start();
+
+                atkCmdR.Stop();
+
+                stateImg.color = Color.white;
+            }
+        }
+        else if (target != null && Vector3.Distance(playerNM.transform.position, target.transform.position) < 9 && atkState == "meteor atack")
+        {
+            if (TurnEnergyActions(3.5f))
+            {
+                StartCoroutine(StartAtkAnim());
+            }
+            else
+            {
+                startCmdR.Start();
+                spellCmdR.Start();
 
                 atkCmdR.Stop();
 
@@ -321,6 +356,7 @@ public class PlayerMove : MonoBehaviour
         else
         {
             startCmdR.Start();
+            spellCmdR.Start();
 
             atkCmdR.Stop();
 
@@ -335,6 +371,63 @@ public class PlayerMove : MonoBehaviour
 
     }
 
+    public void Allie(string n)
+    {
+        for (int i = 0; i < gameM.players.Count; i++)
+        {
+            if (n == gameM.players[i].name)
+            {
+                target = gameM.players[i].gameObject;
+                break;
+            }
+            else if (i == (gameM.players.Count - 1))
+            {
+                target = null;
+                break;
+            }
+        }
+
+        if(target != null && atkState == "curar")
+        {
+            if (TurnEnergyActions(3))
+            {
+                target.GetComponent<PlayerStats>().SetLife(5);
+                stateImg.color = Color.white;
+            }
+            else
+            {
+                startCmdR.Start();
+                spellCmdR.Start();
+
+                atkCmdR.Stop();
+
+                stateImg.color = Color.white;
+            }
+        }
+        else if(target == null && atkState == "revivir")
+        {
+            if (TurnEnergyActions(4.5f))
+            {
+                target = GameObject.Find(n);
+
+                gameM.players.Add(target.transform);
+                target.GetComponent<Animator>().SetInteger("A_Death", 0);
+                target.GetComponent<NavMeshAgent>().enabled = true;
+                target.GetComponent<PlayerStats>().SetLife(5);
+                stateImg.color = Color.white;
+            }
+            else
+            {
+                startCmdR.Start();
+                spellCmdR.Start();
+
+                atkCmdR.Stop();
+
+                stateImg.color = Color.white;
+            }
+        }
+    }
+
     private IEnumerator StartAtkAnim()
     {
         animator.SetInteger("A_FireBall", 1);
@@ -346,7 +439,9 @@ public class PlayerMove : MonoBehaviour
 
         setTarget = false;
 
-        target.GetComponent<EnemyStats>().SetLife(-playerStats.GetAtk());
+        if (atkState == "atk") target.GetComponent<EnemyStats>().SetLife(-playerStats.GetAtk());
+        else if (atkState == "meteor atack") target.GetComponent<EnemyStats>().SetLife(-playerStats.GetIntl());
+
         startCmdR.Start();
 
         stateImg.color = Color.white;

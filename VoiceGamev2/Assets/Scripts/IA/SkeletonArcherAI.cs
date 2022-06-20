@@ -125,6 +125,8 @@ public class SkeletonArcherAI : MonoBehaviour
 
     private int RandomPlayerPiece()
     {
+        
+
         int e = Random.Range(0, casillas.Count);
         float dist = Vector3.Distance(target.position, casillas[e].position);
 
@@ -137,6 +139,14 @@ public class SkeletonArcherAI : MonoBehaviour
         }
         else
         {
+            float dist2 = Vector3.Distance(casillas[e].position, transform.position);
+            dist2 /= 2;
+
+            if(dist2 >= enemyStats.GetEnergy())
+            {
+                return RandomPlayerPiece();
+            }
+
             if (Physics.Raycast(casillas[e].position, newDir, out hit, 100, mask))
             {
                 if (hit.transform == target)
