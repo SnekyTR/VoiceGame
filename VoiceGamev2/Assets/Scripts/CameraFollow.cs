@@ -185,7 +185,8 @@ public class CameraFollow : MonoBehaviour
             moveLogic.ReasignateGrid();
         }
 
-        NewParent(actualPlayer.transform, 1);
+        if(!moveLogic.IsMoving())NewParent(actualPlayer.transform, 1);
+        else NewParent(actualPlayer.transform, 2);
 
         if(n == playersNames[0])
         {

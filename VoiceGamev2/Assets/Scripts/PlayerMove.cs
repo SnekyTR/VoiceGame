@@ -17,7 +17,6 @@ public class PlayerMove : MonoBehaviour
 
     private CameraFollow gameM;
     private GridActivation gridA;
-    private Image stateImg;
     private Image range;
     private bool isOnRoute =false;
     private string atkState;
@@ -52,7 +51,6 @@ public class PlayerMove : MonoBehaviour
     {
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
         gridA = GameObject.Find("RayCast").GetComponent<GridActivation>();
-        stateImg = GameObject.Find("PasarTurno").GetComponent<Image>();
 
         //select action
         startCmd.Add("mover", StartMove);
@@ -130,7 +128,8 @@ public class PlayerMove : MonoBehaviour
         if(atkCmdR.IsRunning) atkCmdR.Stop();
         if(spellCmdR.IsRunning) spellCmdR.Stop();
         gridA.DisableGrid();
-        stateImg.color = Color.white;
+        if(playerTr != null)playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
+        if(playerTr != null)playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.black;
     }
 
     public void PlayerSelect()
@@ -152,7 +151,7 @@ public class PlayerMove : MonoBehaviour
             playerStats.SetEnergy(-n);
             isEnergy = true;
         }
-
+        
         return isEnergy;
     }
 
@@ -205,6 +204,11 @@ public class PlayerMove : MonoBehaviour
         spellCmd[speech.text].Invoke(speech.text);
     }
 
+    public bool IsMoving()
+    {
+        return moveCmdR.IsRunning;
+    }
+
     //move actions
     private void StartMove()
     {
@@ -214,7 +218,7 @@ public class PlayerMove : MonoBehaviour
         print(playerTr.name);
 
         gridA.EnableGrid(playerTr);
-        stateImg.color = Color.blue;
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.blue;
 
         gameM.NewParent(playerTr, 2);
     }
@@ -222,14 +226,16 @@ public class PlayerMove : MonoBehaviour
     //movement
     private void MoveCasilla(string i)
     {
-        float energy = (Vector3.Distance(GameObject.Find(i).transform.position, transform.position) / 2);
+        float energy = (Vector3.Distance(GameObject.Find(i).transform.position, playerTr.position) / 2);
+        print(energy);
         if (energy > ((int)energy + 0.1f) && energy < ((int)energy + 0.7f))
         {
             energy = (int)energy + 0.5f;
         }
-        else if (energy > ((int)energy + 0.7f)) energy = (int)energy + 1;
+        else if (energy > ((int)energy + 0.7f)) energy = (int)energy + 1;       
         else energy = (int)energy;   //formula energia distancia
-        
+
+
         if (GameObject.Find(i).CompareTag("Section"))
         {
             if (TurnEnergy(energy))
@@ -244,7 +250,7 @@ public class PlayerMove : MonoBehaviour
 
                 moveCmdR.Stop();
 
-                stateImg.color = Color.white;
+                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.black;
                 gridA.DisableGrid();
             }
             else
@@ -252,8 +258,9 @@ public class PlayerMove : MonoBehaviour
                 startCmdR.Start();
 
                 moveCmdR.Stop();
+                gameM.NewParent(playerTr, 1);
 
-                stateImg.color = Color.white;
+                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.black;
                 gridA.DisableGrid();
             }
         }
@@ -262,8 +269,9 @@ public class PlayerMove : MonoBehaviour
             startCmdR.Start();
 
             moveCmdR.Stop();
+            gameM.NewParent(playerTr, 1);
 
-            stateImg.color = Color.white;
+            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.black;
             gridA.DisableGrid();
         }
     }
@@ -281,7 +289,7 @@ public class PlayerMove : MonoBehaviour
 
         atkCmdR.Start();
 
-        stateImg.color = Color.red;
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.red;
 
         atkState = "atk";
 
@@ -302,8 +310,6 @@ public class PlayerMove : MonoBehaviour
         {
             allieSpell = true;
         }
-
-        stateImg.color = Color.green;
     }
     private void Enemy(string n)
     {
@@ -334,7 +340,7 @@ public class PlayerMove : MonoBehaviour
 
                 atkCmdR.Stop();
 
-                stateImg.color = Color.white;
+                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
             }
         }
         else if (target != null && Vector3.Distance(playerNM.transform.position, target.transform.position) < 9 && atkState == "meteor atack")
@@ -350,7 +356,7 @@ public class PlayerMove : MonoBehaviour
 
                 atkCmdR.Stop();
 
-                stateImg.color = Color.white;
+                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
             }
         }
         else
@@ -360,7 +366,7 @@ public class PlayerMove : MonoBehaviour
 
             atkCmdR.Stop();
 
-            stateImg.color = Color.white;
+            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
             print("fuera de alcance");
         }
 
@@ -392,7 +398,7 @@ public class PlayerMove : MonoBehaviour
             if (TurnEnergyActions(3))
             {
                 target.GetComponent<PlayerStats>().SetLife(5);
-                stateImg.color = Color.white;
+                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
             }
             else
             {
@@ -401,7 +407,7 @@ public class PlayerMove : MonoBehaviour
 
                 atkCmdR.Stop();
 
-                stateImg.color = Color.white;
+                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
             }
         }
         else if(target == null && atkState == "revivir")
@@ -414,7 +420,7 @@ public class PlayerMove : MonoBehaviour
                 target.GetComponent<Animator>().SetInteger("A_Death", 0);
                 target.GetComponent<NavMeshAgent>().enabled = true;
                 target.GetComponent<PlayerStats>().SetLife(5);
-                stateImg.color = Color.white;
+                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
             }
             else
             {
@@ -423,7 +429,7 @@ public class PlayerMove : MonoBehaviour
 
                 atkCmdR.Stop();
 
-                stateImg.color = Color.white;
+                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
             }
         }
     }
@@ -444,6 +450,6 @@ public class PlayerMove : MonoBehaviour
 
         startCmdR.Start();
 
-        stateImg.color = Color.white;
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
     }
 }

@@ -25,8 +25,8 @@ public class PlayerStats : MonoBehaviour
     private float maxShield;
     [HideInInspector] public float maxEnergy;
 
-    private GameObject structure;
-    private GameObject selected;
+    [HideInInspector] public GameObject structure;
+    [HideInInspector] public GameObject selected;
 
     private CameraFollow gameM;
     private WinLoose winLoose;

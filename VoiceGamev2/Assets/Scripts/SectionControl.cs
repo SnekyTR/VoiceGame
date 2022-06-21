@@ -12,6 +12,9 @@ public class SectionControl : MonoBehaviour
     public void EnableSection(Transform tr)
     {
         float energy = (Vector3.Distance(tr.position, transform.position) / 2);
+
+        if (transform.name == "2 6") print(energy);
+
         if (energy > ((int)energy + 0.1f) && energy < ((int)energy + 0.7f))
         {
             energy = (int)energy + 0.5f;
@@ -26,10 +29,7 @@ public class SectionControl : MonoBehaviour
             return;
         }
 
-
-        canvasObj.SetActive(true);
-        nameTxt.text = transform.name;
-        costTxt.text = energy.ToString();
+        StartCoroutine(anim(energy));
     }
 
     public void DisableSection()
@@ -45,5 +45,14 @@ public class SectionControl : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         isOcuped = false;
+    }
+
+    private IEnumerator anim(float n)
+    {
+        float m = n/4;
+        yield return new WaitForSeconds(m);
+        canvasObj.SetActive(true);
+        nameTxt.text = transform.name;
+        costTxt.text = n.ToString();
     }
 }

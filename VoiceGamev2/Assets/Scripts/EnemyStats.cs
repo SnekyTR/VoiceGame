@@ -42,8 +42,9 @@ public class EnemyStats : MonoBehaviour
         //moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
         //moveData.totalEXP = moveData.totalEXP + xp;
 
-
+        extBars.transform.GetChild(0).GetComponent<Text>().text = transform.name;
         extBars.transform.GetChild(1).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
+        intBars.transform.GetChild(0).GetComponent<Text>().text = transform.name;
         intBars.transform.GetChild(1).GetComponent<Slider>().value = (lifeValue / maxLife);
         intBars.transform.GetChild(2).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
 

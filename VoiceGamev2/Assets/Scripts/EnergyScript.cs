@@ -13,6 +13,7 @@ public class EnergyScript : MonoBehaviour
     {
         for(float i = 0.5f; i < 5; i += 0.5f)
         {
+            
             if (i == e && e > (int)e)
             {
                 rombos[(int)(i)].sprite = icons[1];
@@ -23,7 +24,7 @@ public class EnergyScript : MonoBehaviour
             }
             else if (i > e)
             {
-                rombos[(int)(i)].sprite = icons[2];
+                rombos[(int)(i)].sprite = icons[4];
             }
             else if(i < e)
             {
@@ -40,19 +41,19 @@ public class EnergyScript : MonoBehaviour
         {
             if (i == e && e > (int)e)
             {
-                rombos2[(int)(i)].sprite = icons[1];
+                rombos2[(int)(i)].sprite = icons[3];            //medio
             }
             else if (i == e)
             {
-                rombos2[(int)(i)].sprite = icons[0];
+                rombos2[(int)(i)].sprite = icons[2];            //lleno
             }
             else if (i > e)
             {
-                rombos2[(int)(i)].sprite = icons[2];
+                rombos2[(int)(i)].sprite = icons[4];            //vacio
             }
             else if (i < e)
             {
-                rombos2[(int)(i)].sprite = icons[0];
+                rombos2[(int)(i)].sprite = icons[2];            //lleno
             }
         }
     }
