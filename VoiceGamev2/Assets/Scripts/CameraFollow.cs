@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 using UnityEngine.UI;
-using UnityEditor.AI;
 
 
 public class CameraFollow : MonoBehaviour

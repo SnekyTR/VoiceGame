@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 8022926636653982288}
   - component: {fileID: 1495127968}
   - component: {fileID: 1495127969}
+  - component: {fileID: 4982631306172272307}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -126,6 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e4dbd35b9a4294db453aa14c702398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  allieSpell: 0
 --- !u!114 &1495127969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +145,30 @@ MonoBehaviour:
   lPanel: {fileID: 0}
   moveData: {fileID: 0}
   totalEnemies: 0
+--- !u!114 &4982631306172272307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8022926636653982318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2576509d43503a54c84a09c0eafa4ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skills01: {fileID: 0}
+  skills02: {fileID: 0}
+  skills03: {fileID: 0}
+  skills04: {fileID: 0}
+  skills05: {fileID: 0}
+  skills06: {fileID: 0}
+  skills07: {fileID: 0}
+  skills08: {fileID: 0}
+  meteorRain: {fileID: 165786, guid: d7b50f004cdc74b409188d8b822292fc, type: 3}
+  skills10: {fileID: 0}
+  skills11: {fileID: 0}
+  skills12: {fileID: 0}
 --- !u!1 &8022926637128795510
 GameObject:
   m_ObjectHideFlags: 0

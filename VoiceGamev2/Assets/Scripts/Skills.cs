@@ -1,0 +1,366 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Skills : MonoBehaviour
+{
+    private PlayerMove plyMove;
+    private CameraFollow gameM;
+    private Animator plyAnim;
+    private PlayerStats plyStats;
+
+    private List<string> nameSkill = new List<string>();
+    private List<string> weapons = new List<string>();
+
+    private string actualWeapon;
+
+    public GameObject skills01;
+    public GameObject skills02;
+    public GameObject skills03;
+    public GameObject skills04;
+    public GameObject skills05;
+    public GameObject skills06;
+    public GameObject skills07;
+    public GameObject skills08;
+    public GameObject meteorRain;
+    public GameObject skills10;
+    public GameObject skills11;
+    public GameObject skills12;
+
+    private void Awake()
+    {
+        nameSkill.Add("Partir");
+        nameSkill.Add("Aumento de fuerza");
+        nameSkill.Add("Demacia");
+        nameSkill.Add("Demolicion");
+        nameSkill.Add("Instinto asesino");
+        nameSkill.Add("Lluvia de flechas");
+        nameSkill.Add("Bola de fuego");
+        nameSkill.Add("Sacrificio de sangre");
+        nameSkill.Add("Lluvia de meteoritos");
+        nameSkill.Add("Curar");
+        nameSkill.Add("Revivir");
+        nameSkill.Add("Juicio final");
+
+        weapons.Add("sword");
+        weapons.Add("axe");
+        weapons.Add("spear");
+        weapons.Add("bow");
+        weapons.Add("fire staff");
+        weapons.Add("sacred staff");
+    }
+
+    void Start()
+    {
+        plyMove = GetComponent<PlayerMove>();
+        gameM = GetComponent<CameraFollow>();
+
+        actualWeapon = weapons[0];
+    }
+
+    void Update()
+    {
+        string n = nameSkill[0];
+    }
+
+    public List<string> GetSkillList()
+    {
+        return nameSkill;
+    }
+
+    public int GetRanges(string e)
+    {
+        switch (e)
+        {
+            case "Partir":
+                return 3;
+            case "Aumento de fuerza":
+                return 10000;
+            case "Demacia":
+                return 6;
+            case "Demolicion":
+                return 12;
+            case "Instinto asesino":
+                return 10000;
+            case "Lluvia de flechas":
+                return 17;
+            case "Bola de fuego":
+                return 13;
+            case "Sacrificio de sangre":
+                return 10000;
+            case "Lluvia de meteoritos":
+                return 25;
+            case "Curar":
+                return 10000;
+            case "Revivir":
+                return 10000;
+            case "Juicio final":
+                return 1000;
+            default:
+                if (actualWeapon == weapons[0]) return 3;
+                else if (actualWeapon == weapons[1]) return 4;
+                else if (actualWeapon == weapons[2]) return 6;
+                else if (actualWeapon == weapons[3]) return 14;
+                else if (actualWeapon == weapons[4]) return 12;
+                else if (actualWeapon == weapons[5]) return 12;
+                return 3;
+        }
+    }
+
+    public float GetCost(string e)
+    {
+        switch (e)
+        {
+            case "Partir":
+                return 3f;
+            case "Aumento de fuerza":
+                return 1.5f;
+            case "Demacia":
+                return 3.5f;
+            case "Demolicion":
+                return 2.5f;
+            case "Instinto asesino":
+                return 1.5f;
+            case "Lluvia de flechas":
+                return 3.5f;
+            case "Bola de fuego":
+                return 2.5f;
+            case "Sacrificio de sangre":
+                return 3f;
+            case "Lluvia de meteoritos":
+                return 5f;
+            case "Curar":
+                return 3f;
+            case "Revivir":
+                return 4f;
+            case "Juicio final":
+                return 3.5f;
+            default:
+                if (actualWeapon == weapons[0]) return 2f;
+                else if (actualWeapon == weapons[1]) return 2.5f;
+                else if (actualWeapon == weapons[2]) return 1.5f;
+                else if (actualWeapon == weapons[3]) return 2f;
+                else if (actualWeapon == weapons[4]) return 1.5f;
+                else if (actualWeapon == weapons[5]) return 1f;
+                return 2f;
+        }
+    }
+
+    public void SelectSkill(string e)
+    {
+        plyAnim = gameM.playerParent.GetComponent<Animator>();
+        plyStats = plyAnim.GetComponent<PlayerStats>();
+
+        switch (e)
+        {
+            case "Partir":
+                Cleave();
+                break;
+            case "Aumento de fuerza":
+                StrenghtBuff();
+                break;
+            case "Demacia":
+                Demacia();
+                break;
+            case "Demolicion":
+                Demolition();
+                break;
+            case "Instinto asesino":
+                CriticalBuff();
+                break;
+            case "Lluvia de flechas":
+                ArrowRain();
+                break;
+            case "Bola de fuego":
+                FireBall();
+                break;
+            case "Sacrificio de sangre":
+                BloodSacrifice();
+                break;
+            case "Lluvia de meteoritos":
+                StartCoroutine(MeteorAtk());
+                break;
+            case "Curar":
+                Heal();
+                break;
+            case "Revivir":
+                Resurrect();
+                break;
+            case "Juicio final":
+                Resurrect();
+                break;
+            default:
+                StartCoroutine(BasicAtk());
+                break;
+
+        }
+    }
+
+    private IEnumerator BasicAtk()
+    {
+        if (actualWeapon == weapons[0])
+        {
+            plyAnim.SetInteger("A_BasicAtk", 1);
+
+            yield return new WaitForSeconds(0.7f);
+
+            int dmg = Random.Range((int)(plyStats.GetStrenght() * 0.9f), (int)(plyStats.GetStrenght() * 1.3f));
+
+            int crit = Random.Range(0, 100);
+
+            if(crit <= plyStats.criticProb)
+            {
+                dmg = (int)(dmg * 1.5f);
+            }
+
+            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
+        }
+        else if (actualWeapon == weapons[1])
+        {
+            plyAnim.SetInteger("A_BasicAtk", 1);
+
+            yield return new WaitForSeconds(0.7f);
+
+            int dmg = Random.Range((int)(plyStats.GetStrenght() * 1.2f), (int)(plyStats.GetStrenght() * 1.6f));
+
+            int crit = Random.Range(0, 100);
+
+            if (crit <= plyStats.criticProb)
+            {
+                dmg = (int)(dmg * 1.5f);
+            }
+
+            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
+        }
+        else if (actualWeapon == weapons[2])
+        {
+            plyAnim.SetInteger("A_BasicAtk", 1);
+
+            yield return new WaitForSeconds(0.7f);
+
+            int dmg = Random.Range((int)(plyStats.GetAgility() * 1f), (int)(plyStats.GetAgility() * 1.2f));
+
+            int crit = Random.Range(0, 100);
+
+            if (crit <= plyStats.criticProb)
+            {
+                dmg = (int)(dmg * 1.5f);
+            }
+
+            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
+        }
+        else if (actualWeapon == weapons[3])
+        {
+            plyAnim.SetInteger("A_BasicAtk", 1);
+
+            yield return new WaitForSeconds(0.7f);
+
+            int dmg = Random.Range((int)(plyStats.GetAgility() * 0.8f), (int)(plyStats.GetAgility() * 1.5f));
+
+            int crit = Random.Range(0, 100);
+
+            if (crit <= plyStats.criticProb)
+            {
+                dmg = (int)(dmg * 1.5f);
+            }
+
+            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
+        }
+        else if (actualWeapon == weapons[4])
+        {
+            plyAnim.SetInteger("A_BasicAtk", 1);
+
+            yield return new WaitForSeconds(0.7f);
+
+            int dmg = Random.Range((int)(plyStats.GetIntellect() * 1f), (int)(plyStats.GetIntellect() * 2f));
+
+            int crit = Random.Range(0, 100);
+
+            if (crit <= plyStats.criticProb)
+            {
+                dmg = (int)(dmg * 1.5f);
+            }
+
+            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
+        }
+        else if (actualWeapon == weapons[5])
+        {
+            plyAnim.SetInteger("A_BasicAtk", 1);
+
+            yield return new WaitForSeconds(0.7f);
+
+            int dmg = Random.Range((int)(plyStats.GetIntellect() * 0.7f), (int)(plyStats.GetIntellect() * 1.1f));
+
+            int crit = Random.Range(0, 100);
+
+            if (crit <= plyStats.criticProb)
+            {
+                dmg = (int)(dmg * 1.5f);
+            }
+
+            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
+        }
+    }
+
+    private void Cleave()
+    {
+
+    }
+
+    private void StrenghtBuff()
+    {
+
+    }
+
+    private void Demacia()
+    {
+
+    }
+
+    private void Demolition()
+    {
+
+    }
+
+    private void CriticalBuff()
+    {
+
+    }
+
+    private void ArrowRain()
+    {
+
+    }
+
+    private void FireBall()
+    {
+
+    }
+
+    private void BloodSacrifice()
+    {
+
+    }
+
+    private IEnumerator MeteorAtk()
+    {
+        Instantiate(meteorRain, plyMove.target.transform.position, transform.rotation);
+
+        yield return new WaitForSeconds(2f);
+    }
+
+    private void Heal()
+    {
+
+    }
+
+    private void Resurrect()
+    {
+
+    }
+
+    private void FinalJudgment()
+    {
+
+    }
+}

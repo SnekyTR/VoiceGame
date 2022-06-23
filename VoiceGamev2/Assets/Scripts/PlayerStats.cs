@@ -10,6 +10,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int strengthPoints;
     [SerializeField] public int intellectPoints;
     [SerializeField] public int agilityPoints;
+    [SerializeField] public int criticProb;
     private float energy = 5f;
     private float energyActions = 5f;
     private EnergyScript energyLo;
@@ -185,27 +186,30 @@ public class PlayerStats : MonoBehaviour
         energyLo.NewEnergyActionsIcon(energyActions);
     }
 
-    public int GetAtk()
+    public int GetLife()
     {
-        int newAtk = Random.Range((strengthValue - 2), strengthValue);
-        return newAtk;
+        return lifeValue;
     }
 
-    public int GetIntl()
+    public int GetStrenght()
     {
-        int newIntl = Random.Range((intellectValue - 2), intellectValue);
-        return newIntl;
+        return strengthValue;
+    }
+
+    public int GetIntellect()
+    {
+        return intellectValue;
+    }
+
+    public int GetAgility()
+    {
+        return agilityValue;
     }
 
     public float GetEnergy(int i)
     {
         if (i == 1) return energy;
         else return energyActions;
-    }
-
-    public int GetLife()
-    {
-        return lifeValue;
     }
 
     public void NewShield(int s)

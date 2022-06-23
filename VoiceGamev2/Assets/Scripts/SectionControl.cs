@@ -13,8 +13,6 @@ public class SectionControl : MonoBehaviour
     {
         float energy = (Vector3.Distance(tr.position, transform.position) / 2);
 
-        if (transform.name == "2 6") print(energy);
-
         if (energy > ((int)energy + 0.1f) && energy < ((int)energy + 0.7f))
         {
             energy = (int)energy + 0.5f;

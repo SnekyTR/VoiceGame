@@ -14,8 +14,9 @@ public class PlayerMove : MonoBehaviour
     private PlayerStats playerStats;
     private Animator animator;
     private Transform playerTr;
-
     private CameraFollow gameM;
+    private Skills skill;
+
     private GridActivation gridA;
     private Image range;
     private bool isOnRoute =false;
@@ -25,7 +26,7 @@ public class PlayerMove : MonoBehaviour
     private string[] posNames;
 
     [Header("Enemys")]
-    private GameObject target;
+    [HideInInspector] public GameObject target;
     private bool setTarget;
 
     //voice commands select action
@@ -49,7 +50,8 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
-        gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
+        gameM = GetComponent<CameraFollow>();
+        skill = GetComponent<Skills>();
         gridA = GameObject.Find("RayCast").GetComponent<GridActivation>();
 
         //select action
@@ -82,9 +84,10 @@ public class PlayerMove : MonoBehaviour
         atkCmdR.OnPhraseRecognized += RecognizedVoice3;
 
         //spells
-        spellCmd.Add("meteor atack", Spells);
-        spellCmd.Add("curar", Spells);
-        spellCmd.Add("revivir", Spells);
+        for (int i = 0; i < skill.GetSkillList().Count; i++)
+        {
+            spellCmd.Add(skill.GetSkillList()[i], Spells);
+        }
 
         spellCmdR = new KeywordRecognizer(spellCmd.Keys.ToArray());
         spellCmdR.OnPhraseRecognized += RecognizedVoice5;
@@ -227,7 +230,6 @@ public class PlayerMove : MonoBehaviour
     private void MoveCasilla(string i)
     {
         float energy = (Vector3.Distance(GameObject.Find(i).transform.position, playerTr.position) / 2);
-        print(energy);
         if (energy > ((int)energy + 0.1f) && energy < ((int)energy + 0.7f))
         {
             energy = (int)energy + 0.5f;
@@ -302,13 +304,13 @@ public class PlayerMove : MonoBehaviour
 
         atkState = n;
 
-        if(n == "meteor atack")
-        {
-            atkCmdR.Start();
-        }
-        else if(n == "curar" || n == "revivir")
+        if(n == "curar" || n == "revivir")
         {
             allieSpell = true;
+        }
+        else
+        {
+            atkCmdR.Start();
         }
     }
     private void Enemy(string n)
@@ -327,11 +329,12 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        if (target != null && Vector3.Distance(playerNM.transform.position, target.transform.position) < 4 && atkState == "atk")
+        if (target != null && Vector3.Distance(playerNM.transform.position, target.transform.position) < skill.GetRanges(atkState))
         {
-            if (TurnEnergyActions(2))
+            if (TurnEnergyActions(skill.GetCost(atkState)))
             {
                 StartCoroutine(StartAtkAnim());
+                atkCmdR.Stop();
             }
             else
             {
@@ -343,22 +346,7 @@ public class PlayerMove : MonoBehaviour
                 playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
             }
         }
-        else if (target != null && Vector3.Distance(playerNM.transform.position, target.transform.position) < 9 && atkState == "meteor atack")
-        {
-            if (TurnEnergyActions(3.5f))
-            {
-                StartCoroutine(StartAtkAnim());
-            }
-            else
-            {
-                startCmdR.Start();
-                spellCmdR.Start();
-
-                atkCmdR.Stop();
-
-                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
-            }
-        }
+        
         else
         {
             startCmdR.Start();
@@ -436,19 +424,16 @@ public class PlayerMove : MonoBehaviour
 
     private IEnumerator StartAtkAnim()
     {
-        animator.SetInteger("A_FireBall", 1);
-        atkCmdR.Stop();
+        skill.SelectSkill(atkState);
 
         setTarget = true;
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1.5f);
 
         setTarget = false;
 
-        if (atkState == "atk") target.GetComponent<EnemyStats>().SetLife(-playerStats.GetAtk());
-        else if (atkState == "meteor atack") target.GetComponent<EnemyStats>().SetLife(-playerStats.GetIntl());
-
         startCmdR.Start();
+        spellCmdR.Start();
 
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
     }
