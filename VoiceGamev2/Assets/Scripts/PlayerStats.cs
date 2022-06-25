@@ -10,7 +10,17 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int strengthPoints;
     [SerializeField] public int intellectPoints;
     [SerializeField] public int agilityPoints;
-    [SerializeField] public int criticProb;
+    public int criticProb;
+    public string actualWeapon;
+
+    [Header("Weapons")]
+    public GameObject weapon01;
+    public GameObject weapon02;
+    public GameObject weapon03;
+    public GameObject weapon04;
+    public GameObject weapon05;
+    public GameObject weapon06;
+
     private float energy = 5f;
     private float energyActions = 5f;
     private EnergyScript energyLo;
@@ -30,11 +40,21 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public GameObject selected;
 
     private CameraFollow gameM;
+    private Skills skill;
     private WinLoose winLoose;
     void Start()
     {
-        //LoadStatsPlayer();
+        //******* Aqui carga ya sabes todos los datos de lifepoint, strenghtpoint, agilitypoints, intellectpoints
+        //******* cada player tiene su nombre normal escepto hammun el cual se llama jamun
+        //******* ademas de ello tienes q determinar el arma de cada uno dependiendo de su nombre, los nombres de las armas como deberan ser reconocidos son
+        //******* actualWeapon = ... - los nombres de las armas estan en el script "Skills", aunq son los nombres de las armas pero en ingles y todo minusculas
+        //******* solo eso prueba bien las cosas, y recuerda lo de resucitar, en script "Skills" al final esta el resusitar, suerte con eso
+        //******* faltaron pocas cosas como las pasivas de las habilidades y el funcionamiento del arco en si, asiq si metes en la build q aun no encuentre el arco mejor XD
+        //******* agregue el comando "desbloquear" para si quieren usar todas las habilidades de su arma XD
+
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
+        skill = gameM.GetComponent<Skills>();
+        InitialWeapon();
         /*winLoose = GameObject.Find("GameManager").GetComponent<WinLoose>();
         for (int i = 0; i< GameObject.FindGameObjectsWithTag("Enemy").Length; i++)
         {
@@ -91,6 +111,8 @@ public class PlayerStats : MonoBehaviour
         maxEnergy = energy;
 
         selected.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
+
+
     }
     //Coge los stats guardados en el fichero antes de abrir el nivel
     private void LoadStatsPlayer()
@@ -105,6 +127,34 @@ public class PlayerStats : MonoBehaviour
     void Update()
     {
 
+    }
+
+    private void InitialWeapon()
+    {
+        if (actualWeapon == "sword")
+        {
+            weapon01.SetActive(true);
+        }
+        else if (actualWeapon == "axe")
+        {
+            weapon02.SetActive(true);
+        }
+        else if (actualWeapon == "spear")
+        {
+            weapon03.SetActive(true);
+        }
+        else if (actualWeapon == "bow")
+        {
+            weapon04.SetActive(true);
+        }
+        else if (actualWeapon == "fire staff")
+        {
+            weapon05.SetActive(true);
+        }
+        else if (actualWeapon == "sacred staff")
+        {
+            weapon06.SetActive(true);
+        }
     }
 
     public void SetLife(int n)
@@ -164,6 +214,28 @@ public class PlayerStats : MonoBehaviour
         print((lifeValue / maxLife));
         print(lifeValue + "vida");
         print(maxLife + "maxvida");
+    }
+
+    public void SetStrenght(float n)
+    {
+        strengthValue = (int)(strengthValue * n);
+    }
+
+    public void SetAgility(float n)
+    {
+        agilityValue = (int)(agilityValue * n);
+    }
+
+    public void SetIntellect(float n)
+    {
+        print(intellectValue);
+        intellectValue = (int)(intellectValue * n);
+        print(intellectValue);
+    }
+
+    public void MoreCriticProb(int n)
+    {
+        criticProb += n;
     }
 
     public void SetEnergy(float n)

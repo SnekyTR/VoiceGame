@@ -121,13 +121,17 @@ public class EnemyStats : MonoBehaviour
 
     public int GetAtk()
     {
-        int newAtk = Random.Range((atkValue - 2), atkValue);
-        return newAtk;
+        return atkValue;
     }
 
     public int GetRange()
     {
         return range;
+    }
+
+    public int GetShield()
+    {
+        return shieldValue;
     }
 
     public void SetEnergy(float n)

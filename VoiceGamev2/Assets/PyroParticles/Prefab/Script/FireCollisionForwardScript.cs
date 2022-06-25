@@ -19,11 +19,15 @@ namespace DigitalRuby.PyroParticles
     {
         public ICollisionHandler CollisionHandler;
         private CameraFollow gameM;
+        private PlayerMove plyM;
         private PlayerStats plyStats;
+        int dmg;
+        int crit;
 
         public void Start()
         {
             gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
+            plyM = gameM.GetComponent<PlayerMove>();
             plyStats = gameM.playerParent.GetComponent<PlayerStats>();
         }
 
@@ -31,9 +35,24 @@ namespace DigitalRuby.PyroParticles
         {
             CollisionHandler.HandleCollision(gameObject, col);
 
-            int dmg = Random.Range((int)(plyStats.GetIntellect() * 0.3f), (int)(plyStats.GetIntellect() * 0.5f));
+            if(plyM.GetAtkState() == "Lluvia de meteoritos")
+            {
+                dmg = Random.Range((int)(plyStats.GetIntellect() * 0.4f), (int)(plyStats.GetIntellect() * 0.6f));
+            }
+            else if(plyM.GetAtkState() == "atk")
+            {
+                dmg = Random.Range((int)(plyStats.GetIntellect() * 1f), (int)(plyStats.GetIntellect() * 2f));
+            }
+            else if (plyM.GetAtkState() == "Bola de fuego")
+            {
+                dmg = Random.Range((int)(plyStats.GetIntellect() * 1.5f), (int)(plyStats.GetIntellect() * 2.2f));
+            }
+            else if(plyM.GetAtkState() == "Lluvia de flechas")
+            {
+                dmg = Random.Range((int)(plyStats.GetAgility() * 0.2f), (int)(plyStats.GetAgility() * 0.4f));
+            }
 
-            int crit = Random.Range(0, 100);
+            crit = Random.Range(0, 100);
 
             if (crit <= plyStats.criticProb)
             {
@@ -41,6 +60,8 @@ namespace DigitalRuby.PyroParticles
             }
 
             if (col.transform.tag == "Enemy") col.gameObject.GetComponent<EnemyStats>().SetLife(-dmg);
+
+            GetComponent<Rigidbody>().isKinematic = true;
         }
     }
 }

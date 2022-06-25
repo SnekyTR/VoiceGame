@@ -61,6 +61,7 @@ public class PlayerMove : MonoBehaviour
         startCmd.Add("ataca", StartAttack);
         startCmd.Add("ataca a", StartAttack);
         startCmd.Add("atacar a", StartAttack);
+        startCmd.Add("desbloquear", Unlook);
 
         //movement
 
@@ -98,12 +99,24 @@ public class PlayerMove : MonoBehaviour
         PlayerDeselect();
     }
 
+    public void Unlook()
+    {
+        playerStats.strengthPoints = 10;
+        playerStats.agilityPoints = 10;
+        playerStats.intellectPoints = 10;
+    }
+
     public void NewPlayer(GameObject Pl)
     {
         animator = Pl.GetComponent<Animator>();
         playerStats = Pl.GetComponent<PlayerStats>();
         playerNM = Pl.GetComponent<NavMeshAgent>();
         playerTr = Pl.transform;
+    }
+
+    public string GetAtkState()
+    {
+        return atkState;
     }
 
     public void ReasignateGrid()
@@ -300,13 +313,23 @@ public class PlayerMove : MonoBehaviour
     //spells actions
     private void Spells(string n)
     {
+        if (!skill.ValidationSkill(n))
+        {
+            return;
+        }
+
         spellCmdR.Stop();
 
         atkState = n;
 
-        if(n == "curar" || n == "revivir")
+        if(n == "Curar" || n == "Revivir")
         {
             allieSpell = true;
+        }
+        else if(n == "Aumento de fuerza" || n == "Instinto asesino" || n == "Sacrificio de sangre")
+        {
+            StartCoroutine(SelfBuffs());
+            TurnEnergyActions(skill.GetCost(atkState));
         }
         else
         {
@@ -346,7 +369,6 @@ public class PlayerMove : MonoBehaviour
                 playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
             }
         }
-        
         else
         {
             startCmdR.Start();
@@ -357,12 +379,6 @@ public class PlayerMove : MonoBehaviour
             playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
             print("fuera de alcance");
         }
-
-        if (spellCmdR.IsRunning)
-        {
-            spellCmdR.Stop();
-        }
-
     }
 
     public void Allie(string n)
@@ -381,12 +397,13 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        if(target != null && atkState == "curar")
+        if(target != null || target == null)
         {
-            if (TurnEnergyActions(3))
+            if (target == null) target = GameObject.Find(n);
+
+            if (TurnEnergyActions(skill.GetCost(atkState)))
             {
-                target.GetComponent<PlayerStats>().SetLife(5);
-                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
+                StartCoroutine(StartAtkAnim());
             }
             else
             {
@@ -398,28 +415,17 @@ public class PlayerMove : MonoBehaviour
                 playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
             }
         }
-        else if(target == null && atkState == "revivir")
+        else
         {
-            if (TurnEnergyActions(4.5f))
-            {
-                target = GameObject.Find(n);
+            startCmdR.Start();
+            spellCmdR.Start();
 
-                gameM.players.Add(target.transform);
-                target.GetComponent<Animator>().SetInteger("A_Death", 0);
-                target.GetComponent<NavMeshAgent>().enabled = true;
-                target.GetComponent<PlayerStats>().SetLife(5);
-                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
-            }
-            else
-            {
-                startCmdR.Start();
-                spellCmdR.Start();
+            atkCmdR.Stop();
 
-                atkCmdR.Stop();
-
-                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
-            }
+            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
+            print("fuera de alcance");
         }
+
     }
 
     private IEnumerator StartAtkAnim()
@@ -432,9 +438,19 @@ public class PlayerMove : MonoBehaviour
 
         setTarget = false;
 
-        startCmdR.Start();
+        if(!startCmdR.IsRunning)startCmdR.Start();
         spellCmdR.Start();
 
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
+    }
+
+    private IEnumerator SelfBuffs()
+    {
+        skill.SelectSkill(atkState);
+
+        yield return new WaitForSeconds(1.5f);
+
+        //startCmdR.Start();
+        spellCmdR.Start();
     }
 }

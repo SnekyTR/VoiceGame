@@ -170,6 +170,7 @@ public class CameraFollow : MonoBehaviour
             if(n == players[i].name)
             {
                 actualPlayer = players[i];
+                GetComponent<Skills>().SetActualPlayer(actualPlayer.GetComponent<PlayerStats>());
                 break;
             }
             else if((i+1) == players.Count)
