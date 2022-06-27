@@ -51,15 +51,13 @@ public class PlayerStats : MonoBehaviour
         //******* solo eso prueba bien las cosas, y recuerda lo de resucitar, en script "Skills" al final esta el resusitar, suerte con eso
         //******* faltaron pocas cosas como las pasivas de las habilidades y el funcionamiento del arco en si, asiq si metes en la build q aun no encuentre el arco mejor XD
         //******* agregue el comando "desbloquear" para si quieren usar todas las habilidades de su arma XD
+        //LoadStatsPlayer();
 
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
         skill = gameM.GetComponent<Skills>();
+        winLoose = gameM.GetComponent<WinLoose>();
+        winLoose.totalPlayers++;
         InitialWeapon();
-        /*winLoose = GameObject.Find("GameManager").GetComponent<WinLoose>();
-        for (int i = 0; i< GameObject.FindGameObjectsWithTag("Enemy").Length; i++)
-        {
-            ++winLoose.totalEnemies;
-        }*/
         //calculo de valor de los stats
 
         if(transform.name == "Magnus")
@@ -117,7 +115,7 @@ public class PlayerStats : MonoBehaviour
     //Coge los stats guardados en el fichero antes de abrir el nivel
     private void LoadStatsPlayer()
     {
-        PlayerData data = SaveSystem.LoadPlayer();
+        PlayerData data = SaveSystem.LoadPlayer(transform);
 
         lifePoints = data.healthStat;
         strengthPoints = data.strength;
@@ -193,7 +191,7 @@ public class PlayerStats : MonoBehaviour
         
         if (lifeValue <= 0)                    //death
         {
-            //winLoose.LooseActivateVoice();
+            winLoose.totalPlayers--;
             animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
             GetComponent<NavMeshAgent>().enabled = false;

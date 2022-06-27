@@ -16,6 +16,7 @@ public class WinLoose : MonoBehaviour
     private KeywordRecognizer lOrders;
     [SerializeField] private MoveDataToMain moveData;
     public int totalEnemies;
+    public int totalPlayers;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,11 +30,15 @@ public class WinLoose : MonoBehaviour
         {
             WinActivateVoice();
         }
+        if(totalPlayers == 0)
+        {
+            LooseActivateVoice();
+        }
     }
     private void WinAsignOrders()
     {
         winOrders.Add("Continuar", Continue);
-
+        
         wOrders = new KeywordRecognizer(winOrders.Keys.ToArray());
         wOrders.OnPhraseRecognized += RecognizedVoice;
     }
@@ -75,7 +80,7 @@ public class WinLoose : MonoBehaviour
     }
     private void Assign()
     {
-        //moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
+        moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
         //wPanel = GameObject.Find("VPanel");
         //lPanel = GameObject.Find("LPanel");
     }

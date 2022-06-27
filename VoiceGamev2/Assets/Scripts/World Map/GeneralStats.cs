@@ -34,7 +34,7 @@ public class GeneralStats : MonoBehaviour
     public void LoadPlayer()
     {
 
-        PlayerData data = SaveSystem.LoadPlayer();
+        PlayerData data = SaveSystem.LoadPlayer(transform);
 
         levelSystem.level = data.level;
         levelSystem.currentXp = data.experience;

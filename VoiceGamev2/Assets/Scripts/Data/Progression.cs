@@ -32,9 +32,6 @@ public class Progression : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
     }*/
-    
-
-
     public void CheckProgression()
     {
         if (progression >= 1)

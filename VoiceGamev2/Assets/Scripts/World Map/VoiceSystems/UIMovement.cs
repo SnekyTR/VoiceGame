@@ -30,7 +30,7 @@ public class UIMovement : MonoBehaviour
         characterPannel = GameObject.Find("CharacterInformation");*/
 
         AddFirstLvl();
-        AddPartyInf();
+        //AddPartyInf();
         //AddCharacterInf();  
     }
     private void Update()
@@ -39,6 +39,7 @@ public class UIMovement : MonoBehaviour
     private void AddFirstLvl()
     {
         firstCanvasLvl.Add("grupo", ActivatePartyInformation);
+        firstCanvasLvl.Add("cerrar", CloseWindows);
         firstCanvas = new KeywordRecognizer(firstCanvasLvl.Keys.ToArray());
         firstCanvas.OnPhraseRecognized += RecognizedVoiceFirst;
         firstCanvas.Start();
@@ -86,8 +87,20 @@ public class UIMovement : MonoBehaviour
     private void ActivatePartyInformation()
     {
         partyPannel.SetActive(true);
-        firstCanvas.Stop();
+        //firstCanvas.Stop();
         party.Start();
+    }
+    private void CloseWindows()
+    {
+        if (characterPannel.activeInHierarchy)
+        {
+            characterPannel.SetActive(false);
+        }
+        else if(partyPannel.activeInHierarchy)
+        {
+            partyPannel.SetActive(false);
+            party.Stop();
+        }
     }
     private void DeActivatePartyInformation()
     {

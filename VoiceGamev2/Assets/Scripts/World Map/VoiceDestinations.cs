@@ -32,7 +32,6 @@ public class VoiceDestinations : MonoBehaviour
     private void AddDestinations()
     {
         mapActions.Add("reposo", SelectDestination);
-        print("Se han añadido");
         mapDestinations = new KeywordRecognizer(mapActions.Keys.ToArray());
         mapDestinations.OnPhraseRecognized += RecognizedVoice;
         mapDestinations.Start();
@@ -54,6 +53,7 @@ public class VoiceDestinations : MonoBehaviour
         }
         else
         {
+            print("Se Mueve");
             agent.SetDestination(objectTransform.position);
         }
         //if (combatEnter.combat == true) { print("Se ha parado player"); StopPlayer(); } else {  }

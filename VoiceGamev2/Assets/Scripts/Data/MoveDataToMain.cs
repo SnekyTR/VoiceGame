@@ -37,8 +37,10 @@ public class MoveDataToMain : MonoBehaviour
         print("Entra despeus de destroy");
         pro = GameObject.Find("GameSaver").GetComponent<Progression>();
         gameSave = GameObject.Find("GameSaver").GetComponent<GameSave>();
-        level = GameObject.Find("Player 1").GetComponent<LevelSystem>();
+        level = GameObject.Find("Magnus").GetComponent<LevelSystem>();
         StartCoroutine(IncrementTheProgression());
+        SceneManager.UnloadScene(1);
+
     }
     IEnumerator IncrementTheProgression()
     {
@@ -63,12 +65,10 @@ public class MoveDataToMain : MonoBehaviour
     }
     IEnumerator FailMainScene()
     {
-
         yield return new WaitForSeconds(1f);
         print("Ha fallado");
         gameSave.LoadGame();
         pro.CheckProgression();
         gameSave.SaveGame();
     }
-
 }

@@ -11,8 +11,8 @@ public class GameSave : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        general = GameObject.Find("Player 1").GetComponent<GeneralStats>();
-        level = GameObject.Find("Player 1").GetComponent<LevelSystem>();
+        general = GameObject.Find("Magnus").GetComponent<GeneralStats>();
+        level = GameObject.Find("Magnus").GetComponent<LevelSystem>();
         pro = gameObject.GetComponent<Progression>();
     }
 
@@ -23,7 +23,7 @@ public class GameSave : MonoBehaviour
     }
     public void SaveGame()
     {
-        SaveSystem.SavePlayer(general, level);
+        SaveSystem.SavePlayer(general, level, general.transform);
         SaveSystem.SaveProgression(pro);
     }
     public void LoadGame()

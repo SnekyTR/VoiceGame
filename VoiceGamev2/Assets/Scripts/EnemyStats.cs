@@ -91,8 +91,8 @@ public class EnemyStats : MonoBehaviour
 
         if (lifeValue <= 0)                    //death
         {
-            //winLoose.totalEnemies--;
-            //animator.SetInteger("A_Death", 1);
+            winLoose.totalEnemies--;
+            animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
             GetComponent<NavMeshAgent>().enabled = false;
 

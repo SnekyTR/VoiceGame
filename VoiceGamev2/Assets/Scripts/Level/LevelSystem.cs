@@ -43,7 +43,7 @@ public class LevelSystem : MonoBehaviour
     // Update is called once per frame
     public void LoadLevel()
     {
-        PlayerData data = SaveSystem.LoadPlayer();
+        PlayerData data = SaveSystem.LoadPlayer(transform);
 
         level = data.level;
         currentXp = data.experience;

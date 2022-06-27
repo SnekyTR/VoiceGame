@@ -16,7 +16,7 @@ public class PlayerData
 
     public float[] position;
 
-    public PlayerData(GeneralStats player, LevelSystem levelSystem)
+    public PlayerData(GeneralStats player, LevelSystem levelSystem, Transform transform)
     {
         level = levelSystem.level;
         experience = levelSystem.currentXp;

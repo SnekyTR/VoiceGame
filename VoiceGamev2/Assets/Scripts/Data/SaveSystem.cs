@@ -3,22 +3,22 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 public static class SaveSystem
 {
-    public static void SavePlayer(GeneralStats player, LevelSystem level)
+    public static void SavePlayer(GeneralStats player, LevelSystem level, Transform charName)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/player.data";
+        string path = Application.persistentDataPath + "/"+charName.name+".data";
 
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerData data = new PlayerData(player, level);
+        PlayerData data = new PlayerData(player, level,charName);
 
         formatter.Serialize(stream, data);
         stream.Close();
     }
 
-    public static PlayerData LoadPlayer()
+    public static PlayerData LoadPlayer(Transform charName)
     {
-        string path = Application.persistentDataPath + "/player.data";
+        string path = Application.persistentDataPath + "/" + charName.name + ".data";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
