@@ -27,6 +27,7 @@ public class MoveDataToMain : MonoBehaviour
     }
     public void IncrementProgresion()
     {
+        SceneManager.UnloadSceneAsync(2);
         SceneManager.LoadScene(1);
         StartCoroutine(ReChargeObjects());  
     }
@@ -39,7 +40,7 @@ public class MoveDataToMain : MonoBehaviour
         gameSave = GameObject.Find("GameSaver").GetComponent<GameSave>();
         level = GameObject.Find("Magnus").GetComponent<LevelSystem>();
         StartCoroutine(IncrementTheProgression());
-        SceneManager.UnloadScene(1);
+        //SceneManager.UnloadSceneAsync(1);
 
     }
     IEnumerator IncrementTheProgression()
