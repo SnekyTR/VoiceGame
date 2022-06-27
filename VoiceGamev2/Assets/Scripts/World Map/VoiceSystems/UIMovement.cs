@@ -30,7 +30,7 @@ public class UIMovement : MonoBehaviour
         characterPannel = GameObject.Find("CharacterInformation");*/
 
         AddFirstLvl();
-        //AddPartyInf();
+        AddPartyInf();
         //AddCharacterInf();  
     }
     private void Update()

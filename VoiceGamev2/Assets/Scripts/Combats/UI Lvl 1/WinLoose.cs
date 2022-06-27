@@ -9,6 +9,9 @@ public class WinLoose : MonoBehaviour
 {
     [SerializeField] private GameObject wPanel;
     [SerializeField] private GameObject lPanel;
+    private bool isEnter = false;
+    private PlayerMove plyMove;
+    private CameraFollow gameM;
 
     private Dictionary<string, Action> winOrders = new Dictionary<string, Action>();
     private KeywordRecognizer wOrders;
@@ -23,17 +26,42 @@ public class WinLoose : MonoBehaviour
         Assign();
         WinAsignOrders();
         LooseAsignOrders();
+
+        plyMove = GetComponent<PlayerMove>();
+        gameM = GetComponent<CameraFollow>();
+
+        wPanel = GameObject.Find("CanvasManager").transform.GetChild(9).gameObject;
+        lPanel = GameObject.Find("CanvasManager").transform.GetChild(10).gameObject;
     }
     private void Update()
     {
-        if(totalEnemies == 0)
+        if(totalEnemies == 0 && !isEnter)
         {
             WinActivateVoice();
+            plyMove.ClosePlayerMove();
+            gameM.CloseCameraFollow();
+            isEnter = true;
         }
-        if(totalPlayers == 0)
+        if(totalPlayers == 0 && !isEnter)
         {
             LooseActivateVoice();
+            plyMove.ClosePlayerMove();
+            gameM.CloseCameraFollow();
+            isEnter = true;
         }
+    }
+
+    private void CloseWinLose()
+    {
+        Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
+        zero1.Add("asdfasdadfsasdf21431234" + SceneManager.GetActiveScene().name, WinAsignOrders);
+        Dictionary<string, Action> zero2 = new Dictionary<string, Action>();
+        zero2.Add("ghjghasdfasdf4qw123412341" + SceneManager.GetActiveScene().name, WinAsignOrders);
+
+        wOrders = new KeywordRecognizer(zero1.Keys.ToArray());
+        lOrders = new KeywordRecognizer(zero2.Keys.ToArray());
+        wOrders.OnPhraseRecognized -= RecognizedVoice;
+        lOrders.OnPhraseRecognized -= LooseRecognizedVoice;
     }
     private void WinAsignOrders()
     {
@@ -47,7 +75,7 @@ public class WinLoose : MonoBehaviour
         looseOrders.Add("Salir", Exit);
         looseOrders.Add("Reintentar", Exit);
         lOrders = new KeywordRecognizer(looseOrders.Keys.ToArray());
-        lOrders.OnPhraseRecognized += RecognizedVoice;
+        lOrders.OnPhraseRecognized += LooseRecognizedVoice;
     }
     public void WinActivateVoice()
     {
@@ -71,12 +99,13 @@ public class WinLoose : MonoBehaviour
     {
         wOrders.Stop();
         moveData.IncrementProgresion();
-        
+        if(totalPlayers != 0) CloseWinLose();
     }
     private void Exit()
     {
         lOrders.Stop();
         moveData.FailLevel();
+        if (totalPlayers != 0) CloseWinLose();
     }
     private void Assign()
     {

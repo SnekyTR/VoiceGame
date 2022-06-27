@@ -27,8 +27,8 @@ public class MoveDataToMain : MonoBehaviour
     }
     public void IncrementProgresion()
     {
-        SceneManager.UnloadSceneAsync(2);
         SceneManager.LoadScene(1);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
         StartCoroutine(ReChargeObjects());  
     }
     IEnumerator ReChargeObjects()

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Windows.Speech;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -97,6 +98,26 @@ public class PlayerMove : MonoBehaviour
         startCmdR.Start();
 
         PlayerDeselect();
+    }
+
+    public void ClosePlayerMove()
+    {
+        Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
+        zero1.Add("asdfasd" + SceneManager.GetActiveScene().name, Unlook);
+        Dictionary<string, Action> zero2 = new Dictionary<string, Action>();
+        zero2.Add("ghjgh" + SceneManager.GetActiveScene().name, Unlook);
+        Dictionary<string, Action> zero3 = new Dictionary<string, Action>();
+        zero3.Add("bfdgbdfbd" + SceneManager.GetActiveScene().name, Unlook);
+        Dictionary<string, Action> zero4 = new Dictionary<string, Action>();
+        zero4.Add("qwerqwer" + SceneManager.GetActiveScene().name, Unlook);
+        startCmdR = new KeywordRecognizer(zero1.Keys.ToArray());
+        moveCmdR = new KeywordRecognizer(zero2.Keys.ToArray());
+        atkCmdR = new KeywordRecognizer(zero3.Keys.ToArray());
+        spellCmdR = new KeywordRecognizer(zero4.Keys.ToArray());
+        startCmdR.OnPhraseRecognized -= RecognizedVoice1;
+        moveCmdR.OnPhraseRecognized -= RecognizedVoice2;
+        atkCmdR.OnPhraseRecognized -= RecognizedVoice3;
+        spellCmdR.OnPhraseRecognized -= RecognizedVoice5;
     }
 
     public void Unlook()

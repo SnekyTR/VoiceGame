@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -119,6 +119,19 @@ public class CameraFollow : MonoBehaviour
                 transform.rotation = Quaternion.Euler(transform.rotation.x, playerParent.rotation.y - 180, transform.rotation.z);
             }
         }
+    }
+
+    public void CloseCameraFollow()
+    {
+        Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
+        zero1.Add("asdfasdadfsasdf" + SceneManager.GetActiveScene().name, CancelOrder);
+        Dictionary<string, Action> zero2 = new Dictionary<string, Action>();
+        zero2.Add("ghjghasdfasdf4qw" + SceneManager.GetActiveScene().name, CancelOrder);
+        
+        passCmdR = new KeywordRecognizer(zero1.Keys.ToArray());
+        selectPJCmdR = new KeywordRecognizer(zero2.Keys.ToArray());
+        passCmdR.OnPhraseRecognized -= RecognizedVoice4;
+        selectPJCmdR.OnPhraseRecognized -= RecognizedVoice;
     }
 
     public void RecognizedVoice(PhraseRecognizedEventArgs speech)

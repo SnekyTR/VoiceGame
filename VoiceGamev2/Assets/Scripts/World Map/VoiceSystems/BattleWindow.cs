@@ -40,6 +40,8 @@ public class BattleWindow : MonoBehaviour
     {
         gameSave.SaveGame();
         print(index);
+        //SceneManager.UnloadSceneAsync(0);
+        //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
         SceneManager.LoadScene(combatEnter.sceneIndex);
     }
     private void ClosePannel()
