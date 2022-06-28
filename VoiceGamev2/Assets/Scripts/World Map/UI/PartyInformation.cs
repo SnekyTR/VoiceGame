@@ -38,8 +38,11 @@ public class PartyInformation : MonoBehaviour
 
         for(int i = 0; i < playersName.Length; i++){
             playersName[i].text = players[i].name;
+            //levelSystem.UpdateLevel();
+            levelSystem = players[i].gameObject.GetComponent<LevelSystem>();
+            levelSystem.UpdateLevel();
         }
-        levelSystem.UpdateLevel();
+        
 
     }
     public void UpdateLevel(string actualLvl, string actualPlayer)

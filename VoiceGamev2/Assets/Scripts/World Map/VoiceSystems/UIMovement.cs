@@ -66,7 +66,6 @@ public class UIMovement : MonoBehaviour
     }
     private void LoadCharacter()
     {
-        print("Loading");
         party.Stop();
         //character.Start();
         characterPannel.SetActive(true);
@@ -95,11 +94,14 @@ public class UIMovement : MonoBehaviour
         if (characterPannel.activeInHierarchy)
         {
             characterPannel.SetActive(false);
+            party.Start();
+            firstCanvas.Stop();
         }
         else if(partyPannel.activeInHierarchy)
         {
             partyPannel.SetActive(false);
             party.Stop();
+            firstCanvas.Start();
         }
     }
     private void DeActivatePartyInformation()

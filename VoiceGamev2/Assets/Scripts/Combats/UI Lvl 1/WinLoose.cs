@@ -54,9 +54,9 @@ public class WinLoose : MonoBehaviour
     private void CloseWinLose()
     {
         Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
-        zero1.Add("asdfasdadfsasdf21431234" + SceneManager.GetActiveScene().name, WinAsignOrders);
+        zero1.Add("asdfasdadfsasdf" + SceneManager.GetActiveScene().name, WinAsignOrders);
         Dictionary<string, Action> zero2 = new Dictionary<string, Action>();
-        zero2.Add("ghjghasdfasdf4qw123412341" + SceneManager.GetActiveScene().name, WinAsignOrders);
+        zero2.Add("ghjghasdfasdfqw" + SceneManager.GetActiveScene().name, WinAsignOrders);
 
         wOrders = new KeywordRecognizer(zero1.Keys.ToArray());
         lOrders = new KeywordRecognizer(zero2.Keys.ToArray());
@@ -72,8 +72,8 @@ public class WinLoose : MonoBehaviour
     }
     private void LooseAsignOrders()
     {
-        looseOrders.Add("Salir", Exit);
-        looseOrders.Add("Reintentar", Exit);
+        looseOrders.Add("Salir", Retry);
+        looseOrders.Add("Reintentar", Retry);
         lOrders = new KeywordRecognizer(looseOrders.Keys.ToArray());
         lOrders.OnPhraseRecognized += LooseRecognizedVoice;
     }
@@ -99,13 +99,13 @@ public class WinLoose : MonoBehaviour
     {
         wOrders.Stop();
         moveData.IncrementProgresion();
-        if(totalPlayers != 0) CloseWinLose();
+        CloseWinLose();
     }
-    private void Exit()
+    private void Retry()
     {
         lOrders.Stop();
         moveData.FailLevel();
-        if (totalPlayers != 0) CloseWinLose();
+        CloseWinLose();
     }
     private void Assign()
     {

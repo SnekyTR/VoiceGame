@@ -61,8 +61,10 @@ public class MoveDataToMain : MonoBehaviour
     }
     public void FailLevel()
     {
-        SceneManager.LoadScene(1);
-        StartCoroutine(FailMainScene());
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
+        int scene =  SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(scene);
+        //StartCoroutine(FailMainScene());
     }
     IEnumerator FailMainScene()
     {
