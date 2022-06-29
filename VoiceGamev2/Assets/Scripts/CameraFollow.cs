@@ -15,7 +15,6 @@ public class CameraFollow : MonoBehaviour
     public List<GameObject> playerSelected = new List<GameObject>();
     public List<GameObject> playerStructure = new List<GameObject>();
     private List<string> playersNames = new List<string>();
-    private SkillsColocation skillsColocation;
     private PlayerMove moveLogic;
     private Text turnTxt;
 
@@ -62,7 +61,6 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        skillsColocation = GameObject.Find("CanvasManager").GetComponent<SkillsColocation>();
         for (int i = 0; i < players.Count; i++)                         //speech
         {
             selectPJCmd.Add(players[i].name, SelectPJ);
@@ -144,8 +142,7 @@ public class CameraFollow : MonoBehaviour
         Debug.Log(speech.text);
         selectPJCmd[speech.text].Invoke(speech.text);
         string selectedChar = speech.text;
-        GameObject.Find(selectedChar);
-        skillsColocation.GetThePlayer(GameObject.Find(selectedChar).transform);
+
     }
 
     public void RecognizedVoice4(PhraseRecognizedEventArgs speech)

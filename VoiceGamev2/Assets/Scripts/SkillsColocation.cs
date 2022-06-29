@@ -4,29 +4,16 @@ using UnityEngine;
 
 public class SkillsColocation : MonoBehaviour
 {
-    [SerializeField] private Transform[] skillLocations;
-    [SerializeField] private GameObject[] magicSkills;
-    [SerializeField] private GameObject[] physicalSkills;
-    [SerializeField] private GameObject[] rangedSkills;
+    [SerializeField] private Transform[] skillLocationsMagnus;
+    [SerializeField] private Transform[] skillLocationsVagnar;
+    [SerializeField] private Transform[] skillLocationsHammund;
+    [SerializeField] private GameObject[] fireSkills;
+    [SerializeField] private GameObject[] swordSkills;
+    [SerializeField] private GameObject[] bowSkills;
+    [SerializeField] private GameObject[] spearSkills;
+    [SerializeField] private GameObject[] axeSkills;
     [SerializeField] private GameObject[] healingSkills;
 
-    [SerializeField]private PlayerStats playerStats;
-
-    private GameObject magicskill1;
-    private GameObject magicskill2;
-    private GameObject magicskill3;
-
-    private GameObject healingskill1;
-    private GameObject healingskill2;
-    private GameObject healingskill3;
-
-    private GameObject physicalskill1;
-    private GameObject physicalskill3;
-    private GameObject physicalskill2;
-
-    private GameObject rangerskill1;
-    private GameObject rangerskill2;
-    private GameObject rangerskill3;
     // Start is called before the first frame update
     void Start()
     {        
@@ -37,137 +24,484 @@ public class SkillsColocation : MonoBehaviour
     {
         
     }
-    public void GetThePlayer(Transform player)
+    public void AssignMagnusSkills(string actualWeapon, GameObject player)
     {
-        DestroySkillIcons();
+        PlayerStats playerStats;
+        playerStats = player.GetComponent<PlayerStats>();
         int positionArray = 0;
-        //playerStats = player.GetComponent<PlayerStats>();
-        //playerStats = GameObject.Find("Magnus").GetComponent<PlayerStats>();
-        playerStats = player.gameObject.GetComponent<PlayerStats>();
-
-        int i = positionArray;
-        print(playerStats.intellectPoints);
-        if (player.name == "Magnus")
+        if(actualWeapon == "fire staff")
         {
             if (playerStats.intellectPoints >= 6)
             {
-                //magicSkills[i].position = skillLocations[0].position;
-                magicskill1 = Instantiate(magicSkills[0], skillLocations[positionArray].position, Quaternion.identity);
-                magicskill1.transform.parent = skillLocations[positionArray];
-                magicskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
-                //magicSkills[i].gameObject.SetActive(true);
+                GameObject fireskill1 = Instantiate(fireSkills[0], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                fireskill1.transform.parent = skillLocationsMagnus[positionArray];
+                fireskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
                 print(positionArray);
                 positionArray++;
                 if (playerStats.intellectPoints >= 8)
                 {
-                    //magicSkills[i].transform.position = skillLocations[1].position;
-                    magicskill2 = Instantiate(magicSkills[1], skillLocations[positionArray].position, Quaternion.identity);
-                    magicskill2.transform.parent = skillLocations[positionArray];
-                    magicskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    GameObject fireskill2 = Instantiate(fireSkills[1], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                    fireskill2.transform.parent = skillLocationsMagnus[positionArray];
+                    fireskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
                     print(positionArray);
                     positionArray++;
                     if (playerStats.intellectPoints >= 10)
                     {
-                        print("Entra 10" + positionArray);
-
-                        //magicSkills[i].transform.position = skillLocations[2].position;
-                        magicskill3 = Instantiate(magicSkills[2], skillLocations[positionArray].position, Quaternion.identity);
-                        magicskill3.transform.parent = skillLocations[positionArray];
-                        magicskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        GameObject fireskill3 = Instantiate(fireSkills[2], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                        fireskill3.transform.parent = skillLocationsMagnus[positionArray];
+                        fireskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
                         positionArray++;
                     }
                 }
             }
+        }
+        if(actualWeapon == "sword")
+        {
+            if (playerStats.strengthPoints >= 6)
+            {
+                GameObject sworkSkill1 = Instantiate(swordSkills[0], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                sworkSkill1.transform.parent = skillLocationsMagnus[positionArray];
+                sworkSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                positionArray++;
+                if (playerStats.strengthPoints >= 8)
+                {
+                    GameObject sworkSkill2 = Instantiate(swordSkills[1], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                    sworkSkill2.transform.parent = skillLocationsMagnus[positionArray];
+                    sworkSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    positionArray++;
+                    if (playerStats.strengthPoints >= 10)
+                    {
+                        GameObject sworkSkill3 = Instantiate(swordSkills[2], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                        sworkSkill3.transform.parent = skillLocationsMagnus[positionArray];
+                        sworkSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+        if (actualWeapon == "axe")
+        {
+            if (playerStats.strengthPoints >= 6)
+            {
+                GameObject axeSkill1 = Instantiate(axeSkills[0], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                axeSkill1.transform.parent = skillLocationsMagnus[positionArray];
+                axeSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                positionArray++;
+                if (playerStats.strengthPoints >= 8)
+                {
+                    GameObject axeSkill2 = Instantiate(axeSkills[1], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                    axeSkill2.transform.parent = skillLocationsMagnus[positionArray];
+                    axeSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    positionArray++;
+                    if (playerStats.strengthPoints >= 10)
+                    {
+                        GameObject axeSkill3 = Instantiate(axeSkills[2], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                        axeSkill3.transform.parent = skillLocationsMagnus[positionArray];
+                        axeSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+        if(actualWeapon == "bow")
+        {
+            if (playerStats.agilityPoints >= 6)
+            {
+                GameObject bowSkill1 = Instantiate(bowSkills[0], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                bowSkill1.transform.parent = skillLocationsMagnus[positionArray];
+                bowSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                positionArray++;
+                if (playerStats.agilityPoints >= 8)
+                {
+                    GameObject bowSkill2 = Instantiate(bowSkills[1], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                    bowSkill2.transform.parent = skillLocationsMagnus[positionArray];
+                    bowSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    positionArray++;
+                    if (playerStats.agilityPoints >= 10)
+                    {
+                        GameObject bowSkill3 = Instantiate(bowSkills[2], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                        bowSkill3.transform.parent = skillLocationsMagnus[positionArray];
+                        bowSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+        if (actualWeapon == "spear")
+        {
+            if (playerStats.agilityPoints >= 6)
+            {
+                GameObject spearSkill1 =  Instantiate(spearSkills[0], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                spearSkill1.transform.parent = skillLocationsMagnus[positionArray];
+                spearSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                positionArray++;
+                if (playerStats.agilityPoints >= 8)
+                {
+                    GameObject spearSkill2 = Instantiate(spearSkills[1], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                    spearSkill2.transform.parent = skillLocationsMagnus[positionArray];
+                    spearSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    positionArray++;
+                    if (playerStats.agilityPoints >= 10)
+                    {
+                        GameObject spearSkill3 = Instantiate(spearSkills[2], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                        spearSkill3.transform.parent = skillLocationsMagnus[positionArray];
+                        spearSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+        if(actualWeapon == "sacred staff"){
+            if (playerStats.intellectPoints >= 6)
+            {
+                GameObject healingskill1 = Instantiate(healingSkills[0], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                healingskill1.transform.parent = skillLocationsMagnus[positionArray];
+                healingskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                print(positionArray);
+                positionArray++;
+                if (playerStats.intellectPoints >= 8)
+                {
+                    GameObject healingskill2 = Instantiate(healingSkills[1], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                    healingskill2.transform.parent = skillLocationsMagnus[positionArray];
+                    healingskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    print(positionArray);
+                    positionArray++;
+                    if (playerStats.intellectPoints >= 10)
+                    {
+                        GameObject healingskill3 = Instantiate(healingSkills[2], skillLocationsMagnus[positionArray].position, Quaternion.identity);
+                        healingskill3.transform.parent = skillLocationsMagnus[positionArray];
+                        healingskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+    }
+    public void AssignVagnarSkills(string actualWeapon, GameObject player)
+    {
+        PlayerStats playerStats;
+        playerStats = player.GetComponent<PlayerStats>();
+        int positionArray = 0;
+        if (actualWeapon == "fire staff")
+        {
+            if (playerStats.intellectPoints >= 6)
+            {
+                GameObject fireskill1 = Instantiate(fireSkills[0], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                fireskill1.transform.parent = skillLocationsVagnar[positionArray];
+                fireskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                print(positionArray);
+                positionArray++;
+                if (playerStats.intellectPoints >= 8)
+                {
+                    GameObject fireskill2 = Instantiate(fireSkills[1], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                    fireskill2.transform.parent = skillLocationsVagnar[positionArray];
+                    fireskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    print(positionArray);
+                    positionArray++;
+                    if (playerStats.intellectPoints >= 10)
+                    {
+                        GameObject fireskill3 = Instantiate(fireSkills[2], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                        fireskill3.transform.parent = skillLocationsVagnar[positionArray];
+                        fireskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+        if (actualWeapon == "sword")
+        {
+            if (playerStats.strengthPoints >= 6)
+            {
+                GameObject sworkSkill1 = Instantiate(swordSkills[0], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                sworkSkill1.transform.parent = skillLocationsVagnar[positionArray];
+                sworkSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                positionArray++;
+                if (playerStats.strengthPoints >= 8)
+                {
+                    GameObject sworkSkill2 = Instantiate(swordSkills[1], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                    sworkSkill2.transform.parent = skillLocationsVagnar[positionArray];
+                    sworkSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    positionArray++;
+                    if (playerStats.strengthPoints >= 10)
+                    {
+                        GameObject sworkSkill3 = Instantiate(swordSkills[2], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                        sworkSkill3.transform.parent = skillLocationsVagnar[positionArray];
+                        sworkSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+        if (actualWeapon == "axe")
+        {
+            if (playerStats.strengthPoints >= 6)
+            {
+                GameObject axeSkill1 = Instantiate(axeSkills[0], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                axeSkill1.transform.parent = skillLocationsVagnar[positionArray];
+                axeSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                positionArray++;
+                if (playerStats.strengthPoints >= 8)
+                {
+                    GameObject axeSkill2 = Instantiate(axeSkills[1], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                    axeSkill2.transform.parent = skillLocationsVagnar[positionArray];
+                    axeSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    positionArray++;
+                    if (playerStats.strengthPoints >= 10)
+                    {
+                        GameObject axeSkill3 = Instantiate(axeSkills[2], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                        axeSkill3.transform.parent = skillLocationsVagnar[positionArray];
+                        axeSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+        if (actualWeapon == "bow")
+        {
+            if (playerStats.agilityPoints >= 6)
+            {
+                GameObject bowSkill1 = Instantiate(bowSkills[0], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                bowSkill1.transform.parent = skillLocationsVagnar[positionArray];
+                bowSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                positionArray++;
+                if (playerStats.agilityPoints >= 8)
+                {
+                    GameObject bowSkill2 = Instantiate(bowSkills[1], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                    bowSkill2.transform.parent = skillLocationsVagnar[positionArray];
+                    bowSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    positionArray++;
+                    if (playerStats.agilityPoints >= 10)
+                    {
+                        GameObject bowSkill3 = Instantiate(bowSkills[2], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                        bowSkill3.transform.parent = skillLocationsVagnar[positionArray];
+                        bowSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+        if (actualWeapon == "spear")
+        {
+            if (playerStats.agilityPoints >= 6)
+            {
+                GameObject spearSkill1 = Instantiate(spearSkills[0], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                spearSkill1.transform.parent = skillLocationsVagnar[positionArray];
+                spearSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                positionArray++;
+                if (playerStats.agilityPoints >= 8)
+                {
+                    GameObject spearSkill2 = Instantiate(spearSkills[1], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                    spearSkill2.transform.parent = skillLocationsVagnar[positionArray];
+                    spearSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    positionArray++;
+                    if (playerStats.agilityPoints >= 10)
+                    {
+                        GameObject spearSkill3 = Instantiate(spearSkills[2], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                        spearSkill3.transform.parent = skillLocationsVagnar[positionArray];
+                        spearSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+        if (actualWeapon == "sacred staff")
+        {
+            if (playerStats.intellectPoints >= 6)
+            {
+                GameObject healingskill1 = Instantiate(healingSkills[0], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                healingskill1.transform.parent = skillLocationsVagnar[positionArray];
+                healingskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                print(positionArray);
+                positionArray++;
+                if (playerStats.intellectPoints >= 8)
+                {
+                    GameObject healingskill2 = Instantiate(healingSkills[1], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                    healingskill2.transform.parent = skillLocationsVagnar[positionArray];
+                    healingskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    print(positionArray);
+                    positionArray++;
+                    if (playerStats.intellectPoints >= 10)
+                    {
+                        GameObject healingskill3 = Instantiate(healingSkills[2], skillLocationsVagnar[positionArray].position, Quaternion.identity);
+                        healingskill3.transform.parent = skillLocationsVagnar[positionArray];
+                        healingskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+    }
+    public void AssignHammundSkills(string actualWeapon, GameObject player)
+    {
+        PlayerStats playerStats;
+        playerStats = player.GetComponent<PlayerStats>();
+        int positionArray = 0;
+        if (actualWeapon == "fire staff")
+        {
+            if (playerStats.intellectPoints >= 6)
+            {
+                GameObject fireskill1 = Instantiate(fireSkills[0], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                fireskill1.transform.parent = skillLocationsHammund[positionArray];
+                fireskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                print(positionArray);
+                positionArray++;
+                if (playerStats.intellectPoints >= 8)
+                {
+                    GameObject fireskill2 = Instantiate(fireSkills[1], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                    fireskill2.transform.parent = skillLocationsHammund[positionArray];
+                    fireskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    print(positionArray);
+                    positionArray++;
+                    if (playerStats.intellectPoints >= 10)
+                    {
+                        GameObject fireskill3 = Instantiate(fireSkills[2], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                        fireskill3.transform.parent = skillLocationsHammund[positionArray];
+                        fireskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+        if (actualWeapon == "sword")
+        {
+            if (playerStats.strengthPoints >= 6)
+            {
+                GameObject sworkSkill1 = Instantiate(swordSkills[0], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                sworkSkill1.transform.parent = skillLocationsHammund[positionArray];
+                sworkSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                positionArray++;
+                if (playerStats.strengthPoints >= 8)
+                {
+                    GameObject sworkSkill2 = Instantiate(swordSkills[1], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                    sworkSkill2.transform.parent = skillLocationsHammund[positionArray];
+                    sworkSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    positionArray++;
+                    if (playerStats.strengthPoints >= 10)
+                    {
+                        GameObject sworkSkill3 = Instantiate(swordSkills[2], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                        sworkSkill3.transform.parent = skillLocationsHammund[positionArray];
+                        sworkSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+        if (actualWeapon == "axe")
+        {
+            if (playerStats.strengthPoints >= 6)
+            {
+                GameObject axeSkill1 = Instantiate(axeSkills[0], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                axeSkill1.transform.parent = skillLocationsHammund[positionArray];
+                axeSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                positionArray++;
+                if (playerStats.strengthPoints >= 8)
+                {
+                    GameObject axeSkill2 = Instantiate(axeSkills[1], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                    axeSkill2.transform.parent = skillLocationsHammund[positionArray];
+                    axeSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    positionArray++;
+                    if (playerStats.strengthPoints >= 10)
+                    {
+                        GameObject axeSkill3 = Instantiate(axeSkills[2], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                        axeSkill3.transform.parent = skillLocationsHammund[positionArray];
+                        axeSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+        if (actualWeapon == "bow")
+        {
+            if (playerStats.agilityPoints >= 6)
+            {
+                GameObject bowSkill1 = Instantiate(bowSkills[0], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                bowSkill1.transform.parent = skillLocationsHammund[positionArray];
+                bowSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                positionArray++;
+                if (playerStats.agilityPoints >= 8)
+                {
+                    GameObject bowSkill2 = Instantiate(bowSkills[1], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                    bowSkill2.transform.parent = skillLocationsHammund[positionArray];
+                    bowSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    positionArray++;
+                    if (playerStats.agilityPoints >= 10)
+                    {
+                        GameObject bowSkill3 = Instantiate(bowSkills[2], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                        bowSkill3.transform.parent = skillLocationsHammund[positionArray];
+                        bowSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+        if (actualWeapon == "spear")
+        {
+            if (playerStats.agilityPoints >= 6)
+            {
+                GameObject spearSkill1 = Instantiate(spearSkills[0], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                spearSkill1.transform.parent = skillLocationsHammund[positionArray];
+                spearSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                positionArray++;
+                if (playerStats.agilityPoints >= 8)
+                {
+                    GameObject spearSkill2 = Instantiate(spearSkills[1], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                    spearSkill2.transform.parent = skillLocationsHammund[positionArray];
+                    spearSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    positionArray++;
+                    if (playerStats.agilityPoints >= 10)
+                    {
+                        GameObject spearSkill3 = Instantiate(spearSkills[2], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                        spearSkill3.transform.parent = skillLocationsHammund[positionArray];
+                        spearSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+        if (actualWeapon == "sacred staff")
+        {
+            if (playerStats.intellectPoints >= 6)
+            {
+                GameObject healingskill1 = Instantiate(healingSkills[0], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                healingskill1.transform.parent = skillLocationsHammund[positionArray];
+                healingskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                print(positionArray);
+                positionArray++;
+                if (playerStats.intellectPoints >= 8)
+                {
+                    GameObject healingskill2 = Instantiate(healingSkills[1], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                    healingskill2.transform.parent = skillLocationsHammund[positionArray];
+                    healingskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    print(positionArray);
+                    positionArray++;
+                    if (playerStats.intellectPoints >= 10)
+                    {
+                        GameObject healingskill3 = Instantiate(healingSkills[2], skillLocationsHammund[positionArray].position, Quaternion.identity);
+                        healingskill3.transform.parent = skillLocationsHammund[positionArray];
+                        healingskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        positionArray++;
+                    }
+                }
+            }
+        }
+    }
+    /*public void GetThePlayer(Transform player)
+    {        
+        //playerStats = player.GetComponent<PlayerStats>();
+        //playerStats = GameObject.Find("Magnus").GetComponent<PlayerStats>();
+        playerStats = player.gameObject.GetComponent<PlayerStats>();
+
+        
+        print(playerStats.intellectPoints);
+        if (player.name == "Magnus")
+        {
+            
         }
         else
         {
-            /*if(player.name == "Valfar")
-            {
-                if (playerStats.intellectPoints >= 6)
-                {
-                    //magicSkills[i].position = skillLocations[0].position;
-                    healingskill1 = Instantiate(healingSkills[0], skillLocations[positionArray].position, Quaternion.identity);
-                    healingskill1.transform.parent = skillLocations[positionArray];
-                    healingskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
-                    //magicSkills[i].gameObject.SetActive(true);
-                    print(positionArray);
-                    positionArray++;
-                    if (playerStats.intellectPoints >= 8)
-                    {
-                        //magicSkills[i].transform.position = skillLocations[1].position;
-                        healingskill2 = Instantiate(healingSkills[1], skillLocations[positionArray].position, Quaternion.identity);
-                        healingskill2.transform.parent = skillLocations[positionArray];
-                        healingskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
-                        print(positionArray);
-                        positionArray++;
-                        if (playerStats.intellectPoints >= 10)
-                        {
-                            print("Entra 10" + positionArray);
-
-                            //magicSkills[i].transform.position = skillLocations[2].position;
-                            healingskill3 = Instantiate(healingSkills[2], skillLocations[positionArray].position, Quaternion.identity);
-                            healingskill3.transform.parent = skillLocations[positionArray];
-                            healingskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
-                            positionArray++;
-                        }
-                    }
-                }
-            }*/
+     
         }
-
-        /*if (playerStats.strengthPoints >= 6)
-        {
-            //magicSkills[i].position = skillLocations[0].position;
-            physicalskill1 = Instantiate(physicalSkills[0], skillLocations[positionArray].position, Quaternion.identity);
-            physicalskill1.transform.parent = skillLocations[positionArray];
-            physicalskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
-            //magicSkills[i].gameObject.SetActive(true);
-            print("Se ha generado");
-            positionArray++;
-            if (playerStats.strengthPoints >= 8)
-            {
-            //magicSkills[i].transform.position = skillLocations[1].position;
-                physicalskill2 = Instantiate(physicalSkills[1], skillLocations[positionArray].position, Quaternion.identity);
-                physicalskill2.transform.parent = skillLocations[positionArray];
-                physicalskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
-                positionArray++;
-                if (playerStats.strengthPoints >= 10)
-                {
-                    //magicSkills[i].transform.position = skillLocations[2].position;
-                    physicalskill3 = Instantiate(physicalSkills[2], skillLocations[positionArray].position, Quaternion.identity);
-                    physicalskill3.transform.parent = skillLocations[positionArray];
-                    physicalskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
-                    positionArray++;
-                }
-            }
-        }
-    if (playerStats.agilityPoints >= 6)
-    {
-        //magicSkills[i].position = skillLocations[0].position;
-        rangerskill1 = Instantiate(rangedSkills[0], skillLocations[positionArray].position, Quaternion.identity);
-        rangerskill1.transform.parent = skillLocations[positionArray];
-        rangerskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
-        //magicSkills[i].gameObject.SetActive(true);
-        print("Se ha generado");
-        positionArray++;
-        if (playerStats.agilityPoints >= 8)
-        {
-            //magicSkills[i].transform.position = skillLocations[1].position;
-            rangerskill2 = Instantiate(rangedSkills[1], skillLocations[positionArray].position, Quaternion.identity);
-            rangerskill2.transform.parent = skillLocations[positionArray];
-            rangerskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
-            positionArray++;
-            if (playerStats.agilityPoints >= 10)
-            {
-                //magicSkills[i].transform.position = skillLocations[2].position;
-                rangerskill3 = Instantiate(physicalSkills[2], skillLocations[positionArray].position, Quaternion.identity);
-                rangerskill3.transform.parent = skillLocations[positionArray];
-                rangerskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
-                positionArray++;
-            }
-        }
-    }*/
-}
+    }
 
     public void DestroySkillIcons()
     {
@@ -187,5 +521,5 @@ public class SkillsColocation : MonoBehaviour
         Object.Destroy(rangerskill1);
         Object.Destroy(rangerskill2);
         Object.Destroy(rangerskill3);
-    }
+    }*/
 }

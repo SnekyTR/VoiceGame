@@ -53,7 +53,6 @@ public class VoiceDestinations : MonoBehaviour
         }
         else
         {
-            print("Se Mueve");
             agent.SetDestination(objectTransform.position);
         }
         //if (combatEnter.combat == true) { print("Se ha parado player"); StopPlayer(); } else {  }

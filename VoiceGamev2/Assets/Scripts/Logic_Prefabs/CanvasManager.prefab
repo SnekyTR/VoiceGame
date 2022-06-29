@@ -5265,12 +5265,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9efcf023f1e847e4b85af838f62ddced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillLocations: []
-  magicSkills: []
-  physicalSkills: []
-  rangedSkills: []
-  healingSkills: []
-  playerStats: {fileID: 0}
+  skillLocationsMagnus:
+  - {fileID: 5838020709282654215}
+  - {fileID: 7604265729489979383}
+  - {fileID: 5485972874748976910}
+  skillLocationsVagnar:
+  - {fileID: 2382657465007778460}
+  - {fileID: 5430069090934359549}
+  - {fileID: 5395523305958081112}
+  skillLocationsHammund:
+  - {fileID: 5340407679922772656}
+  - {fileID: 8563031549263175859}
+  - {fileID: 6935332180560212200}
+  fireSkills:
+  - {fileID: 7035935972583888116, guid: be9043b578833fa49a401a4a28bbefd5, type: 3}
+  - {fileID: 3123001941360571303, guid: 2c6d0e81e3480594fb36273f995c6bd4, type: 3}
+  - {fileID: 1213216039291552305, guid: 585fd2c2b746c784b8951d0d77221eeb, type: 3}
+  swordSkills:
+  - {fileID: 3243516216311968453, guid: 0c7036f15c6124b469ff0db279d28931, type: 3}
+  - {fileID: 1302905621145608559, guid: a754b54082a53754b9078a43c328e009, type: 3}
+  - {fileID: 23167533388680085, guid: afec24ce7fb917645b1905a1c9701586, type: 3}
+  bowSkills:
+  - {fileID: 6763252238634743703, guid: 8001e06faabaf2246b94d54094851d1a, type: 3}
+  - {fileID: 1302905621145608559, guid: a754b54082a53754b9078a43c328e009, type: 3}
+  - {fileID: 7063181019320689670, guid: 657203de49d45f449a21f4737f782c66, type: 3}
+  spearSkills:
+  - {fileID: 6763252238634743703, guid: 8001e06faabaf2246b94d54094851d1a, type: 3}
+  - {fileID: 1302905621145608559, guid: a754b54082a53754b9078a43c328e009, type: 3}
+  - {fileID: 7063181019320689670, guid: 657203de49d45f449a21f4737f782c66, type: 3}
+  axeSkills:
+  - {fileID: 3243516216311968453, guid: 0c7036f15c6124b469ff0db279d28931, type: 3}
+  - {fileID: 1302905621145608559, guid: a754b54082a53754b9078a43c328e009, type: 3}
+  - {fileID: 3719873664439061260, guid: 7abfa97e7f6068a449e0487c4d795a02, type: 3}
+  healingSkills:
+  - {fileID: 3513523982948523126, guid: 2dd22a0953c13ac43bc8e304ede41b77, type: 3}
+  - {fileID: 748348599741488225, guid: 2cbddf9959edde942953307b075cb299, type: 3}
+  - {fileID: 807064219690322480, guid: d6048806134df6a4db50dd3061a211c2, type: 3}
 --- !u!1 &2174467114825515569
 GameObject:
   m_ObjectHideFlags: 0

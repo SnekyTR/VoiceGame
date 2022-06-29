@@ -13,12 +13,16 @@ public class UIMovement : MonoBehaviour
     private KeywordRecognizer party;
     private Dictionary<string, Action> charInf = new Dictionary<string, Action>();
     private KeywordRecognizer character;
+    private Dictionary<string, Action> helpOrders = new Dictionary<string, Action>();
+    private KeywordRecognizer helpRecognizer;
 
     [SerializeField] private PartyInformation partyInformation;
     [SerializeField] private Character_skills character_Skills;
 
     [SerializeField] private GameObject partyPannel;
     [SerializeField] private GameObject characterPannel;
+
+    [SerializeField] private GameObject mainHelpPannel;
 
     private string charSelected;
     // Start is called before the first frame update
@@ -31,7 +35,7 @@ public class UIMovement : MonoBehaviour
 
         AddFirstLvl();
         AddPartyInf();
-        //AddCharacterInf();  
+        HelpOrders();
     }
     private void Update()
     {
@@ -43,7 +47,6 @@ public class UIMovement : MonoBehaviour
         firstCanvas = new KeywordRecognizer(firstCanvasLvl.Keys.ToArray());
         firstCanvas.OnPhraseRecognized += RecognizedVoiceFirst;
         firstCanvas.Start();
-        print("Esta activado");
     }
     private void AddPartyInf()
     {
@@ -54,20 +57,21 @@ public class UIMovement : MonoBehaviour
             partyInf.Add(partyInformation.players[i].name, LoadCharacter);
             print(partyInformation.players[i].name);
         }
-        //partyInf.Add("salir", DeActivatePartyInformation);
+
         party = new KeywordRecognizer(partyInf.Keys.ToArray());
         party.OnPhraseRecognized += RecognizedVoiceParty;
     }
-    private void AddCharacterInf()
+    private void HelpOrders()
     {
-        
-        character = new KeywordRecognizer(charInf.Keys.ToArray());
-        character.OnPhraseRecognized += RecognizedVoiceParty;
+        helpOrders.Add("ayuda", HelpPannels);
+        helpRecognizer = new KeywordRecognizer(helpOrders.Keys.ToArray());
+        helpRecognizer.OnPhraseRecognized += RecognizedVoiceHelpPannels;
+        helpRecognizer.Start();
     }
+
     private void LoadCharacter()
     {
         party.Stop();
-        //character.Start();
         characterPannel.SetActive(true);
         GameObject actualCharacter = GameObject.Find(charSelected);
         character_Skills.DisplayCharacterInf(actualCharacter);
@@ -77,16 +81,34 @@ public class UIMovement : MonoBehaviour
         Debug.Log(speech.text);
         firstCanvasLvl[speech.text].Invoke();
     }
+    private void RecognizedVoiceHelpPannels(PhraseRecognizedEventArgs speech)
+    {
+        Debug.Log(speech.text);
+        helpOrders[speech.text].Invoke();
+    }
     private void RecognizedVoiceParty(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
         charSelected = speech.text;
         partyInf[speech.text].Invoke();
     }
+    private void HelpPannels()
+    {
+        if (firstCanvas.IsRunning)
+        {
+            StartCoroutine(ShowHelpPannel(mainHelpPannel));
+        }
+    }
+    IEnumerator ShowHelpPannel(GameObject actualPannel)
+    {
+        actualPannel.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        actualPannel.SetActive(false);
+    }
     private void ActivatePartyInformation()
     {
         partyPannel.SetActive(true);
-        //firstCanvas.Stop();
+        firstCanvas.Stop();
         party.Start();
     }
     private void CloseWindows()
@@ -106,7 +128,6 @@ public class UIMovement : MonoBehaviour
     }
     private void DeActivatePartyInformation()
     {
-        print("He dicho cosa hehehee");
         party.Stop();
         firstCanvas.Start();
         partyPannel.SetActive(false);
@@ -130,5 +151,4 @@ public class UIMovement : MonoBehaviour
         character.Stop();
         party.Start();
     }
-
 }
