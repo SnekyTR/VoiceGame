@@ -123,10 +123,15 @@ public class CameraFollow : MonoBehaviour
 
     public void CloseCameraFollow()
     {
+        if (!PlayerPrefs.HasKey("cf")) PlayerPrefs.SetInt("cf", 0);
+
+        int ns = PlayerPrefs.GetInt("cf");
+        PlayerPrefs.SetInt("cf", (ns + 1));
+
         Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
-        zero1.Add("asdfasdadfsasdf" + SceneManager.GetActiveScene().name, CancelOrder);
+        zero1.Add("asdfasdadfsasdf" + SceneManager.GetActiveScene().name + ns, CancelOrder);
         Dictionary<string, Action> zero2 = new Dictionary<string, Action>();
-        zero2.Add("ghjghasdfasdf4qw" + SceneManager.GetActiveScene().name, CancelOrder);
+        zero2.Add("ghjghasdfasdf4qw" + SceneManager.GetActiveScene().name + ns, CancelOrder);
         
         passCmdR = new KeywordRecognizer(zero1.Keys.ToArray());
         selectPJCmdR = new KeywordRecognizer(zero2.Keys.ToArray());

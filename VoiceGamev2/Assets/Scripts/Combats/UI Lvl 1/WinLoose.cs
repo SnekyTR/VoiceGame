@@ -53,10 +53,15 @@ public class WinLoose : MonoBehaviour
 
     private void CloseWinLose()
     {
+        if(!PlayerPrefs.HasKey("wl")) PlayerPrefs.SetInt("wl", 0);
+
+        int ns = PlayerPrefs.GetInt("wl");
+        PlayerPrefs.SetInt("wl", (ns + 1));
+
         Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
-        zero1.Add("asdfasdadfsasdf" + SceneManager.GetActiveScene().name, WinAsignOrders);
+        zero1.Add("asdfasdadffsasdf" + SceneManager.GetActiveScene().name + ns, WinAsignOrders);
         Dictionary<string, Action> zero2 = new Dictionary<string, Action>();
-        zero2.Add("ghjghasdfasdfqw" + SceneManager.GetActiveScene().name, WinAsignOrders);
+        zero2.Add("ghjghasdfasdfqw" + SceneManager.GetActiveScene().name + ns, WinAsignOrders);
 
         wOrders = new KeywordRecognizer(zero1.Keys.ToArray());
         lOrders = new KeywordRecognizer(zero2.Keys.ToArray());

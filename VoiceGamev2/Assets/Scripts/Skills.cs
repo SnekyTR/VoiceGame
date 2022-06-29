@@ -112,24 +112,24 @@ public class Skills : MonoBehaviour
             case "Demacia":
                 return 6;
             case "Demolicion":
-                if (actualWeapon == weapons[2]) return 3;
+                if (actualWeapon == weapons[2]) return 5;
                 else return 12;
             case "Instinto asesino":
                 return 10000;
             case "Lluvia de flechas":
-                return 17;
+                return 21;
             case "Bola de fuego":
                 return 13;
             case "Sacrificio de sangre":
                 return 10000;
             case "Lluvia de meteoritos":
-                return 25;
+                return 21;
             case "Curar":
-                return 10000;
+                return 12;
             case "Revivir":
-                return 10000;
+                return 3;
             case "Juicio final":
-                return 1000;
+                return 21;
             default:
                 if (actualWeapon == weapons[0]) return 3;
                 else if (actualWeapon == weapons[1]) return 4;

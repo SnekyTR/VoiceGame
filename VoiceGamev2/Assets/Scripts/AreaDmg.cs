@@ -65,7 +65,7 @@ public class AreaDmg : MonoBehaviour
             }
             else if (plyM.GetAtkState() == "atk" && plyStats.actualWeapon == "sacred staff")
             {
-                dmg = Random.Range((int)(plyStats.GetIntellect() * 0.7f), (int)(plyStats.GetIntellect() * 1.1f));
+                dmg = Random.Range((int)(plyStats.GetIntellect() * 0.6f), (int)(plyStats.GetIntellect() * 0.9f));
             }
             else if (plyM.GetAtkState() == "Juicio final" && plyStats.actualWeapon == "sacred staff")
             {

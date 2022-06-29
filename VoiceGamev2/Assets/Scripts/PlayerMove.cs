@@ -102,14 +102,19 @@ public class PlayerMove : MonoBehaviour
 
     public void ClosePlayerMove()
     {
+        if (!PlayerPrefs.HasKey("pm")) PlayerPrefs.SetInt("pm", 0);
+
+        int ns = PlayerPrefs.GetInt("pm");
+        PlayerPrefs.SetInt("pm", (ns + 1));
+
         Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
-        zero1.Add("asdfasd" + SceneManager.GetActiveScene().name, Unlook);
+        zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, Unlook);
         Dictionary<string, Action> zero2 = new Dictionary<string, Action>();
-        zero2.Add("ghjgh" + SceneManager.GetActiveScene().name, Unlook);
+        zero2.Add("ghjgh" + SceneManager.GetActiveScene().name+ ns, Unlook);
         Dictionary<string, Action> zero3 = new Dictionary<string, Action>();
-        zero3.Add("bfdgbdfbd" + SceneManager.GetActiveScene().name, Unlook);
+        zero3.Add("bfdgbdfbd" + SceneManager.GetActiveScene().name + ns, Unlook);
         Dictionary<string, Action> zero4 = new Dictionary<string, Action>();
-        zero4.Add("qwerqwer" + SceneManager.GetActiveScene().name, Unlook);
+        zero4.Add("qwerqwer" + SceneManager.GetActiveScene().name + ns, Unlook);
         startCmdR = new KeywordRecognizer(zero1.Keys.ToArray());
         moveCmdR = new KeywordRecognizer(zero2.Keys.ToArray());
         atkCmdR = new KeywordRecognizer(zero3.Keys.ToArray());
