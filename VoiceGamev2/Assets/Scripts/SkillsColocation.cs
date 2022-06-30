@@ -51,21 +51,21 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject fireskill1 = Instantiate(fireSkills[0], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                 fireskill1.transform.parent = skillLocationsMagnus[positionArray];
-                fireskill1.transform.localScale = new Vector3(0.65f, 65f, 1);
+                fireskill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 print(positionArray);
                 positionArray++;
                 if (playerStats.intellectPoints >= 8)
                 {
                     GameObject fireskill2 = Instantiate(fireSkills[1], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                     fireskill2.transform.parent = skillLocationsMagnus[positionArray];
-                    fireskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    fireskill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     print(positionArray);
                     positionArray++;
                     if (playerStats.intellectPoints >= 10)
                     {
                         GameObject fireskill3 = Instantiate(fireSkills[2], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                         fireskill3.transform.parent = skillLocationsMagnus[positionArray];
-                        fireskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        fireskill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -77,19 +77,19 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject sworkSkill1 = Instantiate(swordSkills[0], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                 sworkSkill1.transform.parent = skillLocationsMagnus[positionArray];
-                sworkSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                sworkSkill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 positionArray++;
                 if (playerStats.strengthPoints >= 8)
                 {
                     GameObject sworkSkill2 = Instantiate(swordSkills[1], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                     sworkSkill2.transform.parent = skillLocationsMagnus[positionArray];
-                    sworkSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    sworkSkill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     positionArray++;
                     if (playerStats.strengthPoints >= 10)
                     {
                         GameObject sworkSkill3 = Instantiate(swordSkills[2], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                         sworkSkill3.transform.parent = skillLocationsMagnus[positionArray];
-                        sworkSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        sworkSkill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -101,19 +101,19 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject axeSkill1 = Instantiate(axeSkills[0], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                 axeSkill1.transform.parent = skillLocationsMagnus[positionArray];
-                axeSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                axeSkill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 positionArray++;
                 if (playerStats.strengthPoints >= 8)
                 {
                     GameObject axeSkill2 = Instantiate(axeSkills[1], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                     axeSkill2.transform.parent = skillLocationsMagnus[positionArray];
-                    axeSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    axeSkill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     positionArray++;
                     if (playerStats.strengthPoints >= 10)
                     {
                         GameObject axeSkill3 = Instantiate(axeSkills[2], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                         axeSkill3.transform.parent = skillLocationsMagnus[positionArray];
-                        axeSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        axeSkill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -125,19 +125,19 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject bowSkill1 = Instantiate(bowSkills[0], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                 bowSkill1.transform.parent = skillLocationsMagnus[positionArray];
-                bowSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                bowSkill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 positionArray++;
                 if (playerStats.agilityPoints >= 8)
                 {
                     GameObject bowSkill2 = Instantiate(bowSkills[1], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                     bowSkill2.transform.parent = skillLocationsMagnus[positionArray];
-                    bowSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    bowSkill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     positionArray++;
                     if (playerStats.agilityPoints >= 10)
                     {
                         GameObject bowSkill3 = Instantiate(bowSkills[2], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                         bowSkill3.transform.parent = skillLocationsMagnus[positionArray];
-                        bowSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        bowSkill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -149,19 +149,19 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject spearSkill1 =  Instantiate(spearSkills[0], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                 spearSkill1.transform.parent = skillLocationsMagnus[positionArray];
-                spearSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                spearSkill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 positionArray++;
                 if (playerStats.agilityPoints >= 8)
                 {
                     GameObject spearSkill2 = Instantiate(spearSkills[1], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                     spearSkill2.transform.parent = skillLocationsMagnus[positionArray];
-                    spearSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    spearSkill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     positionArray++;
                     if (playerStats.agilityPoints >= 10)
                     {
                         GameObject spearSkill3 = Instantiate(spearSkills[2], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                         spearSkill3.transform.parent = skillLocationsMagnus[positionArray];
-                        spearSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        spearSkill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -172,21 +172,21 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject healingskill1 = Instantiate(healingSkills[0], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                 healingskill1.transform.parent = skillLocationsMagnus[positionArray];
-                healingskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                healingskill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 print(positionArray);
                 positionArray++;
                 if (playerStats.intellectPoints >= 8)
                 {
                     GameObject healingskill2 = Instantiate(healingSkills[1], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                     healingskill2.transform.parent = skillLocationsMagnus[positionArray];
-                    healingskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    healingskill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     print(positionArray);
                     positionArray++;
                     if (playerStats.intellectPoints >= 10)
                     {
                         GameObject healingskill3 = Instantiate(healingSkills[2], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                         healingskill3.transform.parent = skillLocationsMagnus[positionArray];
-                        healingskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        healingskill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -204,21 +204,21 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject fireskill1 = Instantiate(fireSkills[0], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                 fireskill1.transform.parent = skillLocationsVagnar[positionArray];
-                fireskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                fireskill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 print(positionArray);
                 positionArray++;
                 if (playerStats.intellectPoints >= 8)
                 {
                     GameObject fireskill2 = Instantiate(fireSkills[1], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                     fireskill2.transform.parent = skillLocationsVagnar[positionArray];
-                    fireskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    fireskill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     print(positionArray);
                     positionArray++;
                     if (playerStats.intellectPoints >= 10)
                     {
                         GameObject fireskill3 = Instantiate(fireSkills[2], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                         fireskill3.transform.parent = skillLocationsVagnar[positionArray];
-                        fireskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        fireskill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -230,19 +230,19 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject sworkSkill1 = Instantiate(swordSkills[0], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                 sworkSkill1.transform.parent = skillLocationsVagnar[positionArray];
-                sworkSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                sworkSkill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 positionArray++;
                 if (playerStats.strengthPoints >= 8)
                 {
                     GameObject sworkSkill2 = Instantiate(swordSkills[1], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                     sworkSkill2.transform.parent = skillLocationsVagnar[positionArray];
-                    sworkSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    sworkSkill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     positionArray++;
                     if (playerStats.strengthPoints >= 10)
                     {
                         GameObject sworkSkill3 = Instantiate(swordSkills[2], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                         sworkSkill3.transform.parent = skillLocationsVagnar[positionArray];
-                        sworkSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        sworkSkill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -254,19 +254,19 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject axeSkill1 = Instantiate(axeSkills[0], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                 axeSkill1.transform.parent = skillLocationsVagnar[positionArray];
-                axeSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                axeSkill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 positionArray++;
                 if (playerStats.strengthPoints >= 8)
                 {
                     GameObject axeSkill2 = Instantiate(axeSkills[1], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                     axeSkill2.transform.parent = skillLocationsVagnar[positionArray];
-                    axeSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    axeSkill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     positionArray++;
                     if (playerStats.strengthPoints >= 10)
                     {
                         GameObject axeSkill3 = Instantiate(axeSkills[2], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                         axeSkill3.transform.parent = skillLocationsVagnar[positionArray];
-                        axeSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        axeSkill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -278,19 +278,19 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject bowSkill1 = Instantiate(bowSkills[0], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                 bowSkill1.transform.parent = skillLocationsVagnar[positionArray];
-                bowSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                bowSkill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 positionArray++;
                 if (playerStats.agilityPoints >= 8)
                 {
                     GameObject bowSkill2 = Instantiate(bowSkills[1], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                     bowSkill2.transform.parent = skillLocationsVagnar[positionArray];
-                    bowSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    bowSkill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     positionArray++;
                     if (playerStats.agilityPoints >= 10)
                     {
                         GameObject bowSkill3 = Instantiate(bowSkills[2], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                         bowSkill3.transform.parent = skillLocationsVagnar[positionArray];
-                        bowSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        bowSkill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -302,19 +302,19 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject spearSkill1 = Instantiate(spearSkills[0], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                 spearSkill1.transform.parent = skillLocationsVagnar[positionArray];
-                spearSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                spearSkill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 positionArray++;
                 if (playerStats.agilityPoints >= 8)
                 {
                     GameObject spearSkill2 = Instantiate(spearSkills[1], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                     spearSkill2.transform.parent = skillLocationsVagnar[positionArray];
-                    spearSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    spearSkill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     positionArray++;
                     if (playerStats.agilityPoints >= 10)
                     {
                         GameObject spearSkill3 = Instantiate(spearSkills[2], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                         spearSkill3.transform.parent = skillLocationsVagnar[positionArray];
-                        spearSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        spearSkill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -326,21 +326,21 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject healingskill1 = Instantiate(healingSkills[0], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                 healingskill1.transform.parent = skillLocationsVagnar[positionArray];
-                healingskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                healingskill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 print(positionArray);
                 positionArray++;
                 if (playerStats.intellectPoints >= 8)
                 {
                     GameObject healingskill2 = Instantiate(healingSkills[1], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                     healingskill2.transform.parent = skillLocationsVagnar[positionArray];
-                    healingskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    healingskill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     print(positionArray);
                     positionArray++;
                     if (playerStats.intellectPoints >= 10)
                     {
                         GameObject healingskill3 = Instantiate(healingSkills[2], skillLocationsVagnar[positionArray].position, Quaternion.identity);
                         healingskill3.transform.parent = skillLocationsVagnar[positionArray];
-                        healingskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        healingskill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -358,21 +358,21 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject fireskill1 = Instantiate(fireSkills[0], skillLocationsHammund[positionArray].position, Quaternion.identity);
                 fireskill1.transform.parent = skillLocationsHammund[positionArray];
-                fireskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                fireskill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 print(positionArray);
                 positionArray++;
                 if (playerStats.intellectPoints >= 8)
                 {
                     GameObject fireskill2 = Instantiate(fireSkills[1], skillLocationsHammund[positionArray].position, Quaternion.identity);
                     fireskill2.transform.parent = skillLocationsHammund[positionArray];
-                    fireskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    fireskill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     print(positionArray);
                     positionArray++;
                     if (playerStats.intellectPoints >= 10)
                     {
                         GameObject fireskill3 = Instantiate(fireSkills[2], skillLocationsHammund[positionArray].position, Quaternion.identity);
                         fireskill3.transform.parent = skillLocationsHammund[positionArray];
-                        fireskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        fireskill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -384,19 +384,19 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject sworkSkill1 = Instantiate(swordSkills[0], skillLocationsHammund[positionArray].position, Quaternion.identity);
                 sworkSkill1.transform.parent = skillLocationsHammund[positionArray];
-                sworkSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                sworkSkill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 positionArray++;
                 if (playerStats.strengthPoints >= 8)
                 {
                     GameObject sworkSkill2 = Instantiate(swordSkills[1], skillLocationsHammund[positionArray].position, Quaternion.identity);
                     sworkSkill2.transform.parent = skillLocationsHammund[positionArray];
-                    sworkSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    sworkSkill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     positionArray++;
                     if (playerStats.strengthPoints >= 10)
                     {
                         GameObject sworkSkill3 = Instantiate(swordSkills[2], skillLocationsHammund[positionArray].position, Quaternion.identity);
                         sworkSkill3.transform.parent = skillLocationsHammund[positionArray];
-                        sworkSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        sworkSkill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -408,19 +408,19 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject axeSkill1 = Instantiate(axeSkills[0], skillLocationsHammund[positionArray].position, Quaternion.identity);
                 axeSkill1.transform.parent = skillLocationsHammund[positionArray];
-                axeSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                axeSkill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 positionArray++;
                 if (playerStats.strengthPoints >= 8)
                 {
                     GameObject axeSkill2 = Instantiate(axeSkills[1], skillLocationsHammund[positionArray].position, Quaternion.identity);
                     axeSkill2.transform.parent = skillLocationsHammund[positionArray];
-                    axeSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    axeSkill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     positionArray++;
                     if (playerStats.strengthPoints >= 10)
                     {
                         GameObject axeSkill3 = Instantiate(axeSkills[2], skillLocationsHammund[positionArray].position, Quaternion.identity);
                         axeSkill3.transform.parent = skillLocationsHammund[positionArray];
-                        axeSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        axeSkill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -432,19 +432,19 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject bowSkill1 = Instantiate(bowSkills[0], skillLocationsHammund[positionArray].position, Quaternion.identity);
                 bowSkill1.transform.parent = skillLocationsHammund[positionArray];
-                bowSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                bowSkill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 positionArray++;
                 if (playerStats.agilityPoints >= 8)
                 {
                     GameObject bowSkill2 = Instantiate(bowSkills[1], skillLocationsHammund[positionArray].position, Quaternion.identity);
                     bowSkill2.transform.parent = skillLocationsHammund[positionArray];
-                    bowSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    bowSkill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     positionArray++;
                     if (playerStats.agilityPoints >= 10)
                     {
                         GameObject bowSkill3 = Instantiate(bowSkills[2], skillLocationsHammund[positionArray].position, Quaternion.identity);
                         bowSkill3.transform.parent = skillLocationsHammund[positionArray];
-                        bowSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        bowSkill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -456,19 +456,19 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject spearSkill1 = Instantiate(spearSkills[0], skillLocationsHammund[positionArray].position, Quaternion.identity);
                 spearSkill1.transform.parent = skillLocationsHammund[positionArray];
-                spearSkill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                spearSkill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 positionArray++;
                 if (playerStats.agilityPoints >= 8)
                 {
                     GameObject spearSkill2 = Instantiate(spearSkills[1], skillLocationsHammund[positionArray].position, Quaternion.identity);
                     spearSkill2.transform.parent = skillLocationsHammund[positionArray];
-                    spearSkill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    spearSkill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     positionArray++;
                     if (playerStats.agilityPoints >= 10)
                     {
                         GameObject spearSkill3 = Instantiate(spearSkills[2], skillLocationsHammund[positionArray].position, Quaternion.identity);
                         spearSkill3.transform.parent = skillLocationsHammund[positionArray];
-                        spearSkill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        spearSkill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
@@ -480,21 +480,21 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject healingskill1 = Instantiate(healingSkills[0], skillLocationsHammund[positionArray].position, Quaternion.identity);
                 healingskill1.transform.parent = skillLocationsHammund[positionArray];
-                healingskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                healingskill1.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                 print(positionArray);
                 positionArray++;
                 if (playerStats.intellectPoints >= 8)
                 {
                     GameObject healingskill2 = Instantiate(healingSkills[1], skillLocationsHammund[positionArray].position, Quaternion.identity);
                     healingskill2.transform.parent = skillLocationsHammund[positionArray];
-                    healingskill2.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                    healingskill2.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                     print(positionArray);
                     positionArray++;
                     if (playerStats.intellectPoints >= 10)
                     {
                         GameObject healingskill3 = Instantiate(healingSkills[2], skillLocationsHammund[positionArray].position, Quaternion.identity);
                         healingskill3.transform.parent = skillLocationsHammund[positionArray];
-                        healingskill3.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                        healingskill3.transform.localScale = new Vector3(0.7f, 0.65f, 1);
                         positionArray++;
                     }
                 }
