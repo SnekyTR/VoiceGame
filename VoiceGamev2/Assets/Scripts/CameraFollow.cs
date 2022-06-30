@@ -16,7 +16,7 @@ public class CameraFollow : MonoBehaviour
     public List<GameObject> playerStructure = new List<GameObject>();
     private List<string> playersNames = new List<string>();
     private PlayerMove moveLogic;
-    private Text turnTxt;
+    private GameObject playerTurn, enemyTurn;
 
     private Transform pos1, pos2;
     private int cameraParent = 1;
@@ -37,7 +37,9 @@ public class CameraFollow : MonoBehaviour
         pos2 = GameObject.Find("pos2").transform;
 
         moveLogic = GetComponent<PlayerMove>();
-        turnTxt = GameObject.Find("Turno").GetComponent<Text>();
+        playerTurn = GameObject.Find("PlayerTurn");
+        enemyTurn = GameObject.Find("EnemyTurn");
+        enemyTurn.SetActive(false);
 
         Transform ply = GameObject.Find("Players").transform;
         Transform cnv = GameObject.Find("CanvasManager").transform;
@@ -271,7 +273,7 @@ public class CameraFollow : MonoBehaviour
         //NavMeshBuilder.ClearAllNavMeshes();
         //NavMeshBuilder.BuildNavMesh();
 
-        
+        GetComponent<Skills>().EliminateSkillSelection();
     }
 
     public void NextTurn()
@@ -295,9 +297,8 @@ public class CameraFollow : MonoBehaviour
             enemys[0].StarIA();
             NewParent(enemys[0].transform, 3);
 
-            turnTxt.text = "Enemy";
-            turnTxt.color = Color.red;
-            turnTxt.transform.GetChild(0).GetComponent<Text>().color = Color.red;
+            playerTurn.SetActive(false);
+            enemyTurn.SetActive(true);
         }
         else
         {
@@ -318,9 +319,10 @@ public class CameraFollow : MonoBehaviour
             if (players.Count > 1) playerStructure[1].SetActive(true);
             if (players.Count > 2) playerStructure[2].SetActive(true);
 
-            turnTxt.text = "Player";
-            turnTxt.color = Color.blue;
-            turnTxt.transform.GetChild(0).GetComponent<Text>().color = Color.blue;
+            playerTurn.SetActive(true);
+            enemyTurn.SetActive(false);
+
+            GetComponent<Skills>().SetSkillsTimers();
         }
     }
 

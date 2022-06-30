@@ -24,6 +24,22 @@ public class SkillsColocation : MonoBehaviour
     {
         
     }
+
+    public Transform[] GetSkillsMagnus()
+    {
+        return skillLocationsMagnus;
+    }
+
+    public Transform[] GetSkillsVagnar()
+    {
+        return skillLocationsVagnar;
+    }
+
+    public Transform[] GetSkillsHammun()
+    {
+        return skillLocationsHammund;
+    }
+
     public void AssignMagnusSkills(string actualWeapon, GameObject player)
     {
         PlayerStats playerStats;

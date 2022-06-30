@@ -60,6 +60,8 @@ public class PlayerStats : MonoBehaviour
         InitialWeapon();
         //calculo de valor de los stats
 
+        //skills
+
         if(transform.name == "Magnus")
         {
             energyLo = gameM.playerSelected[0].transform.GetChild(1).GetComponent<EnergyScript>();

@@ -344,6 +344,8 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
+        skill.SetSkillSelected(n);
+
         spellCmdR.Stop();
 
         atkState = n;
@@ -451,7 +453,6 @@ public class PlayerMove : MonoBehaviour
             playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
             print("fuera de alcance");
         }
-
     }
 
     private IEnumerator StartAtkAnim()
@@ -468,6 +469,8 @@ public class PlayerMove : MonoBehaviour
         spellCmdR.Start();
 
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
+
+        skill.EliminateSkillSelection();
     }
 
     private IEnumerator SelfBuffs()
@@ -478,5 +481,7 @@ public class PlayerMove : MonoBehaviour
 
         //startCmdR.Start();
         spellCmdR.Start();
+
+        skill.EliminateSkillSelection();
     }
 }
