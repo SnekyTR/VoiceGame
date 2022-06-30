@@ -51,7 +51,7 @@ public class SkillsColocation : MonoBehaviour
             {
                 GameObject fireskill1 = Instantiate(fireSkills[0], skillLocationsMagnus[positionArray].position, Quaternion.identity);
                 fireskill1.transform.parent = skillLocationsMagnus[positionArray];
-                fireskill1.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+                fireskill1.transform.localScale = new Vector3(0.65f, 65f, 1);
                 print(positionArray);
                 positionArray++;
                 if (playerStats.intellectPoints >= 8)
