@@ -30,8 +30,8 @@ public class WinLoose : MonoBehaviour
         plyMove = GetComponent<PlayerMove>();
         gameM = GetComponent<CameraFollow>();
 
-        wPanel = GameObject.Find("CanvasManager").transform.GetChild(9).gameObject;
-        lPanel = GameObject.Find("CanvasManager").transform.GetChild(10).gameObject;
+        wPanel = GameObject.Find("CanvasManager").transform.GetChild(7).gameObject;
+        lPanel = GameObject.Find("CanvasManager").transform.GetChild(8).gameObject;
     }
     private void Update()
     {

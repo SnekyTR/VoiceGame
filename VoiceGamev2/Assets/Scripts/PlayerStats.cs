@@ -39,6 +39,8 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public GameObject structure;
     [HideInInspector] public GameObject selected;
 
+    private SkillsColocation skillsColocation;
+
     private CameraFollow gameM;
     private Skills skill;
     private WinLoose winLoose;
@@ -54,6 +56,7 @@ public class PlayerStats : MonoBehaviour
         //LoadStatsPlayer();
 
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
+        skillsColocation = GameObject.Find("CanvasManager").GetComponent<SkillsColocation>();
         skill = gameM.GetComponent<Skills>();
         winLoose = gameM.GetComponent<WinLoose>();
         winLoose.totalPlayers++;
@@ -67,18 +70,21 @@ public class PlayerStats : MonoBehaviour
             energyLo = gameM.playerSelected[0].transform.GetChild(1).GetComponent<EnergyScript>();
             structure = gameM.playerStructure[0];
             selected = gameM.playerSelected[0].transform.GetChild(0).GetChild(1).gameObject;
+            skillsColocation.AssignMagnusSkills(actualWeapon, this.gameObject);
         }
         else if(transform.name == "Vagnar")
         {
             energyLo = gameM.playerSelected[1].transform.GetChild(1).GetComponent<EnergyScript>();
             structure = gameM.playerStructure[1];
             selected = gameM.playerSelected[1].transform.GetChild(0).GetChild(1).gameObject;
+            skillsColocation.AssignVagnarSkills(actualWeapon, this.gameObject);
         }
         else
         {
             energyLo = gameM.playerSelected[2].transform.GetChild(1).GetComponent<EnergyScript>();
             structure = gameM.playerStructure[2];
             selected = gameM.playerSelected[2].transform.GetChild(0).GetChild(1).gameObject;
+            skillsColocation.AssignHammundSkills(actualWeapon, this.gameObject);
         }
 
         lifeValue = 10;
