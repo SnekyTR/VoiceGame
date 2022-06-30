@@ -83,9 +83,12 @@ public class Skills : MonoBehaviour
         gameM = GetComponent<CameraFollow>();
         skillCo = GameObject.Find("CanvasManager").GetComponent<SkillsColocation>();
 
-        skillMagnus.AddRange(skillCo.GetSkillsMagnus());
-        skillVagnar.AddRange(skillCo.GetSkillsVagnar());
-        skillHammun.AddRange(skillCo.GetSkillsHammun());
+        for(int i = 0; i < 3; i++)
+        {
+            skillMagnus.Add(skillCo.GetSkillsMagnus()[i].parent);
+            skillVagnar.Add(skillCo.GetSkillsVagnar()[i].parent);
+            skillHammun.Add(skillCo.GetSkillsHammun()[i].parent);
+        }
     }
 
     void Update()
