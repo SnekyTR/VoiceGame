@@ -49,6 +49,10 @@ public class PlayerMove : MonoBehaviour
     //spells to allies
     [HideInInspector] public bool allieSpell = false;
 
+    //tutorial
+    [HideInInspector] public bool moveRestriction, atkRestriction, spellRestriction;
+    [HideInInspector] public bool moveActive, atkActive, spellActive, move2Active;
+
     void Start()
     {
         gameM = GetComponent<CameraFollow>();
@@ -252,8 +256,14 @@ public class PlayerMove : MonoBehaviour
     }
 
     //move actions
-    private void StartMove()
+    private void StartMove()        //llamar a movimiento
     {
+        if (moveRestriction) return;
+        moveActive = true;
+        atkActive = false;
+        spellActive = false;
+        move2Active = false;
+
         startCmdR.Stop();
 
         moveCmdR.Start();
@@ -293,6 +303,11 @@ public class PlayerMove : MonoBehaviour
 
                 playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.black;
                 gridA.DisableGrid();
+
+                moveActive = false;
+                atkActive = false;
+                spellActive = false;
+                move2Active = true;
             }
             else
             {
@@ -325,6 +340,8 @@ public class PlayerMove : MonoBehaviour
     //attack actions
     private void StartAttack()
     {
+        if (atkRestriction) return;
+
         startCmdR.Stop();
         spellCmdR.Stop();
 
@@ -336,13 +353,18 @@ public class PlayerMove : MonoBehaviour
 
         gameM.NewParent(playerTr, 1);
     }
+
     //spells actions
     private void Spells(string n)
     {
-        if (!skill.ValidationSkill(n))
-        {
-            return;
-        }
+        if (spellRestriction) return;
+
+        if (!skill.ValidationSkill(n)) return;
+
+        moveActive = false;
+        atkActive = false;
+        spellActive = true;
+        move2Active = false;
 
         skill.SetSkillSelected(n);
 
@@ -364,6 +386,7 @@ public class PlayerMove : MonoBehaviour
             atkCmdR.Start();
         }
     }
+
     private void Enemy(string n)
     {
         for(int i = 0; i < gameM.enemys.Count; i++)
@@ -386,6 +409,11 @@ public class PlayerMove : MonoBehaviour
             {
                 StartCoroutine(StartAtkAnim());
                 atkCmdR.Stop();
+
+                moveActive = false;
+                atkActive = true;
+                spellActive = false;
+                move2Active = false;
             }
             else
             {

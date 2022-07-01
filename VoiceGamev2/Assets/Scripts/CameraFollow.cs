@@ -28,6 +28,9 @@ public class CameraFollow : MonoBehaviour
     private Dictionary<string, Action> passCmd = new Dictionary<string, Action>();
     private KeywordRecognizer passCmdR;
 
+    [HideInInspector] public bool selectPjRestriction, nextTurnRestriction, cancelRestriction;
+    [HideInInspector] public bool selectPjActive, nextTurnActive, cancelActive;
+
     private void Awake()
     {
         whoTurn = true;         //player turn
@@ -155,6 +158,11 @@ public class CameraFollow : MonoBehaviour
 
     private void SelectPJ(string n)
     {
+        if (selectPjRestriction) return;
+        selectPjActive = true;
+        nextTurnActive = false;
+        cancelActive = false;
+
         if (moveLogic.allieSpell)
         {
             moveLogic.Allie(n);
@@ -265,6 +273,11 @@ public class CameraFollow : MonoBehaviour
 
     public void CancelOrder()
     {
+        if (cancelRestriction) return;
+        selectPjActive = false;
+        nextTurnActive = false;
+        cancelActive = true;
+
         moveLogic.PlayerDeselect();
         moveLogic.PlayerSelect();
 
@@ -278,6 +291,11 @@ public class CameraFollow : MonoBehaviour
 
     public void NextTurn()
     {
+        if (nextTurnRestriction) return;
+        selectPjActive = false;
+        nextTurnActive = true;
+        cancelActive = false;
+
         if (whoTurn)
         {
             whoTurn = false;
