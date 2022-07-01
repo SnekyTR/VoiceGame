@@ -9,6 +9,8 @@ public class IncreaseStats : MonoBehaviour
 {
     [SerializeField] private LevelSystem level;
     [SerializeField] private GeneralStats general;
+    [SerializeField] private FTUE_Progresion fTUE_Progresion;
+
     //[SerializeField] private CharacterInformation character;
     [SerializeField] private Character_skills character_Skills;
     private Dictionary<string, Action> statsActions = new Dictionary<string, Action>();
@@ -49,6 +51,11 @@ public class IncreaseStats : MonoBehaviour
     {
         Debug.Log(speech.text);
         statsActions[speech.text].Invoke();
+        if(fTUE_Progresion.ftueProgression == 3)
+        {
+            fTUE_Progresion.ftueProgression++;
+            fTUE_Progresion.FTUEProgression();
+        }
     }
     public void IncreaseSRT()
     {

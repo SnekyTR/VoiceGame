@@ -25,6 +25,8 @@ public class UIMovement : MonoBehaviour
     [SerializeField] private GameObject mainHelpPannel;
 
     private string charSelected;
+
+    [SerializeField] private FTUE_Progresion fTUE_Progresion;
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +77,11 @@ public class UIMovement : MonoBehaviour
         characterPannel.SetActive(true);
         GameObject actualCharacter = GameObject.Find(charSelected);
         character_Skills.DisplayCharacterInf(actualCharacter);
+        if (fTUE_Progresion.ftueProgression == 2)
+        {
+            fTUE_Progresion.ftueProgression++;
+            fTUE_Progresion.FTUEProgression();
+        }
     }
     private void RecognizedVoiceFirst(PhraseRecognizedEventArgs speech)
     {
@@ -108,8 +115,12 @@ public class UIMovement : MonoBehaviour
     private void ActivatePartyInformation()
     {
         partyPannel.SetActive(true);
-        firstCanvas.Stop();
         party.Start();
+        if(fTUE_Progresion.ftueProgression == 1)
+        {
+            fTUE_Progresion.ftueProgression++;
+            fTUE_Progresion.FTUEProgression();
+        }
     }
     private void CloseWindows()
     {
@@ -117,19 +128,22 @@ public class UIMovement : MonoBehaviour
         {
             characterPannel.SetActive(false);
             party.Start();
-            firstCanvas.Stop();
         }
         else if(partyPannel.activeInHierarchy)
         {
             partyPannel.SetActive(false);
             party.Stop();
-            firstCanvas.Start();
+            if (fTUE_Progresion.ftueProgression == 5)
+            {
+                fTUE_Progresion.ftueProgression++;
+                fTUE_Progresion.FTUEProgression();
+            }
         }
+        
     }
     private void DeActivatePartyInformation()
     {
         party.Stop();
-        firstCanvas.Start();
         partyPannel.SetActive(false);
     }
     private void ActivateCharacterInformation()

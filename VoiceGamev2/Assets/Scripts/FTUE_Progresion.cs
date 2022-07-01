@@ -7,43 +7,66 @@ using UnityEngine.Windows.Speech;
 
 public class FTUE_Progresion : MonoBehaviour
 {
-    private int ftueProgression;
+    public int ftueProgression = 0;
+    [SerializeField] Progression progression;
+
     private Dictionary<string, Action> ftueActions = new Dictionary<string, Action>();
     private KeywordRecognizer ftueRecognizer;
 
-    private GameObject pannel1;
-    private GameObject pannel2;
-    private GameObject pannel3;
-    private GameObject pannel4;
-    private GameObject pannel5;
-    private GameObject pannel6;
-    // Start is called before the first frame update
+    [SerializeField] private GameObject pannel1;
+    [SerializeField] private GameObject extrapannel;
+    [SerializeField] private GameObject pannel2;
+    [SerializeField] private GameObject pannel3;
+    [SerializeField] private GameObject pannel4;
+    [SerializeField] private GameObject pannel5;
+    [SerializeField] private GameObject pannel6;
+    [SerializeField] private GameObject pannel7;
+    private void Awake()
+    {
+
+    }
     void Start()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     public void FTUEProgression()
     {
         if(ftueProgression == 0)
         {
+            AddOrders();
             pannel1.SetActive(true);
+            extrapannel.SetActive(true);
         }else if(ftueProgression == 1)
         {
             pannel2.SetActive(true);
         }
         else if (ftueProgression == 2)
         {
+            pannel2.SetActive(false);
             pannel3.SetActive(true);
         }
         else if (ftueProgression == 3)
         {
+            pannel3.SetActive(false);
             pannel4.SetActive(true);
+        }
+        else if (ftueProgression == 4)
+        {
+            pannel4.SetActive(false);
+            pannel5.SetActive(true);
+        }
+        else if (ftueProgression == 5)
+        {
+            pannel6.SetActive(true);
+        }
+        else if (ftueProgression == 6)
+        {
+            pannel6.SetActive(false);
+            pannel7.SetActive(true);
+        }
+        else
+        {
+            pannel7.SetActive(false);
         }
     }
     private void AddOrders()
@@ -64,16 +87,15 @@ public class FTUE_Progresion : MonoBehaviour
         if(ftueProgression == 0)
         {
             pannel1.SetActive(false);
+            extrapannel.SetActive(false);
             ftueProgression++;
-        }else if(ftueProgression == 1)
-        {
-            pannel2.SetActive(false);
-            ftueProgression++;
+            FTUEProgression();
         }
-        else if (ftueProgression == 2)
+        else if (ftueProgression == 4)
         {
-            pannel3.SetActive(false);
+            pannel5.SetActive(false);
             ftueProgression++;
+            FTUEProgression();
         }
         else if (ftueProgression == 3)
         {

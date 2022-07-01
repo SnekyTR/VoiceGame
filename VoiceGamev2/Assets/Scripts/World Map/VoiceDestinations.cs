@@ -9,6 +9,9 @@ using UnityEngine.Windows.Speech;
 public class VoiceDestinations : MonoBehaviour
 {
     [SerializeField]Transform objectTransform;
+    [SerializeField]FTUE_Progresion fTUE_Progresion;
+
+    private String selectedLocation;
     public CombatEnter combatEnter;
     public bool entered;
     private NavMeshAgent agent;
@@ -32,6 +35,7 @@ public class VoiceDestinations : MonoBehaviour
     private void AddDestinations()
     {
         mapActions.Add("reposo", SelectDestination);
+        mapActions.Add("negro", SelectDestination);
         mapDestinations = new KeywordRecognizer(mapActions.Keys.ToArray());
         mapDestinations.OnPhraseRecognized += RecognizedVoice;
         mapDestinations.Start();
@@ -39,11 +43,14 @@ public class VoiceDestinations : MonoBehaviour
     public void RecognizedVoice(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
+        selectedLocation = speech.text.ToString();
         mapActions[speech.text].Invoke();
+        
+        
     }
     private void SelectDestination()
     {
-        objectTransform = GameObject.Find("Rest of the Giant").transform;
+        objectTransform = GameObject.Find(selectedLocation).transform;
 
         //combatEnter.www();
         if (entered)
@@ -54,6 +61,11 @@ public class VoiceDestinations : MonoBehaviour
         else
         {
             agent.SetDestination(objectTransform.position);
+            if(fTUE_Progresion.ftueProgression == 6)
+            {
+                fTUE_Progresion.ftueProgression++;
+                fTUE_Progresion.FTUEProgression();
+            }
         }
         //if (combatEnter.combat == true) { print("Se ha parado player"); StopPlayer(); } else {  }
         //else { ); }

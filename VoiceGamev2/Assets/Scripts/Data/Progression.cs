@@ -14,14 +14,15 @@ public class Progression : MonoBehaviour
     public GameObject combat7;
     public GameObject combat8;
     public int progression;
+    [SerializeField] private FTUE_Progresion fTUE_Progresion;
     GameSave gameSave;
     private void Start()
     {
-        combat1 = GameObject.Find("FirstCombat");
-        combat2 = GameObject.Find("Combat2");
-        combat3 = GameObject.Find("Combat3");
-        combat4 = GameObject.Find("Combat4");
-        combat5 = GameObject.Find("Combat5");
+        //combat1 = GameObject.Find("First Combat");
+        combat2 = GameObject.Find("Second Combat");
+        combat3 = GameObject.Find("Third Combat");
+        combat4 = GameObject.Find("Fourth Combat");
+        combat5 = GameObject.Find("Fifth Combat");
         combat6 = GameObject.Find("Combat6");
         combat7 = GameObject.Find("Combat7");
         combat8 = GameObject.Find("Combat8");
@@ -37,7 +38,8 @@ public class Progression : MonoBehaviour
         if (progression >= 1)
         {
             //Destroy(combat1);
-            combat1.SetActive(false);
+            //combat2.SetActive(false);
+            fTUE_Progresion.FTUEProgression();
             print("Se ha pasado el primer nivel");
             if(progression >= 2)
             {
