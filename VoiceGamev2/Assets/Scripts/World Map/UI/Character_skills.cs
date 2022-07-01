@@ -31,7 +31,7 @@ public class Character_skills : MonoBehaviour
     {
         GeneralStats stats = GameObject.Find(actualCharacter.transform.name).GetComponent<GeneralStats>();
         general = stats;
-        CallThings();
+        CallThings(actualCharacter);
         //magicBar.fillAmount = (float)stats.intellectPoints / 10;
         HP.text = stats.lifePoints.ToString();
         STR.text = stats.strengthPoints.ToString();
@@ -39,10 +39,11 @@ public class Character_skills : MonoBehaviour
         INT.text = stats.intellectPoints.ToString();
         CRIT.text = stats.critStrikePoints.ToString();
         magicBar.value = stats.intellectPoints;
+        physicalBar.value = stats.strengthPoints;
 
 
     }
-    private void CallThings()
+    private void CallThings(GameObject actualcharacter)
     {
         magicBar = GameObject.Find("magic_bar").GetComponent<Slider>();
         physicalBar = GameObject.Find("physical_bar").GetComponent<Slider>();

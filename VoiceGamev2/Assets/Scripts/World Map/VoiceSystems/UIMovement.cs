@@ -76,6 +76,8 @@ public class UIMovement : MonoBehaviour
         party.Stop();
         characterPannel.SetActive(true);
         GameObject actualCharacter = GameObject.Find(charSelected);
+        LevelSystem level = actualCharacter.GetComponent<LevelSystem>();
+        level.ActivateButtons();
         character_Skills.DisplayCharacterInf(actualCharacter);
         if (fTUE_Progresion.ftueProgression == 2)
         {
@@ -98,6 +100,7 @@ public class UIMovement : MonoBehaviour
         Debug.Log(speech.text);
         charSelected = speech.text;
         partyInf[speech.text].Invoke();
+
     }
     private void HelpPannels()
     {

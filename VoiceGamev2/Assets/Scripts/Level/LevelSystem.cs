@@ -9,6 +9,8 @@ public class LevelSystem : MonoBehaviour
     [SerializeField]private IncreaseStats increaseStats;
     public int level;
 
+    public bool hasLvlUP;
+
     public float currentXp;
     public float requiredXp;
     private float lerpTimer;
@@ -82,7 +84,7 @@ public class LevelSystem : MonoBehaviour
         backXpBar.fillAmount = 0f;
         currentXp = Mathf.RoundToInt(currentXp - requiredXp);
         requiredXp = CalculateRequireXp();
-        ActivateButtons();
+        //ActivateButtons();
         UpdateLevel();
     }
     private int CalculateRequireXp()
@@ -111,8 +113,10 @@ public class LevelSystem : MonoBehaviour
     public void ActivateButtons()
     {
         increaseStats.GetPlayer(this.gameObject);
-        buttonsStats.SetActive(true);
-        
+        if (hasLvlUP)
+        {
+            buttonsStats.SetActive(true);
+        }
     }
     public GameObject PlayerLvlUp()
     {

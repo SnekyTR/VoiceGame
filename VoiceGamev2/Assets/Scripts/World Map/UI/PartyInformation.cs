@@ -34,16 +34,12 @@ public class PartyInformation : MonoBehaviour
     }
     private void AssignPlayer1()
     {
-
-
         for(int i = 0; i < playersName.Length; i++){
             playersName[i].text = players[i].name;
             //levelSystem.UpdateLevel();
             levelSystem = players[i].gameObject.GetComponent<LevelSystem>();
             levelSystem.UpdateLevel();
         }
-        
-
     }
     public void UpdateLevel(string actualLvl, string actualPlayer)
     {
@@ -53,12 +49,10 @@ public class PartyInformation : MonoBehaviour
             {
                 if(players[i].name == playersName[i].text){
                    playersName[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Level " + actualLvl;
-
                 }
             }
         }
     }
-
     // Update is called once per frame
     void Update()
     {

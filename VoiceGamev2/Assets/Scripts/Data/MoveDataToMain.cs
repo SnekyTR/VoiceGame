@@ -57,7 +57,7 @@ public class MoveDataToMain : MonoBehaviour
             print("Hemos pillado a: " + GameObject.FindGameObjectsWithTag("Player")[i].name);
             level = GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>();
             level.GainExperience(totalEXP);
-            break;
+            level.hasLvlUP = true;
         }
         gameSave.SaveGame();
     }
