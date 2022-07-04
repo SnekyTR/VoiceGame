@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class GameSave : MonoBehaviour
 {
-    [SerializeField] private GeneralStats general;
-    [SerializeField] private LevelSystem level;
+    //[SerializeField] private GeneralStats general;
+    //[SerializeField] private LevelSystem level;
     [SerializeField] private Progression pro;
     //[SerializeField] private SingleCombatChanger single;
     // Start is called before the first frame update
     void Awake()
     {
-        general = GameObject.Find("Magnus").GetComponent<GeneralStats>();
-        level = GameObject.Find("Magnus").GetComponent<LevelSystem>();
+        //general = GameObject.Find("Magnus").GetComponent<GeneralStats>();
+        //level = GameObject.Find("Magnus").GetComponent<LevelSystem>();
         pro = gameObject.GetComponent<Progression>();
     }
 
@@ -23,12 +23,26 @@ public class GameSave : MonoBehaviour
     }
     public void SaveGame()
     {
-        SaveSystem.SavePlayer(general, level, general.transform);
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Player").Length; i++)
+        {
+            GeneralStats general = GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<GeneralStats>();
+            LevelSystem level = GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>();
+            SaveSystem.SavePlayer(general, level, general.transform);
+        }
         SaveSystem.SaveProgression(pro);
     }
     public void LoadGame()
     {
-        general.LoadPlayer();
-        level.LoadLevel();
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Player").Length; i++)
+        {
+            GeneralStats general = GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<GeneralStats>();
+            LevelSystem level = GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>();
+            general.LoadPlayer();
+            level.LoadLevel();
+        }
+    }
+    public void LoadSelectedPlayer()
+    {
+
     }
 }

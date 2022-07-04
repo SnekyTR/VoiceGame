@@ -14,6 +14,8 @@ public class Progression : MonoBehaviour
     public GameObject combat7;
     public GameObject combat8;
     public int progression;
+
+    [SerializeField]private GameObject victoryResults;
     [SerializeField] private FTUE_Progresion fTUE_Progresion;
     GameSave gameSave;
     private void Start()
@@ -67,5 +69,8 @@ public class Progression : MonoBehaviour
             }
         }
     }
-
+    public void Victory()
+    {
+        victoryResults.SetActive(true);
+    }
 }

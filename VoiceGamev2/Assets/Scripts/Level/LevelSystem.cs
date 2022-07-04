@@ -17,6 +17,7 @@ public class LevelSystem : MonoBehaviour
     private float delayTimer;
 
     [SerializeField]private GameObject buttonsStats;
+    [SerializeField]private GameObject levelupNotif;
 
     [Header("UI")]
     public Image frontXpBar;
@@ -39,7 +40,6 @@ public class LevelSystem : MonoBehaviour
         requiredXp = CalculateRequireXp();
         //buttonsStats = GameObject.Find("buttons");
         //increaseStats = GameObject.Find("buttons_stats").GetComponent<IncreaseStats>();
-
     }
 
     // Update is called once per frame
@@ -55,6 +55,13 @@ public class LevelSystem : MonoBehaviour
         UpdateXpUI();
         if (Input.GetKeyDown(KeyCode.A)) GainExperience(20);
         if (currentXp > requiredXp) LevelUP();
+        if (hasLvlUP)
+        {
+            levelupNotif.SetActive(true);
+        }
+        else{
+            levelupNotif.SetActive(false);
+        }
     }
     public void UpdateXpUI()
     {
@@ -85,6 +92,7 @@ public class LevelSystem : MonoBehaviour
         currentXp = Mathf.RoundToInt(currentXp - requiredXp);
         requiredXp = CalculateRequireXp();
         //ActivateButtons();
+        levelupNotif.SetActive(true);
         UpdateLevel();
     }
     private int CalculateRequireXp()

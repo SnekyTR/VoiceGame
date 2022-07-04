@@ -9,6 +9,7 @@ public class MoveDataToMain : MonoBehaviour
     private GameSave gameSave;
     private LevelSystem level;
     private CombatEnter combatEnter;
+    private GameObject victoryResults;
     public int totalEXP;
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class MoveDataToMain : MonoBehaviour
         print("Entra despeus de destroy");
         pro = GameObject.Find("GameSaver").GetComponent<Progression>();
         gameSave = GameObject.Find("GameSaver").GetComponent<GameSave>();
+        
         //level = GameObject.Find("Magnus").GetComponent<LevelSystem>();
         StartCoroutine(IncrementTheProgression());
         //SceneManager.UnloadSceneAsync(1);
@@ -50,16 +52,19 @@ public class MoveDataToMain : MonoBehaviour
         pro.progression += 1;
         print("Incrementa");
         gameSave.SaveGame();
-        gameSave.LoadGame();
+        //gameSave.LoadGame();
         pro.CheckProgression();
         for(int i = 0; i< GameObject.FindGameObjectsWithTag("Player").Length; i++)
         {
+            
             print("Hemos pillado a: " + GameObject.FindGameObjectsWithTag("Player")[i].name);
             level = GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>();
             level.GainExperience(totalEXP);
             level.hasLvlUP = true;
+            //gameSave.LoadGame(GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<GeneralStats>(), GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>()) ;
         }
         gameSave.SaveGame();
+        pro.Victory();
     }
     public void FailLevel()
     {
