@@ -50,7 +50,7 @@ public class PlayerMove : MonoBehaviour
     [HideInInspector] public bool allieSpell = false;
 
     //tutorial
-    [HideInInspector] public bool moveRestriction, atkRestriction, spellRestriction;
+    [HideInInspector] public bool moveRestriction, atkRestriction, spellRestriction, move2Restriction;
     [HideInInspector] public bool moveActive, atkActive, spellActive, move2Active;
 
     void Start()
@@ -278,6 +278,8 @@ public class PlayerMove : MonoBehaviour
     //movement
     private void MoveCasilla(string i)
     {
+        if (move2Restriction) return;
+
         float energy = (Vector3.Distance(GameObject.Find(i).transform.position, playerTr.position) / 2);
         if (energy > ((int)energy + 0.1f) && energy < ((int)energy + 0.7f))
         {
@@ -342,6 +344,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (atkRestriction) return;
 
+        skill.ShowRanges(skill.GetRanges("atk"));
+
         startCmdR.Stop();
         spellCmdR.Stop();
 
@@ -367,6 +371,7 @@ public class PlayerMove : MonoBehaviour
         move2Active = false;
 
         skill.SetSkillSelected(n);
+        skill.ShowRanges(skill.GetRanges(n));
 
         spellCmdR.Stop();
 
@@ -380,6 +385,7 @@ public class PlayerMove : MonoBehaviour
         {
             StartCoroutine(SelfBuffs());
             TurnEnergyActions(skill.GetCost(atkState));
+            skill.UnShowRange();
         }
         else
         {
@@ -402,6 +408,8 @@ public class PlayerMove : MonoBehaviour
                 break;
             }
         }
+
+        skill.UnShowRange();
 
         if (target != null && Vector3.Distance(playerNM.transform.position, target.transform.position) < skill.GetRanges(atkState))
         {
@@ -453,7 +461,9 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        if(target != null || target == null)
+        skill.UnShowRange();
+
+        if (target != null || target == null)
         {
             if (target == null) target = GameObject.Find(n);
 

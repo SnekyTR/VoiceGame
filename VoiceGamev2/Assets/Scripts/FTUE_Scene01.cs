@@ -81,6 +81,7 @@ public class FTUE_Scene01 : MonoBehaviour
             tutos[4].SetActive(true);
 
             plMove.atkRestriction = false;
+            plMove.moveRestriction = true;
 
             p4 = false;
             p5 = true;

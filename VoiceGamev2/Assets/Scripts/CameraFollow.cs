@@ -280,6 +280,7 @@ public class CameraFollow : MonoBehaviour
 
         moveLogic.PlayerDeselect();
         moveLogic.PlayerSelect();
+        GetComponent<Skills>().UnShowRange();
 
         NewParent(playerParent, 1);
 

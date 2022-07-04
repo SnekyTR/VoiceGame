@@ -11,6 +11,7 @@ public class Skills : MonoBehaviour
     private Animator plyAnim;
     private PlayerStats plyStats;
     private SkillsColocation skillCo;
+    public GameObject rangeObj;
 
     private List<string> nameSkill = new List<string>();
     private List<string> weapons = new List<string>();
@@ -196,6 +197,18 @@ public class Skills : MonoBehaviour
                 return 3;
         }
     }                       
+
+    public void ShowRanges(int e)
+    {
+        rangeObj.SetActive(true);
+
+        rangeObj.transform.localScale = new Vector3((2f + e), 0.0001f, (2f + e));
+    }
+
+    public void UnShowRange()
+    {
+        rangeObj.SetActive(false);
+    }
 
     public float GetCost(string e)
     {
