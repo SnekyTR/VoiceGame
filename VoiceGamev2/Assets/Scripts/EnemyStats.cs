@@ -17,9 +17,9 @@ public class EnemyStats : MonoBehaviour
 
     private WinLoose winLoose;
 
-    public float maxLife;
-    public float maxShield;
-    public float maxEnergy;
+    [HideInInspector] public float maxLife;
+    [HideInInspector] public float maxShield;
+    [HideInInspector] public float maxEnergy;
     public int xp = 50;
 
     [SerializeField] private GameObject intBars;
@@ -72,7 +72,7 @@ public class EnemyStats : MonoBehaviour
                 intBars.transform.GetChild(3).gameObject.SetActive(false);
                 intBars.transform.GetChild(4).gameObject.SetActive(false);
 
-                //animator.SetInteger("A_Recieve", 1);
+                animator.SetInteger("A_Recieve", 1);
 
                 n = shieldValue;
             }
@@ -82,7 +82,7 @@ public class EnemyStats : MonoBehaviour
                 intBars.transform.GetChild(3).GetComponent<Slider>().value = (shieldValue / maxShield);
                 intBars.transform.GetChild(4).GetComponent<Text>().text = (shieldValue + " / " + maxShield);
 
-                //animator.SetInteger("A_Recieve", 1);
+                animator.SetInteger("A_Recieve", 1);
 
                 return;
             }
@@ -103,7 +103,7 @@ public class EnemyStats : MonoBehaviour
         }
         else if (n < 0)                         //dmg recieve
         {
-            //animator.SetInteger("A_Recieve", 1);
+            animator.SetInteger("A_Recieve", 1);
         }
         
 

@@ -357,9 +357,13 @@ public class Skills : MonoBehaviour
         }
         else if (actualWeapon == weapons[3])
         {
-            plyAnim.SetInteger("A_BasicAtk", 1);
+            plyAnim.SetInteger("A_Bow", 1);
 
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.8f);
+
+            plyAnim.SetInteger("A_Bow", 0);
+
+            yield return new WaitForSeconds(2f);
 
             int dmg = Random.Range((int)(plyStats.GetAgility() * 0.8f), (int)(plyStats.GetAgility() * 1.5f));
 
@@ -814,9 +818,13 @@ public class Skills : MonoBehaviour
         }
         else if(actualWeapon == weapons[3])
         {
-            plyAnim.SetInteger("A_BasicAtk", 1);
+            plyAnim.SetInteger("A_Bow", 1);
 
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.8f);
+
+            plyAnim.SetInteger("A_Bow", 0);
+
+            yield return new WaitForSeconds(2f);
 
             int dmg = Random.Range((int)(plyStats.GetAgility() * 0.8f), (int)(plyStats.GetAgility() * 1.5f));
 
@@ -860,11 +868,15 @@ public class Skills : MonoBehaviour
 
     private IEnumerator ArrowRain()
     {
+        plyAnim.SetInteger("A_Magic", 4);
+        yield return new WaitForSeconds(0.2f);
+        plyAnim.SetInteger("A_Magic", 0);
+        yield return new WaitForSeconds(1.3f);
         SkillSelection(gameM.playerParent.name, 3, GetTimerSkills(5));
 
         Instantiate(arrowRain, plyMove.target.transform.position, transform.rotation);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.6f);
     }
 
     private IEnumerator FireBall()

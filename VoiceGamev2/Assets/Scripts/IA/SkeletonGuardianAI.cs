@@ -14,7 +14,7 @@ public class SkeletonGuardianAI : MonoBehaviour
     private Animator animator;
 
     int mask;
-    public int ShielAport;
+    public int ShieldAport;
 
     void Start()
     {
@@ -41,6 +41,7 @@ public class SkeletonGuardianAI : MonoBehaviour
                 StatesManager();
                 isOnRoute = false;
                 enemyNM.isStopped = true;
+                animator.SetInteger("A_Movement", 0);
             }
         }
 
@@ -109,7 +110,7 @@ public class SkeletonGuardianAI : MonoBehaviour
 
                 enemyNM.isStopped = false;
                 enemyNM.SetDestination(casillas[destiny].position);
-                //animator.SetInteger("A_Movement", 1);
+                animator.SetInteger("A_Movement", 1);
                 StartCoroutine(StartRoute());
             }
             else
@@ -127,7 +128,7 @@ public class SkeletonGuardianAI : MonoBehaviour
     {
         setTarget = true;
         yield return new WaitForSeconds(0.8f);
-        //animator.SetInteger("A_Attack", 1);
+        animator.SetInteger("A_BasicAtk", 1);
         yield return new WaitForSeconds(0.5f);
 
         RaycastHit hit;
@@ -196,8 +197,8 @@ public class SkeletonGuardianAI : MonoBehaviour
 
             if (div < 0.75f && enemyStats.GetEnergy() >= 6)
             {
-                print("hi");
-                gameM.enemys[i].GetComponent<EnemyStats>().NewShield(ShielAport);
+                animator.SetInteger("A_BasicAtk", 3);
+                gameM.enemys[i].GetComponent<EnemyStats>().NewShield(ShieldAport);
                 enemyStats.SetEnergy(-6);
             }
         }
