@@ -21,6 +21,7 @@ public class UIMovement : MonoBehaviour
 
     [SerializeField] private GameObject partyPannel;
     [SerializeField] private GameObject characterPannel;
+    [SerializeField] private GameObject victoryResult;
 
     [SerializeField] private GameObject mainHelpPannel;
 
@@ -141,6 +142,9 @@ public class UIMovement : MonoBehaviour
                 fTUE_Progresion.ftueProgression++;
                 fTUE_Progresion.FTUEProgression();
             }
+        }else if (victoryResult.activeInHierarchy)
+        {
+            victoryResult.SetActive(false);
         }
         
     }

@@ -15,6 +15,11 @@ public class Progression : MonoBehaviour
     public GameObject combat8;
     public int progression;
 
+    [SerializeField] private GameObject p2Interface;
+    [SerializeField] private GameObject p2;
+    [SerializeField] private GameObject p3Interface;
+    [SerializeField] private GameObject p3;
+
     [SerializeField]private GameObject victoryResults;
     [SerializeField] private FTUE_Progresion fTUE_Progresion;
     GameSave gameSave;
@@ -51,6 +56,8 @@ public class Progression : MonoBehaviour
                     combat3.SetActive(false);
                     if (progression >= 4)
                     {
+                        p2Interface.SetActive(true);
+                        p2.SetActive(true);
                         combat4.SetActive(false);
                         if (progression >= 5)
                         {
@@ -60,6 +67,8 @@ public class Progression : MonoBehaviour
                                 combat6.SetActive(false);
                                 if (progression >= 7)
                                 {
+                                    p3Interface.SetActive(true);
+                                    p3.SetActive(true);
                                     combat7.SetActive(false);
                                 }
                             }

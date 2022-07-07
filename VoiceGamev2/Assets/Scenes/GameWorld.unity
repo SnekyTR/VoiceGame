@@ -8780,6 +8780,10 @@ MonoBehaviour:
   combat7: {fileID: 0}
   combat8: {fileID: 0}
   progression: 0
+  p2Interface: {fileID: 366856303}
+  p2: {fileID: 2115945310}
+  p3Interface: {fileID: 1714923099}
+  p3: {fileID: 514330442}
   victoryResults: {fileID: 532953708}
   fTUE_Progresion: {fileID: 2003819490}
 --- !u!1 &661419656
@@ -20645,7 +20649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1614116241
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26389,6 +26393,7 @@ MonoBehaviour:
   character_Skills: {fileID: 1908109841}
   partyPannel: {fileID: 396894661}
   characterPannel: {fileID: 811599409}
+  victoryResult: {fileID: 532953708}
   mainHelpPannel: {fileID: 375705107}
   fTUE_Progresion: {fileID: 2003819490}
 --- !u!114 &2003819490
