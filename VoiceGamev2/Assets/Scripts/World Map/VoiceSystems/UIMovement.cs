@@ -144,6 +144,7 @@ public class UIMovement : MonoBehaviour
             }
         }else if (victoryResult.activeInHierarchy)
         {
+            fTUE_Progresion.NextPannel();
             victoryResult.SetActive(false);
         }
         

@@ -53,8 +53,11 @@ public class PlayerStats : MonoBehaviour
         //******* solo eso prueba bien las cosas, y recuerda lo de resucitar, en script "Skills" al final esta el resusitar, suerte con eso
         //******* faltaron pocas cosas como las pasivas de las habilidades y el funcionamiento del arco en si, asiq si metes en la build q aun no encuentre el arco mejor XD
         //******* agregue el comando "desbloquear" para si quieren usar todas las habilidades de su arma XD
-        //LoadStatsPlayer();
-
+        
+        if(System.IO.File.Exists(Application.persistentDataPath +"/"+ transform.name+".data")){
+            LoadStatsPlayer();
+        }
+        
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
         skillsColocation = GameObject.Find("CanvasManager").GetComponent<SkillsColocation>();
         skill = gameM.GetComponent<Skills>();

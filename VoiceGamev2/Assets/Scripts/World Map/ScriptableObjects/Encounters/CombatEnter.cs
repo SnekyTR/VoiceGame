@@ -41,6 +41,8 @@ public class CombatEnter : MonoBehaviour
             battleWindow.GetCombatEnter(this.gameObject);
             voices = other.gameObject.GetComponent<VoiceDestinations>();
             voices.entered = true;
+            battleWindow.combatPanel.Start();
+            print("Se ha activado combat panel");
             voices.combatEnter = GetComponent<CombatEnter>();
             if (combatSingle)
             {

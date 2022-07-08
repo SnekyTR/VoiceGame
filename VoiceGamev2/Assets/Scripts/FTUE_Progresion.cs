@@ -35,7 +35,7 @@ public class FTUE_Progresion : MonoBehaviour
         {
             AddOrders();
             pannel1.SetActive(true);
-            extrapannel.SetActive(true);
+            
         }else if(ftueProgression == 1)
         {
             pannel2.SetActive(true);
@@ -54,6 +54,7 @@ public class FTUE_Progresion : MonoBehaviour
         {
             pannel4.SetActive(false);
             pannel5.SetActive(true);
+            extrapannel.SetActive(true);
         }
         else if (ftueProgression == 5)
         {
@@ -82,18 +83,19 @@ public class FTUE_Progresion : MonoBehaviour
         Debug.Log(speech.text);
         ftueActions[speech.text].Invoke();
     }
-    private void NextPannel()
+    public void NextPannel()
     {
         if(ftueProgression == 0)
         {
             pannel1.SetActive(false);
-            extrapannel.SetActive(false);
+           
             ftueProgression++;
             FTUEProgression();
         }
         else if (ftueProgression == 4)
         {
             pannel5.SetActive(false);
+            extrapannel.SetActive(false);
             ftueProgression++;
             FTUEProgression();
         }

@@ -55,13 +55,13 @@ public class LevelSystem : MonoBehaviour
         UpdateXpUI();
         if (Input.GetKeyDown(KeyCode.A)) GainExperience(20);
         if (currentXp > requiredXp) LevelUP();
-        if (hasLvlUP)
+        /*if (hasLvlUP)
         {
             levelupNotif.SetActive(true);
         }
         else{
             levelupNotif.SetActive(false);
-        }
+        }*/
     }
     public void UpdateXpUI()
     {
@@ -133,6 +133,7 @@ public class LevelSystem : MonoBehaviour
     public void DeactivateButtons()
     {
         buttonsStats.SetActive(false);
+        levelupNotif.SetActive(false);
         increaseStats.statOrders.Stop();
     }
     public void UpdateLevel()
