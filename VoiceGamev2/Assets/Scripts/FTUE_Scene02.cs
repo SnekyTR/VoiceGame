@@ -9,7 +9,7 @@ public class FTUE_Scene02 : MonoBehaviour
 
     public List<GameObject> tutos = new List<GameObject>();
 
-    private bool p1, p2, p3, p4, p5, p6;
+    private bool p0, p1, p2, p3, p4, p5, p6;
 
     void Start()
     {
@@ -17,21 +17,39 @@ public class FTUE_Scene02 : MonoBehaviour
         plMove = gameM.GetComponent<PlayerMove>();
 
         gameM.nextTurnRestriction = true;
-        plMove.moveRestriction = true;
-        plMove.atkRestriction = true;
+        plMove.moveRestriction = false;
+        plMove.atkRestriction = false;
+        plMove.atk2Restriction = true;
         plMove.spellRestriction = true;
 
-        p1 = true;
+        p0 = true;
     }
 
     void Update()
     {
+        if (p0) Part00();
         if (p1) Part01();
         if (p2) Part02();
         if (p3) Part03();
         if (p4) Part04();
         if (p5) Part05();
         if (p6) Part06();
+    }
+
+    private void Part00()
+    {
+        if(plMove.atk0Active || plMove.moveActive)
+        {
+            p0 = false;
+
+            tutos[5].SetActive(false);
+            tutos[0].SetActive(true);
+
+            plMove.moveRestriction = false;
+            plMove.atkRestriction = false;
+
+            p1 = true;
+        }
     }
 
     private void Part01()
@@ -41,6 +59,7 @@ public class FTUE_Scene02 : MonoBehaviour
             p1 = false;
 
             plMove.spellRestriction = false;
+            plMove.atk2Restriction = false;
 
             tutos[0].SetActive(false);
             tutos[1].SetActive(true);
@@ -98,7 +117,7 @@ public class FTUE_Scene02 : MonoBehaviour
 
     private void Part05()
     {
-        if (gameM.whoTurn)
+        if (gameM.whoTurn && gameM.selectPjActive)
         {
             p5 = false;
 

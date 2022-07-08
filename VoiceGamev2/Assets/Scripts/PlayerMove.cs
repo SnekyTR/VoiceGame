@@ -50,8 +50,8 @@ public class PlayerMove : MonoBehaviour
     [HideInInspector] public bool allieSpell = false;
 
     //tutorial
-    [HideInInspector] public bool moveRestriction, atkRestriction, spellRestriction, move2Restriction;
-    [HideInInspector] public bool moveActive, atkActive, spellActive, move2Active;
+    [HideInInspector] public bool moveRestriction, atkRestriction, spellRestriction, move2Restriction, atk2Restriction;
+    [HideInInspector] public bool moveActive, atkActive, spellActive, move2Active, atk0Active;
 
     void Start()
     {
@@ -263,6 +263,7 @@ public class PlayerMove : MonoBehaviour
         atkActive = false;
         spellActive = false;
         move2Active = false;
+        atk0Active = false;
 
         startCmdR.Stop();
 
@@ -310,6 +311,7 @@ public class PlayerMove : MonoBehaviour
                 atkActive = false;
                 spellActive = false;
                 move2Active = true;
+                atk0Active = false;
             }
             else
             {
@@ -343,6 +345,12 @@ public class PlayerMove : MonoBehaviour
     private void StartAttack()
     {
         if (atkRestriction) return;
+
+        moveActive = false;
+        atkActive = false;
+        spellActive = false;
+        move2Active = false;
+        atk0Active = true;
 
         skill.ShowRanges(skill.GetRanges("atk"));
 
@@ -395,6 +403,8 @@ public class PlayerMove : MonoBehaviour
 
     private void Enemy(string n)
     {
+        if (atk2Restriction) return;
+
         for(int i = 0; i < gameM.enemys.Count; i++)
         {
             if(n == gameM.enemys[i].name)
