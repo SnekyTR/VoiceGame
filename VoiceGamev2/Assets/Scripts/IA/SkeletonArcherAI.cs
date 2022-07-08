@@ -39,6 +39,7 @@ public class SkeletonArcherAI : MonoBehaviour
                 StatesManager();
                 isOnRoute = false;
                 enemyNM.isStopped = true;
+                animator.SetInteger("A_Movement", 0);
             }
         }
 
@@ -113,7 +114,7 @@ public class SkeletonArcherAI : MonoBehaviour
                 enemyNM.isStopped = false;
 
                 enemyNM.SetDestination(casillas[destiny].position);
-                //animator.SetInteger("A_Movement", 1);
+                animator.SetInteger("A_Movement", 1);
                 StartCoroutine(StartRoute());
             }
         }
@@ -175,8 +176,8 @@ public class SkeletonArcherAI : MonoBehaviour
     {
         setTarget = true;
         yield return new WaitForSeconds(0.8f);
-        //animator.SetInteger("A_Attack", 1);
-        yield return new WaitForSeconds(0.5f);
+        animator.SetInteger("A_BasicAtk", 2);
+        yield return new WaitForSeconds(2.2f);
 
         RaycastHit hit;
         Vector3 newPos = transform.position;

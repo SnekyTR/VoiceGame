@@ -74,7 +74,7 @@ public class SkeletonGuardianAI : MonoBehaviour
     {
         if (enemyStats.GetEnergy() > 0)
         {
-            SupportEnemy();
+            StartCoroutine(SupportEnemy());
 
             if (Vector3.Distance(transform.position, target.position) < enemyStats.GetRange() && enemyStats.GetEnergy() >= 4)
             {
@@ -189,8 +189,10 @@ public class SkeletonGuardianAI : MonoBehaviour
         }
     }
 
-    private void SupportEnemy()
+    private IEnumerator SupportEnemy()
     {
+        int en = 0;
+
         for(int i = 0; i < gameM.enemys.Count; i++)
         {
             float div = (gameM.enemys[i].GetComponent<EnemyStats>().GetLife() / gameM.enemys[i].GetComponent<EnemyStats>().maxLife);
@@ -198,9 +200,15 @@ public class SkeletonGuardianAI : MonoBehaviour
             if (div < 0.75f && enemyStats.GetEnergy() >= 6)
             {
                 animator.SetInteger("A_BasicAtk", 3);
-                gameM.enemys[i].GetComponent<EnemyStats>().NewShield(ShieldAport);
                 enemyStats.SetEnergy(-6);
+
+                en = i;
+                break;
             }
         }
+
+        yield return new WaitForSeconds(1.5f);
+
+        gameM.enemys[en].GetComponent<EnemyStats>().NewShield(ShieldAport);
     }
 }
