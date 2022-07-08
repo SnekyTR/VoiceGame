@@ -31,8 +31,8 @@ public class EnemyStats : MonoBehaviour
     void Start()
     {
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
-        moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
-        moveData.totalEXP += xp;
+        //moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
+        //moveData.totalEXP += xp;
         animator = GetComponent<Animator>();
         maxLife = lifeValue;
         maxShield = shieldValue;
