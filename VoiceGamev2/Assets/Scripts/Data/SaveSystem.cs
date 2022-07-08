@@ -34,14 +34,14 @@ public static class SaveSystem
             return null;
         }
     }
-    public static void SaveProgression(Progression pro)
+    public static void SaveProgression(Progression pro, FTUE_Progresion fTUE_Progresion)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/progression.data";
 
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        GameProgressionData data = new GameProgressionData(pro);
+        GameProgressionData data = new GameProgressionData(pro, fTUE_Progresion);
 
         formatter.Serialize(stream, data);
         stream.Close();

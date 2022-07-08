@@ -7,6 +7,7 @@ public class GameSave : MonoBehaviour
     //[SerializeField] private GeneralStats general;
     //[SerializeField] private LevelSystem level;
     [SerializeField] private Progression pro;
+    [SerializeField] private FTUE_Progresion fTUE_Progresion;
     //[SerializeField] private SingleCombatChanger single;
     // Start is called before the first frame update
     void Awake()
@@ -29,7 +30,7 @@ public class GameSave : MonoBehaviour
             LevelSystem level = GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>();
             SaveSystem.SavePlayer(general, level, general.transform);
         }
-        SaveSystem.SaveProgression(pro);
+        SaveSystem.SaveProgression(pro,fTUE_Progresion);
     }
     public void LoadGame()
     {

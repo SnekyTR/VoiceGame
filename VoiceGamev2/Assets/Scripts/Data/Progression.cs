@@ -26,20 +26,26 @@ public class Progression : MonoBehaviour
     private void Start()
     {
         //combat1 = GameObject.Find("First Combat");
-        combat2 = GameObject.Find("Second Combat");
+        /*combat2 = GameObject.Find("Second Combat");
         combat3 = GameObject.Find("Third Combat");
         combat4 = GameObject.Find("Fourth Combat");
         combat5 = GameObject.Find("Fifth Combat");
         combat6 = GameObject.Find("Combat6");
         combat7 = GameObject.Find("Combat7");
-        combat8 = GameObject.Find("Combat8");
+        combat8 = GameObject.Find("Combat8");*/
         gameSave = gameObject.GetComponent<GameSave>();
+        if (System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
+        {
+            print("Se ha cargado progresion");
+            LoadProgresion();
+        }
+    }
+    private void LoadProgresion()
+    {
+        GameProgressionData data = SaveSystem.LoadProgression();
+        progression = data.progressionNumber;
         CheckProgression();
     }
-    /*private void Awake()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }*/
     public void CheckProgression()
     {
         if (progression >= 1)
@@ -50,6 +56,7 @@ public class Progression : MonoBehaviour
             print("Se ha pasado el primer nivel");
             if(progression >= 2)
             {
+                print("Se ha pasado el segundo nivel");
                 combat2.SetActive(false);
                 if (progression >= 3)
                 {

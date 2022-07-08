@@ -21,7 +21,10 @@ public class GeneralStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (System.IO.File.Exists(Application.persistentDataPath + "/" + transform.name + ".data"))
+        {
+            LoadPlayer();
+        }
     }
 
     // Update is called once per frame

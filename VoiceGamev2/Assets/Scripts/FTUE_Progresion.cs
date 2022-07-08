@@ -8,7 +8,6 @@ using UnityEngine.Windows.Speech;
 public class FTUE_Progresion : MonoBehaviour
 {
     public int ftueProgression = 0;
-    [SerializeField] Progression progression;
 
     private Dictionary<string, Action> ftueActions = new Dictionary<string, Action>();
     private KeywordRecognizer ftueRecognizer;
@@ -21,13 +20,22 @@ public class FTUE_Progresion : MonoBehaviour
     [SerializeField] private GameObject pannel5;
     [SerializeField] private GameObject pannel6;
     [SerializeField] private GameObject pannel7;
-    private void Awake()
-    {
 
-    }
     void Start()
     {
-
+        if(System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
+        {
+            if (ftueProgression == 0)
+            {
+                LoadFTUEProgresion();
+            }
+        }
+    }
+    private void LoadFTUEProgresion()
+    {
+        GameProgressionData data = SaveSystem.LoadProgression();
+        ftueProgression = data.ftueProgressionNumber;
+        
     }
     public void FTUEProgression()
     {
@@ -35,7 +43,6 @@ public class FTUE_Progresion : MonoBehaviour
         {
             AddOrders();
             pannel1.SetActive(true);
-            
         }else if(ftueProgression == 1)
         {
             pannel2.SetActive(true);
