@@ -13,11 +13,10 @@ public class VoiceDestinations : MonoBehaviour
 
     private String selectedLocation;
     public CombatEnter combatEnter;
-    public bool entered;
+    public bool entered = false;
     private NavMeshAgent agent;
     private Dictionary<string, Action> mapActions = new Dictionary<string, Action>();
     private KeywordRecognizer mapDestinations;
-    public bool combat;
     // Start is called before the first frame update
     void Start()
     {
