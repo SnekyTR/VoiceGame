@@ -44,6 +44,7 @@ public class PlayerStats : MonoBehaviour
     private CameraFollow gameM;
     private Skills skill;
     private WinLoose winLoose;
+
     void Start()
     {
         //******* Aqui carga ya sabes todos los datos de lifepoint, strenghtpoint, agilitypoints, intellectpoints

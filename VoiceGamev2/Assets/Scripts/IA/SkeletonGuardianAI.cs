@@ -72,11 +72,11 @@ public class SkeletonGuardianAI : MonoBehaviour
 
     private void StatesManager()
     {
-        if (enemyStats.GetEnergy() > 0)
+        if (enemyStats.GetEnergy() > 0 || enemyStats.GetEnergyActions() > 0)
         {
-            StartCoroutine(SupportEnemy());
 
-            if (Vector3.Distance(transform.position, target.position) < enemyStats.GetRange() && enemyStats.GetEnergy() >= 4)
+            if(enemyStats.GetEnergyActions() >= 3 && EnemysLife()) StartCoroutine(SupportEnemy());
+            else if (Vector3.Distance(transform.position, target.position) < enemyStats.GetRange() && enemyStats.GetEnergyActions() >= 2)
             {
                 if (target.GetComponent<PlayerStats>().GetLife() > 0)
                 {
@@ -142,7 +142,7 @@ public class SkeletonGuardianAI : MonoBehaviour
                 target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
             }
         }
-        enemyStats.SetEnergy(-4);
+        enemyStats.SetEnergyAction(-2);
         print(2);
         yield return new WaitForSeconds(0.5f);
         setTarget = false;
@@ -157,36 +157,22 @@ public class SkeletonGuardianAI : MonoBehaviour
 
     private int RandomPlayerPiece()
     {
-        if ((Vector3.Distance(target.position, transform.position) / 2) > enemyStats.GetEnergy())
-        {
-            int o = Random.Range(0, casillas.Count);
-            float dist3 = Vector3.Distance(transform.position, casillas[o].position);
+        float dis = 10000;
+        int ps = 0;
 
-            if ((dist3 / 2) <= enemyStats.GetEnergy())
+        for (int i = 0; i < casillas.Count; i++)
+        {
+            if ((Vector3.Distance(transform.position, casillas[i].position) / 2) <= enemyStats.GetEnergy())
             {
-                return o;
+                if (Vector3.Distance(target.position, casillas[i].position) <= dis && !casillas[i].GetComponent<SectionControl>().isOcuped)
+                {
+                    ps = i;
+                    dis = Vector3.Distance(target.position, casillas[i].position);
+                }
             }
-            else return RandomPlayerPiece();
         }
 
-        int e = Random.Range(0, casillas.Count);
-        float dist = Vector3.Distance(target.position, casillas[e].position);
-
-        int n = 3;
-        int f = 1;
-
-        if (dist > n || dist < f)
-        {
-            return RandomPlayerPiece();
-        }
-        else
-        {
-            if (casillas[e].GetComponent<SectionControl>().isOcuped)
-            {
-                return RandomPlayerPiece();
-            }
-            return e;
-        }
+        return ps;
     }
 
     private IEnumerator SupportEnemy()
@@ -197,10 +183,10 @@ public class SkeletonGuardianAI : MonoBehaviour
         {
             float div = (gameM.enemys[i].GetComponent<EnemyStats>().GetLife() / gameM.enemys[i].GetComponent<EnemyStats>().maxLife);
 
-            if (div < 0.75f && enemyStats.GetEnergy() >= 6)
+            if (div < 0.75f)
             {
                 animator.SetInteger("A_BasicAtk", 3);
-                enemyStats.SetEnergy(-6);
+                enemyStats.SetEnergyAction(-3);
 
                 en = i;
                 break;
@@ -210,5 +196,25 @@ public class SkeletonGuardianAI : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         gameM.enemys[en].GetComponent<EnemyStats>().NewShield(ShieldAport);
+
+        yield return new WaitForSeconds(0.5f);
+
+        StatesManager();
+    }
+
+    private bool EnemysLife()
+    {
+        for (int i = 0; i < gameM.enemys.Count; i++)
+        {
+            float div = (gameM.enemys[i].GetComponent<EnemyStats>().GetLife() / gameM.enemys[i].GetComponent<EnemyStats>().maxLife);
+
+            if (div < 0.75f)
+            {
+                print("hola1");
+                return true;
+            }
+        }
+        print("hola2");
+        return false;
     }
 }

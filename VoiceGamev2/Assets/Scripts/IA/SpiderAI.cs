@@ -71,9 +71,9 @@ public class SpiderAI : MonoBehaviour
 
     private void StatesManager()
     {
-        if (enemyStats.GetEnergy() > 0)
+        if (enemyStats.GetEnergy() > 0 || enemyStats.GetEnergyActions() > 0)
         {
-            if (Vector3.Distance(transform.position, target.position) < enemyStats.GetRange() && enemyStats.GetEnergy() >= 4)
+            if (Vector3.Distance(transform.position, target.position) < enemyStats.GetRange() && enemyStats.GetEnergyActions() >= 2)
             {
                 if (target.GetComponent<PlayerStats>().GetLife() > 0)
                 {
@@ -84,7 +84,7 @@ public class SpiderAI : MonoBehaviour
                     StarIA();
                 }
             }
-            else if (Vector3.Distance(transform.position, target.position) > enemyStats.GetRange())
+            else if (Vector3.Distance(transform.position, target.position) >= enemyStats.GetRange())
             {
                 int destiny = RandomPlayerPiece();
 
@@ -125,7 +125,7 @@ public class SpiderAI : MonoBehaviour
         setTarget = true;
         yield return new WaitForSeconds(0.8f);
         animator.SetInteger("A_Attack", 1);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
 
         RaycastHit hit;
         Vector3 newPos = transform.position;
@@ -133,13 +133,12 @@ public class SpiderAI : MonoBehaviour
         Vector3 newDir = target.position - transform.position;
         if (Physics.Raycast(newPos, newDir, out hit, 7f, mask))
         {
-            print("hola");
             if (hit.transform == target)
             {
                 target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
             }
         }
-        enemyStats.SetEnergy(-4);
+        enemyStats.SetEnergyAction(-2);
         yield return new WaitForSeconds(0.5f);
         setTarget = false;
         StatesManager();
@@ -152,40 +151,21 @@ public class SpiderAI : MonoBehaviour
 
     private int RandomPlayerPiece()
     {
-        if ((Vector3.Distance(target.position, transform.position) / 2) > enemyStats.GetEnergy())
-        {
-            int o = Random.Range(0, casillas.Count);
-            float dist3 = Vector3.Distance(transform.position, casillas[o].position);
+        float dis = 10000;
+        int ps = 0;
 
-            if ((dist3 / 2) <= enemyStats.GetEnergy())
+        for (int i = 0; i < casillas.Count; i++)
+        {
+            if ((Vector3.Distance(transform.position, casillas[i].position) / 2) <= enemyStats.GetEnergy())
             {
-                return o;
+                if (Vector3.Distance(target.position, casillas[i].position) <= dis && !casillas[i].GetComponent<SectionControl>().isOcuped)
+                {
+                    ps = i;
+                    dis = Vector3.Distance(target.position, casillas[i].position);
+                }
             }
-            else return RandomPlayerPiece();
         }
 
-        int e = Random.Range(0, casillas.Count);
-        float dist = Vector3.Distance(target.position, casillas[e].position);
-
-        int n = 3;
-        int f = 1;
-        if (nSpider == 2)
-        {
-            n = 6;
-            f = 1;
-        }
-
-        if (dist > n || dist < f)
-        {
-            return RandomPlayerPiece();
-        }
-        else
-        {
-            if (casillas[e].GetComponent<SectionControl>().isOcuped)
-            {
-                return RandomPlayerPiece();
-            }
-            return e;
-        }
+        return ps;
     }
 }

@@ -12,7 +12,9 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] private int shieldValue;
     [SerializeField] private int atkValue;
     [SerializeField] private int range;
-    [SerializeField] private float energy;
+    private GameObject bars;
+    private float energy = 5;
+    private float energyActions = 5;
     private Animator animator;
 
     private WinLoose winLoose;
@@ -20,6 +22,7 @@ public class EnemyStats : MonoBehaviour
     [HideInInspector] public float maxLife;
     [HideInInspector] public float maxShield;
     [HideInInspector] public float maxEnergy;
+    [HideInInspector] public CanvasFollow canv;
     public int xp = 50;
 
     [SerializeField] private GameObject intBars;
@@ -47,8 +50,10 @@ public class EnemyStats : MonoBehaviour
         extBars.transform.GetChild(0).GetComponent<Text>().text = transform.name;
         extBars.transform.GetChild(1).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
         intBars.transform.GetChild(0).GetComponent<Text>().text = transform.name;
-        intBars.transform.GetChild(1).GetComponent<Slider>().value = (lifeValue / maxLife);
-        intBars.transform.GetChild(2).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
+        intBars.transform.GetChild(1).GetChild(1).GetComponent<Slider>().value = (lifeValue / maxLife);
+        intBars.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
+
+        bars = intBars.transform.GetChild(1).gameObject;
 
         if (shieldValue > 0) NewShield(shieldValue);
     }
@@ -65,12 +70,12 @@ public class EnemyStats : MonoBehaviour
             if (shieldValue <= 0)
             {
                 extBars.transform.GetChild(2).GetComponent<Scrollbar>().size = 0;
-                intBars.transform.GetChild(3).GetComponent<Slider>().value = 0;
-                intBars.transform.GetChild(4).GetComponent<Text>().text = "";
+                intBars.transform.GetChild(1).GetChild(3).GetComponent<Slider>().value = 0;
+                intBars.transform.GetChild(1).GetChild(4).GetComponent<Text>().text = "";
 
                 extBars.transform.GetChild(2).gameObject.SetActive(false);
-                intBars.transform.GetChild(3).gameObject.SetActive(false);
-                intBars.transform.GetChild(4).gameObject.SetActive(false);
+                intBars.transform.GetChild(1).GetChild(3).gameObject.SetActive(false);
+                intBars.transform.GetChild(1).GetChild(4).gameObject.SetActive(false);
 
                 animator.SetInteger("A_Recieve", 1);
 
@@ -79,8 +84,8 @@ public class EnemyStats : MonoBehaviour
             else
             {
                 extBars.transform.GetChild(2).GetComponent<Scrollbar>().size = (shieldValue / maxShield);
-                intBars.transform.GetChild(3).GetComponent<Slider>().value = (shieldValue / maxShield);
-                intBars.transform.GetChild(4).GetComponent<Text>().text = (shieldValue + " / " + maxShield);
+                intBars.transform.GetChild(1).GetChild(3).GetComponent<Slider>().value = (shieldValue / maxShield);
+                intBars.transform.GetChild(1).GetChild(4).GetComponent<Text>().text = (shieldValue + " / " + maxShield);
 
                 animator.SetInteger("A_Recieve", 1);
 
@@ -108,8 +113,8 @@ public class EnemyStats : MonoBehaviour
         
 
         extBars.transform.GetChild(1).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
-        intBars.transform.GetChild(1).GetComponent<Slider>().value = (lifeValue / maxLife);
-        intBars.transform.GetChild(2).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
+        intBars.transform.GetChild(1).GetChild(1).GetComponent<Slider>().value = (lifeValue / maxLife);
+        intBars.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
     }
     public int GetLife()
     {
@@ -119,6 +124,11 @@ public class EnemyStats : MonoBehaviour
     public float GetEnergy()
     {
         return energy;
+    }
+
+    public float GetEnergyActions()
+    {
+        return energyActions;
     }
 
     public int GetAtk()
@@ -141,23 +151,28 @@ public class EnemyStats : MonoBehaviour
         energy += n;
     }
 
+    public void SetEnergyAction(float n)
+    {
+        energyActions += n;
+    }
     public void FullEnergy()
     {
         energy = maxEnergy;
+        energyActions = maxEnergy;
     }
 
     public void NewShield(int s)
     {
         extBars.transform.GetChild(2).gameObject.SetActive(true);
-        intBars.transform.GetChild(3).gameObject.SetActive(true);
-        intBars.transform.GetChild(4).gameObject.SetActive(true);
+        intBars.transform.GetChild(1).GetChild(3).gameObject.SetActive(true);
+        intBars.transform.GetChild(1).GetChild(4).gameObject.SetActive(true);
 
         shieldValue = s;
         maxShield = s;
 
         extBars.transform.GetChild(2).GetComponent<Scrollbar>().size = (shieldValue / maxShield);
-        intBars.transform.GetChild(3).GetComponent<Slider>().value = (shieldValue / maxShield);
-        intBars.transform.GetChild(4).GetComponent<Text>().text = (shieldValue + " / " + maxShield);
-        intBars.transform.GetChild(2).GetComponent<Text>().text = "";
+        intBars.transform.GetChild(1).GetChild(3).GetComponent<Slider>().value = (shieldValue / maxShield);
+        intBars.transform.GetChild(1).GetChild(4).GetComponent<Text>().text = (shieldValue + " / " + maxShield);
+        intBars.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "";
     }
 }

@@ -76,7 +76,7 @@ public class SkeletonArcherAI : MonoBehaviour
 
             if(dis > 7 && dis < 13)
             {
-                if(enemyStats.GetEnergy() < 4)
+                if(enemyStats.GetEnergyActions() < 2)
                 {
                     gameM.NextIA(GetComponent<StateManager>());
                     return;
@@ -126,44 +126,23 @@ public class SkeletonArcherAI : MonoBehaviour
 
     private int RandomPlayerPiece()
     {
-        
+        float dis = 10000;
+        int ps = 0;
 
-        int e = Random.Range(0, casillas.Count);
-        float dist = Vector3.Distance(target.position, casillas[e].position);
-
-        RaycastHit hit;
-        Vector3 newDir = target.position - casillas[e].position;
-
-        if(dist < 7 || dist > 13 || casillas[e].GetComponent<SectionControl>().isOcuped)
+        for (int i = 0; i < casillas.Count; i++)
         {
-            return RandomPlayerPiece();
-        }
-        else
-        {
-            float dist2 = Vector3.Distance(casillas[e].position, transform.position);
-            dist2 /= 2;
-
-            if(dist2 >= enemyStats.GetEnergy())
+            if ((Vector3.Distance(transform.position, casillas[i].position) / 2) <= enemyStats.GetEnergy())
             {
-                return RandomPlayerPiece();
-            }
-
-            if (Physics.Raycast(casillas[e].position, newDir, out hit, 100, mask))
-            {
-                if (hit.transform == target)
+                if (Vector3.Distance(target.position, casillas[i].position) <= dis && !casillas[i].GetComponent<SectionControl>().isOcuped
+                    && Vector3.Distance(target.position, casillas[i].position) >= 7f)
                 {
-                    return e;
-                }
-                else
-                {
-                    return RandomPlayerPiece();
+                    ps = i;
+                    dis = Vector3.Distance(target.position, casillas[i].position);
                 }
             }
-            else
-            {
-                return RandomPlayerPiece();
-            }
         }
+
+        return ps;
     }
 
     private IEnumerator StartRoute()
@@ -177,7 +156,7 @@ public class SkeletonArcherAI : MonoBehaviour
         setTarget = true;
         yield return new WaitForSeconds(0.8f);
         animator.SetInteger("A_BasicAtk", 2);
-        yield return new WaitForSeconds(2.2f);
+        yield return new WaitForSeconds(3.1f);
 
         RaycastHit hit;
         Vector3 newPos = transform.position;
@@ -190,7 +169,7 @@ public class SkeletonArcherAI : MonoBehaviour
                 target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
             }
         }
-        enemyStats.SetEnergy(-4);
+        enemyStats.SetEnergyAction(-2);
         yield return new WaitForSeconds(0.5f);
         setTarget = false;
         StatesManager();
