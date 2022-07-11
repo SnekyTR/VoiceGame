@@ -34,8 +34,7 @@ public class MoveDataToMain : MonoBehaviour
     }
     IEnumerator ReChargeObjects()
     {
-        print("Ha recargado");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         print("Entra despeus de destroy");
         pro = GameObject.Find("GameSaver").GetComponent<Progression>();
         gameSave = GameObject.Find("GameSaver").GetComponent<GameSave>();
@@ -50,14 +49,11 @@ public class MoveDataToMain : MonoBehaviour
         
         yield return new WaitForSeconds(0.1f);
         pro.progression += 1;
-        print("Incrementa");
         gameSave.SaveGame();
         //gameSave.LoadGame();
         pro.CheckProgression();
         for(int i = 0; i< GameObject.FindGameObjectsWithTag("Player").Length; i++)
         {
-            
-            print("Hemos pillado a: " + GameObject.FindGameObjectsWithTag("Player")[i].name);
             level = GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>();
             level.GainExperience(totalEXP);
             level.hasLvlUP = true;

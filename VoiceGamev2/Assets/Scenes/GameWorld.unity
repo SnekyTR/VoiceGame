@@ -3982,7 +3982,6 @@ MonoBehaviour:
   fTUE_Progresion: {fileID: 2003819490}
   combatEnter: {fileID: 0}
   entered: 0
-  combat: 0
 --- !u!1 &347739249
 GameObject:
   m_ObjectHideFlags: 0
@@ -8788,6 +8787,8 @@ MonoBehaviour:
   p3: {fileID: 514330442}
   victoryResults: {fileID: 532953708}
   fTUE_Progresion: {fileID: 2003819490}
+  player: {fileID: 344659047}
+  singlePanel: {fileID: 189538480}
 --- !u!1 &661419656
 GameObject:
   m_ObjectHideFlags: 0
@@ -26753,7 +26754,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ftueProgression: 0
-  progression: {fileID: 645889367}
   pannel1: {fileID: 699151365}
   extrapannel: {fileID: 2077249984}
   pannel2: {fileID: 1113198908}

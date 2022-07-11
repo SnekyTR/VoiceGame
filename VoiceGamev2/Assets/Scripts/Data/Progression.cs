@@ -22,7 +22,17 @@ public class Progression : MonoBehaviour
 
     [SerializeField]private GameObject victoryResults;
     [SerializeField] private FTUE_Progresion fTUE_Progresion;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject singlePanel;
     GameSave gameSave;
+    private void Awake()
+    {
+        if (System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
+        {
+            print("Se ha cargado progresion");
+            LoadProgresion();
+        }
+    }
     private void Start()
     {
         //combat1 = GameObject.Find("First Combat");
@@ -34,11 +44,7 @@ public class Progression : MonoBehaviour
         combat7 = GameObject.Find("Combat7");
         combat8 = GameObject.Find("Combat8");*/
         gameSave = gameObject.GetComponent<GameSave>();
-        if (System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
-        {
-            print("Se ha cargado progresion");
-            LoadProgresion();
-        }
+        
     }
     private void LoadProgresion()
     {
@@ -52,12 +58,19 @@ public class Progression : MonoBehaviour
         {
             //Destroy(combat1);
             //combat2.SetActive(false);
-            fTUE_Progresion.FTUEProgression();
+            if(fTUE_Progresion.ftueProgression == 0)
+            {
+                fTUE_Progresion.LoadFTUEProgresion();
+                fTUE_Progresion.FTUEProgression();
+            }
             print("Se ha pasado el primer nivel");
             if(progression >= 2)
             {
                 print("Se ha pasado el segundo nivel");
                 combat2.SetActive(false);
+                player.GetComponent<VoiceDestinations>().entered = false;
+                singlePanel.SetActive(false);
+
                 if (progression >= 3)
                 {
                     combat3.SetActive(false);
@@ -77,6 +90,7 @@ public class Progression : MonoBehaviour
                                     p3Interface.SetActive(true);
                                     p3.SetActive(true);
                                     combat7.SetActive(false);
+
                                 }
                             }
                         }

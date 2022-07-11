@@ -11,6 +11,7 @@ public class BattleWindow : MonoBehaviour
     private Dictionary<string, Action> combatPanelActions = new Dictionary<string, Action>();
     public KeywordRecognizer combatPanel;
     private GameSave gameSave;
+    private FTUE_Progresion fTUE_Progresion;
     int index;
     private CombatEnter combatEnter;
 
@@ -18,14 +19,15 @@ public class BattleWindow : MonoBehaviour
     void Start()
     {
         gameSave = GameObject.Find("GameSaver").GetComponent<GameSave>();
+        fTUE_Progresion = GameObject.Find("Canvas").GetComponent<FTUE_Progresion>();
         AddVoice();
     }
 
     private void AddVoice()
     {
+        
         combatPanelActions.Add("luchar", EnterBatle);
         //combatPanelActions.Add("cancelar", ClosePannel);
-
         combatPanel = new KeywordRecognizer(combatPanelActions.Keys.ToArray());
         combatPanel.OnPhraseRecognized += RecognizedVoice;
 
@@ -38,6 +40,7 @@ public class BattleWindow : MonoBehaviour
 
     public void EnterBatle()
     {
+        fTUE_Progresion.CloseOrders();
         gameSave.SaveGame();
         print(index);
         //SceneManager.UnloadSceneAsync(0);

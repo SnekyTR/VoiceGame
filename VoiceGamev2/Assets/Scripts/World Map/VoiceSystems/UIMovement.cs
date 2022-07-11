@@ -56,7 +56,6 @@ public class UIMovement : MonoBehaviour
 
         for (int i = 0; i < partyInformation.players.Length; i++)
         {
-
             partyInf.Add(partyInformation.players[i].name, LoadCharacter);
             print(partyInformation.players[i].name);
         }

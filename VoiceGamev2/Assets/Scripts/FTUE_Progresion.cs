@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Windows.Speech;
 
 public class FTUE_Progresion : MonoBehaviour
@@ -23,15 +24,12 @@ public class FTUE_Progresion : MonoBehaviour
 
     void Start()
     {
-        if(System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
+        /*if(System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
         {
-            if (ftueProgression == 0)
-            {
-                LoadFTUEProgresion();
-            }
-        }
+            LoadFTUEProgresion();
+        }*/
     }
-    private void LoadFTUEProgresion()
+    public void LoadFTUEProgresion()
     {
         GameProgressionData data = SaveSystem.LoadProgression();
         ftueProgression = data.ftueProgressionNumber;
@@ -84,7 +82,17 @@ public class FTUE_Progresion : MonoBehaviour
         ftueRecognizer.OnPhraseRecognized += RecognizedVoice;
         ftueRecognizer.Start();
     }
+    public void CloseOrders()
+    {
+        if (!PlayerPrefs.HasKey("pm")) PlayerPrefs.SetInt("pm", 0);
 
+        int ns = PlayerPrefs.GetInt("pm");
+        PlayerPrefs.SetInt("pm", (ns + 1));
+
+        Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
+        zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, NextPannel);
+        ftueRecognizer = new KeywordRecognizer(zero1.Keys.ToArray());
+    }
     public void RecognizedVoice(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
