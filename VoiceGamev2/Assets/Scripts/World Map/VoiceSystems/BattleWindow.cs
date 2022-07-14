@@ -40,7 +40,7 @@ public class BattleWindow : MonoBehaviour
 
     public void EnterBatle()
     {
-        fTUE_Progresion.CloseOrders();
+        //fTUE_Progresion.CloseOrders();
         gameSave.SaveGame();
         print(index);
         //SceneManager.UnloadSceneAsync(0);

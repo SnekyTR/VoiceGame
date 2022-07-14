@@ -39,7 +39,7 @@ public class FTUE_Progresion : MonoBehaviour
     {
         if(ftueProgression == 0)
         {
-            AddOrders();
+            //AddOrders();
             pannel1.SetActive(true);
         }else if(ftueProgression == 1)
         {
@@ -58,8 +58,9 @@ public class FTUE_Progresion : MonoBehaviour
         else if (ftueProgression == 4)
         {
             pannel4.SetActive(false);
-            pannel5.SetActive(true);
-            extrapannel.SetActive(true);
+            //pannel5.SetActive(true);
+            StartCoroutine(ActivateTimer());
+            //extrapannel.SetActive(true);
         }
         else if (ftueProgression == 5)
         {
@@ -75,7 +76,15 @@ public class FTUE_Progresion : MonoBehaviour
             pannel7.SetActive(false);
         }
     }
-    private void AddOrders()
+    IEnumerator ActivateTimer()
+    {
+        pannel5.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        pannel5.SetActive(false);
+        ftueProgression++;
+        FTUEProgression();
+    }
+    /*private void AddOrders()
     {
         ftueActions.Add("Aceptar", NextPannel);
         ftueRecognizer = new KeywordRecognizer(ftueActions.Keys.ToArray());
@@ -92,7 +101,7 @@ public class FTUE_Progresion : MonoBehaviour
         Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
         zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, NextPannel);
         ftueRecognizer = new KeywordRecognizer(zero1.Keys.ToArray());
-    }
+    }*/
     public void RecognizedVoice(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
