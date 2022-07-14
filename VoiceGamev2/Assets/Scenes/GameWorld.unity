@@ -3966,6 +3966,8 @@ MonoBehaviour:
   intellectPoints: 5
   agilityPoints: 5
   critStrikePoints: 5
+  victoryRewardPlayer: {fileID: 0}
+  groupPlayer: {fileID: 0}
 --- !u!114 &344659056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6870,6 +6872,8 @@ MonoBehaviour:
   intellectPoints: 5
   agilityPoints: 5
   critStrikePoints: 5
+  victoryRewardPlayer: {fileID: 1140305071}
+  groupPlayer: {fileID: 1714923099}
 --- !u!114 &514330446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6882,7 +6886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82e986e3a0645347980ffd296e0516c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 344659048}
 --- !u!54 &514330447
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7281,7 +7284,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -637.8, y: 4}
+  m_AnchoredPosition: {x: -188.2, y: 4}
   m_SizeDelta: {x: 159.16, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &541935615
@@ -7304,7 +7307,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Level 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: faa26c437fd6517478f170e67b3953b2, type: 2}
   m_sharedMaterial: {fileID: 7649214206849331385, guid: faa26c437fd6517478f170e67b3953b2, type: 2}
@@ -8789,6 +8792,7 @@ MonoBehaviour:
   fTUE_Progresion: {fileID: 2003819490}
   player: {fileID: 344659047}
   singlePanel: {fileID: 189538480}
+  vagnar: {fileID: 2115945310}
 --- !u!1 &661419656
 GameObject:
   m_ObjectHideFlags: 0
@@ -13607,7 +13611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82e986e3a0645347980ffd296e0516c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
 --- !u!1 &1069535204
 GameObject:
   m_ObjectHideFlags: 0
@@ -27583,8 +27586,10 @@ MonoBehaviour:
   lifePoints: 5
   strengthPoints: 5
   intellectPoints: 5
-  agilityPoints: 5
+  agilityPoints: 4
   critStrikePoints: 5
+  victoryRewardPlayer: {fileID: 1730552319}
+  groupPlayer: {fileID: 366856303}
 --- !u!114 &2115945314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27597,7 +27602,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82e986e3a0645347980ffd296e0516c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 344659048}
 --- !u!54 &2115945315
 Rigidbody:
   m_ObjectHideFlags: 0

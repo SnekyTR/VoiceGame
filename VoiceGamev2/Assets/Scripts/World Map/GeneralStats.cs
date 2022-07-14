@@ -13,6 +13,9 @@ public class GeneralStats : MonoBehaviour
     public int agilityPoints;
     public int critStrikePoints;
 
+    [SerializeField] private GameObject victoryRewardPlayer;
+    [SerializeField] private GameObject groupPlayer;
+
     private void Awake()
     {
         levelSystem = gameObject.GetComponent<LevelSystem>();
@@ -54,5 +57,11 @@ public class GeneralStats : MonoBehaviour
         position.z = data.position[2];
 
         transform.position = position;
+    }
+    public void PlayerActivation()
+    {
+        gameObject.SetActive(true);
+        victoryRewardPlayer.SetActive(true);
+        groupPlayer.SetActive(true);
     }
 }

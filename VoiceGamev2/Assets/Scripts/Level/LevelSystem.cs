@@ -142,6 +142,7 @@ public class LevelSystem : MonoBehaviour
         string actualPlayer = transform.name.ToString();
         actualLevel = level.ToString();
         partyInfo.UpdateLevel(actualLevel, actualPlayer);
+        print("Se ha incrementado el nivel de: " + actualPlayer + "al Level: " + actualLevel);
     }
     public string UpdateXP()
     {

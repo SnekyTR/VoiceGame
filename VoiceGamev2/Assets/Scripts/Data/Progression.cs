@@ -24,6 +24,7 @@ public class Progression : MonoBehaviour
     [SerializeField] private FTUE_Progresion fTUE_Progresion;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject singlePanel;
+    [SerializeField] private GameObject vagnar;
     GameSave gameSave;
     private void Awake()
     {
@@ -74,6 +75,8 @@ public class Progression : MonoBehaviour
                 if (progression >= 3)
                 {
                     combat3.SetActive(false);
+                    vagnar.GetComponent<GeneralStats>().PlayerActivation();
+                    //vagnar.SetActive(true);
                     if (progression >= 4)
                     {
                         p2Interface.SetActive(true);
