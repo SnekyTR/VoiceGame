@@ -19,7 +19,6 @@ public class PlayerMove : MonoBehaviour
     private Skills skill;
 
     private GridActivation gridA;
-    private Image range;
     private bool isOnRoute =false;
     private string atkState;
 
@@ -225,6 +224,7 @@ public class PlayerMove : MonoBehaviour
         {
             animator.SetInteger("A_Movement", 0);
             isOnRoute = false;
+            gameM.NewParent(playerTr, 1);
         }
     }
 
@@ -298,8 +298,6 @@ public class PlayerMove : MonoBehaviour
                 StartCoroutine(StopAnimation());
                 playerNM.destination = GameObject.Find(i).transform.position;
 
-                gameM.NewParent(playerTr, 1);
-
                 startCmdR.Start();
 
                 moveCmdR.Stop();
@@ -352,6 +350,8 @@ public class PlayerMove : MonoBehaviour
         move2Active = false;
         atk0Active = true;
 
+        gameM.NewParent(playerTr, 2);
+
         skill.ShowRanges(skill.GetRanges("atk"));
 
         startCmdR.Stop();
@@ -362,8 +362,6 @@ public class PlayerMove : MonoBehaviour
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.red;
 
         atkState = "atk";
-
-        gameM.NewParent(playerTr, 1);
     }
 
     //spells actions
@@ -388,6 +386,7 @@ public class PlayerMove : MonoBehaviour
         if(n == "Curar" || n == "Revivir")
         {
             allieSpell = true;
+            gameM.NewParent(playerTr, 2);
         }
         else if(n == "Aumento de fuerza" || n == "Instinto asesino" || n == "Sacrificio de sangre")
         {
@@ -398,6 +397,7 @@ public class PlayerMove : MonoBehaviour
         else
         {
             atkCmdR.Start();
+            gameM.NewParent(playerTr, 2);
         }
     }
 
@@ -505,15 +505,16 @@ public class PlayerMove : MonoBehaviour
 
     private IEnumerator StartAtkAnim()
     {
-        skill.SelectSkill(atkState);
-
         setTarget = true;
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.1f);
+
+        gameM.CameraCinematic();
+        skill.SelectSkill(atkState);
 
         setTarget = false;
 
-        if(!startCmdR.IsRunning)startCmdR.Start();
+        if (!startCmdR.IsRunning)startCmdR.Start();
         spellCmdR.Start();
 
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
@@ -524,10 +525,11 @@ public class PlayerMove : MonoBehaviour
     private IEnumerator SelfBuffs()
     {
         skill.SelectSkill(atkState);
+        gameM.CameraCinematic();
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.7f);
 
-        //startCmdR.Start();
+        if (!startCmdR.IsRunning) startCmdR.Start();
         spellCmdR.Start();
 
         skill.EliminateSkillSelection();

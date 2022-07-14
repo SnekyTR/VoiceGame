@@ -119,6 +119,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Archer Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6848559203227562834, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.7073975
+      objectReference: {fileID: 0}
+    - target: {fileID: 6848559203227562834, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5243883
+      objectReference: {fileID: 0}
+    - target: {fileID: 6848559203227562834, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.69467163
+      objectReference: {fileID: 0}
+    - target: {fileID: 6848559203227562834, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9425163
+      objectReference: {fileID: 0}
+    - target: {fileID: 6848559203227562834, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.03565101
+      objectReference: {fileID: 0}
+    - target: {fileID: 6848559203227562834, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.3320154
+      objectReference: {fileID: 0}
+    - target: {fileID: 6848559203227562834, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.012565907
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1912414068, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}

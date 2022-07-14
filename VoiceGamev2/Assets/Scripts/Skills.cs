@@ -11,10 +11,10 @@ public class Skills : MonoBehaviour
     private Animator plyAnim;
     private PlayerStats plyStats;
     private SkillsColocation skillCo;
-    public GameObject rangeObj;
 
     private List<string> nameSkill = new List<string>();
     private List<string> weapons = new List<string>();
+    private List<GameObject> ranges = new List<GameObject>();
 
     private List<Transform> skillMagnus = new List<Transform>();
     private List<Transform> skillVagnar = new List<Transform>();
@@ -40,6 +40,7 @@ public class Skills : MonoBehaviour
     public GameObject sacredBall;
     public GameObject meteorRain;
     public GameObject healFX;
+    public GameObject rangeFX;
 
     [Header("Areas")]
     public Transform slashArea;
@@ -170,7 +171,7 @@ public class Skills : MonoBehaviour
                 return 6;
             case "Demolicion":
                 if (actualWeapon == weapons[2]) return 5;
-                else return 12;
+                else return 14;
             case "Instinto asesino":
                 return 10000;
             case "Lluvia de flechas":
@@ -182,9 +183,9 @@ public class Skills : MonoBehaviour
             case "Lluvia de meteoritos":
                 return 21;
             case "Curar":
-                return 12;
+                return 10;
             case "Revivir":
-                return 3;
+                return 5;
             case "Juicio final":
                 return 21;
             default:
@@ -193,21 +194,34 @@ public class Skills : MonoBehaviour
                 else if (actualWeapon == weapons[2]) return 6;
                 else if (actualWeapon == weapons[3]) return 14;
                 else if (actualWeapon == weapons[4]) return 12;
-                else if (actualWeapon == weapons[5]) return 12;
+                else if (actualWeapon == weapons[5]) return 10;
                 return 3;
         }
     }                       
 
     public void ShowRanges(int e)
     {
-        rangeObj.SetActive(true);
+        for(int i = 0;i < gameM.enemys.Count; i++)
+        {
+            if(Vector3.Distance(gameM.enemys[i].transform.position, gameM.playerParent.position) <= e)
+            {
+                Vector3 newPos = gameM.enemys[i].transform.position;
+                newPos.y += 0.6f;
 
-        rangeObj.transform.localScale = new Vector3((2f + e), 0.0001f, (2f + e));
+                GameObject rg = Instantiate(rangeFX, newPos, transform.rotation);
+                ranges.Add(rg);
+            }
+        }
     }
 
     public void UnShowRange()
     {
-        rangeObj.SetActive(false);
+        for(int i = 0;i < ranges.Count; i++)
+        {
+            Destroy(ranges[i]);
+        }
+
+        ranges = new List<GameObject>();
     }
 
     public float GetCost(string e)
@@ -215,15 +229,11 @@ public class Skills : MonoBehaviour
         switch (e)
         {
             case "Partir":
-                if (actualWeapon == weapons[0]) return 2f;
-                else if (actualWeapon == weapons[1]) return 3.5f;
                 return 3f;
             case "Aumento de fuerza":
                 return 1.5f;
             case "Demacia":
-                if (actualWeapon == weapons[0]) return 3.5f;
-                else if (actualWeapon == weapons[1]) return 4f;
-                return 3.5f;
+                return 4f;
             case "Demolicion":
                 return 2.5f;
             case "Instinto asesino":
@@ -233,15 +243,15 @@ public class Skills : MonoBehaviour
             case "Bola de fuego":
                 return 2.5f;
             case "Sacrificio de sangre":
-                return 3f;
+                return 1.5f;
             case "Lluvia de meteoritos":
                 return 5f;
             case "Curar":
                 return 3f;
             case "Revivir":
-                return 4f;
+                return 5f;
             case "Juicio final":
-                return 3.5f;
+                return 4f;
             default:
                 if (actualWeapon == weapons[0]) return 2f;
                 else if (actualWeapon == weapons[1]) return 2.5f;
@@ -427,6 +437,8 @@ public class Skills : MonoBehaviour
 
             Destroy(h);
         }
+
+        gameM.NewParent(gameM.playerParent, 1);
     }
 
     private int GetTimerSkills(int n)
@@ -751,6 +763,8 @@ public class Skills : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         slashArea.gameObject.SetActive(false);
+
+        gameM.NewParent(gameM.playerParent, 1);
     }
 
     private IEnumerator StrenghtBuff()
@@ -766,6 +780,8 @@ public class Skills : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         Instantiate(buffFX01, gameM.playerParent.position, transform.rotation);
+
+        gameM.NewParent(gameM.playerParent, 1);
 
         plyStats.SetStrenght(1.25f);
     }
@@ -789,6 +805,7 @@ public class Skills : MonoBehaviour
         demaciaArea.rotation = gameM.playerParent.rotation;
 
         yield return new WaitForSeconds(2f);
+        gameM.NewParent(gameM.playerParent, 1);
         demaciaArea.gameObject.SetActive(false);
     }
 
@@ -844,7 +861,7 @@ public class Skills : MonoBehaviour
         GameObject h = Instantiate(blood, plyMove.target.transform.position, transform.rotation);
 
         yield return new WaitForSeconds(1.2f);
-
+        gameM.NewParent(gameM.playerParent, 1);
         Destroy(h);
     }
 
@@ -861,7 +878,7 @@ public class Skills : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         Instantiate(buffFX02, gameM.playerParent.position, transform.rotation);
-
+        gameM.NewParent(gameM.playerParent, 1);
         plyStats.SetAgility(1.25f);
         plyStats.MoreCriticProb(50);
     }
@@ -876,7 +893,9 @@ public class Skills : MonoBehaviour
 
         Instantiate(arrowRain, plyMove.target.transform.position, transform.rotation);
 
-        yield return new WaitForSeconds(1.6f);
+        yield return new WaitForSeconds(2.5f);
+
+        gameM.NewParent(gameM.playerParent, 1);
     }
 
     private IEnumerator FireBall()
@@ -899,7 +918,9 @@ public class Skills : MonoBehaviour
 
         Instantiate(fireBall, newPos, rotacion);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2.2f);
+
+        gameM.NewParent(gameM.playerParent, 1);
     }
 
     private IEnumerator BloodSacrifice()
@@ -912,10 +933,10 @@ public class Skills : MonoBehaviour
 
         plyAnim.SetInteger("A_AutoBuff", 0);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
 
         Instantiate(buffFX03, gameM.playerParent.position, transform.rotation);
-
+        gameM.NewParent(gameM.playerParent, 1);
         plyStats.SetIntellect(1.25f);
     }
 
@@ -929,7 +950,8 @@ public class Skills : MonoBehaviour
         yield return new WaitForSeconds(0.7f);
         Instantiate(meteorRain, plyMove.target.transform.position, transform.rotation);
 
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(2f);
+        gameM.NewParent(gameM.playerParent, 1);
     }
 
     private IEnumerator Heal()
@@ -953,6 +975,7 @@ public class Skills : MonoBehaviour
         yield return new WaitForSeconds(1.2f);
 
         Destroy(h);
+        gameM.NewParent(gameM.playerParent, 1);
     }
 
     private IEnumerator Resurrect()
@@ -972,7 +995,9 @@ public class Skills : MonoBehaviour
         plyMove.target.GetComponent<NavMeshAgent>().enabled = true;
         plyMove.target.GetComponent<PlayerStats>().SetLife(plyStats.GetIntellect());
 
-        plyStats.SetIntellect(1.25f);
+        yield return new WaitForSeconds(1.5f);
+
+        gameM.NewParent(gameM.playerParent, 1);
     }
 
     private IEnumerator FinalJudgment()
@@ -992,5 +1017,7 @@ public class Skills : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         demaciaArea.gameObject.SetActive(false);
+
+        gameM.NewParent(gameM.playerParent, 1);
     }
 }

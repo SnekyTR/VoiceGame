@@ -34,7 +34,7 @@ public class CanvasFollow : MonoBehaviour
     {
         float dis = Vector3.Distance(cam.position, transform.position);
 
-        transform.localScale = new Vector3((2.4f + dis*0.15f), (2.4f + dis * 0.15f), 1);
+        transform.localScale = new Vector3((2.4f + dis*0.14f), (2.4f + dis * 0.14f), 1);
     }
 
     public void EnemyB(bool t)

@@ -13,6 +13,8 @@ public class PlayerStats : MonoBehaviour
     public int criticProb;
     public string actualWeapon;
 
+    public Transform cinemaCam;
+
     [Header("Weapons")]
     public GameObject weapon01;
     public GameObject weapon02;

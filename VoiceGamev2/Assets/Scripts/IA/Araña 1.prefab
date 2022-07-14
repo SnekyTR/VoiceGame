@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &577247996600929655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3067891314203584575}
+  m_Layer: 0
+  m_Name: CinemaCam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3067891314203584575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577247996600929655}
+  m_LocalRotation: {x: 0.03947748, y: 0.5657635, z: 0.026728116, w: -0.82318825}
+  m_LocalPosition: {x: 0.9662865, y: 0.32783136, z: 0.09587356}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6344400149860986834}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1174368284409085800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,6 +1493,7 @@ Transform:
   - {fileID: 6347170545547854932}
   - {fileID: 6346957512219050046}
   - {fileID: 8572994707934099232}
+  - {fileID: 3067891314203584575}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1612,6 +1643,7 @@ MonoBehaviour:
   canv: {fileID: 0}
   xp: 50
   intBars: {fileID: 8572994707371243174}
+  cinemaCam: {fileID: 3067891314203584575}
 --- !u!114 &-7520687688447244144
 MonoBehaviour:
   m_ObjectHideFlags: 0

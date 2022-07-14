@@ -16,11 +16,14 @@ public class CameraFollow : MonoBehaviour
     public List<GameObject> playerStructure = new List<GameObject>();
     private List<string> playersNames = new List<string>();
     private PlayerMove moveLogic;
+    private SkillBook skBook;
     private GameObject playerTurn, enemyTurn;
+    private Transform cam;
 
-    private Transform pos1, pos2;
+    public Transform pos1, pos2;
+    private Transform pos3, pos4;
     private int cameraParent = 1;
-    private Quaternion initPos;
+    private Vector3 initPos;
 
     private Dictionary<string, Action<string>> selectPJCmd = new Dictionary<string, Action<string>>();
     private KeywordRecognizer selectPJCmdR;
@@ -28,16 +31,16 @@ public class CameraFollow : MonoBehaviour
     private Dictionary<string, Action> passCmd = new Dictionary<string, Action>();
     private KeywordRecognizer passCmdR;
 
-    [HideInInspector] public bool selectPjRestriction, nextTurnRestriction, cancelRestriction;
-    [HideInInspector] public bool selectPjActive, nextTurnActive, cancelActive;
+    [HideInInspector] public bool selectPjRestriction, nextTurnRestriction, cancelRestriction, sbookRestriction;
+    [HideInInspector] public bool selectPjActive, nextTurnActive, cancelActive, sbookActive;
 
     private void Awake()
     {
         whoTurn = true;         //player turn
-        initPos = transform.rotation;
+        initPos = transform.position;
 
-        pos1 = GameObject.Find("pos1").transform;
-        pos2 = GameObject.Find("pos2").transform;
+        cam = transform.GetChild(0);
+        pos3 = GameObject.Find("Center").transform;
 
         moveLogic = GetComponent<PlayerMove>();
         playerTurn = GameObject.Find("PlayerTurn");
@@ -46,10 +49,12 @@ public class CameraFollow : MonoBehaviour
 
         Transform ply = GameObject.Find("Players").transform;
         Transform cnv = GameObject.Find("CanvasManager").transform;
+        skBook = cnv.GetComponent<SkillBook>();
 
         for (int i = 0; i < ply.childCount; i++)
         {
             players.Add(ply.GetChild(i));
+            skBook.playerS.Add(ply.GetChild(i).GetComponent<PlayerStats>());
             playerSelected.Add(cnv.GetChild(i+3).gameObject);
             playerStructure.Add(cnv.GetChild(i).gameObject);
 
@@ -79,6 +84,7 @@ public class CameraFollow : MonoBehaviour
 
         passCmd.Add("pasar", NextTurn);
         passCmd.Add("cancelar", CancelOrder);
+        passCmd.Add("pergamino", SkillBookOpen);
         passCmdR = new KeywordRecognizer(passCmd.Keys.ToArray());
         passCmdR.OnPhraseRecognized += RecognizedVoice4;
 
@@ -87,39 +93,30 @@ public class CameraFollow : MonoBehaviour
 
         selectPJCmdR.Start();
         passCmdR.Start();
+
+        CameraCenter();
     }
     
     void LateUpdate()
     {
         if(playerParent != null)
         {
-            Vector3 newPos = Vector3.MoveTowards(transform.position,new Vector3(playerParent.position.x, transform.position.y, playerParent.position.z), 5 * Time.deltaTime);
+            Vector3 newPos = Vector3.MoveTowards(transform.position,new Vector3(playerParent.position.x, transform.position.y, playerParent.position.z), 6 * Time.deltaTime);
             transform.position = newPos;
 
             if(cameraParent == 1)
             {
                 Vector3 newPos1 = Vector3.MoveTowards(transform.GetChild(0).position, pos1.position, 9 * Time.deltaTime);
-                transform.GetChild(0).position = newPos1;
+                cam.position = newPos1;
 
-                transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos1.rotation, 1.3f * Time.deltaTime);
-
-                transform.rotation = Quaternion.Lerp(transform.rotation, initPos, 3 * Time.deltaTime);
+                cam.rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos1.rotation, 1.3f * Time.deltaTime);
             }
             else if(cameraParent == 2)
             {
                 Vector3 newPos2 = Vector3.MoveTowards(transform.GetChild(0).position, pos2.position, 9 * Time.deltaTime);
-                transform.GetChild(0).position = newPos2;
+                cam.position = newPos2;
 
-                transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos2.rotation, 1.5f * Time.deltaTime);
-            }
-            else if(cameraParent == 3)
-            {
-                Vector3 newPos3 = Vector3.MoveTowards(transform.GetChild(0).position, pos1.position, 9 * Time.deltaTime);
-                transform.GetChild(0).position = newPos3;
-
-                transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos1.rotation, 2 * Time.deltaTime);
-
-                transform.rotation = Quaternion.Euler(transform.rotation.x, playerParent.rotation.y - 180, transform.rotation.z);
+                cam.rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos2.rotation, 1.5f * Time.deltaTime);
             }
         }
     }
@@ -162,13 +159,7 @@ public class CameraFollow : MonoBehaviour
         selectPjActive = true;
         nextTurnActive = false;
         cancelActive = false;
-
-        if (moveLogic.allieSpell)
-        {
-            moveLogic.Allie(n);
-            moveLogic.allieSpell = false;
-            return;
-        }
+        sbookActive = false;
 
         string[] names = n.Split(' ');
         if(names.Length > 2)
@@ -205,6 +196,31 @@ public class CameraFollow : MonoBehaviour
             }
             else if((i+1) == players.Count)
             {
+                return;
+            }
+        }
+
+        if (moveLogic.allieSpell)
+        {
+            moveLogic.Allie(n);
+            moveLogic.allieSpell = false;
+            return;
+        }
+
+        if (skBook.isStarted)
+        {
+            int e = 0;
+
+            if (playerParent != null)
+            {
+                if (actualPlayer == players[0]) e = 1;
+                else if (actualPlayer == players[1]) e = 2;
+                else if (actualPlayer == players[1]) e = 2;
+            }
+
+            if (e != 0)
+            {
+                skBook.ChangeSkillBookPage(e);
                 return;
             }
         }
@@ -261,13 +277,60 @@ public class CameraFollow : MonoBehaviour
 
         cameraParent = o;
 
-        if (cameraParent == 3)
+        if (tr.GetComponent<PlayerStats>()) pos4 = tr.GetComponent<PlayerStats>().cinemaCam;
+        else if (tr.GetComponent<EnemyStats>()) pos4 = tr.GetComponent<EnemyStats>().cinemaCam;
+    }
+
+    public void CameraCenter()
+    {
+        transform.position = initPos;
+        cam.position = pos3.position;
+        cam.rotation = pos3.rotation;
+
+        playerParent = null;
+    }
+
+    public void CameraCinematic()
+    {
+        cam.position = pos4.position;
+        cam.rotation = pos4.rotation;
+        cameraParent = 0;
+    }
+
+    public void CameraPos1()
+    {
+        cam.position = pos1.position;
+        cam.rotation = pos1.rotation;
+        transform.position = new Vector3(playerParent.position.x, transform.position.y, playerParent.position.z);
+    }
+
+    public void CameraPos2()
+    {
+        cam.position = pos2.position;
+        cam.rotation = pos2.rotation;
+        transform.position = new Vector3(playerParent.position.x, transform.position.y, playerParent.position.z);
+    }
+
+    private void SkillBookOpen()
+    {
+        if (sbookRestriction) return;
+        selectPjActive = false;
+        nextTurnActive = false;
+        cancelActive = false;
+        sbookActive = true;
+
+        int e = 0;
+
+        if(playerParent != null)
         {
-            transform.position = new Vector3(playerParent.position.x, transform.position.y, playerParent.position.z);
+            if (playerParent == players[0]) e = 1;
+            else if (playerParent == players[1]) e = 2;
+            else if (playerParent == players[1]) e = 2;
         }
-        else if(cameraParent == 1)
+
+        if(e != 0)
         {
-            //transform.rotation = initPos;
+            skBook.StartSkillBook(e, players.Count);
         }
     }
 
@@ -277,6 +340,7 @@ public class CameraFollow : MonoBehaviour
         selectPjActive = false;
         nextTurnActive = false;
         cancelActive = true;
+        sbookActive = false;
 
         moveLogic.PlayerDeselect();
         moveLogic.PlayerSelect();
@@ -296,6 +360,7 @@ public class CameraFollow : MonoBehaviour
         selectPjActive = false;
         nextTurnActive = true;
         cancelActive = false;
+        sbookActive = false;
 
         if (whoTurn)
         {
@@ -303,7 +368,15 @@ public class CameraFollow : MonoBehaviour
             passCmdR.Stop();
             selectPJCmdR.Stop();
 
-            for(int i = 0; i<players.Count; i++)
+            playerSelected[0].SetActive(false);
+            if (players.Count > 1) playerSelected[1].SetActive(false);
+            if (players.Count > 2) playerSelected[2].SetActive(false);
+
+            playerStructure[0].SetActive(true);
+            if (players.Count > 1) playerStructure[1].SetActive(true);
+            if (players.Count > 2) playerStructure[2].SetActive(true);
+
+            for (int i = 0; i<players.Count; i++)
             {
                 moveLogic.PlayerDeselect();
             }
@@ -314,7 +387,8 @@ public class CameraFollow : MonoBehaviour
             }
 
             enemys[0].StarIA();
-            NewParent(enemys[0].transform, 3);
+            NewParent(enemys[0].transform, 2);
+            CameraPos2();
 
             playerTurn.SetActive(false);
             enemyTurn.SetActive(true);
@@ -330,13 +404,7 @@ public class CameraFollow : MonoBehaviour
                 players[i].GetComponent<PlayerStats>().FullEnergy();
             }
 
-            playerSelected[0].SetActive(false);
-            if (players.Count > 1) playerSelected[1].SetActive(false);
-            if (players.Count > 2) playerSelected[2].SetActive(false);
-
-            playerStructure[0].SetActive(true);
-            if (players.Count > 1) playerStructure[1].SetActive(true);
-            if (players.Count > 2) playerStructure[2].SetActive(true);
+            CameraCenter();
 
             playerTurn.SetActive(true);
             enemyTurn.SetActive(false);
@@ -352,7 +420,8 @@ public class CameraFollow : MonoBehaviour
             if(n == enemys[i] && n != enemys[(enemys.Count)-1])
             {
                 enemys[(i + 1)].StarIA();
-                NewParent(enemys[(i + 1)].transform, 3);
+                NewParent(enemys[(i + 1)].transform, 2);
+                CameraPos2();
                 return;
             }
             else if(n == enemys[(enemys.Count) - 1])

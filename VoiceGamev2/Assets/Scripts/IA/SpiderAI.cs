@@ -124,6 +124,9 @@ public class SpiderAI : MonoBehaviour
     {
         setTarget = true;
         yield return new WaitForSeconds(0.8f);
+
+        gameM.CameraCinematic();
+
         animator.SetInteger("A_Attack", 1);
         yield return new WaitForSeconds(0.6f);
 

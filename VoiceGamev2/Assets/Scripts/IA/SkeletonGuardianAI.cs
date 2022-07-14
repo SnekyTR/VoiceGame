@@ -129,6 +129,7 @@ public class SkeletonGuardianAI : MonoBehaviour
         setTarget = true;
         yield return new WaitForSeconds(0.8f);
         animator.SetInteger("A_BasicAtk", 1);
+        gameM.CameraCinematic();
         yield return new WaitForSeconds(0.5f);
 
         RaycastHit hit;

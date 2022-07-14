@@ -154,7 +154,12 @@ public class SkeletonArcherAI : MonoBehaviour
     private IEnumerator AttackAnim()
     {
         setTarget = true;
+        enemyStats.canv.EnemyC(false);
         yield return new WaitForSeconds(0.8f);
+
+        enemyStats.canv.EnemyC(false);
+        gameM.CameraCinematic();
+
         animator.SetInteger("A_BasicAtk", 2);
         yield return new WaitForSeconds(3.1f);
 
@@ -172,6 +177,7 @@ public class SkeletonArcherAI : MonoBehaviour
         enemyStats.SetEnergyAction(-2);
         yield return new WaitForSeconds(0.5f);
         setTarget = false;
+        enemyStats.canv.EnemyC(true);
         StatesManager();
     }
 }
