@@ -65,6 +65,8 @@ public class SkillBook : MonoBehaviour
         magnusA.SetActive(true);
         if(psjNum == 2)vagnarA.SetActive(false);
         if(psjNum == 3)torekA.SetActive(true);
+
+        SetVagnarSkillBook();
     }
 
     private void TorekBook()
@@ -75,6 +77,8 @@ public class SkillBook : MonoBehaviour
         magnusA.SetActive(true);
         if(psjNum == 2)vagnarA.SetActive(true);
         if(psjNum == 3)torekA.SetActive(false);
+
+        SetTorekSkillBook();
     }
 
     private void SetMagnusSkillBook()
@@ -87,36 +91,108 @@ public class SkillBook : MonoBehaviour
             GetBasicAtk(wp, plyN, false) + "\n" + "Energía: " + GetEnergy(wp) + "\n" + "Rango: " +
             GetRange(wp) + "\n" + "Crítico: " + GetCritical(wp);
 
-        if(ValidationSkill(wp, 0) >= 1)
+        if(ValidationSkill(wp, plyN) >= 1)
         {
             magnusSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 1);
-            magnusSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = "Daño: " + GetBasicAtk(wp, plyN, true) + " - " +
-            GetBasicAtk(wp, plyN, false) + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 1)) + "\n" + "Rango: " +
+            magnusSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 1), plyN)
+            + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 1)) + "\n" + "Rango: " +
             skills.GetRanges(GetSkillName(wp, 1));
         }
         else magnusSB.transform.GetChild(2).gameObject.SetActive(false);
 
-        if (ValidationSkill(wp, 0) >= 2)
+        if (ValidationSkill(wp, plyN) >= 2)
         {
-
+            magnusSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 2);
+            magnusSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 2), plyN)
+            + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 2)) + "\n" + "Rango: " +
+            skills.GetRanges(GetSkillName(wp, 1));
         }
         else magnusSB.transform.GetChild(3).gameObject.SetActive(false);
 
-        if (ValidationSkill(wp, 0) >= 3)
+        if (ValidationSkill(wp, plyN) >= 3)
         {
-
+            magnusSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 3);
+            magnusSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 3), plyN)
+            + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 3)) + "\n" + "Rango: " +
+            skills.GetRanges(GetSkillName(wp, 3));
         }
         else magnusSB.transform.GetChild(4).gameObject.SetActive(false);
     }
 
     private void SetVagnarSkillBook()
     {
+        string wp = playerS[1].actualWeapon;
+        int plyN = 1;
 
+        vagnarSB.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = wp.ToUpper();
+        vagnarSB.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "Daño: " + GetBasicAtk(wp, plyN, true) + " - " +
+            GetBasicAtk(wp, plyN, false) + "\n" + "Energía: " + GetEnergy(wp) + "\n" + "Rango: " +
+            GetRange(wp) + "\n" + "Crítico: " + GetCritical(wp);
+
+        if (ValidationSkill(wp, plyN) >= 1)
+        {
+            vagnarSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 1);
+            vagnarSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 1), plyN)
+            + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 1)) + "\n" + "Rango: " +
+            skills.GetRanges(GetSkillName(wp, 1));
+        }
+        else vagnarSB.transform.GetChild(2).gameObject.SetActive(false);
+
+        if (ValidationSkill(wp, plyN) >= 2)
+        {
+            vagnarSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 2);
+            vagnarSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 2), plyN)
+            + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 2)) + "\n" + "Rango: " +
+            skills.GetRanges(GetSkillName(wp, 1));
+        }
+        else vagnarSB.transform.GetChild(3).gameObject.SetActive(false);
+
+        if (ValidationSkill(wp, plyN) >= 3)
+        {
+            vagnarSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 3);
+            vagnarSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 3), plyN)
+            + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 3)) + "\n" + "Rango: " +
+            skills.GetRanges(GetSkillName(wp, 3));
+        }
+        else vagnarSB.transform.GetChild(4).gameObject.SetActive(false);
     }
 
     private void SetTorekSkillBook()
     {
+        string wp = playerS[2].actualWeapon;
+        int plyN = 2;
 
+        torekSB.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = wp.ToUpper();
+        torekSB.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "Daño: " + GetBasicAtk(wp, plyN, true) + " - " +
+            GetBasicAtk(wp, plyN, false) + "\n" + "Energía: " + GetEnergy(wp) + "\n" + "Rango: " +
+            GetRange(wp) + "\n" + "Crítico: " + GetCritical(wp);
+
+        if (ValidationSkill(wp, plyN) >= 1)
+        {
+            torekSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 1);
+            torekSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 1), plyN)
+            + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 1)) + "\n" + "Rango: " +
+            skills.GetRanges(GetSkillName(wp, 1));
+        }
+        else torekSB.transform.GetChild(2).gameObject.SetActive(false);
+
+        if (ValidationSkill(wp, plyN) >= 2)
+        {
+            torekSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 2);
+            torekSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 2), plyN)
+            + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 2)) + "\n" + "Rango: " +
+            skills.GetRanges(GetSkillName(wp, 1));
+        }
+        else torekSB.transform.GetChild(3).gameObject.SetActive(false);
+
+        if (ValidationSkill(wp, plyN) >= 3)
+        {
+            torekSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 3);
+            torekSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 3), plyN)
+            + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 3)) + "\n" + "Rango: " +
+            skills.GetRanges(GetSkillName(wp, 3));
+        }
+        else torekSB.transform.GetChild(4).gameObject.SetActive(false);
     }
 
     private int ValidationSkill(string w, int i)
@@ -267,65 +343,57 @@ public class SkillBook : MonoBehaviour
         return "";
     }
 
-    private int GetSkillDmg(string w, bool d, int i)
+    private string GetSkillDmg(string w, int i)
     {
         if (w == "Partir")
         {
-            if (d) return (int)(playerS[i].GetStrenght() * 0.9f);
-            else if (!d) return (int)(playerS[i].GetStrenght() * 1.3f);
+            return "Daño: " + (int)(playerS[i].GetStrenght() * 1.2f) + " - " + (int)(playerS[i].GetStrenght() * 2f);
         }
         else if (w == "Aumento de fuerza")
         {
-            if (d) return (int)(playerS[i].GetStrenght() * 1.2f);
-            else if (!d) return (int)(playerS[i].GetStrenght() * 1.6f);
+            return "Aumento de fuerza: x1.5 ";
         }
         else if (w == "Demacia")
         {
-            if (d) return (int)(playerS[i].GetAgility() * 1f);
-            else if (!d) return (int)(playerS[i].GetAgility() * 1.2f);
+            return "Daño: " + (int)(playerS[i].GetStrenght() * 2f) + " - " + (int)(playerS[i].GetStrenght() * 3.5f);
         }
         else if (w == "Demolicíon")
         {
-            if (d) return (int)(playerS[i].GetAgility() * 0.8f);
-            else if (!d) return (int)(playerS[i].GetAgility() * 1.5f);
+            return "Daño: " + (int)(playerS[i].GetAgility() * 0.8f) + " - " + (int)(playerS[i].GetStrenght() * 1.5f) + " + Escudo enemigo";
         }
         else if (w == "Instinto asesino")
         {
-            if (d) return (int)(playerS[i].GetIntellect() * 1f);
-            else if (!d) return (int)(playerS[i].GetIntellect() * 2f);
+            return "Aumento de agilidad: x1.5 & Crítico: +50%";
+        }
+        else if (w == "Lluvia de flechas")
+        {
+            return "Daño: " + (int)(playerS[i].GetAgility() * 0.2f) + " - " + (int)(playerS[i].GetAgility() * 0.4f) + " x hit";
         }
         else if (w == "Bola de fuego")
         {
-            if (d) return (int)(playerS[i].GetIntellect() * 0.6f);
-            else if (!d) return (int)(playerS[i].GetIntellect() * 0.9f);
+            return "Daño: " + (int)(playerS[i].GetIntellect() * 1.5f) + " - " + (int)(playerS[i].GetIntellect()* 2.2f);
         }
         else if (w == "Sacrificio de sangre")
         {
-            if (d) return (int)(playerS[i].GetIntellect() * 0.6f);
-            else if (!d) return (int)(playerS[i].GetIntellect() * 0.9f);
+            return "Aumento de inteligencia: x1.5 ";
         }
         else if (w == "Lluvia de meteoritos")
         {
-            if (d) return (int)(playerS[i].GetIntellect() * 0.6f);
-            else if (!d) return (int)(playerS[i].GetIntellect() * 0.9f);
+            return "Daño: " + (int)(playerS[i].GetIntellect() * 0.4f) + " - " + (int)(playerS[i].GetIntellect() * 0.6f) + " x hit";
         }
         else if (w == "Curar")
         {
-            if (d) return (int)(playerS[i].GetIntellect() * 0.6f);
-            else if (!d) return (int)(playerS[i].GetIntellect() * 0.9f);
+            return "Curacíon: " + (int)(playerS[i].GetIntellect() * 0.6f) + " - " + (int)(playerS[i].GetIntellect() * 1f);
         }
         else if (w == "Revivir")
         {
-            if (d) return (int)(playerS[i].GetIntellect() * 0.6f);
-            else if (!d) return (int)(playerS[i].GetIntellect() * 0.9f);
+            return "Vida extra: " + (int)(playerS[i].GetStrenght() * 1f);
         }
         else if (w == "Juicio Final")
         {
-            if (d) return (int)(playerS[i].GetIntellect() * 0.6f);
-            else if (!d) return (int)(playerS[i].GetIntellect() * 0.9f);
+            return "Daño: " + (int)(playerS[i].GetIntellect() * 1.5f) + " - " + (int)(playerS[i].GetIntellect() * 2.5f);
         }
 
-
-        return 0;
+        return "";
     }
 }

@@ -51,7 +51,7 @@ public class FTUE_Scene01 : MonoBehaviour
     {
         p2 = false;
 
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(8.5f);
 
         tutos[1].SetActive(false);
         tutos[2].SetActive(true);
