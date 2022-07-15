@@ -36720,6 +36720,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 556698399}
     m_Modifications:
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: actualWeapon
+      value: bow
+      objectReference: {fileID: 0}
     - target: {fileID: 6670066613191042240, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: m_Name
       value: Vagnar

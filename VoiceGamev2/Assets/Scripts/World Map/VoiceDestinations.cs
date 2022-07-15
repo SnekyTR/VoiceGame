@@ -34,7 +34,8 @@ public class VoiceDestinations : MonoBehaviour
     private void AddDestinations()
     {
         mapActions.Add("reposo", SelectDestination);
-        mapActions.Add("negro", SelectDestination);
+        mapActions.Add("bastion", SelectDestination);
+        mapActions.Add("bosque", SelectDestination);
         mapDestinations = new KeywordRecognizer(mapActions.Keys.ToArray());
         mapDestinations.OnPhraseRecognized += RecognizedVoice;
         mapDestinations.Start();
