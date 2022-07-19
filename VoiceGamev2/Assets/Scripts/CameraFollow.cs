@@ -319,6 +319,8 @@ public class CameraFollow : MonoBehaviour
         cancelActive = false;
         sbookActive = true;
 
+        if(skBook.isStarted) sbookActive = false;
+
         int e = 0;
 
         if(playerParent != null)
