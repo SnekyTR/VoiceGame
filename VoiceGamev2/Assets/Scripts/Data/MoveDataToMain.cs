@@ -11,6 +11,8 @@ public class MoveDataToMain : MonoBehaviour
     private CombatEnter combatEnter;
     private GameObject victoryResults;
     public int totalEXP;
+    private GameObject[] player;
+    VoiceDestinations voices;
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -47,6 +49,15 @@ public class MoveDataToMain : MonoBehaviour
     IEnumerator IncrementTheProgression()
     {
         
+        player = GameObject.FindGameObjectsWithTag("Player");
+        for(int i = 0; i < player.Length; i++)
+        {
+            if (player[i].name == "Magnus")
+            {
+                voices = player[i].GetComponent<VoiceDestinations>();
+                voices.enabled = false;
+            }
+        }
         yield return new WaitForSeconds(0.1f);
         pro.progression += 1;
         gameSave.SaveGame();
@@ -60,6 +71,7 @@ public class MoveDataToMain : MonoBehaviour
             //gameSave.LoadGame(GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<GeneralStats>(), GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>()) ;
         }
         gameSave.SaveGame();
+        voices.enabled = true;
         pro.Victory();
     }
     public void FailLevel()

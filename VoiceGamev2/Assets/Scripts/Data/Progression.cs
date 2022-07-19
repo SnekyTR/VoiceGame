@@ -75,12 +75,13 @@ public class Progression : MonoBehaviour
                 if (progression >= 3)
                 {
                     combat3.SetActive(false);
-                    vagnar.GetComponent<GeneralStats>().PlayerActivation();
+                    
                     //vagnar.SetActive(true);
                     if (progression >= 4)
                     {
-                        p2Interface.SetActive(true);
-                        p2.SetActive(true);
+                        //p2Interface.SetActive(true);
+                        //p2.SetActive(true);
+                        vagnar.GetComponent<GeneralStats>().PlayerActivation();
                         combat4.SetActive(false);
                         if (progression >= 5)
                         {
