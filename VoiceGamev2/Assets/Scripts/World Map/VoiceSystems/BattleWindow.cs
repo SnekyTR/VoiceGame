@@ -14,6 +14,7 @@ public class BattleWindow : MonoBehaviour
     private FTUE_Progresion fTUE_Progresion;
     int index;
     private CombatEnter combatEnter;
+    [SerializeField] private VoiceDestinations voices;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +26,22 @@ public class BattleWindow : MonoBehaviour
 
     private void AddVoice()
     {
-        
         combatPanelActions.Add("luchar", EnterBatle);
         //combatPanelActions.Add("cancelar", ClosePannel);
         combatPanel = new KeywordRecognizer(combatPanelActions.Keys.ToArray());
         combatPanel.OnPhraseRecognized += RecognizedVoice;
+    }
+    public void CloseCombatOrder()
+    {
+        if (!PlayerPrefs.HasKey("pm")) PlayerPrefs.SetInt("pm", 0);
 
+        int ns = PlayerPrefs.GetInt("pm");
+        PlayerPrefs.SetInt("pm", (ns + 1));
+
+        Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
+        zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, EnterBatle);
+        combatPanel = new KeywordRecognizer(zero1.Keys.ToArray());
+        combatPanel.OnPhraseRecognized += RecognizedVoice;
     }
     public void RecognizedVoice(PhraseRecognizedEventArgs speech)
     {
@@ -46,6 +57,8 @@ public class BattleWindow : MonoBehaviour
         //SceneManager.UnloadSceneAsync(0);
         //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
         combatPanel.Stop();
+        voices.CloseDestinations();
+        CloseCombatOrder();
         SceneManager.LoadScene(combatEnter.sceneIndex);
     }
     private void ClosePannel()

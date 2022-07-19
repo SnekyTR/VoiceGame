@@ -12,6 +12,7 @@ public class CombatEnter : MonoBehaviour
     [SerializeField] public bool combatSingle;
     VoiceDestinations voices;
     [SerializeField] private SingleCombatChanger single;
+    [SerializeField] private MusicChanger musicChanger;
     [SerializeField] private GameObject panelSingle;
     [SerializeField] private GameObject panelDouble;
     [SerializeField] private Transform player;
@@ -36,7 +37,7 @@ public class CombatEnter : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")){
-            
+            musicChanger.ChangeCombatMusic();
             single.scriptableObjects.Add(actualCombat);
             battleWindow.GetCombatEnter(this.gameObject);
             voices = other.gameObject.GetComponent<VoiceDestinations>();

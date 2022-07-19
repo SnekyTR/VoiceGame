@@ -38,7 +38,6 @@ public class UIMovement : MonoBehaviour
 
         AddFirstLvl();
         AddPartyInf();
-        HelpOrders();
     }
     private void Update()
     {
