@@ -24,10 +24,10 @@ public class FTUE_Progresion : MonoBehaviour
 
     void Start()
     {
-        /*if(System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
+        if(System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
         {
             LoadFTUEProgresion();
-        }*/
+        }
     }
     public void LoadFTUEProgresion()
     {

@@ -42,8 +42,4 @@ public class GameSave : MonoBehaviour
             level.LoadLevel();
         }
     }
-    public void LoadSelectedPlayer()
-    {
-
-    }
 }
