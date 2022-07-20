@@ -25,7 +25,7 @@ namespace LowPolyWater
         [MenuItem("GameObject/LowPoly Water/Generate Water Plane...")]
         static void CreateWizard()
         {
-            cam = Camera.current;
+            //cam = Camera.current;
             // Hack because camera.current doesn't return editor camera if scene view doesn't have focus
             if (!cam)
             {
