@@ -31,6 +31,8 @@ public class EnemyStats : MonoBehaviour
     private CameraFollow gameM;
     private MoveDataToMain moveData;
     public Transform cinemaCam;
+    public GameObject deathFX;
+    public Text dmgTxt;
 
     void Start()
     {
@@ -43,8 +45,8 @@ public class EnemyStats : MonoBehaviour
         winLoose.totalEnemies++;
         extBars = GameObject.Find("CanvasManager").transform.GetChild(6).GetChild(nEnemy).gameObject;
 
-        moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
-        moveData.totalEXP = moveData.totalEXP + xp;
+        if (GameObject.Find("SceneConector")) moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
+        if (GameObject.Find("SceneConector")) moveData.totalEXP = moveData.totalEXP + xp;
 
         extBars.transform.GetChild(0).GetComponent<Text>().text = transform.name;
         extBars.transform.GetChild(1).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
@@ -87,6 +89,7 @@ public class EnemyStats : MonoBehaviour
                 intBars.transform.GetChild(1).GetChild(4).GetComponent<Text>().text = (shieldValue + " / " + maxShield);
 
                 animator.SetInteger("A_Recieve", 1);
+                StartCoroutine(DmgTxtAnim(n));
 
                 return;
             }
@@ -102,12 +105,15 @@ public class EnemyStats : MonoBehaviour
             gameM.EliminateElement(this.gameObject);
             GetComponent<NavMeshAgent>().enabled = false;
 
-            intBars.SetActive(false);
-            
+            intBars.transform.GetChild(0).gameObject.SetActive(false);
+            intBars.transform.GetChild(1).gameObject.SetActive(false);
+            StartCoroutine(DmgTxtAnim(n));
+            Destroy(Instantiate(deathFX, transform.position, transform.rotation), 4);
         }
         else if (n < 0)                         //dmg recieve
         {
             animator.SetInteger("A_Recieve", 1);
+            StartCoroutine(DmgTxtAnim(n));
         }
         
 
@@ -115,6 +121,16 @@ public class EnemyStats : MonoBehaviour
         intBars.transform.GetChild(1).GetChild(1).GetComponent<Slider>().value = (lifeValue / maxLife);
         intBars.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
     }
+
+    private IEnumerator DmgTxtAnim(int i)
+    {
+        dmgTxt.text = i.ToString();
+
+        yield return new WaitForSeconds(2f);
+
+        dmgTxt.text = "";
+    }
+
     public int GetLife()
     {
         return lifeValue;
