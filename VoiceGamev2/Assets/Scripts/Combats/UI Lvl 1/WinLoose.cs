@@ -51,6 +51,14 @@ public class WinLoose : MonoBehaviour
         }
     }
 
+    public void OverTime()
+    {
+        LooseActivateVoice();
+        plyMove.ClosePlayerMove();
+        gameM.CloseCameraFollow();
+        isEnter = true;
+    }
+
     private void CloseWinLose()
     {
         if(!PlayerPrefs.HasKey("wl")) PlayerPrefs.SetInt("wl", 0);
