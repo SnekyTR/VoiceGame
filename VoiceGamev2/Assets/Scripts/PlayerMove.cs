@@ -52,6 +52,8 @@ public class PlayerMove : MonoBehaviour
     [HideInInspector] public bool moveRestriction, atkRestriction, spellRestriction, move2Restriction, atk2Restriction;
     [HideInInspector] public bool moveActive, atkActive, spellActive, move2Active, atk0Active;
 
+    [SerializeField] private Color blueC, redC, defaultC;
+
     void Start()
     {
         gameM = GetComponent<CameraFollow>();
@@ -271,7 +273,7 @@ public class PlayerMove : MonoBehaviour
         print(playerTr.name);
 
         gridA.EnableGrid(playerTr);
-        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.blue;
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = blueC;
 
         gameM.NewParent(playerTr, 2);
     }
@@ -302,7 +304,7 @@ public class PlayerMove : MonoBehaviour
 
                 moveCmdR.Stop();
 
-                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.black;
+                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = defaultC;
                 gridA.DisableGrid();
 
                 moveActive = false;
@@ -318,7 +320,7 @@ public class PlayerMove : MonoBehaviour
                 moveCmdR.Stop();
                 gameM.NewParent(playerTr, 1);
 
-                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.black;
+                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = defaultC;
                 gridA.DisableGrid();
             }
         }
@@ -329,7 +331,7 @@ public class PlayerMove : MonoBehaviour
             moveCmdR.Stop();
             gameM.NewParent(playerTr, 1);
 
-            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.black;
+            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = defaultC;
             gridA.DisableGrid();
         }
     }
@@ -359,7 +361,7 @@ public class PlayerMove : MonoBehaviour
 
         atkCmdR.Start();
 
-        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.red;
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = redC;
 
         atkState = "atk";
     }
@@ -440,7 +442,7 @@ public class PlayerMove : MonoBehaviour
 
                 atkCmdR.Stop();
 
-                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
+                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = defaultC;
             }
         }
         else
@@ -450,7 +452,7 @@ public class PlayerMove : MonoBehaviour
 
             atkCmdR.Stop();
 
-            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
+            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = defaultC;
             print("fuera de alcance");
         }
     }
@@ -488,7 +490,7 @@ public class PlayerMove : MonoBehaviour
 
                 atkCmdR.Stop();
 
-                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
+                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = defaultC;
             }
         }
         else
@@ -498,7 +500,7 @@ public class PlayerMove : MonoBehaviour
 
             atkCmdR.Stop();
 
-            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
+            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = defaultC;
             print("fuera de alcance");
         }
     }
@@ -517,7 +519,7 @@ public class PlayerMove : MonoBehaviour
         if (!startCmdR.IsRunning)startCmdR.Start();
         spellCmdR.Start();
 
-        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = defaultC;
 
         skill.EliminateSkillSelection();
     }

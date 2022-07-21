@@ -435,6 +435,9 @@ MonoBehaviour:
   spellActive: 0
   move2Active: 0
   atk0Active: 0
+  blueC: {r: 0.10980393, g: 0.20392159, b: 0.41960788, a: 1}
+  redC: {r: 0.39607847, g: 0.14901961, b: 0.10588236, a: 1}
+  defaultC: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &1495127969
 MonoBehaviour:
   m_ObjectHideFlags: 0

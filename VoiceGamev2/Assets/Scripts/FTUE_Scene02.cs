@@ -59,8 +59,6 @@ public class FTUE_Scene02 : MonoBehaviour
             tutos[1].SetActive(false);
             tutos[2].SetActive(true);
 
-            plMove.moveRestriction = false;
-            plMove.atkRestriction = false;
             gameM.sbookRestriction = false;
 
             p1 = true;
@@ -131,6 +129,9 @@ public class FTUE_Scene02 : MonoBehaviour
             p4 = false;
 
             tutos[5].SetActive(false);
+
+            plMove.moveRestriction = false;
+            plMove.atkRestriction = false;
 
             p5 = true;
         }
