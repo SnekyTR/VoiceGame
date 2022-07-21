@@ -15,6 +15,9 @@ public class Progression : MonoBehaviour
     public GameObject combat8;
     public int progression;
 
+    [SerializeField] public Animator restAnimator;
+    [SerializeField] private Animator bastionAnimator;
+    [SerializeField] private Animator forestAnimator;
     [SerializeField] private GameObject p2Interface;
     [SerializeField] private GameObject p2;
     [SerializeField] private GameObject p3Interface;
@@ -36,16 +39,7 @@ public class Progression : MonoBehaviour
     }
     private void Start()
     {
-        //combat1 = GameObject.Find("First Combat");
-        /*combat2 = GameObject.Find("Second Combat");
-        combat3 = GameObject.Find("Third Combat");
-        combat4 = GameObject.Find("Fourth Combat");
-        combat5 = GameObject.Find("Fifth Combat");
-        combat6 = GameObject.Find("Combat6");
-        combat7 = GameObject.Find("Combat7");
-        combat8 = GameObject.Find("Combat8");*/
         gameSave = gameObject.GetComponent<GameSave>();
-        
     }
     private void LoadProgresion()
     {
@@ -72,19 +66,24 @@ public class Progression : MonoBehaviour
                 player.GetComponent<VoiceDestinations>().entered = false;
                 singlePanel.SetActive(false);
 
+
                 if (progression >= 3)
                 {
                     combat3.SetActive(false);
-                    
+                    restAnimator.SetFloat("anim", 0);
+                    bastionAnimator.SetFloat("anim", 1);
                     //vagnar.SetActive(true);
                     if (progression >= 4)
                     {
+                        bastionAnimator.SetFloat("anim", 0);
+                        forestAnimator.SetFloat("anim", 1);
                         //p2Interface.SetActive(true);
                         //p2.SetActive(true);
                         vagnar.GetComponent<GeneralStats>().PlayerActivation();
                         combat4.SetActive(false);
                         if (progression >= 5)
                         {
+                            forestAnimator.SetFloat("anim", 0);
                             combat5.SetActive(false);
                             if (progression >= 6)
                             {
