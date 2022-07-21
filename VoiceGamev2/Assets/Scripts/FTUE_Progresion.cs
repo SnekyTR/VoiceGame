@@ -12,6 +12,7 @@ public class FTUE_Progresion : MonoBehaviour
 
     private Dictionary<string, Action> ftueActions = new Dictionary<string, Action>();
     private KeywordRecognizer ftueRecognizer;
+    [SerializeField] private Progression pro;
 
     [SerializeField] private GameObject pannel1;
     [SerializeField] private GameObject extrapannel;
@@ -74,6 +75,7 @@ public class FTUE_Progresion : MonoBehaviour
         else
         {
             pannel7.SetActive(false);
+            pro.restAnimator.SetFloat("anim", 1);
         }
     }
     IEnumerator ActivateTimer()
