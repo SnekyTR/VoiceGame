@@ -17,6 +17,7 @@ public class PlayerMove : MonoBehaviour
     private Transform playerTr;
     private CameraFollow gameM;
     private Skills skill;
+    private CombatTimer timerC;
 
     private GridActivation gridA;
     private bool isOnRoute =false;
@@ -59,6 +60,7 @@ public class PlayerMove : MonoBehaviour
         gameM = GetComponent<CameraFollow>();
         skill = GetComponent<Skills>();
         gridA = GameObject.Find("RayCast").GetComponent<GridActivation>();
+        timerC = GameObject.Find("CanvasManager").GetComponent<CombatTimer>();
 
         //select action
         startCmd.Add("mover", StartMove);
@@ -174,6 +176,7 @@ public class PlayerMove : MonoBehaviour
         if(moveCmdR.IsRunning) moveCmdR.Stop();
         if(atkCmdR.IsRunning) atkCmdR.Stop();
         if(spellCmdR.IsRunning) spellCmdR.Stop();
+        gridA.DisableAtkGrid();
         gridA.DisableGrid();
         if(playerTr != null)playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
         if(playerTr != null)playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.black;
@@ -267,9 +270,16 @@ public class PlayerMove : MonoBehaviour
         move2Active = false;
         atk0Active = false;
 
+        if(playerStats.GetEnergy(1) <= 0.5f)
+        {
+            timerC.NoEnergyMove();
+            return;
+        }
+
         startCmdR.Stop();
 
         moveCmdR.Start();
+        spellCmdR.Stop();
         print(playerTr.name);
 
         gridA.EnableGrid(playerTr);
@@ -301,6 +311,7 @@ public class PlayerMove : MonoBehaviour
                 playerNM.destination = GameObject.Find(i).transform.position;
 
                 startCmdR.Start();
+                spellCmdR.Start();
 
                 moveCmdR.Stop();
 
@@ -315,24 +326,12 @@ public class PlayerMove : MonoBehaviour
             }
             else
             {
-                startCmdR.Start();
-
-                moveCmdR.Stop();
-                gameM.NewParent(playerTr, 1);
-
-                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = defaultC;
-                gridA.DisableGrid();
+                timerC.SectionIsFar();
             }
         }
         else
         {
-            startCmdR.Start();
-
-            moveCmdR.Stop();
-            gameM.NewParent(playerTr, 1);
-
-            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = defaultC;
-            gridA.DisableGrid();
+            timerC.SectionIsFar();
         }
     }
 
@@ -352,9 +351,16 @@ public class PlayerMove : MonoBehaviour
         move2Active = false;
         atk0Active = true;
 
+        if (playerStats.GetEnergy(2) <= skill.GetCost("atk"))
+        {
+            timerC.NoEnergyAction();
+            return;
+        }
+
         gameM.NewParent(playerTr, 2);
 
         skill.ShowRanges(skill.GetRanges("atk"));
+        gridA.EnableAtkGrid(playerTr, skill.GetRanges("atk"));
 
         startCmdR.Stop();
         spellCmdR.Stop();
@@ -378,10 +384,18 @@ public class PlayerMove : MonoBehaviour
         spellActive = true;
         move2Active = false;
 
+        if (playerStats.GetEnergy(2) <= skill.GetCost(n))
+        {
+            timerC.NoEnergyAction();
+            return;
+        }
+
         skill.SetSkillSelected(n);
         skill.ShowRanges(skill.GetRanges(n));
+        gridA.EnableAtkGrid(playerTr, skill.GetRanges(n));
 
         spellCmdR.Stop();
+        startCmdR.Stop();
 
         atkState = n;
 
@@ -421,8 +435,6 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        skill.UnShowRange();
-
         if (target != null && Vector3.Distance(playerNM.transform.position, target.transform.position) < skill.GetRanges(atkState))
         {
             if (TurnEnergyActions(skill.GetCost(atkState)))
@@ -434,26 +446,18 @@ public class PlayerMove : MonoBehaviour
                 atkActive = true;
                 spellActive = false;
                 move2Active = false;
+
+                skill.UnShowRange();
+                gridA.DisableAtkGrid();
             }
             else
             {
-                startCmdR.Start();
-                spellCmdR.Start();
-
-                atkCmdR.Stop();
-
-                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = defaultC;
+                timerC.EnemyFar();
             }
         }
         else
         {
-            startCmdR.Start();
-            spellCmdR.Start();
-
-            atkCmdR.Stop();
-
-            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = defaultC;
-            print("fuera de alcance");
+            timerC.EnemyFar();
         }
     }
 
@@ -474,6 +478,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         skill.UnShowRange();
+        gridA.DisableAtkGrid();
 
         if (target != null || target == null)
         {

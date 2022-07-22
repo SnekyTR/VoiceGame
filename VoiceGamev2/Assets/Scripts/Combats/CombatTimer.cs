@@ -12,7 +12,7 @@ public class CombatTimer : MonoBehaviour
     public bool isPlaying = false;
     private float timer;
     private WinLoose wl;
-
+    public GameObject blue, red;
     void Start()
     {
         isPlaying = true;
@@ -41,5 +41,45 @@ public class CombatTimer : MonoBehaviour
 
             filledImg.fillAmount = (timer / maxTime);
         }
+    }
+
+    public void NoEnergyMove()
+    {
+        StartCoroutine(Blue("Energía insuficiente"));
+    }
+
+    public void NoEnergyAction()
+    {
+        StartCoroutine(Red("Energía insuficiente"));
+    }
+
+    public void SectionIsFar()
+    {
+        StartCoroutine(Blue("Casilla inválida"));
+    }
+
+    public void EnemyFar()
+    {
+        StartCoroutine(Red("Enemigo inválido"));
+    }
+
+    private IEnumerator Red(string e)
+    {
+        red.SetActive(true);
+        red.GetComponent<Text>().text = e;
+
+        yield return new WaitForSeconds(2f);
+
+        red.SetActive(false);
+    }
+
+    private IEnumerator Blue(string e)
+    {
+        blue.SetActive(true);
+        blue.GetComponent<Text>().text = e;
+
+        yield return new WaitForSeconds(2f);
+
+        blue.SetActive(false);
     }
 }

@@ -8,6 +8,14 @@ public class SectionControl : MonoBehaviour
     [SerializeField] private Text nameTxt, costTxt;
     [SerializeField] private GameObject canvasObj;
     public bool isOcuped = false;
+    private Image sectImg;
+    private Color originColor;
+
+    private void Awake()
+    {
+        sectImg = canvasObj.transform.GetChild(2).GetComponent<Image>();
+        originColor = sectImg.color;
+    }
 
     public void EnableSection(Transform tr)
     {
@@ -52,5 +60,24 @@ public class SectionControl : MonoBehaviour
         canvasObj.SetActive(true);
         nameTxt.text = transform.name;
         costTxt.text = n.ToString();
+    }
+
+    public void AtkShowRange(Color c, bool t)
+    {
+        if (t)
+        {
+            canvasObj.SetActive(true);
+            sectImg.color = c;
+            canvasObj.transform.GetChild(0).gameObject.SetActive(false);
+            canvasObj.transform.GetChild(1).gameObject.SetActive(false);
+            canvasObj.transform.GetChild(3).gameObject.SetActive(false);
+        }
+        else
+        {
+            sectImg.color = originColor;
+            canvasObj.transform.GetChild(0).gameObject.SetActive(true);
+            canvasObj.transform.GetChild(1).gameObject.SetActive(true);
+            canvasObj.transform.GetChild(3).gameObject.SetActive(true);
+        }
     }
 }

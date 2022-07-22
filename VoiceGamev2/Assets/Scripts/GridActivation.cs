@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GridActivation : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class GridActivation : MonoBehaviour
     public List<Transform> casillas = new List<Transform>();
     public string[] nameC;
     private PlayerMove playerM;
+    private Image sectImg;
+
+    public Color red;
 
     private void Awake()
     {
@@ -56,6 +60,27 @@ public class GridActivation : MonoBehaviour
         for (int i = 0; i < rays.Length; i++)
         {
             rays[i].SetActive(false);
+        }
+    }
+
+    public void EnableAtkGrid(Transform tr, float e)
+    {
+        for(int i = 0; i < casillas.Count; i++)
+        {
+            float d = Vector3.Distance(tr.position, casillas[i].position);
+            if (d <= e && d >= 1)
+            {
+                casillas[i].GetComponent<SectionControl>().AtkShowRange(red, true);
+            }
+        }
+    }
+
+    public void DisableAtkGrid()
+    {
+        for (int i = 0; i < casillas.Count; i++)
+        {
+            casillas[i].GetComponent<SectionControl>().DisableSection();
+            casillas[i].GetComponent<SectionControl>().AtkShowRange(red, false);
         }
     }
 }
