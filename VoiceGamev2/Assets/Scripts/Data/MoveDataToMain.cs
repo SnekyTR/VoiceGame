@@ -37,7 +37,6 @@ public class MoveDataToMain : MonoBehaviour
     IEnumerator ReChargeObjects()
     {
         yield return new WaitForSeconds(0.1f);
-        print("Entra despeus de destroy");
         pro = GameObject.Find("GameSaver").GetComponent<Progression>();
         gameSave = GameObject.Find("GameSaver").GetComponent<GameSave>();
         
@@ -72,7 +71,7 @@ public class MoveDataToMain : MonoBehaviour
         }
         gameSave.SaveGame();
         voices.enabled = true;
-        pro.Victory();
+        pro.Victory(totalEXP);
     }
     public void FailLevel()
     {

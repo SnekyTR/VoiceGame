@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,6 +29,9 @@ public class Progression : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject singlePanel;
     [SerializeField] private GameObject vagnar;
+    [SerializeField] private TextMeshProUGUI expText1;
+    [SerializeField] private TextMeshProUGUI expText2;
+    [SerializeField] private TextMeshProUGUI expText3;
     GameSave gameSave;
     private void Awake()
     {
@@ -102,8 +106,11 @@ public class Progression : MonoBehaviour
             }
         }
     }
-    public void Victory()
+    public void Victory(float xp)
     {
         victoryResults.SetActive(true);
+        expText1.text = "+" + xp + " XP";
+        expText2.text = "+" + xp + " XP";
+        expText3.text = "+" + xp + " XP";
     }
 }

@@ -8,7 +8,7 @@ public class LevelSystem : MonoBehaviour
     [SerializeField] private PartyInformation partyInfo;
     [SerializeField]private IncreaseStats increaseStats;
     public int level;
-
+    [SerializeField] private GameObject lvlUP;
     public bool hasLvlUP;
 
     public float currentXp;
@@ -93,6 +93,7 @@ public class LevelSystem : MonoBehaviour
         requiredXp = CalculateRequireXp();
         //ActivateButtons();
         levelupNotif.SetActive(true);
+        lvlUP.SetActive(true);
         UpdateLevel();
     }
     private int CalculateRequireXp()
@@ -135,6 +136,7 @@ public class LevelSystem : MonoBehaviour
         buttonsStats.SetActive(false);
         levelupNotif.SetActive(false);
         increaseStats.statOrders.Stop();
+        lvlUP.SetActive(true);
     }
     public void UpdateLevel()
     {
@@ -143,6 +145,7 @@ public class LevelSystem : MonoBehaviour
         actualLevel = level.ToString();
         partyInfo.UpdateLevel(actualLevel, actualPlayer);
         print("Se ha incrementado el nivel de: " + actualPlayer + "al Level: " + actualLevel);
+        
     }
     public string UpdateXP()
     {

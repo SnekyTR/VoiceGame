@@ -15,6 +15,7 @@ public class BattleWindow : MonoBehaviour
     int index;
     private CombatEnter combatEnter;
     [SerializeField] private VoiceDestinations voices;
+    [SerializeField] private IncreaseStats increaseStats;
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +60,7 @@ public class BattleWindow : MonoBehaviour
         combatPanel.Stop();
         voices.CloseDestinations();
         CloseCombatOrder();
+        increaseStats.CloseOrders();
         SceneManager.LoadScene(combatEnter.sceneIndex);
     }
     private void ClosePannel()

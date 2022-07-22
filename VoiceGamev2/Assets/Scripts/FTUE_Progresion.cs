@@ -70,12 +70,13 @@ public class FTUE_Progresion : MonoBehaviour
         else if (ftueProgression == 6)
         {
             pannel6.SetActive(false);
+            pro.restAnimator.SetFloat("anim", 1);
             pannel7.SetActive(true);
         }
         else
         {
             pannel7.SetActive(false);
-            pro.restAnimator.SetFloat("anim", 1);
+            
         }
     }
     IEnumerator ActivateTimer()

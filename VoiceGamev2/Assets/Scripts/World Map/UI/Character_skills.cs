@@ -8,8 +8,20 @@ public class Character_skills : MonoBehaviour
 {
     private Slider magicBar;
     private Slider physicalBar;
+    private Slider agilityBar;
+    [SerializeField] private TextMeshProUGUI player;
 
-    private Slider image;
+    [SerializeField] private RawImage magicSkill1;
+    [SerializeField] private RawImage magicSkill2;
+    [SerializeField] private RawImage magicSkill3;
+
+    [SerializeField] private RawImage strenghtSkill1;
+    [SerializeField] private RawImage strenghtSkill2;
+    [SerializeField] private RawImage strenghtSkill3;
+
+    [SerializeField] private RawImage agilitySkill1;
+    [SerializeField] private RawImage agilitySkill2;
+    [SerializeField] private RawImage agilitySkill3;
 
     [SerializeField] private TextMeshProUGUI HP;
     [SerializeField] private TextMeshProUGUI STR;
@@ -26,13 +38,16 @@ public class Character_skills : MonoBehaviour
     {
         
     }
+    private void Update()
+    {
+    }
 
     public void DisplayCharacterInf(GameObject actualCharacter)
     {
+
         GeneralStats stats = GameObject.Find(actualCharacter.transform.name).GetComponent<GeneralStats>();
         general = stats;
         CallThings(actualCharacter);
-        //magicBar.fillAmount = (float)stats.intellectPoints / 10;
         HP.text = stats.lifePoints.ToString();
         STR.text = stats.strengthPoints.ToString();
         AGI.text = stats.agilityPoints.ToString();
@@ -40,13 +55,107 @@ public class Character_skills : MonoBehaviour
         CRIT.text = stats.critStrikePoints.ToString();
         magicBar.value = stats.intellectPoints;
         physicalBar.value = stats.strengthPoints;
-
-
+        agilityBar.value = stats.agilityPoints;
+        player.text = actualCharacter.name;
+        CheckAgility();
+        CheckIntellect();
+        CheckStrenght();
+    }
+    public void CheckStrenght()
+    {
+        if (general.strengthPoints >= 6)
+        {
+            strenghtSkill1.color = new Color(255, 255, 255, 255);
+            if (general.strengthPoints >= 8)
+            {
+                strenghtSkill2.color = new Color(255, 255, 255, 255);
+                if (general.strengthPoints >= 10)
+                {
+                    strenghtSkill3.color = new Color(255, 255, 255, 255);
+                }
+                else
+                {
+                    //strenghtSkill3.color = new Color(50, 50, 50, 255);
+                }
+            }
+            else
+            {
+                //strenghtSkill2.color = new Color(50, 50, 50, 255);
+                //strenghtSkill3.color = new Color(50, 50, 50, 255);
+            }
+        }
+        else
+        {
+            /*strenghtSkill1.color = new Color(50, 50, 50, 255);
+            strenghtSkill2.color = new Color(50, 50, 50, 255);
+            strenghtSkill3.color = new Color(50, 50, 50, 255);*/
+        }
+    }
+    public void CheckIntellect()
+    {
+        if (general.intellectPoints >= 6)
+        {
+            magicSkill1.color = new Color(255, 255, 255, 255);
+            if (general.intellectPoints >= 8)
+            {
+                magicSkill2.color = new Color(255, 255, 255, 255);
+                if (general.intellectPoints >= 10)
+                {
+                    magicSkill3.color = new Color(255, 255, 255, 255);
+                }
+                else
+                {
+                   // magicSkill2.color = new Color(50, 50, 50, 255);
+                }
+            }
+            else
+            {
+                //magicSkill2.color = new Color(50, 50, 50, 255);
+                //magicSkill3.color = new Color(50, 50, 50, 255);
+            }
+        }
+        else
+        {
+            /*magicSkill1.color = new Color(50, 50, 50, 255);
+            magicSkill2.color = new Color(50, 50, 50, 255);
+            magicSkill3.color = new Color(50, 50, 50, 255);*/
+        }
+    }
+    public void CheckAgility()
+    {
+        if (general.agilityPoints >= 6)
+        {
+            agilitySkill1.color = new Color(255, 255, 255, 255);
+            if (general.agilityPoints >= 8)
+            {
+                agilitySkill2.color = new Color(255, 255, 255, 255);
+                if (general.agilityPoints >= 10)
+                {
+                    agilitySkill3.color = new Color(255, 255, 255, 255);
+                }
+                else
+                {
+                    //agilitySkill3.color = new Color(50, 50, 50, 255);
+                }
+            }
+            else
+            {
+               // agilitySkill2.color = new Color(50, 50, 50, 255);
+                //agilitySkill3.color = new Color(50, 50, 50, 255);
+            }
+        }
+        else
+        {
+            /*agilitySkill1.color = new Color(50, 50, 50, 255);
+            agilitySkill2.color = new Color(50, 50, 50, 255);
+            agilitySkill3.color = new Color(50, 50, 50, 255);*/
+        }
     }
     private void CallThings(GameObject actualcharacter)
     {
         magicBar = GameObject.Find("magic_bar").GetComponent<Slider>();
         physicalBar = GameObject.Find("physical_bar").GetComponent<Slider>();
+        agilityBar = GameObject.Find("agility_bar").GetComponent<Slider>();
         //physicalBar = GameObject.Find("physical_bar").GetComponent<Scrollbar>();
         //image = GameObject.Find("magic_image").GetComponent<Image>();
         HP = GameObject.Find("hp_stat").GetComponent<TextMeshProUGUI>();
@@ -59,6 +168,7 @@ public class Character_skills : MonoBehaviour
     {
         STR.text = general.strengthPoints.ToString();
         physicalBar.value = general.strengthPoints;
+        CheckStrenght();
     }
     public void UpdateHP(GeneralStats general)
     {
@@ -67,11 +177,14 @@ public class Character_skills : MonoBehaviour
     public void UpdateAGI(GeneralStats general)
     {
         AGI.text = general.agilityPoints.ToString();
+        agilityBar.value = general.agilityPoints;
+        CheckAgility();
     }
     public void UpdateINT(GeneralStats general)
     {
         INT.text = general.intellectPoints.ToString();
         magicBar.value = general.intellectPoints;
+        CheckIntellect();
     }
     public void UpdateCRIT(GeneralStats general)
     {

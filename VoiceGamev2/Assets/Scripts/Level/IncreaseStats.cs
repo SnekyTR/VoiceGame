@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Windows.Speech;
+using UnityEngine.SceneManagement;
 
 public class IncreaseStats : MonoBehaviour
 {
@@ -46,6 +47,18 @@ public class IncreaseStats : MonoBehaviour
         statOrders = new KeywordRecognizer(statsActions.Keys.ToArray());
         statOrders.OnPhraseRecognized += RecognizedVoice;
         
+    }
+    public void CloseOrders()
+    {
+        if (!PlayerPrefs.HasKey("pm")) PlayerPrefs.SetInt("pm", 0);
+
+        int ns = PlayerPrefs.GetInt("pm");
+        PlayerPrefs.SetInt("pm", (ns + 1));
+
+        Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
+        zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, IncreaseSRT);
+        statOrders = new KeywordRecognizer(zero1.Keys.ToArray());
+        statOrders.OnPhraseRecognized += RecognizedVoice;
     }
     public void RecognizedVoice(PhraseRecognizedEventArgs speech)
     {

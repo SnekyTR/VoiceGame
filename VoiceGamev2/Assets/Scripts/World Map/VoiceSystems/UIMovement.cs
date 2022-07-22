@@ -13,8 +13,8 @@ public class UIMovement : MonoBehaviour
     private KeywordRecognizer party;
     private Dictionary<string, Action> charInf = new Dictionary<string, Action>();
     private KeywordRecognizer character;
-    private Dictionary<string, Action> helpOrders = new Dictionary<string, Action>();
-    private KeywordRecognizer helpRecognizer;
+    private Dictionary<string, Action> optionsOrders = new Dictionary<string, Action>();
+    private KeywordRecognizer optionsRecognizer;
 
     [SerializeField] private PartyInformation partyInformation;
     [SerializeField] private Character_skills character_Skills;
@@ -22,8 +22,10 @@ public class UIMovement : MonoBehaviour
     [SerializeField] private GameObject partyPannel;
     [SerializeField] private GameObject characterPannel;
     [SerializeField] private GameObject victoryResult;
+    [SerializeField] private GameObject optionsPannel;
 
     [SerializeField] private GameObject mainHelpPannel;
+    [SerializeField] private GameSave gameSave;
 
     private string charSelected;
 
@@ -38,6 +40,7 @@ public class UIMovement : MonoBehaviour
 
         AddFirstLvl();
         AddPartyInf();
+        OptionsOrders();
     }
     private void Update()
     {
@@ -46,6 +49,7 @@ public class UIMovement : MonoBehaviour
     {
         firstCanvasLvl.Add("grupo", ActivatePartyInformation);
         firstCanvasLvl.Add("cerrar", CloseWindows);
+        firstCanvasLvl.Add("opciones", OpenOptions);
         firstCanvas = new KeywordRecognizer(firstCanvasLvl.Keys.ToArray());
         firstCanvas.OnPhraseRecognized += RecognizedVoiceFirst;
         firstCanvas.Start();
@@ -62,12 +66,13 @@ public class UIMovement : MonoBehaviour
         party = new KeywordRecognizer(partyInf.Keys.ToArray());
         party.OnPhraseRecognized += RecognizedVoiceParty;
     }
-    private void HelpOrders()
+    private void OptionsOrders()
     {
-        helpOrders.Add("ayuda", HelpPannels);
-        helpRecognizer = new KeywordRecognizer(helpOrders.Keys.ToArray());
-        helpRecognizer.OnPhraseRecognized += RecognizedVoiceHelpPannels;
-        helpRecognizer.Start();
+        optionsOrders.Add("salir", CloseGame);
+        optionsOrders.Add("guardar", Save);
+        optionsRecognizer = new KeywordRecognizer(optionsOrders.Keys.ToArray());
+        optionsRecognizer.OnPhraseRecognized += RecognizedOptionsOrders;
+        optionsRecognizer.Start();
     }
 
     private void LoadCharacter()
@@ -84,15 +89,34 @@ public class UIMovement : MonoBehaviour
             fTUE_Progresion.FTUEProgression();
         }
     }
+    private void CloseGame()
+    {
+        gameSave.SaveGame();
+        Application.Quit();
+    }
+    private void OpenOptions()
+    {
+        optionsPannel.SetActive(true);
+        optionsRecognizer.Start();
+    }
+    private void Save()
+    {
+        gameSave.SaveGame();
+    }
     private void RecognizedVoiceFirst(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
         firstCanvasLvl[speech.text].Invoke();
     }
+    private void RecognizedOptionsOrders(PhraseRecognizedEventArgs speech)
+    {
+        Debug.Log(speech.text);
+        optionsOrders[speech.text].Invoke();
+    }
     private void RecognizedVoiceHelpPannels(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
-        helpOrders[speech.text].Invoke();
+        optionsOrders[speech.text].Invoke();
     }
     private void RecognizedVoiceParty(PhraseRecognizedEventArgs speech)
     {
@@ -144,6 +168,9 @@ public class UIMovement : MonoBehaviour
         {
             fTUE_Progresion.NextPannel();
             victoryResult.SetActive(false);
+        }else if(optionsPannel.activeInHierarchy){
+            optionsPannel.SetActive(false);
+            optionsRecognizer.Stop();
         }
         
     }
