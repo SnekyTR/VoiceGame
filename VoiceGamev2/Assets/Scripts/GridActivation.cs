@@ -5,11 +5,9 @@ using UnityEngine.UI;
 
 public class GridActivation : MonoBehaviour
 {
-    public GameObject[] rays;
     public List<Transform> casillas = new List<Transform>();
     public string[] nameC;
     private PlayerMove playerM;
-    private Image sectImg;
 
     public Color red;
 
@@ -36,30 +34,26 @@ public class GridActivation : MonoBehaviour
             casillas[i].tag = "Untagged";
         }
     }
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 
     public void EnableGrid(Transform tr)
     {
-        transform.position = new Vector3(tr.position.x, transform.position.y, tr.position.z);
-        for(int i = 0; i < rays.Length; i++)
+        for (int i = 0; i < casillas.Count; i++)
         {
-            rays[i].SetActive(true);
+            float d = Vector3.Distance(tr.position, casillas[i].position);
+            if (d <= 10.2f && d >= 1)
+            {
+                casillas[i].GetComponent<SectionControl>().ShowRange();
+                casillas[i].GetComponent<SectionControl>().EnableSection(tr);
+            }
         }
     }
 
     public void DisableGrid()
     {
-        for (int i = 0; i < rays.Length; i++)
+        for (int i = 0; i < casillas.Count; i++)
         {
-            rays[i].SetActive(false);
+            casillas[i].GetComponent<SectionControl>().DisableSection();
+            casillas[i].GetComponent<SectionControl>().AtkShowRange(red, false);
         }
     }
 

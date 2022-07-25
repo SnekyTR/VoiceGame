@@ -80,4 +80,13 @@ public class SectionControl : MonoBehaviour
             canvasObj.transform.GetChild(3).gameObject.SetActive(true);
         }
     }
+
+    public void ShowRange()
+    {
+        canvasObj.SetActive(true);
+        sectImg.color = originColor;
+        canvasObj.transform.GetChild(0).gameObject.SetActive(true);
+        canvasObj.transform.GetChild(1).gameObject.SetActive(true);
+        canvasObj.transform.GetChild(3).gameObject.SetActive(true);
+    }
 }

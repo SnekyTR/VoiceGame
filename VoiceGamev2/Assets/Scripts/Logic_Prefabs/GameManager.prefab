@@ -423,6 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e4dbd35b9a4294db453aa14c702398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerC: {fileID: 0}
   target: {fileID: 0}
   allieSpell: 0
   moveRestriction: 0
@@ -479,6 +480,7 @@ MonoBehaviour:
   meteorRain: {fileID: 165786, guid: d7b50f004cdc74b409188d8b822292fc, type: 3}
   healFX: {fileID: 6809944706259094419, guid: 0a3972e964dcd2b47b2a3bc58d35d554, type: 3}
   rangeFX: {fileID: 1202522996400206, guid: f87e7926fd589094b8a269e14b8bea5e, type: 3}
+  finalJ: {fileID: 131468, guid: f61def225eac3e247985f6679965a655, type: 3}
   slashArea: {fileID: 6025503878839352763}
   demaciaArea: {fileID: 7963478697685677715}
 --- !u!1 &8022926637128795510

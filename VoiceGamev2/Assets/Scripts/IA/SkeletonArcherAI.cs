@@ -136,8 +136,18 @@ public class SkeletonArcherAI : MonoBehaviour
                 if (Vector3.Distance(target.position, casillas[i].position) <= dis && !casillas[i].GetComponent<SectionControl>().isOcuped
                     && Vector3.Distance(target.position, casillas[i].position) >= 7f)
                 {
-                    ps = i;
-                    dis = Vector3.Distance(target.position, casillas[i].position);
+                    RaycastHit hit;
+                    Vector3 newPos = casillas[i].position;
+                    newPos.y += 1;
+                    Vector3 newDir = target.position - casillas[i].position;
+                    if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
+                    {
+                        if (hit.transform.tag == "Player")
+                        {
+                            ps = i;
+                            dis = Vector3.Distance(target.position, casillas[i].position);
+                        }
+                    }
                 }
             }
         }

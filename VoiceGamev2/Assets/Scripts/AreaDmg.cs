@@ -12,6 +12,7 @@ public class AreaDmg : MonoBehaviour
     bool magic = false;
 
     public GameObject blood;
+    public GameObject dust;
     private List<GameObject> bloods = new List<GameObject>();
 
     void Start()
@@ -69,7 +70,28 @@ public class AreaDmg : MonoBehaviour
             }
             else if (plyM.GetAtkState() == "Juicio final" && plyStats.actualWeapon == "sacred staff")
             {
+                Destroy(Instantiate(dust, plyM.target.transform.position, transform.rotation), 2);
+
                 dmg = Random.Range((int)(plyStats.GetIntellect() * 1.5f), (int)(plyStats.GetIntellect() * 2.5f));
+
+                crit = Random.Range(0, 100);
+
+                if (crit <= plyStats.criticProb)
+                {
+                    dmg = (int)(dmg * 1.5f);
+                }
+
+                for(int i = 0; i < gameM.enemys.Count; i++)
+                {
+                    if (Vector3.Distance(gameM.enemys[i].transform.position, plyM.target.transform.position) <= 5)
+                    {
+                        gameM.enemys[i].GetComponent<EnemyStats>().SetLife(-dmg);
+
+                        Destroy(Instantiate(blood, gameM.enemys[i].transform.position, transform.rotation), 2);
+                    }
+                }
+
+                return;
             }
 
             crit = Random.Range(0, 100);

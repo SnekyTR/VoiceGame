@@ -222,10 +222,6 @@ public class PlayerStats : MonoBehaviour
         structure.transform.GetChild(1).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
         selected.transform.GetChild(0).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
         selected.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
-
-        print((lifeValue / maxLife));
-        print(lifeValue + "vida");
-        print(maxLife + "maxvida");
     }
 
     public void SetStrenght(float n)
