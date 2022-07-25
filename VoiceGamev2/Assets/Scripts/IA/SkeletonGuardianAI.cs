@@ -106,7 +106,6 @@ public class SkeletonGuardianAI : MonoBehaviour
                 }
 
                 enemyStats.SetEnergy(-energy);
-                print(1);
 
                 enemyNM.isStopped = false;
                 enemyNM.SetDestination(casillas[destiny].position);
@@ -167,8 +166,18 @@ public class SkeletonGuardianAI : MonoBehaviour
             {
                 if (Vector3.Distance(target.position, casillas[i].position) <= dis && !casillas[i].GetComponent<SectionControl>().isOcuped)
                 {
-                    ps = i;
-                    dis = Vector3.Distance(target.position, casillas[i].position);
+                    RaycastHit hit;
+                    Vector3 newPos = casillas[i].position;
+                    newPos.y += 1;
+                    Vector3 newDir = target.position - casillas[i].position;
+                    if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
+                    {
+                        if (hit.transform.tag == "Player")
+                        {
+                            ps = i;
+                            dis = Vector3.Distance(target.position, casillas[i].position);
+                        }
+                    }
                 }
             }
         }
@@ -211,11 +220,9 @@ public class SkeletonGuardianAI : MonoBehaviour
 
             if (div < 0.75f)
             {
-                print("hola1");
                 return true;
             }
         }
-        print("hola2");
         return false;
     }
 }

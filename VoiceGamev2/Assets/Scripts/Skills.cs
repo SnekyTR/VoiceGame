@@ -41,10 +41,13 @@ public class Skills : MonoBehaviour
     public GameObject meteorRain;
     public GameObject healFX;
     public GameObject rangeFX;
+    public GameObject finalJ;
 
     [Header("Areas")]
     public Transform slashArea;
     public Transform demaciaArea;
+
+    int mask;
 
     private void Awake()
     {
@@ -77,6 +80,9 @@ public class Skills : MonoBehaviour
             hamunTimer.Add(0);
             hamunTimer2.Add(0);
         }
+
+        mask = 1 << LayerMask.NameToLayer("Occlude");
+        mask |= 1 << LayerMask.NameToLayer("Enemy");
     }
 
     void Start()
@@ -95,7 +101,7 @@ public class Skills : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     public void SetActualPlayer(PlayerStats pl)
@@ -206,6 +212,21 @@ public class Skills : MonoBehaviour
             if(Vector3.Distance(gameM.enemys[i].transform.position, gameM.playerParent.position) <= e)
             {
                 Vector3 newPos = gameM.enemys[i].transform.position;
+                newPos.y += 0.6f;
+
+                GameObject rg = Instantiate(rangeFX, newPos, transform.rotation);
+                ranges.Add(rg);
+            }
+        }
+    }
+
+    public void ShowRangesAllie(int e)
+    {
+        for (int i = 0; i < gameM.players.Count; i++)
+        {
+            if (Vector3.Distance(gameM.players[i].position, gameM.playerParent.position) <= e)
+            {
+                Vector3 newPos = gameM.players[i].position;
                 newPos.y += 0.6f;
 
                 GameObject rg = Instantiate(rangeFX, newPos, transform.rotation);
@@ -384,7 +405,21 @@ public class Skills : MonoBehaviour
                 dmg = (int)(dmg * 1.5f);
             }
 
-            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
+            isBlood = false;
+
+            RaycastHit hit;
+            Vector3 newPos = plyStats.transform.position;
+            newPos.y += 1;
+            Vector3 newDir = plyMove.target.transform.position - plyStats.transform.position;
+            if (Physics.Raycast(newPos, newDir, out hit, 1000f, mask))
+            {
+                print(hit.transform.name);
+                if (hit.transform.tag == "Enemy")
+                {
+                    hit.transform.GetComponent<EnemyStats>().SetLife(-dmg);
+                    Destroy(Instantiate(blood, plyMove.target.transform.position, transform.rotation), 2);
+                }
+            }
         }
         else if (actualWeapon == weapons[4])
         {
@@ -779,7 +814,9 @@ public class Skills : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        Instantiate(buffFX01, gameM.playerParent.position, transform.rotation);
+        GameObject buff = Instantiate(buffFX01, gameM.playerParent.position, transform.rotation);
+
+        buff.transform.SetParent(gameM.playerParent);
 
         gameM.NewParent(gameM.playerParent, 1);
 
@@ -855,14 +892,22 @@ public class Skills : MonoBehaviour
             int dmg2 = plyMove.target.GetComponent<EnemyStats>().GetShield();
             dmg = dmg + dmg2;
 
-            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
+            RaycastHit hit;
+            Vector3 newPos = plyStats.transform.position;
+            newPos.y += 1;
+            Vector3 newDir = plyMove.target.transform.position - plyStats.transform.position;
+            if (Physics.Raycast(newPos, newDir, out hit, 1000f, mask))
+            {
+                print(hit.transform.name);
+                if (hit.transform.tag == "Enemy")
+                {
+                    plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
+                    Destroy(Instantiate(blood, plyMove.target.transform.position, transform.rotation), 2);
+                }
+            }
         }
-
-        GameObject h = Instantiate(blood, plyMove.target.transform.position, transform.rotation);
-
         yield return new WaitForSeconds(1.2f);
         gameM.NewParent(gameM.playerParent, 1);
-        Destroy(h);
     }
 
     private IEnumerator CriticalBuff()
@@ -877,7 +922,10 @@ public class Skills : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        Instantiate(buffFX02, gameM.playerParent.position, transform.rotation);
+        GameObject buff = Instantiate(buffFX02, gameM.playerParent.position, transform.rotation);
+
+        buff.transform.SetParent(gameM.playerParent);
+
         gameM.NewParent(gameM.playerParent, 1);
         plyStats.SetAgility(1.25f);
         plyStats.MoreCriticProb(50);
@@ -935,7 +983,10 @@ public class Skills : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
-        Instantiate(buffFX03, gameM.playerParent.position, transform.rotation);
+         GameObject buff = Instantiate(buffFX03, gameM.playerParent.position, transform.rotation);
+
+        buff.transform.SetParent(gameM.playerParent);
+
         gameM.NewParent(gameM.playerParent, 1);
         plyStats.SetIntellect(1.25f);
     }
@@ -1010,10 +1061,12 @@ public class Skills : MonoBehaviour
         yield return new WaitForSeconds(1.3f);
 
         Vector3 newPos = plyMove.target.transform.position;
+        newPos.y += 40;
 
-        demaciaArea.gameObject.SetActive(true);
-        demaciaArea.position = newPos;
-        demaciaArea.rotation = gameM.playerParent.rotation;
+        Quaternion newRot = gameM.playerParent.rotation;
+        newRot.x = 180;
+
+        Destroy(Instantiate(finalJ, newPos, newRot), 5);
 
         yield return new WaitForSeconds(2f);
         demaciaArea.gameObject.SetActive(false);

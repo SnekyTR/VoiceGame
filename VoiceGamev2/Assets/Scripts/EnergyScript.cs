@@ -35,8 +35,6 @@ public class EnergyScript : MonoBehaviour
 
     public void NewEnergyActionsIcon(float e)
     {
-        print(e);
-
         for (float i = 0.5f; i < 5; i += 0.5f)
         {
             if (i == e && e > (int)e)

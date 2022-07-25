@@ -17,7 +17,7 @@ public class PlayerMove : MonoBehaviour
     private Transform playerTr;
     private CameraFollow gameM;
     private Skills skill;
-    private CombatTimer timerC;
+    [HideInInspector]public CombatTimer timerC;
 
     private GridActivation gridA;
     private bool isOnRoute =false;
@@ -391,8 +391,6 @@ public class PlayerMove : MonoBehaviour
         }
 
         skill.SetSkillSelected(n);
-        skill.ShowRanges(skill.GetRanges(n));
-        gridA.EnableAtkGrid(playerTr, skill.GetRanges(n));
 
         spellCmdR.Stop();
         startCmdR.Stop();
@@ -403,6 +401,9 @@ public class PlayerMove : MonoBehaviour
         {
             allieSpell = true;
             gameM.NewParent(playerTr, 2);
+
+            skill.ShowRangesAllie(skill.GetRanges(n));
+            gridA.EnableAtkGrid(playerTr, skill.GetRanges(n));
         }
         else if(n == "Aumento de fuerza" || n == "Instinto asesino" || n == "Sacrificio de sangre")
         {
@@ -412,6 +413,9 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
+            skill.ShowRanges(skill.GetRanges(n));
+            gridA.EnableAtkGrid(playerTr, skill.GetRanges(n));
+
             atkCmdR.Start();
             gameM.NewParent(playerTr, 2);
         }

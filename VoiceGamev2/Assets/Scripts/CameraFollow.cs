@@ -392,6 +392,8 @@ public class CameraFollow : MonoBehaviour
             NewParent(enemys[0].transform, 2);
             CameraPos2();
 
+            moveLogic.timerC.isPlaying = false;
+
             playerTurn.SetActive(false);
             enemyTurn.SetActive(true);
         }
@@ -412,6 +414,8 @@ public class CameraFollow : MonoBehaviour
             enemyTurn.SetActive(false);
 
             GetComponent<Skills>().SetSkillsTimers();
+
+            moveLogic.timerC.isPlaying = true;
         }
     }
 

@@ -94,27 +94,30 @@ public class SkillBook : MonoBehaviour
         if(ValidationSkill(wp, plyN) >= 1)
         {
             magnusSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 1);
+            magnusSB.transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 1));
             magnusSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 1), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 1)) + "\n" + "Rango: " +
-            skills.GetRanges(GetSkillName(wp, 1));
+            GetRange(GetSkillName(wp, 1));
         }
         else magnusSB.transform.GetChild(2).gameObject.SetActive(false);
 
         if (ValidationSkill(wp, plyN) >= 2)
         {
-            magnusSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 2);
-            magnusSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 2), plyN)
+            magnusSB.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 2);
+            magnusSB.transform.GetChild(3).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 2));
+            magnusSB.transform.GetChild(3).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 2), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 2)) + "\n" + "Rango: " +
-            skills.GetRanges(GetSkillName(wp, 1));
+            GetRange(GetSkillName(wp, 2));
         }
         else magnusSB.transform.GetChild(3).gameObject.SetActive(false);
 
         if (ValidationSkill(wp, plyN) >= 3)
         {
-            magnusSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 3);
-            magnusSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 3), plyN)
+            magnusSB.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 3);
+            magnusSB.transform.GetChild(4).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 3));
+            magnusSB.transform.GetChild(4).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 3), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 3)) + "\n" + "Rango: " +
-            skills.GetRanges(GetSkillName(wp, 3));
+            GetRange(GetSkillName(wp, 3));
         }
         else magnusSB.transform.GetChild(4).gameObject.SetActive(false);
     }
@@ -132,27 +135,30 @@ public class SkillBook : MonoBehaviour
         if (ValidationSkill(wp, plyN) >= 1)
         {
             vagnarSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 1);
+            vagnarSB.transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 1));
             vagnarSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 1), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 1)) + "\n" + "Rango: " +
-            skills.GetRanges(GetSkillName(wp, 1));
+            GetRange(GetSkillName(wp, 1));
         }
         else vagnarSB.transform.GetChild(2).gameObject.SetActive(false);
 
         if (ValidationSkill(wp, plyN) >= 2)
         {
-            vagnarSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 2);
-            vagnarSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 2), plyN)
+            vagnarSB.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 2);
+            vagnarSB.transform.GetChild(3).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 2));
+            vagnarSB.transform.GetChild(3).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 2), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 2)) + "\n" + "Rango: " +
-            skills.GetRanges(GetSkillName(wp, 1));
+            GetRange(GetSkillName(wp, 2));
         }
         else vagnarSB.transform.GetChild(3).gameObject.SetActive(false);
 
         if (ValidationSkill(wp, plyN) >= 3)
         {
-            vagnarSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 3);
-            vagnarSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 3), plyN)
+            vagnarSB.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 3);
+            vagnarSB.transform.GetChild(4).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 3));
+            vagnarSB.transform.GetChild(4).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 3), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 3)) + "\n" + "Rango: " +
-            skills.GetRanges(GetSkillName(wp, 3));
+            GetRange(GetSkillName(wp, 3));
         }
         else vagnarSB.transform.GetChild(4).gameObject.SetActive(false);
     }
@@ -170,27 +176,30 @@ public class SkillBook : MonoBehaviour
         if (ValidationSkill(wp, plyN) >= 1)
         {
             torekSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 1);
+            torekSB.transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 1));
             torekSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 1), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 1)) + "\n" + "Rango: " +
-            skills.GetRanges(GetSkillName(wp, 1));
+            GetRange(GetSkillName(wp, 1));
         }
         else torekSB.transform.GetChild(2).gameObject.SetActive(false);
 
         if (ValidationSkill(wp, plyN) >= 2)
         {
-            torekSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 2);
-            torekSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 2), plyN)
+            torekSB.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 2);
+            torekSB.transform.GetChild(3).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 2));
+            torekSB.transform.GetChild(3).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 2), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 2)) + "\n" + "Rango: " +
-            skills.GetRanges(GetSkillName(wp, 1));
+            GetRange(GetSkillName(wp, 2));
         }
         else torekSB.transform.GetChild(3).gameObject.SetActive(false);
 
         if (ValidationSkill(wp, plyN) >= 3)
         {
-            torekSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 3);
-            torekSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 3), plyN)
+            torekSB.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 3);
+            torekSB.transform.GetChild(4).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 3));
+            torekSB.transform.GetChild(4).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 3), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 3)) + "\n" + "Rango: " +
-            skills.GetRanges(GetSkillName(wp, 3));
+            GetRange(GetSkillName(wp, 3));
         }
         else torekSB.transform.GetChild(4).gameObject.SetActive(false);
     }
@@ -199,21 +208,21 @@ public class SkillBook : MonoBehaviour
     {
         if (w == "sword" || w == "axe")
         {
-            if (playerS[i].strengthPoints >= 6) return 1;
+            if (playerS[i].strengthPoints >= 10) return 3;
             else if (playerS[i].strengthPoints >= 8) return 2;
-            else if (playerS[i].strengthPoints >= 10) return 3;
+            else if (playerS[i].strengthPoints >= 6) return 1;
         }
         else if (w == "spear" || w == "bow")
         {
-            if (playerS[i].agilityPoints >= 6) return 1;
+            if (playerS[i].agilityPoints >= 10) return 3;
             else if (playerS[i].agilityPoints >= 8) return 2;
-            else if (playerS[i].agilityPoints >= 10) return 3;
+            else if (playerS[i].agilityPoints >= 6) return 1;
         }
         else if (w == "fire staff" || w == "sacred staff")
         {
-            if (playerS[i].intellectPoints >= 6) return 1;
+            if (playerS[i].intellectPoints >= 10) return 3;
             else if (playerS[i].intellectPoints >= 8) return 2;
-            else if (playerS[i].intellectPoints >= 10) return 3;
+            else if (playerS[i].intellectPoints >= 6) return 1;
         }
 
         return 0;
@@ -319,25 +328,25 @@ public class SkillBook : MonoBehaviour
         {
             if (i == 1) return "Partir";
             else if (i == 2) return "Aumento de fuerza";
-            else if (i == 2) return "Demacia";
+            else if (i == 3) return "Demacia";
         }
         else if (w == "spear" || w == "bow")
         {
             if (i == 1) return "Demolicíon";
             else if (i == 2) return "Instinto asesino";
-            else if (i == 2) return "Lluvia de flechas";
+            else if (i == 3) return "Lluvia de flechas";
         }
         else if (w == "fire staff")
         {
             if (i == 1) return "Bola de fuego";
             else if (i == 2) return "Sacrificio de sangre";
-            else if (i == 2) return "Lluvia de meteoritos";
+            else if (i == 3) return "Lluvia de meteoritos";
         }
         else if (w == "sacred staff")
         {
             if (i == 1) return "Curar";
             else if (i == 2) return "Revivir";
-            else if (i == 2) return "Juicio Final";
+            else if (i == 3) return "Juicio Final";
         }
 
         return "";
@@ -359,7 +368,7 @@ public class SkillBook : MonoBehaviour
         }
         else if (w == "Demolicíon")
         {
-            return "Daño: " + (int)(playerS[i].GetAgility() * 0.8f) + " - " + (int)(playerS[i].GetStrenght() * 1.5f) + " + Escudo enemigo";
+            return "Daño: " + (int)(playerS[i].GetAgility() * 0.8f) + " - " + (int)(playerS[i].GetStrenght() * 1.5f) + " + Escudo";
         }
         else if (w == "Instinto asesino")
         {
@@ -395,5 +404,59 @@ public class SkillBook : MonoBehaviour
         }
 
         return "";
+    }
+
+    private Sprite ReturnImg(string w)
+    {
+        if (w == "Partir")
+        {
+            return skillImage[0];
+        }
+        else if (w == "Aumento de fuerza")
+        {
+            return skillImage[1];
+        }
+        else if (w == "Demacia")
+        {
+            return skillImage[2];
+        }
+        else if (w == "Demolicíon")
+        {
+            return skillImage[3];
+        }
+        else if (w == "Instinto asesino")
+        {
+            return skillImage[4];
+        }
+        else if (w == "Lluvia de flechas")
+        {
+            return skillImage[5];
+        }
+        else if (w == "Bola de fuego")
+        {
+            return skillImage[6];
+        }
+        else if (w == "Sacrificio de sangre")
+        {
+            return skillImage[7];
+        }
+        else if (w == "Lluvia de meteoritos")
+        {
+            return skillImage[8];
+        }
+        else if (w == "Curar")
+        {
+            return skillImage[9];
+        }
+        else if (w == "Revivir")
+        {
+            return skillImage[10];
+        }
+        else if (w == "Juicio Final")
+        {
+            return skillImage[11];
+        }
+
+        return null;
     }
 }

@@ -37,6 +37,11 @@ public class CombatTimer : MonoBehaviour
             string min = ((int)timer / 60).ToString();
             string sec = ((int)(timer % 60)).ToString();
 
+            if(int.Parse(sec) < 10)
+            {
+                sec = "0" + sec;
+            }
+
             timerTxt.text = min + ":" + sec;
 
             filledImg.fillAmount = (timer / maxTime);
