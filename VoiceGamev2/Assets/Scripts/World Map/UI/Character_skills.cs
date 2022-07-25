@@ -46,6 +46,7 @@ public class Character_skills : MonoBehaviour
     {
 
         GeneralStats stats = GameObject.Find(actualCharacter.transform.name).GetComponent<GeneralStats>();
+        GameObject.Find(actualCharacter.transform.name).GetComponent<LevelSystem>().DeactivateButtons();
         general = stats;
         CallThings(actualCharacter);
         HP.text = stats.lifePoints.ToString();

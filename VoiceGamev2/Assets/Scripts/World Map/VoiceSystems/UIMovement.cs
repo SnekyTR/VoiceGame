@@ -26,6 +26,7 @@ public class UIMovement : MonoBehaviour
 
     [SerializeField] private GameObject mainHelpPannel;
     [SerializeField] private GameSave gameSave;
+    [HideInInspector] public bool canOpenGroup;
 
     private string charSelected;
 
@@ -98,6 +99,7 @@ public class UIMovement : MonoBehaviour
     {
         optionsPannel.SetActive(true);
         optionsRecognizer.Start();
+        canOpenGroup = false;
     }
     private void Save()
     {
@@ -125,13 +127,7 @@ public class UIMovement : MonoBehaviour
         partyInf[speech.text].Invoke();
 
     }
-    private void HelpPannels()
-    {
-        if (firstCanvas.IsRunning)
-        {
-            StartCoroutine(ShowHelpPannel(mainHelpPannel));
-        }
-    }
+
     IEnumerator ShowHelpPannel(GameObject actualPannel)
     {
         actualPannel.SetActive(true);
@@ -140,12 +136,15 @@ public class UIMovement : MonoBehaviour
     }
     private void ActivatePartyInformation()
     {
-        partyPannel.SetActive(true);
-        party.Start();
-        if(fTUE_Progresion.ftueProgression == 1)
+        if (canOpenGroup)
         {
-            fTUE_Progresion.ftueProgression++;
-            fTUE_Progresion.FTUEProgression();
+            partyPannel.SetActive(true);
+            party.Start();
+            if (fTUE_Progresion.ftueProgression == 1)
+            {
+                fTUE_Progresion.ftueProgression++;
+                fTUE_Progresion.FTUEProgression();
+            }
         }
     }
     private void CloseWindows()
@@ -168,9 +167,12 @@ public class UIMovement : MonoBehaviour
         {
             fTUE_Progresion.NextPannel();
             victoryResult.SetActive(false);
-        }else if(optionsPannel.activeInHierarchy){
+            canOpenGroup = true;
+        }
+        else if(optionsPannel.activeInHierarchy){
             optionsPannel.SetActive(false);
             optionsRecognizer.Stop();
+            canOpenGroup = true;
         }
         
     }

@@ -15,6 +15,7 @@ public class LevelSystem : MonoBehaviour
     public float requiredXp;
     private float lerpTimer;
     private float delayTimer;
+    int amountOfLvl;
 
     [SerializeField]private GameObject buttonsStats;
     [SerializeField]private GameObject levelupNotif;
@@ -133,19 +134,32 @@ public class LevelSystem : MonoBehaviour
     }
     public void DeactivateButtons()
     {
-        buttonsStats.SetActive(false);
-        levelupNotif.SetActive(false);
-        increaseStats.statOrders.Stop();
-        lvlUP.SetActive(true);
+        if(amountOfLvl <= 0)
+        {
+            print("No tiene mas levels a subir");
+            buttonsStats.SetActive(false);
+            levelupNotif.SetActive(false);
+            increaseStats.statOrders.Stop();
+            lvlUP.SetActive(false);
+        }
+        else
+        {
+            print("Todavia tiene lvl que subir");
+            buttonsStats.SetActive(true);
+            levelupNotif.SetActive(true);
+            lvlUP.SetActive(true);
+            amountOfLvl--;
+        }
+
     }
     public void UpdateLevel()
     {
         string actualLevel;
+        amountOfLvl++;
         string actualPlayer = transform.name.ToString();
         actualLevel = level.ToString();
         partyInfo.UpdateLevel(actualLevel, actualPlayer);
         print("Se ha incrementado el nivel de: " + actualPlayer + "al Level: " + actualLevel);
-        
     }
     public string UpdateXP()
     {
