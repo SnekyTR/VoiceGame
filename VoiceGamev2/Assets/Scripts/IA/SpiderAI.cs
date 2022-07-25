@@ -73,7 +73,13 @@ public class SpiderAI : MonoBehaviour
     {
         if (enemyStats.GetEnergy() > 0 || enemyStats.GetEnergyActions() > 0)
         {
-            if (Vector3.Distance(transform.position, target.position) < enemyStats.GetRange() && enemyStats.GetEnergyActions() >= 2)
+            RaycastHit hit;
+            Vector3 newPos = transform.position;
+            newPos.y += 1;
+            Vector3 newDir = target.position - transform.position;
+            if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
+
+            if (Vector3.Distance(transform.position, target.position) < enemyStats.GetRange() && enemyStats.GetEnergyActions() >= 2 && hit.transform.tag == "Player")
             {
                 if (target.GetComponent<PlayerStats>().GetLife() > 0)
                 {

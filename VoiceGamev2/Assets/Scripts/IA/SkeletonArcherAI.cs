@@ -74,7 +74,13 @@ public class SkeletonArcherAI : MonoBehaviour
         {
             float dis = Vector3.Distance(transform.position, target.position);
 
-            if(dis > 7 && dis < 13)
+            RaycastHit hit;
+            Vector3 newPos = transform.position;
+            newPos.y += 1;
+            Vector3 newDir = target.position - transform.position;
+            if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
+
+            if (dis > 7 && dis < 13 && hit.transform.tag == "Player")
             {
                 if(enemyStats.GetEnergyActions() < 2)
                 {
