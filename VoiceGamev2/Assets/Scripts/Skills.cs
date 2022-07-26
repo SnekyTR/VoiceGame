@@ -99,11 +99,6 @@ public class Skills : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-
-    }
-
     public void SetActualPlayer(PlayerStats pl)
     {
         plyStats = pl;

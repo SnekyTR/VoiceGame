@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using TMPro;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -124,7 +125,18 @@ public class PlayerStats : MonoBehaviour
 
         selected.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
 
+        float atkE = 0;
 
+        if (actualWeapon == "sword") atkE = 2;
+        else if (actualWeapon == "axe") atkE = 2.5f;
+        else if (actualWeapon == "spear") atkE = 1.5f;
+        else if (actualWeapon == "bow") atkE = 2f;
+        else if (actualWeapon == "fire staff") atkE = 1.5f;
+        else if (actualWeapon == "sacred staff") atkE = 1;
+
+        selected.transform.parent.parent.GetChild(2).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = atkE.ToString();
+
+        print(selected.transform.parent.parent.GetChild(2).GetChild(0).GetChild(0).GetChild(0));
     }
     //Coge los stats guardados en el fichero antes de abrir el nivel
     private void LoadStatsPlayer()
