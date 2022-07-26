@@ -7681,6 +7681,7 @@ MonoBehaviour:
   p3: {fileID: 514330442}
   victoryResults: {fileID: 532953708}
   fTUE_Progresion: {fileID: 2003819490}
+  uIMovement: {fileID: 2003819489}
   player: {fileID: 344659047}
   singlePanel: {fileID: 189538480}
   vagnar: {fileID: 2115945310}
@@ -24453,6 +24454,7 @@ MonoBehaviour:
   optionsPannel: {fileID: 1641281639}
   mainHelpPannel: {fileID: 375705107}
   gameSave: {fileID: 645889366}
+  canOpenGroup: 0
   fTUE_Progresion: {fileID: 2003819490}
 --- !u!114 &2003819490
 MonoBehaviour:

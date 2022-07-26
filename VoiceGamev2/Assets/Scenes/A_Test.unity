@@ -62806,6 +62806,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 538294761, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 538294761, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.96
+      objectReference: {fileID: 0}
     - target: {fileID: 1495127969, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
       propertyPath: lPanel
       value: 

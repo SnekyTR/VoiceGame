@@ -26,6 +26,7 @@ public class Progression : MonoBehaviour
 
     [SerializeField]private GameObject victoryResults;
     [SerializeField] private FTUE_Progresion fTUE_Progresion;
+    [SerializeField] private UIMovement uIMovement;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject singlePanel;
     [SerializeField] private GameObject vagnar;
@@ -108,6 +109,7 @@ public class Progression : MonoBehaviour
     }
     public void Victory(float xp)
     {
+        uIMovement.canOpenGroup = false;
         victoryResults.SetActive(true);
         expText1.text = "+" + xp + " XP";
         expText2.text = "+" + xp + " XP";

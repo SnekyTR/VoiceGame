@@ -31,7 +31,6 @@ public class MainMenuVoice : MonoBehaviour
     void Start()
     {
         AddOrders();
-        StartCoroutine(StartGame());
         //loadGame.SetActive(false);
         if (filesExist)
         {
@@ -54,9 +53,8 @@ public class MainMenuVoice : MonoBehaviour
     {
         menuActions.Add("cargar partida", LoadGame);
         menuActions.Add("crear partida", CreateNewGame);
-        menuActions.Add("crear", CreateNewGame);
-        menuActions.Add("partida", CreateNewGame);
-        menuActions.Add("kaka", CreateNewGame);
+        menuActions.Add("borrar datos", DeleteFiles);
+        //menuActions.Add("salir", ExitGame);
         menuKeyword = new KeywordRecognizer(menuActions.Keys.ToArray());
         menuKeyword.OnPhraseRecognized += RecognizedVoice;
         menuKeyword.Start();
@@ -67,21 +65,43 @@ public class MainMenuVoice : MonoBehaviour
         Debug.Log(speech.text);
         menuActions[speech.text].Invoke();
     }
+    IEnumerator caca()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(2);
+    }
+    private void DeleteFiles()
+    {
+        UnityEditor.FileUtil.DeleteFileOrDirectory(Application.persistentDataPath);
+        filesExist = false;
+    }
     private void LoadGame()
     {
         if (!filesExist) { return; }
+        CloseOrders();
         SceneManager.LoadScene(1);
     }
     private void CreateNewGame()
     {
         if (filesExist) { return; }
-        print("Se ha cargado");
+        CloseOrders();
         SceneManager.LoadScene(2);
     }
-    IEnumerator StartGame()
+    private void ExitGame()
     {
-        yield return new WaitForSeconds(3f);
-        //SceneManager.LoadScene(2);
+        Application.Quit();
+    }
+    private void CloseOrders()
+    {
+        if (!PlayerPrefs.HasKey("pm")) PlayerPrefs.SetInt("pm", 0);
+
+        int ns = PlayerPrefs.GetInt("pm");
+        PlayerPrefs.SetInt("pm", (ns + 1));
+
+        Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
+        zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, CreateNewGame);
+        menuKeyword = new KeywordRecognizer(zero1.Keys.ToArray());
+        menuKeyword.OnPhraseRecognized += RecognizedVoice;
     }
 
 }
