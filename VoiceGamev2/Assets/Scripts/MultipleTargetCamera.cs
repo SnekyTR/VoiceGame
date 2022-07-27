@@ -13,6 +13,14 @@ public class MultipleTargetCamera : MonoBehaviour
     public float maxZoom = 10f;
     public float zoomLimiter = 50f;
     private Camera cam;
+
+    private bool isRotate;
+    private Quaternion rotationPos;
+
+    [Header("Rotation")]
+    public List<Quaternion> rotations;
+    public List<Vector3> positions;
+
     private void Start()
     {
         cam = gameObject.GetComponent<Camera>();
@@ -24,7 +32,18 @@ public class MultipleTargetCamera : MonoBehaviour
 
         Move();
         Zoom();
+
+        Rotation();
     }
+
+    private void Rotation()
+    {
+        if (isRotate)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotationPos, 1.8f * Time.deltaTime);
+        }
+    }
+
     private void Move()
     {
         Vector3 centerPoint = GetCenterPoint();
@@ -59,5 +78,25 @@ public class MultipleTargetCamera : MonoBehaviour
             bounds.Encapsulate(targets[i].position);
         }
         return bounds.center;
+    }
+
+    public void CameraStrategic(Transform l)
+    {
+        targets = new List<Transform>();
+        targets.Add(l);
+
+        offset = positions[0];
+        rotationPos = rotations[0];
+        isRotate = true;
+    }
+
+    public void CameraEnemy(Transform l)
+    {
+
+    }
+
+    public void SectionAdd(Transform l)
+    {
+        targets.Add(l);
     }
 }

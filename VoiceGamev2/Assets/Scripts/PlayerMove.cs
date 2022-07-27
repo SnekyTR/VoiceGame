@@ -301,7 +301,7 @@ public class PlayerMove : MonoBehaviour
         else if (energy > ((int)energy + 0.7f)) energy = (int)energy + 1;       
         else energy = (int)energy;   //formula energia distancia
 
-
+        print(energy);
         if (GameObject.Find(i).CompareTag("Section"))
         {
             if (TurnEnergy(energy))

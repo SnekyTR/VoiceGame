@@ -11,10 +11,13 @@ public class SectionControl : MonoBehaviour
     private Image sectImg;
     private Color originColor;
 
+    private MultipleTargetCamera cam;
+
     private void Awake()
     {
         sectImg = canvasObj.transform.GetChild(2).GetComponent<Image>();
         originColor = sectImg.color;
+        cam = GameObject.Find("Main Camera").GetComponent<MultipleTargetCamera>();
     }
 
     public void EnableSection(Transform tr)
@@ -30,7 +33,6 @@ public class SectionControl : MonoBehaviour
 
         if (tr.gameObject.GetComponent<PlayerStats>().GetEnergy(1) < energy)
         {
-            transform.tag = "Untagged";
             DisableSection();
             return;
         }

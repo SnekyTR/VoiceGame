@@ -17,6 +17,7 @@ public class CameraFollow : MonoBehaviour
     private List<string> playersNames = new List<string>();
     private PlayerMove moveLogic;
     private SkillBook skBook;
+    private MultipleTargetCamera camS;
     private GameObject playerTurn, enemyTurn;
     private Transform cam;
 
@@ -40,6 +41,7 @@ public class CameraFollow : MonoBehaviour
         initPos = transform.position;
 
         cam = transform.GetChild(0);
+        camS = cam.GetComponent<MultipleTargetCamera>();
         pos3 = GameObject.Find("Center").transform;
 
         moveLogic = GetComponent<PlayerMove>();
@@ -83,8 +85,11 @@ public class CameraFollow : MonoBehaviour
         }
 
         passCmd.Add("pasar", NextTurn);
+        passCmd.Add("pasa", NextTurn);
         passCmd.Add("cancelar", CancelOrder);
+        passCmd.Add("cancela", CancelOrder);
         passCmd.Add("pergamino", SkillBookOpen);
+        passCmd.Add("cerrar", SkillBookClose);
         passCmdR = new KeywordRecognizer(passCmd.Keys.ToArray());
         passCmdR.OnPhraseRecognized += RecognizedVoice4;
 
@@ -94,12 +99,12 @@ public class CameraFollow : MonoBehaviour
         selectPJCmdR.Start();
         passCmdR.Start();
 
-        CameraCenter();
+        //CameraCenter();
     }
     
     void LateUpdate()
     {
-        if(playerParent != null)
+        /*if(playerParent != null)
         {
             Vector3 newPos = Vector3.MoveTowards(transform.position,new Vector3(playerParent.position.x, transform.position.y, playerParent.position.z), 6 * Time.deltaTime);
             transform.position = newPos;
@@ -118,7 +123,7 @@ public class CameraFollow : MonoBehaviour
 
                 cam.rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos2.rotation, 1.5f * Time.deltaTime);
             }
-        }
+        }*/
     }
 
     public void CloseCameraFollow()
@@ -333,7 +338,18 @@ public class CameraFollow : MonoBehaviour
         if(e != 0)
         {
             skBook.StartSkillBook(e, players.Count);
+
+            sbookRestriction = true;
         }
+    }
+
+    private void SkillBookClose()
+    {
+        if (skBook.isStarted) sbookActive = false;
+
+        skBook.StartSkillBook(1, players.Count);
+
+        sbookRestriction = false;
     }
 
     public void CancelOrder()
@@ -363,6 +379,8 @@ public class CameraFollow : MonoBehaviour
         nextTurnActive = true;
         cancelActive = false;
         sbookActive = false;
+
+        if (skBook.isStarted) SkillBookClose();
 
         if (whoTurn)
         {

@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blood: {fileID: 4787146697146794734, guid: e9050f838eb01db44b8958e4d8266866, type: 3}
+  dust: {fileID: 0}
 --- !u!1 &5819794358170449582
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,6 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blood: {fileID: 4787146697146794734, guid: e9050f838eb01db44b8958e4d8266866, type: 3}
+  dust: {fileID: 0}
 --- !u!1 &8022926636653982318
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,6 +498,7 @@ GameObject:
   - component: {fileID: 8022926637128795513}
   - component: {fileID: 5905581117175736877}
   - component: {fileID: 3077805959708153457}
+  - component: {fileID: 2852720273540608171}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -622,8 +625,8 @@ MonoBehaviour:
       colorBlindnessType: 0
       colorBlindnessStrength: 1
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
+  m_ShowToolkit: 1
+  m_ShowCustomSorter: 1
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
@@ -645,6 +648,24 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!114 &2852720273540608171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8022926637128795510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 131b9f870924bb548a5ca77ea0b7c74e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets: []
+  smoothTime: 4
+  offset: {x: 0, y: 0, z: 0}
+  minZoom: 40
+  maxZoom: 10
+  zoomLimiter: 50
 --- !u!1001 &5357094215712880117
 PrefabInstance:
   m_ObjectHideFlags: 0
