@@ -5,22 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class MoveDataToMain : MonoBehaviour
 {
-    private Progression pro;
-    private GameSave gameSave;
+    [SerializeField] private Progression pro;
+    [SerializeField] private GameSave gameSave;
     private LevelSystem level;
     private CombatEnter combatEnter;
     private GameObject victoryResults;
-    public int totalEXP;
     private GameObject[] player;
     VoiceDestinations voices;
+    public LoadingScreen loadingScreen;
+    public bool loadVictory;
+    public int totalEXP;
+    // Start is called before the first frame update
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
     }
-    // Start is called before the first frame update
     void Start()
     {
-        ReChargeObjects();
+        
     }
 
     // Update is called once per frame
@@ -30,7 +32,8 @@ public class MoveDataToMain : MonoBehaviour
     }
     public void IncrementProgresion()
     {
-        SceneManager.LoadScene(1);
+        loadingScreen = GameObject.Find("CanvasManager").GetComponent<LoadingScreen>();
+        loadingScreen.LoadScene(1);
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
         StartCoroutine(ReChargeObjects());  
     }
@@ -41,51 +44,10 @@ public class MoveDataToMain : MonoBehaviour
         gameSave = GameObject.Find("GameSaver").GetComponent<GameSave>();
         
         //level = GameObject.Find("Magnus").GetComponent<LevelSystem>();
-        StartCoroutine(IncrementTheProgression());
+        //StartCoroutine(IncrementTheProgression());
         //SceneManager.UnloadSceneAsync(1);
 
     }
-    IEnumerator IncrementTheProgression()
-    {
-        
-        player = GameObject.FindGameObjectsWithTag("Player");
-        for(int i = 0; i < player.Length; i++)
-        {
-            if (player[i].name == "Magnus")
-            {
-                voices = player[i].GetComponent<VoiceDestinations>();
-                voices.enabled = false;
-            }
-        }
-        yield return new WaitForSeconds(0.1f);
-        pro.progression += 1;
-        gameSave.SaveGame();
-        //gameSave.LoadGame();
-        pro.CheckProgression();
-        for(int i = 0; i< GameObject.FindGameObjectsWithTag("Player").Length; i++)
-        {
-            level = GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>();
-            level.GainExperience(totalEXP);
-            level.hasLvlUP = true;
-            //gameSave.LoadGame(GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<GeneralStats>(), GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>()) ;
-        }
-        gameSave.SaveGame();
-        voices.enabled = true;
-        pro.Victory(totalEXP);
-    }
-    public void FailLevel()
-    {
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
-        int scene =  SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(scene);
-        //StartCoroutine(FailMainScene());
-    }
-    IEnumerator FailMainScene()
-    {
-        yield return new WaitForSeconds(1f);
-        print("Ha fallado");
-        gameSave.LoadGame();
-        pro.CheckProgression();
-        gameSave.SaveGame();
-    }
+    
+   
 }

@@ -76,20 +76,20 @@ public class Character_skills : MonoBehaviour
                 }
                 else
                 {
-                    //strenghtSkill3.color = new Color(50, 50, 50, 255);
+                    strenghtSkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
                 }
             }
             else
             {
-                //strenghtSkill2.color = new Color(50, 50, 50, 255);
-                //strenghtSkill3.color = new Color(50, 50, 50, 255);
+                strenghtSkill2.color = new Color(0.15f, 0.15f, 0.15f, 255);
+                strenghtSkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
             }
         }
         else
         {
-            /*strenghtSkill1.color = new Color(50, 50, 50, 255);
-            strenghtSkill2.color = new Color(50, 50, 50, 255);
-            strenghtSkill3.color = new Color(50, 50, 50, 255);*/
+            strenghtSkill1.color = new Color(0.15f, 0.15f, 0.15f, 255);
+            strenghtSkill2.color = new Color(0.15f, 0.15f, 0.15f, 255);
+            strenghtSkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
         }
     }
     public void CheckIntellect()
@@ -106,20 +106,20 @@ public class Character_skills : MonoBehaviour
                 }
                 else
                 {
-                   // magicSkill2.color = new Color(50, 50, 50, 255);
+                   magicSkill2.color = new Color(0.15f, 0.15f, 0.15f, 255);
                 }
             }
             else
             {
-                //magicSkill2.color = new Color(50, 50, 50, 255);
-                //magicSkill3.color = new Color(50, 50, 50, 255);
+                magicSkill2.color = new Color(0.15f, 0.15f, 0.15f, 255);
+                magicSkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
             }
         }
         else
         {
-            /*magicSkill1.color = new Color(50, 50, 50, 255);
-            magicSkill2.color = new Color(50, 50, 50, 255);
-            magicSkill3.color = new Color(50, 50, 50, 255);*/
+            magicSkill1.color = new Color(0.15f, 0.15f, 0.15f, 255);
+            magicSkill2.color = new Color(0.15f, 0.15f, 0.15f, 255);
+            magicSkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
         }
     }
     public void CheckAgility()
@@ -136,20 +136,20 @@ public class Character_skills : MonoBehaviour
                 }
                 else
                 {
-                    //agilitySkill3.color = new Color(50, 50, 50, 255);
+                    agilitySkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
                 }
             }
             else
             {
-               // agilitySkill2.color = new Color(50, 50, 50, 255);
-                //agilitySkill3.color = new Color(50, 50, 50, 255);
+                agilitySkill2.color = new Color(0.15f, 0.15f, 0.15f, 255);
+                agilitySkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
             }
         }
         else
         {
-            /*agilitySkill1.color = new Color(50, 50, 50, 255);
-            agilitySkill2.color = new Color(50, 50, 50, 255);
-            agilitySkill3.color = new Color(50, 50, 50, 255);*/
+            agilitySkill1.color = new Color(0.15f, 0.15f, 0.15f, 255);
+            agilitySkill2.color = new Color(0.15f, 0.15f, 0.15f, 255);
+            agilitySkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
         }
     }
     private void CallThings(GameObject actualcharacter)

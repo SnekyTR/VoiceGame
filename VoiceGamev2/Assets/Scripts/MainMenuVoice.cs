@@ -16,6 +16,7 @@ public class MainMenuVoice : MonoBehaviour
 
     [SerializeField] private GameObject createGame;
     [SerializeField] private GameObject loadGame;
+    [SerializeField] private LoadingScreen loadingScreen;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -85,7 +86,8 @@ public class MainMenuVoice : MonoBehaviour
     {
         if (filesExist) { return; }
         CloseOrders();
-        SceneManager.LoadScene(2);
+        loadingScreen.LoadScene(2);
+       
     }
     private void ExitGame()
     {

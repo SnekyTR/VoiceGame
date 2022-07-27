@@ -15,12 +15,14 @@ public class VoiceDestinations : MonoBehaviour
     private String selectedLocation;
     public CombatEnter combatEnter;
     public bool entered = false;
-    private NavMeshAgent agent;
+    [SerializeField] private NavMeshAgent agent;
     private Dictionary<string, Action> mapActions = new Dictionary<string, Action>();
     private KeywordRecognizer mapDestinations;
+    private BoxCollider boxCollider;
     // Start is called before the first frame update
     void Start()
     {
+        boxCollider = gameObject.GetComponent<BoxCollider>();
         agent = gameObject.GetComponent<NavMeshAgent>();
         AddDestinations();
     }
@@ -52,6 +54,7 @@ public class VoiceDestinations : MonoBehaviour
         zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, SelectDestination);
         mapDestinations = new KeywordRecognizer(zero1.Keys.ToArray());
         mapDestinations.OnPhraseRecognized += RecognizedVoice;
+        
     }
     public void RecognizedVoice(PhraseRecognizedEventArgs speech)
     {
@@ -64,7 +67,7 @@ public class VoiceDestinations : MonoBehaviour
     private void SelectDestination()
     {
         objectTransform = GameObject.Find(selectedLocation).transform;
-
+        boxCollider.enabled = true;
         //combatEnter.www();
         if (entered)
         {
@@ -86,6 +89,7 @@ public class VoiceDestinations : MonoBehaviour
     public void StopPlayer()
     {
         agent.SetDestination(transform.position);
+      
         
     }
 

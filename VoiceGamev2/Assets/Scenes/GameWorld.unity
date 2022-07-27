@@ -3866,7 +3866,7 @@ BoxCollider:
   m_GameObject: {fileID: 344659047}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 2.5262961, y: 2.2204463e-16, z: 2.3485906}
   m_Center: {x: -0.079024926, y: 0, z: -0.027658885}
@@ -3950,6 +3950,7 @@ MonoBehaviour:
   fTUE_Progresion: {fileID: 2003819490}
   combatEnter: {fileID: 0}
   entered: 0
+  agent: {fileID: 0}
 --- !u!1 &365076886
 GameObject:
   m_ObjectHideFlags: 0
@@ -5374,7 +5375,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -9.999878, y: 0}
+  m_AnchoredPosition: {x: -10, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &474596798
@@ -7688,6 +7689,8 @@ MonoBehaviour:
   expText1: {fileID: 493275135}
   expText2: {fileID: 1536882374}
   expText3: {fileID: 365076888}
+  totalEXP: 0
+  loadVictory: 0
 --- !u!1 &661419656
 GameObject:
   m_ObjectHideFlags: 0
@@ -24485,7 +24488,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2003819483}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49f3ca33d6cba8b4ca98470fcfadd33e, type: 3}
   m_Name: 
@@ -28355,7 +28358,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Agility Skills
+  m_text: Agilidad
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: eb5b94f63ad5cf844a6e4a2a9fb880b2, type: 2}
   m_sharedMaterial: {fileID: -3164822241988926466, guid: eb5b94f63ad5cf844a6e4a2a9fb880b2, type: 2}
@@ -31752,9 +31755,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Inventory
-
-'
+  m_text: Inventario
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: faa26c437fd6517478f170e67b3953b2, type: 2}
   m_sharedMaterial: {fileID: 7649214206849331385, guid: faa26c437fd6517478f170e67b3953b2, type: 2}
@@ -32801,7 +32802,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Skills
+  m_text: Habilidades
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: faa26c437fd6517478f170e67b3953b2, type: 2}
   m_sharedMaterial: {fileID: 7649214206849331385, guid: faa26c437fd6517478f170e67b3953b2, type: 2}
@@ -38062,7 +38063,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Strength Skills
+  m_text: Fuerza
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: eb5b94f63ad5cf844a6e4a2a9fb880b2, type: 2}
   m_sharedMaterial: {fileID: -3164822241988926466, guid: eb5b94f63ad5cf844a6e4a2a9fb880b2, type: 2}
@@ -39103,7 +39104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -41604,7 +41605,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Magic Skills
+  m_text: "M\xE1gicas"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: eb5b94f63ad5cf844a6e4a2a9fb880b2, type: 2}
   m_sharedMaterial: {fileID: -3164822241988926466, guid: eb5b94f63ad5cf844a6e4a2a9fb880b2, type: 2}

@@ -12,12 +12,13 @@ public class WinLoose : MonoBehaviour
     private bool isEnter = false;
     private PlayerMove plyMove;
     private CameraFollow gameM;
-
     private Dictionary<string, Action> winOrders = new Dictionary<string, Action>();
     private KeywordRecognizer wOrders;
     private Dictionary<string, Action> looseOrders = new Dictionary<string, Action>();
     private KeywordRecognizer lOrders;
     [SerializeField] private MoveDataToMain moveData;
+    [SerializeField] LoadingScreen loadingScreen;
+
     public int totalEnemies;
     public int totalPlayers;
     // Start is called before the first frame update
@@ -29,9 +30,10 @@ public class WinLoose : MonoBehaviour
 
         plyMove = GetComponent<PlayerMove>();
         gameM = GetComponent<CameraFollow>();
-
-        wPanel = GameObject.Find("CanvasManager").transform.GetChild(7).gameObject;
-        lPanel = GameObject.Find("CanvasManager").transform.GetChild(8).gameObject;
+        loadingScreen = GameObject.Find("CanvasManager").GetComponent<LoadingScreen>();
+        moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
+        //wPanel = GameObject.Find("CanvasManager").transform.GetChild(7).gameObject;
+        //lPanel = GameObject.Find("CanvasManager").transform.GetChild(8).gameObject;
     }
     private void Update()
     {
@@ -110,20 +112,28 @@ public class WinLoose : MonoBehaviour
     }
     private void Continue()
     {
+        moveData.loadVictory = true;
         wOrders.Stop();
-        moveData.IncrementProgresion();
+        //moveData.IncrementProgresion();
         CloseWinLose();
+        loadingScreen.LoadScene(1);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
+
     }
     private void Retry()
     {
         lOrders.Stop();
-        moveData.FailLevel();
         CloseWinLose();
+        FailLevel();
     }
     private void Assign()
     {
         if(GameObject.Find("SceneConector")) moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
-        //wPanel = GameObject.Find("VPanel");
-        //lPanel = GameObject.Find("LPanel");
+    }
+    public void FailLevel()
+    {
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(scene);
     }
 }

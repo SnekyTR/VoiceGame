@@ -7,6 +7,7 @@ public class GameProgressionData
 {
     public int progressionNumber;
     public int ftueProgressionNumber;
+
     //[SerializeField] FTUE_Progresion fTUE_Progresion;
 
     // Update is called once per frame

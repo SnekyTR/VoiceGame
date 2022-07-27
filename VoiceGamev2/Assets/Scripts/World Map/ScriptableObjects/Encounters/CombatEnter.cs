@@ -72,7 +72,7 @@ public class CombatEnter : MonoBehaviour
     public void CheckLvlPanel()
     {
         if (combat == true) { 
-
+            
             if (combatSingle)
             {
                 panelSingle.SetActive(true);

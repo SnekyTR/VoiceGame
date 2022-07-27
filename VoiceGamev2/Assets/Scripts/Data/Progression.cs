@@ -34,16 +34,33 @@ public class Progression : MonoBehaviour
     [SerializeField] private TextMeshProUGUI expText2;
     [SerializeField] private TextMeshProUGUI expText3;
     GameSave gameSave;
+    VoiceDestinations voices;
+    MoveDataToMain moveDataToMain;
+    LevelSystem level;
+    public int totalEXP;
+    public bool loadVictory;
+
+
+    GameObject[] players;
     private void Awake()
     {
+        moveDataToMain = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
+        if (moveDataToMain.loadVictory)
+        {
+            StartCoroutine(IncrementTheProgression());
+        }
+        print("Se ha cargado progresion");
+        
+        
         if (System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
         {
-            print("Se ha cargado progresion");
+           
             LoadProgresion();
         }
     }
     private void Start()
     {
+        
         gameSave = gameObject.GetComponent<GameSave>();
     }
     private void LoadProgresion()
@@ -114,5 +131,34 @@ public class Progression : MonoBehaviour
         expText1.text = "+" + xp + " XP";
         expText2.text = "+" + xp + " XP";
         expText3.text = "+" + xp + " XP";
+    }
+    IEnumerator IncrementTheProgression()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i].name == "Magnus")
+            {
+                voices = players[i].GetComponent<VoiceDestinations>();
+                voices.enabled = false;
+            }
+        }
+        yield return new WaitForSeconds(0.1f);
+        progression += 1;
+        gameSave.SaveGame();
+        //gameSave.LoadGame();
+        CheckProgression();
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Player").Length; i++)
+        {
+            level = GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>();
+            level.GainExperience(moveDataToMain.totalEXP);
+            level.hasLvlUP = true;
+            //gameSave.LoadGame(GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<GeneralStats>(), GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>()) ;
+        }
+        gameSave.SaveGame();
+        voices.enabled = true;
+        Victory(moveDataToMain.totalEXP);
+        Progression pro = gameObject.GetComponent<Progression>();
+        //SaveSystem.SaveLvlExit(pro);
     }
 }

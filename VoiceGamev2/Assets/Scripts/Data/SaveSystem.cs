@@ -65,4 +65,36 @@ public static class SaveSystem
             return null;
         }
     }
+
+   /* public static void SaveLvlExit(WinLoose winLoos)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/progression.data";
+
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        LevelExitData data = new LevelExitData(winLoose);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    public static LevelExitData LoadLvlExit()
+    {
+        string path = Application.persistentDataPath + "/progression.data";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stram = new FileStream(path, FileMode.Open);
+
+            LevelExitData data = formatter.Deserialize(stram) as LevelExitData;
+            stram.Close();
+            return data;
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + path);
+            return null;
+        }
+    }*/
 }
