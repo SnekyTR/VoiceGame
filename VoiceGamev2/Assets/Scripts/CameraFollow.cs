@@ -22,8 +22,7 @@ public class CameraFollow : MonoBehaviour
     private Transform cam;
 
     public List<Transform> playersPos = new List<Transform>();
-    private Transform pos3, pos4;
-    private Vector3 initPos;
+    private Transform pos4;
 
     private Dictionary<string, Action<string>> selectPJCmd = new Dictionary<string, Action<string>>();
     private KeywordRecognizer selectPJCmdR;
@@ -37,11 +36,9 @@ public class CameraFollow : MonoBehaviour
     private void Awake()
     {
         whoTurn = true;         //player turn
-        initPos = transform.position;
 
         cam = transform.GetChild(0);
         camS = cam.GetComponent<MultipleTargetCamera>();
-        pos3 = GameObject.Find("Center").transform;
 
         moveLogic = GetComponent<PlayerMove>();
         playerTurn = GameObject.Find("PlayerTurn");
@@ -351,6 +348,17 @@ public class CameraFollow : MonoBehaviour
         camS.CameraEnemy(tr);
     }
 
+    public void CameraAddEnemys()
+    {
+        for(int i = 0; i < enemys.Count; i++)
+        {
+            if(Vector3.Distance(playerParent.position, enemys[i].transform.position) <= 20f)
+            {
+                camS.SectionAdd(enemys[i].transform);
+            }
+        }
+    }
+
     private void SkillBookOpen()
     {
         if (sbookRestriction) return;
@@ -469,7 +477,18 @@ public class CameraFollow : MonoBehaviour
 
             moveLogic.timerC.isPlaying = true;
 
-            camS.CameraPlayerTurn(players);
+            List<Transform> nw = new List<Transform>();
+            for(int i = 0; i < players.Count; i++)
+            {
+                nw.Add(players[i].transform);
+            }
+
+            for(int i = 0; i < enemys.Count; i++)
+            {
+                nw.Add(enemys[i].transform);
+            }
+
+            camS.CameraPlayerTurn(nw);
         }
     }
 

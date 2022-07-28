@@ -280,12 +280,12 @@ public class PlayerMove : MonoBehaviour
 
         moveCmdR.Start();
         spellCmdR.Stop();
-        print(playerTr.name);
 
         gridA.EnableGrid(playerTr);
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = blueC;
 
         gameM.CameraPos2();
+        gameM.CameraAddEnemys();
     }
 
     //movement
@@ -360,6 +360,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         gameM.CameraPos2();
+        gameM.CameraAddEnemys();
 
         skill.ShowRanges(skill.GetRanges("atk"));
         gridA.EnableAtkGrid(playerTr, skill.GetRanges("atk"));
@@ -418,6 +419,7 @@ public class PlayerMove : MonoBehaviour
         else
         {
             gameM.CameraPos2();
+            gameM.CameraAddEnemys();
 
             skill.ShowRanges(skill.GetRanges(n));
             gridA.EnableAtkGrid(playerTr, skill.GetRanges(n));

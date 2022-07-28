@@ -94,7 +94,7 @@ public class PlayerStats : MonoBehaviour
             skillsColocation.AssignHammundSkills(actualWeapon, this.gameObject);
         }
 
-        lifeValue = 10;
+        lifeValue = 15;
         for(int i = 2; i <= lifePoints; i++)
         {
             lifeValue += (int)i / 2;

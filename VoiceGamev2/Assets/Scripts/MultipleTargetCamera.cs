@@ -18,7 +18,7 @@ public class MultipleTargetCamera : MonoBehaviour
     private Quaternion rotationPos;
 
     [Header("Rotation")]
-    public List<Quaternion> rotations;
+    public List<Vector3> rotations;
     public List<Vector3> positions;
 
     private void Start()
@@ -86,7 +86,7 @@ public class MultipleTargetCamera : MonoBehaviour
         targets.Add(l);
 
         offset = positions[0];
-        rotationPos = rotations[0];
+        rotationPos = Quaternion.Euler(rotations[0]);
         isRotate = true;
 
     }
@@ -97,7 +97,7 @@ public class MultipleTargetCamera : MonoBehaviour
         targets.Add(l);
 
         offset = positions[1];
-        rotationPos = rotations[1];
+        rotationPos = Quaternion.Euler(rotations[1]);
         isRotate = true;
     }
 
@@ -107,7 +107,7 @@ public class MultipleTargetCamera : MonoBehaviour
         targets.Add(l);
 
         offset = positions[0];
-        rotationPos = rotations[0];
+        rotationPos = Quaternion.Euler(rotations[0]);
         isRotate = true;
     }
 
