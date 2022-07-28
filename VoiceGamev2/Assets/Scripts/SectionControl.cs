@@ -31,18 +31,19 @@ public class SectionControl : MonoBehaviour
         else if (energy > ((int)energy + 0.7f)) energy = (int)energy + 1;       //formula energia mov
         else energy = (int)energy;
 
-        if (tr.gameObject.GetComponent<PlayerStats>().GetEnergy(1) < energy)
+        if (tr.gameObject.GetComponent<PlayerStats>().GetEnergy(1) < energy || isOcuped)
         {
             DisableSection();
             return;
         }
 
-        StartCoroutine(anim(energy));
+        StartCoroutine(anim(energy, tr));
     }
 
     public void DisableSection()
     {
         canvasObj.SetActive(false);
+        transform.tag = "Untagged";
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,10 +56,16 @@ public class SectionControl : MonoBehaviour
         isOcuped = false;
     }
 
-    private IEnumerator anim(float n)
+    private IEnumerator anim(float n, Transform tr)
     {
+        transform.tag = "Section";
+
         float m = n/4;
         yield return new WaitForSeconds(m);
+
+        string[] names = transform.name.Split(' ');
+
+        cam.SectionAdd(transform);
         canvasObj.SetActive(true);
         nameTxt.text = transform.name;
         costTxt.text = n.ToString();
@@ -73,6 +80,8 @@ public class SectionControl : MonoBehaviour
             canvasObj.transform.GetChild(0).gameObject.SetActive(false);
             canvasObj.transform.GetChild(1).gameObject.SetActive(false);
             canvasObj.transform.GetChild(3).gameObject.SetActive(false);
+
+            cam.SectionAdd(transform);
         }
         else
         {

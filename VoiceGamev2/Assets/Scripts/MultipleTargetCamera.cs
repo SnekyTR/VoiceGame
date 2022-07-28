@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MultipleTargetCamera : MonoBehaviour
 {
-    public List<Transform> targets;
+    public List<Transform> targets = new List<Transform>();
     private Vector3 velocity;
     public float smoothTime = 4;
     public Vector3 offset;
@@ -82,6 +82,27 @@ public class MultipleTargetCamera : MonoBehaviour
 
     public void CameraStrategic(Transform l)
     {
+        if(targets.Count > 0) targets = new List<Transform>();
+        targets.Add(l);
+
+        offset = positions[0];
+        rotationPos = rotations[0];
+        isRotate = true;
+
+    }
+
+    public void CameraPlayer(Transform l)
+    {
+        targets = new List<Transform>();
+        targets.Add(l);
+
+        offset = positions[1];
+        rotationPos = rotations[1];
+        isRotate = true;
+    }
+
+    public void CameraEnemy(Transform l)
+    {
         targets = new List<Transform>();
         targets.Add(l);
 
@@ -90,13 +111,14 @@ public class MultipleTargetCamera : MonoBehaviour
         isRotate = true;
     }
 
-    public void CameraEnemy(Transform l)
-    {
-
-    }
-
     public void SectionAdd(Transform l)
     {
         targets.Add(l);
+    }
+
+    public void CameraPlayerTurn(List<Transform> l)
+    {
+        targets = new List<Transform>();
+        targets = l;
     }
 }

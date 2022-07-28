@@ -332,6 +332,8 @@ public class Skills : MonoBehaviour
 
         if (actualWeapon == weapons[0])
         {
+            gameM.CameraSkillPlayer(1);
+
             plyAnim.SetInteger("A_BasicAtk", 1);
 
             yield return new WaitForSeconds(0.7f);
@@ -349,6 +351,8 @@ public class Skills : MonoBehaviour
         }
         else if (actualWeapon == weapons[1])
         {
+            gameM.CameraSkillPlayer(1);
+
             plyAnim.SetInteger("A_BasicAtk", 1);
 
             yield return new WaitForSeconds(0.7f);
@@ -383,6 +387,8 @@ public class Skills : MonoBehaviour
         }
         else if (actualWeapon == weapons[3])
         {
+            gameM.CameraSkillPlayer(2);
+
             plyAnim.SetInteger("A_Bow", 1);
 
             yield return new WaitForSeconds(0.8f);
@@ -418,6 +424,8 @@ public class Skills : MonoBehaviour
         }
         else if (actualWeapon == weapons[4])
         {
+            gameM.CameraSkillPlayer(2);
+
             isBlood = false;
             plyAnim.SetInteger("A_Magic", 2);
             yield return new WaitForSeconds(0.2f);
@@ -439,6 +447,8 @@ public class Skills : MonoBehaviour
         }
         else if (actualWeapon == weapons[5])
         {
+            gameM.CameraSkillPlayer(2);
+
             isBlood = false;
             plyAnim.SetInteger("A_Magic", 2);
             yield return new WaitForSeconds(0.2f);
@@ -468,7 +478,7 @@ public class Skills : MonoBehaviour
             Destroy(h);
         }
 
-        gameM.NewParent(gameM.playerParent, 1);
+        gameM.CameraPos1();
     }
 
     private int GetTimerSkills(int n)
@@ -538,17 +548,17 @@ public class Skills : MonoBehaviour
 
     public void EliminateSkillSelection()
     {
-        skillMagnus[0].GetChild(2).gameObject.SetActive(false);
-        skillMagnus[1].GetChild(2).gameObject.SetActive(false);
-        skillMagnus[2].GetChild(2).gameObject.SetActive(false);
+        skillMagnus[0].GetChild(1).gameObject.SetActive(false);
+        skillMagnus[1].GetChild(1).gameObject.SetActive(false);
+        skillMagnus[2].GetChild(1).gameObject.SetActive(false);
 
-        skillVagnar[0].GetChild(2).gameObject.SetActive(false);
-        skillVagnar[1].GetChild(2).gameObject.SetActive(false);
-        skillVagnar[2].GetChild(2).gameObject.SetActive(false);
+        skillVagnar[0].GetChild(1).gameObject.SetActive(false);
+        skillVagnar[1].GetChild(1).gameObject.SetActive(false);
+        skillVagnar[2].GetChild(1).gameObject.SetActive(false);
 
-        skillHammun[0].GetChild(2).gameObject.SetActive(false);
-        skillHammun[1].GetChild(2).gameObject.SetActive(false);
-        skillHammun[2].GetChild(2).gameObject.SetActive(false);
+        skillHammun[0].GetChild(1).gameObject.SetActive(false);
+        skillHammun[1].GetChild(1).gameObject.SetActive(false);
+        skillHammun[2].GetChild(1).gameObject.SetActive(false);
     }
 
     public void SetSkillSelected(string n)      //remarca la skill seleccionada por el player
@@ -601,63 +611,63 @@ public class Skills : MonoBehaviour
         {
             if (f == 1)
             {
-                skillMagnus[0].GetChild(2).gameObject.SetActive(true);
-                skillMagnus[1].GetChild(2).gameObject.SetActive(false);
-                skillMagnus[2].GetChild(2).gameObject.SetActive(false);
+                skillMagnus[0].GetChild(1).gameObject.SetActive(true);
+                skillMagnus[1].GetChild(1).gameObject.SetActive(false);
+                skillMagnus[2].GetChild(1).gameObject.SetActive(false);
             }
             else if(f == 2)
             {
-                skillMagnus[0].GetChild(2).gameObject.SetActive(false);
-                skillMagnus[1].GetChild(2).gameObject.SetActive(true);
-                skillMagnus[2].GetChild(2).gameObject.SetActive(false);
+                skillMagnus[0].GetChild(1).gameObject.SetActive(false);
+                skillMagnus[1].GetChild(1).gameObject.SetActive(true);
+                skillMagnus[2].GetChild(1).gameObject.SetActive(false);
             }
             else
             {
-                skillMagnus[0].GetChild(2).gameObject.SetActive(false);
-                skillMagnus[1].GetChild(2).gameObject.SetActive(false);
-                skillMagnus[2].GetChild(2).gameObject.SetActive(true);
+                skillMagnus[0].GetChild(1).gameObject.SetActive(false);
+                skillMagnus[1].GetChild(1).gameObject.SetActive(false);
+                skillMagnus[2].GetChild(1).gameObject.SetActive(true);
             }
         }
         else if(plyStats.name == "Vagnar")
         {
             if (f == 1)
             {
-                skillVagnar[0].GetChild(2).gameObject.SetActive(true);
-                skillVagnar[1].GetChild(2).gameObject.SetActive(false);
-                skillVagnar[2].GetChild(2).gameObject.SetActive(false);
+                skillVagnar[0].GetChild(1).gameObject.SetActive(true);
+                skillVagnar[1].GetChild(1).gameObject.SetActive(false);
+                skillVagnar[2].GetChild(1).gameObject.SetActive(false);
             }
             else if (f == 2)
             {
-                skillVagnar[0].GetChild(2).gameObject.SetActive(false);
-                skillVagnar[1].GetChild(2).gameObject.SetActive(true);
-                skillVagnar[2].GetChild(2).gameObject.SetActive(false);
+                skillVagnar[0].GetChild(1).gameObject.SetActive(false);
+                skillVagnar[1].GetChild(1).gameObject.SetActive(true);
+                skillVagnar[2].GetChild(1).gameObject.SetActive(false);
             }
             else
             {
-                skillVagnar[0].GetChild(2).gameObject.SetActive(false);
-                skillVagnar[1].GetChild(2).gameObject.SetActive(false);
-                skillVagnar[2].GetChild(2).gameObject.SetActive(true);
+                skillVagnar[0].GetChild(1).gameObject.SetActive(false);
+                skillVagnar[1].GetChild(1).gameObject.SetActive(false);
+                skillVagnar[2].GetChild(1).gameObject.SetActive(true);
             }
         }
         else
         {
             if (f == 1)
             {
-                skillHammun[0].GetChild(2).gameObject.SetActive(true);
-                skillHammun[1].GetChild(2).gameObject.SetActive(false);
-                skillHammun[2].GetChild(2).gameObject.SetActive(false);
+                skillHammun[0].GetChild(1).gameObject.SetActive(true);
+                skillHammun[1].GetChild(1).gameObject.SetActive(false);
+                skillHammun[2].GetChild(1).gameObject.SetActive(false);
             }
             else if (f == 2)
             {
-                skillHammun[0].GetChild(2).gameObject.SetActive(false);
-                skillHammun[1].GetChild(2).gameObject.SetActive(true);
-                skillHammun[2].GetChild(2).gameObject.SetActive(false);
+                skillHammun[0].GetChild(1).gameObject.SetActive(false);
+                skillHammun[1].GetChild(1).gameObject.SetActive(true);
+                skillHammun[2].GetChild(1).gameObject.SetActive(false);
             }
             else
             {
-                skillHammun[0].GetChild(2).gameObject.SetActive(false);
-                skillHammun[1].GetChild(2).gameObject.SetActive(false);
-                skillHammun[2].GetChild(2).gameObject.SetActive(true);
+                skillHammun[0].GetChild(1).gameObject.SetActive(false);
+                skillHammun[1].GetChild(1).gameObject.SetActive(false);
+                skillHammun[2].GetChild(1).gameObject.SetActive(true);
             }
         }
     }
@@ -776,6 +786,8 @@ public class Skills : MonoBehaviour
 
     private IEnumerator Cleave()
     {
+        gameM.CameraSkillPlayer(1);
+
         SkillSelection(gameM.playerParent.name, 1, GetTimerSkills(0));
 
         plyAnim.SetInteger("A_Slash", 1);
@@ -794,11 +806,13 @@ public class Skills : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         slashArea.gameObject.SetActive(false);
 
-        gameM.NewParent(gameM.playerParent, 1);
+        gameM.CameraPos1();
     }
 
     private IEnumerator StrenghtBuff()
     {
+        gameM.CameraSkillPlayer(3);
+
         SkillSelection(gameM.playerParent.name, 2, GetTimerSkills(1));
 
         plyAnim.SetInteger("A_AutoBuff", 1);
@@ -813,13 +827,15 @@ public class Skills : MonoBehaviour
 
         buff.transform.SetParent(gameM.playerParent);
 
-        gameM.NewParent(gameM.playerParent, 1);
-
         plyStats.SetStrenght(1.25f);
+
+        gameM.CameraPos1();
     }
 
     private IEnumerator Demacia()
     {
+        gameM.CameraSkillPlayer(1);
+
         SkillSelection(gameM.playerParent.name, 3, GetTimerSkills(2));
 
         plyAnim.SetInteger("A_Demacia", 1);
@@ -837,8 +853,9 @@ public class Skills : MonoBehaviour
         demaciaArea.rotation = gameM.playerParent.rotation;
 
         yield return new WaitForSeconds(2f);
-        gameM.NewParent(gameM.playerParent, 1);
         demaciaArea.gameObject.SetActive(false);
+
+        gameM.CameraPos1();
     }
 
     private IEnumerator Demolition()
@@ -867,6 +884,8 @@ public class Skills : MonoBehaviour
         }
         else if(actualWeapon == weapons[3])
         {
+            gameM.CameraSkillPlayer(2);
+
             plyAnim.SetInteger("A_Bow", 1);
 
             yield return new WaitForSeconds(0.8f);
@@ -902,11 +921,14 @@ public class Skills : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(1.2f);
-        gameM.NewParent(gameM.playerParent, 1);
+
+        gameM.CameraPos1();
     }
 
     private IEnumerator CriticalBuff()
     {
+        gameM.CameraSkillPlayer(3);
+
         SkillSelection(gameM.playerParent.name, 2, GetTimerSkills(4));
 
         plyAnim.SetInteger("A_AutoBuff", 1);
@@ -921,13 +943,16 @@ public class Skills : MonoBehaviour
 
         buff.transform.SetParent(gameM.playerParent);
 
-        gameM.NewParent(gameM.playerParent, 1);
         plyStats.SetAgility(1.25f);
         plyStats.MoreCriticProb(50);
+
+        gameM.CameraPos1();
     }
 
     private IEnumerator ArrowRain()
     {
+        gameM.CameraSkillPlayer(4);
+
         plyAnim.SetInteger("A_Magic", 4);
         yield return new WaitForSeconds(0.2f);
         plyAnim.SetInteger("A_Magic", 0);
@@ -938,11 +963,13 @@ public class Skills : MonoBehaviour
 
         yield return new WaitForSeconds(2.5f);
 
-        gameM.NewParent(gameM.playerParent, 1);
+        gameM.CameraPos1();
     }
 
     private IEnumerator FireBall()
     {
+        gameM.CameraSkillPlayer(2);
+
         SkillSelection(gameM.playerParent.name, 1, GetTimerSkills(6));
 
         plyAnim.SetInteger("A_Magic", 2);
@@ -963,11 +990,13 @@ public class Skills : MonoBehaviour
 
         yield return new WaitForSeconds(2.2f);
 
-        gameM.NewParent(gameM.playerParent, 1);
+        gameM.CameraPos1();
     }
 
     private IEnumerator BloodSacrifice()
     {
+        gameM.CameraSkillPlayer(3);
+
         SkillSelection(gameM.playerParent.name, 2, GetTimerSkills(7));
 
         plyAnim.SetInteger("A_AutoBuff", 1);
@@ -982,12 +1011,15 @@ public class Skills : MonoBehaviour
 
         buff.transform.SetParent(gameM.playerParent);
 
-        gameM.NewParent(gameM.playerParent, 1);
         plyStats.SetIntellect(1.25f);
+
+        gameM.CameraPos1();
     }
 
     private IEnumerator MeteorAtk()
     {
+        gameM.CameraSkillPlayer(4);
+
         SkillSelection(gameM.playerParent.name, 3, GetTimerSkills(8));
 
         plyAnim.SetInteger("A_Magic", 4);
@@ -997,11 +1029,14 @@ public class Skills : MonoBehaviour
         Instantiate(meteorRain, plyMove.target.transform.position, transform.rotation);
 
         yield return new WaitForSeconds(2f);
-        gameM.NewParent(gameM.playerParent, 1);
+
+        gameM.CameraPos1();
     }
 
     private IEnumerator Heal()
     {
+        gameM.CameraSkillPlayer(2);
+
         SkillSelection(gameM.playerParent.name, 1, GetTimerSkills(9));
 
         plyAnim.SetInteger("A_Magic", 1);
@@ -1021,11 +1056,13 @@ public class Skills : MonoBehaviour
         yield return new WaitForSeconds(1.2f);
 
         Destroy(h);
-        gameM.NewParent(gameM.playerParent, 1);
+        gameM.CameraPos1();
     }
 
     private IEnumerator Resurrect()
     {
+        gameM.CameraSkillPlayer(2);
+
         SkillSelection(gameM.playerParent.name, 2, GetTimerSkills(10));
 
         plyAnim.SetInteger("A_Magic", 3);
@@ -1042,12 +1079,13 @@ public class Skills : MonoBehaviour
         plyMove.target.GetComponent<PlayerStats>().SetLife(plyStats.GetIntellect());
 
         yield return new WaitForSeconds(1.5f);
-
-        gameM.NewParent(gameM.playerParent, 1);
+        gameM.CameraPos1();
     }
 
     private IEnumerator FinalJudgment()
     {
+        gameM.CameraSkillPlayer(4);
+
         SkillSelection(gameM.playerParent.name, 3, GetTimerSkills(11));
 
         plyAnim.SetInteger("A_Magic", 4);
@@ -1065,7 +1103,7 @@ public class Skills : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         demaciaArea.gameObject.SetActive(false);
+        gameM.CameraPos1();
 
-        gameM.NewParent(gameM.playerParent, 1);
     }
 }

@@ -14,7 +14,7 @@ public class PlayerStats : MonoBehaviour
     public int criticProb;
     public string actualWeapon;
 
-    public Transform cinemaCam;
+    public List<Transform> cinemaCam;
 
     [Header("Weapons")]
     public GameObject weapon01;

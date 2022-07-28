@@ -31,7 +31,7 @@ public class WinLoose : MonoBehaviour
         plyMove = GetComponent<PlayerMove>();
         gameM = GetComponent<CameraFollow>();
         loadingScreen = GameObject.Find("CanvasManager").GetComponent<LoadingScreen>();
-        moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
+        if (GameObject.Find("SceneConector")) moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
         //wPanel = GameObject.Find("CanvasManager").transform.GetChild(7).gameObject;
         //lPanel = GameObject.Find("CanvasManager").transform.GetChild(8).gameObject;
     }

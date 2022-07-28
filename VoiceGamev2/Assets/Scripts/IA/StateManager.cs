@@ -12,7 +12,6 @@ public class StateManager : MonoBehaviour
         }
         else if (GetComponent<SkeletonArcherAI>())
         {
-            print("sadfadsf");
             GetComponent<SkeletonArcherAI>().StarIA();
         }
         else if (GetComponent<SkeletonGuardianAI>())

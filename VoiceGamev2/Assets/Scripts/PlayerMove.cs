@@ -229,7 +229,7 @@ public class PlayerMove : MonoBehaviour
         {
             animator.SetInteger("A_Movement", 0);
             isOnRoute = false;
-            gameM.NewParent(playerTr, 1);
+            gameM.CameraPos1();
         }
     }
 
@@ -285,7 +285,7 @@ public class PlayerMove : MonoBehaviour
         gridA.EnableGrid(playerTr);
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = blueC;
 
-        gameM.NewParent(playerTr, 2);
+        gameM.CameraPos2();
     }
 
     //movement
@@ -302,12 +302,14 @@ public class PlayerMove : MonoBehaviour
         else energy = (int)energy;   //formula energia distancia
 
         print(energy);
-        if (GameObject.Find(i).CompareTag("Section"))
+        if (GameObject.Find(i).transform.tag == "Section")
         {
+            print(GameObject.Find(i).transform.tag);
             if (TurnEnergy(energy))
             {
                 animator.SetInteger("A_Movement", 1);
                 StartCoroutine(StopAnimation());
+                gameM.CameraPos2();
                 playerNM.destination = GameObject.Find(i).transform.position;
 
                 startCmdR.Start();
@@ -357,10 +359,11 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
-        gameM.NewParent(playerTr, 2);
+        gameM.CameraPos2();
 
         skill.ShowRanges(skill.GetRanges("atk"));
         gridA.EnableAtkGrid(playerTr, skill.GetRanges("atk"));
+
 
         startCmdR.Stop();
         spellCmdR.Stop();
@@ -400,7 +403,8 @@ public class PlayerMove : MonoBehaviour
         if(n == "Curar" || n == "Revivir")
         {
             allieSpell = true;
-            gameM.NewParent(playerTr, 2);
+
+            gameM.CameraPos2();
 
             skill.ShowRangesAllie(skill.GetRanges(n));
             gridA.EnableAtkGrid(playerTr, skill.GetRanges(n));
@@ -413,11 +417,12 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
+            gameM.CameraPos2();
+
             skill.ShowRanges(skill.GetRanges(n));
             gridA.EnableAtkGrid(playerTr, skill.GetRanges(n));
 
             atkCmdR.Start();
-            gameM.NewParent(playerTr, 2);
         }
     }
 
@@ -520,7 +525,7 @@ public class PlayerMove : MonoBehaviour
 
         yield return new WaitForSeconds(1.1f);
 
-        gameM.CameraCinematic();
+        gameM.CameraSkillPlayer(2);
         skill.SelectSkill(atkState);
 
         setTarget = false;
@@ -536,8 +541,7 @@ public class PlayerMove : MonoBehaviour
     private IEnumerator SelfBuffs()
     {
         skill.SelectSkill(atkState);
-        gameM.CameraCinematic();
-
+        
         yield return new WaitForSeconds(1.7f);
 
         if (!startCmdR.IsRunning) startCmdR.Start();

@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3285416409893984558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2856801076609531702}
+  m_Layer: 6
+  m_Name: Cinematic02_cam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2856801076609531702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3285416409893984558}
+  m_LocalRotation: {x: 0.008649898, y: 0.118814774, z: 0.00082982675, w: -0.99287844}
+  m_LocalPosition: {x: 1.1976748, y: 1.8740655, z: -1.7929039}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6670066613191303950}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5048643846704026268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 328199781242611215}
+  m_Layer: 6
+  m_Name: Cinematic04_cam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &328199781242611215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5048643846704026268}
+  m_LocalRotation: {x: -0.07312514, y: 0.000010851654, z: 0.00014800111, w: 0.9973228}
+  m_LocalPosition: {x: 0.027099133, y: 1.7015626, z: 0.649}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6670066613191303950}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: -8.387, y: 0, z: 0.017}
 --- !u!1 &6670066613190947578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1747,6 +1807,9 @@ Transform:
   - {fileID: 6670066613191185474}
   - {fileID: 6670066613191283176}
   - {fileID: 7061900362672386538}
+  - {fileID: 2856801076609531702}
+  - {fileID: 8163391428964470470}
+  - {fileID: 328199781242611215}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1817,7 +1880,11 @@ MonoBehaviour:
   agilityPoints: 6
   criticProb: 20
   actualWeapon: sword
-  cinemaCam: {fileID: 7061900362672386538}
+  cinemaCam:
+  - {fileID: 7061900362672386538}
+  - {fileID: 2856801076609531702}
+  - {fileID: 8163391428964470470}
+  - {fileID: 328199781242611215}
   weapon01: {fileID: 6670066613190949416}
   weapon02: {fileID: 2465662939376335344}
   weapon03: {fileID: 2524425900279855943}
@@ -3144,6 +3211,36 @@ Transform:
   m_Father: {fileID: 6670066613191308250}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8114669590204493836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8163391428964470470}
+  m_Layer: 6
+  m_Name: Cinematic03_cam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8163391428964470470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8114669590204493836}
+  m_LocalRotation: {x: -0.0065339594, y: 0.991653, z: -0.058414843, w: -0.1147578}
+  m_LocalPosition: {x: 0.6090584, y: 1.2222562, z: 2.1607113}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6670066613191303950}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9169174572104123690
 GameObject:
   m_ObjectHideFlags: 0
@@ -3330,14 +3427,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 623b347c8f6a87e44abd622ce171e13d, type: 3}
---- !u!1 &2524425900279855943 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 808816068481573496, guid: 623b347c8f6a87e44abd622ce171e13d, type: 3}
-  m_PrefabInstance: {fileID: 2896362215529584959}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2901267415130808829 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 32278643250608322, guid: 623b347c8f6a87e44abd622ce171e13d, type: 3}
+  m_PrefabInstance: {fileID: 2896362215529584959}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2524425900279855943 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 808816068481573496, guid: 623b347c8f6a87e44abd622ce171e13d, type: 3}
   m_PrefabInstance: {fileID: 2896362215529584959}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3355924549116289276
@@ -3496,14 +3593,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0c32318984847e428ac1bce4ea19377, type: 3}
---- !u!1 &3145115565942461059 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1198998981114754527, guid: d0c32318984847e428ac1bce4ea19377, type: 3}
-  m_PrefabInstance: {fileID: 4253089960794203996}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2372941105986340921 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2010966721360703333, guid: d0c32318984847e428ac1bce4ea19377, type: 3}
+  m_PrefabInstance: {fileID: 4253089960794203996}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3145115565942461059 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1198998981114754527, guid: d0c32318984847e428ac1bce4ea19377, type: 3}
   m_PrefabInstance: {fileID: 4253089960794203996}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4370704104171231122

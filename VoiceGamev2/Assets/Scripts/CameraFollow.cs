@@ -21,9 +21,8 @@ public class CameraFollow : MonoBehaviour
     private GameObject playerTurn, enemyTurn;
     private Transform cam;
 
-    public Transform pos1, pos2;
+    public List<Transform> playersPos = new List<Transform>();
     private Transform pos3, pos4;
-    private int cameraParent = 1;
     private Vector3 initPos;
 
     private Dictionary<string, Action<string>> selectPJCmd = new Dictionary<string, Action<string>>();
@@ -173,7 +172,7 @@ public class CameraFollow : MonoBehaviour
             {
                 if (names[2] + " " + names[3] == enemys[i].name)
                 {
-                    NewParent(enemys[i].transform, 1);
+                    NewParent(enemys[i].transform);
                     print(names[2]);
                     moveLogic.PlayerDeselect();
 
@@ -236,8 +235,12 @@ public class CameraFollow : MonoBehaviour
             moveLogic.ReasignateGrid();
         }
 
-        if(!moveLogic.IsMoving())NewParent(actualPlayer.transform, 1);
-        else NewParent(actualPlayer.transform, 2);
+        if (!moveLogic.IsMoving())
+        {
+            NewParent(actualPlayer.transform);
+            CameraPos1();
+        }
+        else NewParent(actualPlayer.transform);
 
         if(n == playersNames[0])
         {
@@ -276,44 +279,76 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    public void NewParent(Transform tr, int o)
+    public void NewParent(Transform tr)
     {
         playerParent = tr;
 
-        cameraParent = o;
+        if (tr.GetComponent<PlayerStats>())
+        {
+            playersPos = new List<Transform>();
 
-        if (tr.GetComponent<PlayerStats>()) pos4 = tr.GetComponent<PlayerStats>().cinemaCam;
+            playersPos = tr.GetComponent<PlayerStats>().cinemaCam;
+        }
         else if (tr.GetComponent<EnemyStats>()) pos4 = tr.GetComponent<EnemyStats>().cinemaCam;
-    }
-
-    public void CameraCenter()
-    {
-        transform.position = initPos;
-        cam.position = pos3.position;
-        cam.rotation = pos3.rotation;
-
-        playerParent = null;
     }
 
     public void CameraCinematic()
     {
+        camS.enabled = false;
+
+        cam.GetComponent<Camera>().fieldOfView = 60;
+
         cam.position = pos4.position;
         cam.rotation = pos4.rotation;
-        cameraParent = 0;
+    }
+
+    public void CameraSkillPlayer(int i)
+    {
+        camS.enabled = false;
+
+        cam.GetComponent<Camera>().fieldOfView = 60;
+
+        if (i == 1)
+        {
+            cam.position = playersPos[0].position;
+            cam.rotation = playersPos[0].rotation;
+        }
+        else if (i == 2)
+        {
+            cam.position = playersPos[1].position;
+            cam.rotation = playersPos[1].rotation;
+        }
+        else if (i == 3)
+        {
+            cam.position = playersPos[2].position;
+            cam.rotation = playersPos[2].rotation;
+        }
+        else if (i == 4)
+        {
+            cam.position = playersPos[3].position;
+            cam.rotation = playersPos[3].rotation;
+        }
     }
 
     public void CameraPos1()
     {
-        cam.position = pos1.position;
-        cam.rotation = pos1.rotation;
-        transform.position = new Vector3(playerParent.position.x, transform.position.y, playerParent.position.z);
+        camS.enabled = true;
+
+        camS.CameraPlayer(playerParent);
     }
 
     public void CameraPos2()
     {
-        cam.position = pos2.position;
-        cam.rotation = pos2.rotation;
-        transform.position = new Vector3(playerParent.position.x, transform.position.y, playerParent.position.z);
+        camS.enabled = true;
+
+        camS.CameraStrategic(playerParent);
+    }
+
+    public void CameraEnemyPos(Transform tr)
+    {
+        camS.enabled = true;
+
+        camS.CameraEnemy(tr);
     }
 
     private void SkillBookOpen()
@@ -364,7 +399,8 @@ public class CameraFollow : MonoBehaviour
         moveLogic.PlayerSelect();
         GetComponent<Skills>().UnShowRange();
 
-        NewParent(playerParent, 1);
+        NewParent(playerParent);
+        CameraPos1();
 
         //NavMeshBuilder.ClearAllNavMeshes();
         //NavMeshBuilder.BuildNavMesh();
@@ -407,8 +443,8 @@ public class CameraFollow : MonoBehaviour
             }
 
             enemys[0].StarIA();
-            NewParent(enemys[0].transform, 2);
-            CameraPos2();
+            NewParent(enemys[0].transform);
+            CameraEnemyPos(enemys[0].transform);
 
             moveLogic.timerC.isPlaying = false;
 
@@ -426,14 +462,14 @@ public class CameraFollow : MonoBehaviour
                 players[i].GetComponent<PlayerStats>().FullEnergy();
             }
 
-            CameraCenter();
-
             playerTurn.SetActive(true);
             enemyTurn.SetActive(false);
 
             GetComponent<Skills>().SetSkillsTimers();
 
             moveLogic.timerC.isPlaying = true;
+
+            camS.CameraPlayerTurn(players);
         }
     }
 
@@ -444,8 +480,8 @@ public class CameraFollow : MonoBehaviour
             if(n == enemys[i] && n != enemys[(enemys.Count)-1])
             {
                 enemys[(i + 1)].StarIA();
-                NewParent(enemys[(i + 1)].transform, 2);
-                CameraPos2();
+                NewParent(enemys[(i + 1)].transform);
+                CameraEnemyPos(enemys[(i + 1)].transform);
                 return;
             }
             else if(n == enemys[(enemys.Count) - 1])

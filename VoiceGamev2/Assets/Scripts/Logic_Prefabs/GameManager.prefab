@@ -456,6 +456,7 @@ MonoBehaviour:
   wPanel: {fileID: 0}
   lPanel: {fileID: 0}
   moveData: {fileID: 0}
+  loadingScreen: {fileID: 0}
   totalEnemies: 0
   totalPlayers: 0
 --- !u!114 &4982631306172272307
@@ -661,11 +662,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targets: []
-  smoothTime: 4
+  smoothTime: 0.6
   offset: {x: 0, y: 0, z: 0}
-  minZoom: 40
-  maxZoom: 10
-  zoomLimiter: 50
+  minZoom: 65
+  maxZoom: 25
+  zoomLimiter: 30
+  rotations:
+  - {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
+  - {x: 0.01212973, y: 0.9864998, z: -0.13864355, w: 0.08630761}
+  positions:
+  - {x: 0, y: 21, z: 1}
+  - {x: -1.5, y: 2.6, z: 5}
 --- !u!1001 &5357094215712880117
 PrefabInstance:
   m_ObjectHideFlags: 0
