@@ -38,7 +38,7 @@ public class Progression : MonoBehaviour
     MoveDataToMain moveDataToMain;
     LevelSystem level;
     public int totalEXP;
-    public bool loadVictory;
+    public bool fromVictory;
 
 
     GameObject[] players;
@@ -47,14 +47,15 @@ public class Progression : MonoBehaviour
         moveDataToMain = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
         if (moveDataToMain.loadVictory)
         {
+            fromVictory = true;
             StartCoroutine(IncrementTheProgression());
         }
-        print("Se ha cargado progresion");
+        
         
         
         if (System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
         {
-           
+            print("Se ha cargado progresion");
             LoadProgresion();
         }
     }
@@ -65,6 +66,10 @@ public class Progression : MonoBehaviour
     }
     private void LoadProgresion()
     {
+        if (!fromVictory)
+        {
+            uIMovement.canOpenGroup = true;
+        }
         GameProgressionData data = SaveSystem.LoadProgression();
         progression = data.progressionNumber;
         CheckProgression();
@@ -80,17 +85,17 @@ public class Progression : MonoBehaviour
                 fTUE_Progresion.LoadFTUEProgresion();
                 fTUE_Progresion.FTUEProgression();
             }
-            print("Se ha pasado el primer nivel");
             if(progression >= 2)
             {
-                print("Se ha pasado el segundo nivel");
                 combat2.SetActive(false);
                 player.GetComponent<VoiceDestinations>().entered = false;
                 singlePanel.SetActive(false);
+                restAnimator.SetFloat("anim", 1);
 
 
                 if (progression >= 3)
                 {
+                    print("Se activa vastion anum");
                     combat3.SetActive(false);
                     restAnimator.SetFloat("anim", 0);
                     bastionAnimator.SetFloat("anim", 1);

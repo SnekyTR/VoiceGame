@@ -11,6 +11,7 @@ public class IncreaseStats : MonoBehaviour
     [SerializeField] private LevelSystem level;
     [SerializeField] private GeneralStats general;
     [SerializeField] private FTUE_Progresion fTUE_Progresion;
+    [SerializeField] private GameSave gameSave;
 
     //[SerializeField] private CharacterInformation character;
     [SerializeField] private Character_skills character_Skills;
@@ -74,35 +75,47 @@ public class IncreaseStats : MonoBehaviour
     {
         general.strengthPoints++;
         character_Skills.UpdateSRT(general);
+        UpdateLevelAmount();
         level.DeactivateButtons();
-        statOrders.Stop();
+
     }
     public void IncreaseHealth()
     {
         general.lifePoints++;
         character_Skills.UpdateHP(general);
+        UpdateLevelAmount();
         level.DeactivateButtons();
-        statOrders.Stop();
+
     }
     public void IncreaseAGI()
     {
         general.agilityPoints++;
         character_Skills.UpdateAGI(general);
+        UpdateLevelAmount();
         level.DeactivateButtons();
-        statOrders.Stop();
+
     }
     public void IncreaseINT()
     {
         general.intellectPoints++;
         character_Skills.UpdateINT(general);
+        UpdateLevelAmount();
         level.DeactivateButtons();
-        statOrders.Stop();
+
     }
     public void IncreaseCRIT()
     {
         general.critStrikePoints++;
         character_Skills.UpdateCRIT(general);
+        UpdateLevelAmount();
         level.DeactivateButtons();
-        statOrders.Stop();
+
+    }
+    private void UpdateLevelAmount()
+    {
+        level.amountOfLvl--;
+        character_Skills.amountofLvl.text = "Puntos restantes: " + level.amountOfLvl.ToString();
+        gameSave.SaveGame();
+
     }
 }

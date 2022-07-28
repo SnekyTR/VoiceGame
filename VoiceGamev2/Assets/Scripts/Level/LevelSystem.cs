@@ -15,7 +15,7 @@ public class LevelSystem : MonoBehaviour
     public float requiredXp;
     private float lerpTimer;
     private float delayTimer;
-    int amountOfLvl;
+    public int amountOfLvl = 0;
 
     [SerializeField]private GameObject buttonsStats;
     [SerializeField]private GameObject levelupNotif;
@@ -36,6 +36,7 @@ public class LevelSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        print("Amount of lvl: " + amountOfLvl);
         frontXpBar.fillAmount = currentXp / requiredXp;
         backXpBar.fillAmount = currentXp / requiredXp;
         requiredXp = CalculateRequireXp();
@@ -47,7 +48,7 @@ public class LevelSystem : MonoBehaviour
     public void LoadLevel()
     {
         PlayerData data = SaveSystem.LoadPlayer(transform);
-
+        amountOfLvl = data.amountofLevel;
         level = data.level;
         currentXp = data.experience;
     }
@@ -95,6 +96,7 @@ public class LevelSystem : MonoBehaviour
         //ActivateButtons();
         levelupNotif.SetActive(true);
         lvlUP.SetActive(true);
+        amountOfLvl++;
         UpdateLevel();
     }
     private int CalculateRequireXp()
@@ -134,7 +136,7 @@ public class LevelSystem : MonoBehaviour
     }
     public void DeactivateButtons()
     {
-        if(amountOfLvl <= 0)
+        if(amountOfLvl == 0)
         {
             print("No tiene mas levels a subir");
             buttonsStats.SetActive(false);
@@ -148,14 +150,13 @@ public class LevelSystem : MonoBehaviour
             buttonsStats.SetActive(true);
             levelupNotif.SetActive(true);
             lvlUP.SetActive(true);
-            amountOfLvl--;
         }
 
     }
     public void UpdateLevel()
     {
         string actualLevel;
-        amountOfLvl++;
+        
         string actualPlayer = transform.name.ToString();
         actualLevel = level.ToString();
         partyInfo.UpdateLevel(actualLevel, actualPlayer);

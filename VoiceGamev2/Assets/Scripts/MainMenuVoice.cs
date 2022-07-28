@@ -55,7 +55,7 @@ public class MainMenuVoice : MonoBehaviour
         menuActions.Add("cargar partida", LoadGame);
         menuActions.Add("crear partida", CreateNewGame);
         menuActions.Add("borrar datos", DeleteFiles);
-        //menuActions.Add("salir", ExitGame);
+        menuActions.Add("salir", ExitGame);
         menuKeyword = new KeywordRecognizer(menuActions.Keys.ToArray());
         menuKeyword.OnPhraseRecognized += RecognizedVoice;
         menuKeyword.Start();
@@ -80,7 +80,7 @@ public class MainMenuVoice : MonoBehaviour
     {
         if (!filesExist) { return; }
         CloseOrders();
-        SceneManager.LoadScene(1);
+        loadingScreen.LoadScene(1);
     }
     private void CreateNewGame()
     {

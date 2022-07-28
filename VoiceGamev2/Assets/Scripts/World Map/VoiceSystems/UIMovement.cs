@@ -8,7 +8,7 @@ using UnityEngine.Windows.Speech;
 public class UIMovement : MonoBehaviour
 {
     private Dictionary<string, Action> firstCanvasLvl = new Dictionary<string, Action>();
-    private KeywordRecognizer firstCanvas;
+    public KeywordRecognizer firstCanvas;
     private Dictionary<string, Action> partyInf = new Dictionary<string, Action>();
     private KeywordRecognizer party;
     private Dictionary<string, Action> charInf = new Dictionary<string, Action>();
@@ -55,6 +55,7 @@ public class UIMovement : MonoBehaviour
         firstCanvas.OnPhraseRecognized += RecognizedVoiceFirst;
         firstCanvas.Start();
     }
+    
     private void AddPartyInf()
     {
 

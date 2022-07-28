@@ -13,6 +13,7 @@ public class PlayerData
     public int agility;
     public int coins;
     public int critStrikePoints;
+    public int amountofLevel;
 
     public float[] position;
 
@@ -25,6 +26,7 @@ public class PlayerData
         strength = player.strengthPoints;
         agility = player.agilityPoints;
         critStrikePoints = player.critStrikePoints;
+        amountofLevel = levelSystem.amountOfLvl;
 
         position = new float[3];
         position[0] = player.transform.position.x;

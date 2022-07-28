@@ -29,6 +29,8 @@ public class Character_skills : MonoBehaviour
     [SerializeField] private TextMeshProUGUI INT;
     [SerializeField] private TextMeshProUGUI CRIT;
 
+    [SerializeField] public TextMeshProUGUI amountofLvl;
+
     private GeneralStats general;
 
     private void Awake()
@@ -58,6 +60,7 @@ public class Character_skills : MonoBehaviour
         physicalBar.value = stats.strengthPoints;
         agilityBar.value = stats.agilityPoints;
         player.text = actualCharacter.name;
+        amountofLvl.text = "Puntos restantes: " + actualCharacter.GetComponent<LevelSystem>().amountOfLvl.ToString();
         CheckAgility();
         CheckIntellect();
         CheckStrenght();
