@@ -403,8 +403,7 @@ MonoBehaviour:
   enemys: []
   playerSelected: []
   playerStructure: []
-  pos1: {fileID: 1061093664}
-  pos2: {fileID: 538294761}
+  playersPos: []
   selectPjRestriction: 0
   nextTurnRestriction: 0
   cancelRestriction: 0
@@ -500,6 +499,8 @@ GameObject:
   - component: {fileID: 5905581117175736877}
   - component: {fileID: 3077805959708153457}
   - component: {fileID: 2852720273540608171}
+  - component: {fileID: 7141043509037855016}
+  - component: {fileID: 3325842176598235600}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -673,6 +674,31 @@ MonoBehaviour:
   positions:
   - {x: 0, y: 21, z: 1}
   - {x: -1.5, y: 2.6, z: 5}
+--- !u!65 &7141043509037855016
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8022926637128795510}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.550171, y: 3.6144824, z: 7.6628313}
+  m_Center: {x: 0.8270025, y: 0.5493709, z: 3.517956}
+--- !u!114 &3325842176598235600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8022926637128795510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b757c6e08d84649969d99094a62a40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5357094215712880117
 PrefabInstance:
   m_ObjectHideFlags: 0

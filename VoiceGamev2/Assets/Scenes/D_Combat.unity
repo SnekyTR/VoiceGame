@@ -33994,6 +33994,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -3.04
       objectReference: {fileID: 0}
+    - target: {fileID: 1495127969, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
+      propertyPath: lPanel
+      value: 
+      objectReference: {fileID: 1858800227}
+    - target: {fileID: 1495127969, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
+      propertyPath: wPanel
+      value: 
+      objectReference: {fileID: 1858800228}
     - target: {fileID: 5905581117175736877, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
       propertyPath: volumeLayer.m_Bits
       value: 4294967295
@@ -45352,6 +45360,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4685fb0ee33abde42ac1e48c8b68af7f, type: 3}
+--- !u!1 &1858800227 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 213928384, guid: 4685fb0ee33abde42ac1e48c8b68af7f, type: 3}
+  m_PrefabInstance: {fileID: 1858800226}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1858800228 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 706739402, guid: 4685fb0ee33abde42ac1e48c8b68af7f, type: 3}
+  m_PrefabInstance: {fileID: 1858800226}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1867466320 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 493156, guid: cd63e7ed2d501564ebcb6cd6729e699e, type: 3}
