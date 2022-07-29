@@ -209,11 +209,21 @@ public class Skills : MonoBehaviour
         {
             if(Vector3.Distance(gameM.enemys[i].transform.position, gameM.playerParent.position) <= e)
             {
-                Vector3 newPos = gameM.enemys[i].transform.position;
-                newPos.y += 0.6f;
+                RaycastHit hit;
+                Vector3 newPos = plyStats.transform.position;
+                newPos.y += 1;
+                Vector3 newDir = gameM.enemys[i].transform.position - plyStats.transform.position;
+                if (Physics.Raycast(newPos, newDir, out hit, 1000f, mask))
+                {
+                    if (hit.transform.tag == "Enemy")
+                    {
+                        Vector3 newPos2 = gameM.enemys[i].transform.position;
+                        newPos2.y += 0.6f;
 
-                GameObject rg = Instantiate(rangeFX, newPos, transform.rotation);
-                ranges.Add(rg);
+                        GameObject rg = Instantiate(rangeFX, newPos2, transform.rotation);
+                        ranges.Add(rg);
+                    }
+                }
             }
         }
     }

@@ -55,6 +55,8 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField] private Color blueC, redC, defaultC;
 
+    int mask;
+
     void Start()
     {
         gameM = GetComponent<CameraFollow>();
@@ -105,6 +107,9 @@ public class PlayerMove : MonoBehaviour
         startCmdR.Start();
 
         PlayerDeselect();
+
+        mask = 1 << LayerMask.NameToLayer("Occlude");
+        mask |= 1 << LayerMask.NameToLayer("Enemy");
     }
 
     public void ClosePlayerMove()
@@ -443,6 +448,18 @@ public class PlayerMove : MonoBehaviour
             {
                 target = null;
                 break;
+            }
+        }
+
+        RaycastHit hit;
+        Vector3 newPos = playerTr.position;
+        newPos.y += 1;
+        Vector3 newDir = target.transform.position - playerTr.position;
+        if (Physics.Raycast(newPos, newDir, out hit, 1000f, mask))
+        {
+            if (hit.transform.tag != "Enemy")
+            {
+                return;
             }
         }
 
