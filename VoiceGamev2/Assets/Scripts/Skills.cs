@@ -11,6 +11,7 @@ public class Skills : MonoBehaviour
     private Animator plyAnim;
     private PlayerStats plyStats;
     private SkillsColocation skillCo;
+    private AudioSource audioSource;
 
     private List<string> nameSkill = new List<string>();
     private List<string> weapons = new List<string>();
@@ -19,6 +20,7 @@ public class Skills : MonoBehaviour
     private List<Transform> skillMagnus = new List<Transform>();
     private List<Transform> skillVagnar = new List<Transform>();
     private List<Transform> skillHammun = new List<Transform>();
+    [SerializeField]private List<AudioClip> attacksFX = new List<AudioClip>();
 
     private List<int> magnusTimer = new List<int>();
     private List<float> magnusTimer2 = new List<float>();
@@ -87,6 +89,7 @@ public class Skills : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         plyMove = GetComponent<PlayerMove>();
         gameM = GetComponent<CameraFollow>();
         skillCo = GameObject.Find("CanvasManager").GetComponent<SkillsColocation>();
@@ -337,6 +340,8 @@ public class Skills : MonoBehaviour
             plyAnim.SetInteger("A_BasicAtk", 1);
 
             yield return new WaitForSeconds(0.7f);
+            audioSource.clip = attacksFX[0];
+            audioSource.Play();
 
             int dmg = Random.Range((int)(plyStats.GetStrenght() * 0.9f), (int)(plyStats.GetStrenght() * 1.3f));
 
@@ -390,12 +395,16 @@ public class Skills : MonoBehaviour
             gameM.CameraSkillPlayer(2);
 
             plyAnim.SetInteger("A_Bow", 1);
-
+            yield return new WaitForSeconds(2f);
+            audioSource.clip = attacksFX[4];
+            audioSource.Play();
             yield return new WaitForSeconds(0.8f);
 
             plyAnim.SetInteger("A_Bow", 0);
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.3f);
+            audioSource.clip = attacksFX[5];
+            audioSource.Play();
 
             int dmg = Random.Range((int)(plyStats.GetAgility() * 0.8f), (int)(plyStats.GetAgility() * 1.5f));
 
@@ -794,9 +803,13 @@ public class Skills : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
-        plyAnim.SetInteger("A_Slash", 0);
 
-        yield return new WaitForSeconds(0.7f);
+        plyAnim.SetInteger("A_Slash", 0);
+        yield return new WaitForSeconds(0.5f);
+        audioSource.clip = attacksFX[1];
+        audioSource.Play();
+
+        yield return new WaitForSeconds(0.2f);
         Vector3 newPos = plyMove.target.transform.position;
 
         slashArea.gameObject.SetActive(true);
@@ -818,6 +831,10 @@ public class Skills : MonoBehaviour
         plyAnim.SetInteger("A_AutoBuff", 1);
 
         yield return new WaitForSeconds(0.2f);
+        audioSource.clip = attacksFX[2];
+        audioSource.volume = 0.15f;
+        audioSource.Play();
+        audioSource.volume = 1;
 
         plyAnim.SetInteger("A_AutoBuff", 0);
 
@@ -843,8 +860,10 @@ public class Skills : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         plyAnim.SetInteger("A_Demacia", 0);
-
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.05f);
+        audioSource.clip = attacksFX[3];
+        audioSource.Play();
+        yield return new WaitForSeconds(0.55f);
 
         Vector3 newPos = plyMove.target.transform.position;
 
@@ -866,7 +885,12 @@ public class Skills : MonoBehaviour
         {
             plyAnim.SetInteger("A_BasicAtk", 1);
 
-            yield return new WaitForSeconds(0.7f);
+
+            yield return new WaitForSeconds(0.1f);
+
+
+
+            yield return new WaitForSeconds(0.6f);
 
             int dmg = Random.Range((int)(plyStats.GetAgility() * 1f), (int)(plyStats.GetAgility() * 1.2f));
 
@@ -887,12 +911,20 @@ public class Skills : MonoBehaviour
             gameM.CameraSkillPlayer(2);
 
             plyAnim.SetInteger("A_Bow", 1);
+            yield return new WaitForSeconds(2f);
 
+            audioSource.clip = attacksFX[4];
+            audioSource.Play();
             yield return new WaitForSeconds(0.8f);
+
 
             plyAnim.SetInteger("A_Bow", 0);
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.3f);
+            audioSource.clip = attacksFX[6];
+            audioSource.volume = 0.50f;
+            audioSource.Play();
+            audioSource.volume = 1;
 
             int dmg = Random.Range((int)(plyStats.GetAgility() * 0.8f), (int)(plyStats.GetAgility() * 1.5f));
 
@@ -934,6 +966,10 @@ public class Skills : MonoBehaviour
         plyAnim.SetInteger("A_AutoBuff", 1);
 
         yield return new WaitForSeconds(0.2f);
+        audioSource.clip = attacksFX[2];
+        audioSource.volume = 0.15f;
+        audioSource.Play();
+        audioSource.volume = 1;
 
         plyAnim.SetInteger("A_AutoBuff", 0);
 

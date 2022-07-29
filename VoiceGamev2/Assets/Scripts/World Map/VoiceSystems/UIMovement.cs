@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 
@@ -23,6 +24,7 @@ public class UIMovement : MonoBehaviour
     [SerializeField] private GameObject characterPannel;
     [SerializeField] private GameObject victoryResult;
     [SerializeField] private GameObject optionsPannel;
+    [SerializeField] private TextMeshProUGUI textSave;
 
     [SerializeField] private GameObject mainHelpPannel;
     [SerializeField] private GameSave gameSave;
@@ -105,6 +107,14 @@ public class UIMovement : MonoBehaviour
     private void Save()
     {
         gameSave.SaveGame();
+        StartCoroutine(FadeText());
+    }
+    IEnumerator FadeText()
+    {
+        textSave.gameObject.SetActive(true);
+        textSave.GetComponent<Animation>().Play();
+        yield return new WaitForSeconds(4f);
+        textSave.gameObject.SetActive(false);
     }
     private void RecognizedVoiceFirst(PhraseRecognizedEventArgs speech)
     {
