@@ -62864,15 +62864,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2852720273540608171, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
       propertyPath: maxZoom
-      value: 40
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 2852720273540608171, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
       propertyPath: minZoom
-      value: 10
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 2852720273540608171, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
       propertyPath: zoomLimiter
-      value: 10
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 3077805959708153457, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
       propertyPath: isGlobal
@@ -62964,7 +62964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8543887534595166546, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
       propertyPath: m_Volume
-      value: 0.07
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 8543887534595166546, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
       propertyPath: m_audioClip

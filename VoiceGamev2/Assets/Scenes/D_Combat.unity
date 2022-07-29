@@ -35179,6 +35179,14 @@ PrefabInstance:
       propertyPath: wPanel
       value: 
       objectReference: {fileID: 1858800228}
+    - target: {fileID: 2852720273540608171, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
+      propertyPath: maxZoom
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852720273540608171, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
+      propertyPath: zoomLimiter
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 8022926636653982289, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -35233,7 +35241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8543887534595166546, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
       propertyPath: m_Volume
-      value: 0.09
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 8543887534595166546, guid: 13bffa558465aa0489a4ead4a7b27fa8, type: 3}
       propertyPath: m_audioClip
@@ -46958,6 +46966,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6268681195616526502, guid: 4685fb0ee33abde42ac1e48c8b68af7f, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6383891686540193729, guid: 4685fb0ee33abde42ac1e48c8b68af7f, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6472331123069521219, guid: 4685fb0ee33abde42ac1e48c8b68af7f, type: 3}

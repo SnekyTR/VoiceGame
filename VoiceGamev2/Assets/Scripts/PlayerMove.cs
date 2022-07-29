@@ -353,7 +353,7 @@ public class PlayerMove : MonoBehaviour
         move2Active = false;
         atk0Active = true;
 
-        if (playerStats.GetEnergy(2) <= skill.GetCost("atk"))
+        if (playerStats.GetEnergy(2) < skill.GetCost("atk"))
         {
             timerC.NoEnergyAction();
             return;
@@ -388,7 +388,7 @@ public class PlayerMove : MonoBehaviour
         spellActive = true;
         move2Active = false;
 
-        if (playerStats.GetEnergy(2) <= skill.GetCost(n))
+        if (playerStats.GetEnergy(2) < skill.GetCost(n))
         {
             timerC.NoEnergyAction();
             return;

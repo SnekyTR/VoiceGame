@@ -73,8 +73,8 @@ public class MainMenuVoice : MonoBehaviour
     }
     private void DeleteFiles()
     {
-        UnityEditor.FileUtil.DeleteFileOrDirectory(Application.persistentDataPath);
-        filesExist = false;
+        //UnityEditor.FileUtil.DeleteFileOrDirectory(Application.persistentDataPath);
+        //filesExist = false;
     }
     private void LoadGame()
     {
