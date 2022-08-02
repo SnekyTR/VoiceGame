@@ -141,12 +141,13 @@ public class PlayerStats : MonoBehaviour
     //Coge los stats guardados en el fichero antes de abrir el nivel
     private void LoadStatsPlayer()
     {
-        PlayerData data = SaveSystem.LoadPlayer(transform);
+        PlayerData data = SaveSystem.LoadPlayer(this.transform);
 
         lifePoints = data.healthStat;
         strengthPoints = data.strength;
         agilityPoints = data.agility;
         intellectPoints = data.intellectStat;
+        actualWeapon = data.weaponType;
     }
     void Update()
     {
