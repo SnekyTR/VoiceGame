@@ -34,19 +34,24 @@ public class PlayerStats : MonoBehaviour
     private int agilityValue;
     private int intellectValue;
     private int shieldValue;
+    private bool isStunned;
 
-    private float maxLife;
+    [HideInInspector] public float maxLife;
     private float maxShield;
     [HideInInspector] public float maxEnergy;
 
     [HideInInspector] public GameObject structure;
     [HideInInspector] public GameObject selected;
 
+    public GameObject stunFX;
+    private GameObject stunPrefab;
+
     private SkillsColocation skillsColocation;
 
     private CameraFollow gameM;
     private Skills skill;
     private WinLoose winLoose;
+
 
     void Start()
     {
@@ -147,7 +152,7 @@ public class PlayerStats : MonoBehaviour
         strengthPoints = data.strength;
         agilityPoints = data.agility;
         intellectPoints = data.intellectStat;
-        actualWeapon = data.weaponType;
+        //actualWeapon = data.weaponType;
     }
     void Update()
     {
@@ -235,6 +240,29 @@ public class PlayerStats : MonoBehaviour
         structure.transform.GetChild(1).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
         selected.transform.GetChild(0).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
         selected.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
+    }
+
+    public void StunPlayer(bool t)
+    {
+        if (t)
+        {
+            Vector3 pos = transform.position;
+            pos.y += 2;
+
+            stunPrefab = Instantiate(stunFX, pos, transform.rotation);
+            isStunned = true;
+        }
+        else
+        {
+            Destroy(stunPrefab);
+
+            isStunned = false;
+        }
+    }
+
+    public bool IsStunned()
+    {
+        return isStunned;
     }
 
     public void SetStrenght(float n)

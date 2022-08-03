@@ -1891,9 +1891,11 @@ MonoBehaviour:
   weapon04: {fileID: 3145115565942461059}
   weapon05: {fileID: 9159059444769284852}
   weapon06: {fileID: 1126678234294569177}
+  maxLife: 0
   maxEnergy: 0
   structure: {fileID: 0}
   selected: {fileID: 0}
+  stunFX: {fileID: 1500378020736912, guid: 2547a66872ebe45408ace228820a79e1, type: 3}
 --- !u!195 &421785698
 NavMeshAgent:
   m_ObjectHideFlags: 0

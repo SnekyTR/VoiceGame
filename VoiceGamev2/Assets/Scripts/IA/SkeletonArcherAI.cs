@@ -53,6 +53,12 @@ public class SkeletonArcherAI : MonoBehaviour
 
     public void StarIA()
     {
+        if (enemyStats.IsStunned())
+        {
+            gameM.NextIA(GetComponent<StateManager>());
+            return;
+        }
+
         float dis = 10000;
 
         if (gameM.players.Count == 0) return;
@@ -70,7 +76,7 @@ public class SkeletonArcherAI : MonoBehaviour
 
     private void StatesManager()
     {
-        if(enemyStats.GetEnergy() > 0)
+        if(enemyStats.GetEnergy() > 0 || enemyStats.GetEnergyActions() > 0)
         {
             float dis = Vector3.Distance(transform.position, target.position);
 

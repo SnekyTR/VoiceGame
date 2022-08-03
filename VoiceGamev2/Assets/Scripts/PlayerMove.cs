@@ -420,6 +420,7 @@ public class PlayerMove : MonoBehaviour
             StartCoroutine(SelfBuffs());
             TurnEnergyActions(skill.GetCost(atkState));
             skill.UnShowRange();
+            if (!gameM.playerUseMagic) gameM.playerUseMagic = true;
         }
         else
         {
@@ -477,6 +478,8 @@ public class PlayerMove : MonoBehaviour
 
                 skill.UnShowRange();
                 gridA.DisableAtkGrid();
+
+                if(atkState != "atk" && !gameM.playerUseMagic) gameM.playerUseMagic = true;
             }
             else
             {
@@ -515,6 +518,11 @@ public class PlayerMove : MonoBehaviour
             if (TurnEnergyActions(skill.GetCost(atkState)))
             {
                 StartCoroutine(StartAtkAnim());
+
+                skill.UnShowRange();
+                gridA.DisableAtkGrid();
+
+                if (!gameM.playerUseMagic) gameM.playerUseMagic = true;
             }
             else
             {

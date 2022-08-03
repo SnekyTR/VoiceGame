@@ -55,6 +55,12 @@ public class SkeletonGuardianAI : MonoBehaviour
 
     public void StarIA()
     {
+        if (enemyStats.IsStunned())
+        {
+            gameM.NextIA(GetComponent<StateManager>());
+            return;
+        }
+
         float dis = 10000;
 
         if (gameM.players.Count == 0) return;

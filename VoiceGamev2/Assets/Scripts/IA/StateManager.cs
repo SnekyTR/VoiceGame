@@ -18,5 +18,13 @@ public class StateManager : MonoBehaviour
         {
             GetComponent<SkeletonGuardianAI>().StarIA();
         }
+        else if (GetComponent<BarbarianBerserkAI>())
+        {
+            GetComponent<BarbarianBerserkAI>().StarIA();
+        }
+        else if (GetComponent<BarbarianMageAI>())
+        {
+            GetComponent<BarbarianMageAI>().StarIA();
+        }
     }
 }

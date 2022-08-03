@@ -923,18 +923,20 @@ public class Skills : MonoBehaviour
             plyAnim.SetInteger("A_Bow", 1);
             yield return new WaitForSeconds(2f);
 
-            audioSource.clip = attacksFX[4];
-            audioSource.Play();
+            /*audioSource.clip = attacksFX[4];
+            audioSource.Play();*/
             yield return new WaitForSeconds(0.8f);
 
 
             plyAnim.SetInteger("A_Bow", 0);
 
             yield return new WaitForSeconds(0.3f);
-            audioSource.clip = attacksFX[6];
+            /*audioSource.clip = attacksFX[6];
             audioSource.volume = 0.50f;
             audioSource.Play();
-            audioSource.volume = 1;
+            audioSource.volume = 1;*/
+
+            
 
             int dmg = Random.Range((int)(plyStats.GetAgility() * 0.8f), (int)(plyStats.GetAgility() * 1.5f));
 

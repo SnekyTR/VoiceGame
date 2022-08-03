@@ -33,6 +33,8 @@ public class CameraFollow : MonoBehaviour
     [HideInInspector] public bool selectPjRestriction, nextTurnRestriction, cancelRestriction, sbookRestriction;
     [HideInInspector] public bool selectPjActive, nextTurnActive, cancelActive, sbookActive;
 
+    [HideInInspector] public bool playerUseMagic = false;
+
     private void Awake()
     {
         whoTurn = true;         //player turn
@@ -224,6 +226,11 @@ public class CameraFollow : MonoBehaviour
                 skBook.ChangeSkillBookPage(e);
                 return;
             }
+        }
+
+        if (actualPlayer.GetComponent<PlayerStats>().IsStunned())
+        {
+            return;
         }
 
         if (whoTurn)
@@ -440,9 +447,11 @@ public class CameraFollow : MonoBehaviour
             if (players.Count > 1) playerStructure[1].SetActive(true);
             if (players.Count > 2) playerStructure[2].SetActive(true);
 
+            moveLogic.PlayerDeselect();
+
             for (int i = 0; i<players.Count; i++)
             {
-                moveLogic.PlayerDeselect();
+                if (players[i].GetComponent<PlayerStats>().IsStunned()) players[i].GetComponent<PlayerStats>().StunPlayer(false);
             }
 
             for (int i = 0; i < enemys.Count; i++)
@@ -485,8 +494,11 @@ public class CameraFollow : MonoBehaviour
 
             for(int i = 0; i < enemys.Count; i++)
             {
-                nw.Add(enemys[i].transform);
+                if(Vector3.Distance(playerParent.position, enemys[i].transform.position) <= 20f) nw.Add(enemys[i].transform);
+                if (enemys[i].GetComponent<EnemyStats>().IsStunned()) enemys[i].GetComponent<EnemyStats>().StunEnemy(false);
             }
+
+            camS.enabled = true;
 
             camS.CameraPlayerTurn(nw);
         }

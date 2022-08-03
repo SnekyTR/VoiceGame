@@ -18,6 +18,7 @@ public class EnemyStats : MonoBehaviour
     private Animator animator;
 
     private WinLoose winLoose;
+    private bool isStunned;
 
     [HideInInspector] public float maxLife;
     [HideInInspector] public float maxShield;
@@ -33,6 +34,9 @@ public class EnemyStats : MonoBehaviour
     public Transform cinemaCam;
     public GameObject deathFX;
     public Text dmgTxt;
+
+    public GameObject stunFX;
+    private GameObject stunPrefab;
 
     void Start()
     {
@@ -122,6 +126,29 @@ public class EnemyStats : MonoBehaviour
         intBars.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
     }
 
+    public void StunEnemy(bool t)
+    {
+        if (t)
+        {
+            Vector3 pos = transform.position;
+            pos.y += 2;
+
+            stunPrefab = Instantiate(stunFX, pos, transform.rotation);
+            isStunned = true;
+        }
+        else
+        {
+            Destroy(stunPrefab);
+
+            isStunned = false;
+        }
+    }
+
+    public bool IsStunned()
+    {
+        return isStunned;
+    }
+
     private IEnumerator DmgTxtAnim(int i)
     {
         dmgTxt.text = i.ToString();
@@ -159,6 +186,11 @@ public class EnemyStats : MonoBehaviour
     public int GetShield()
     {
         return shieldValue;
+    }
+
+    public void SetDmg(int i)
+    {
+        atkValue = i;
     }
 
     public void SetEnergy(float n)

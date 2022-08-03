@@ -120,5 +120,8 @@ public class MultipleTargetCamera : MonoBehaviour
     {
         targets = new List<Transform>();
         targets = l;
+
+        offset = positions[0];
+        rotationPos = Quaternion.Euler(rotations[0]);
     }
 }
