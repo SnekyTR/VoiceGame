@@ -9,17 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7c2f1345f48d54ab0eb944e8f28364, type: 3}
-  m_Name: SecondEncounter
+  m_Script: {fileID: 11500000, guid: eb31159114f73c04d860d6e81c19d0d5, type: 3}
+  m_Name: ThirdCombat
   m_EditorClassIdentifier: 
-  index: 0
-  combatTitle: Second
-  combatDescription: Second Descr
-  image: {fileID: 0}
-  reward: 150
-  level: Level 1
-  level2: Level 2
+  sceneIndex: 4
+  combatTitle: Originalidad
+  combatDescription: 'Descripcion de '
+  Image: {fileID: 0}
+  reward: 217
+  level: Enemigos
   enemyList:
-  - Alpaca Gigante
-  enemyList2:
-  - Pato
+  - "Ara\xF1a Lvl 2"
+  - "Ara\xF1a Lvl 2"

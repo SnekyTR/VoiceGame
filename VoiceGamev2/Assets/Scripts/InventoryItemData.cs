@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Weapons", menuName = "Weapons/GreatSword")]
-public class Scripteable_GreatSword : ScriptableObject
+[CreateAssetMenu(fileName ="Weapons", menuName ="Weapons/Sword")]
+public class InventoryItemData : ScriptableObject
 {
+    public int id;
     public new string name;
     public string description;
 

@@ -6,11 +6,12 @@ public static class SaveSystem
     public static void SavePlayer(GeneralStats player, LevelSystem level, Transform charName)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/"+charName.name+".data";
+        string path = Application.persistentDataPath + "/"+ charName.name+".data";
+       
 
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerData data = new PlayerData(player, level,charName);
+        PlayerData data = new PlayerData(player, level);
 
         formatter.Serialize(stream, data);
         stream.Close();
@@ -18,7 +19,7 @@ public static class SaveSystem
 
     public static PlayerData LoadPlayer(Transform charName)
     {
-        string path = Application.persistentDataPath + "/" + charName.name + ".data";
+        string path = Application.persistentDataPath + "/" + charName.transform.name + ".data";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();

@@ -9,6 +9,7 @@ public class Character_skills : MonoBehaviour
     private Slider magicBar;
     private Slider physicalBar;
     private Slider agilityBar;
+    [SerializeField] private Image weaponImagePosition;
     [SerializeField] private TextMeshProUGUI player;
 
     [SerializeField] private RawImage magicSkill1;
@@ -32,6 +33,7 @@ public class Character_skills : MonoBehaviour
     [SerializeField] public TextMeshProUGUI amountofLvl;
 
     private GeneralStats general;
+    [SerializeField] private Inventory inventory;
 
     private void Awake()
     {
@@ -46,11 +48,30 @@ public class Character_skills : MonoBehaviour
 
     public void DisplayCharacterInf(GameObject actualCharacter)
     {
-
         GeneralStats stats = GameObject.Find(actualCharacter.transform.name).GetComponent<GeneralStats>();
         GameObject.Find(actualCharacter.transform.name).GetComponent<LevelSystem>().DeactivateButtons();
         general = stats;
         CallThings(actualCharacter);
+        if(stats.weaponequiped == null){
+            print("No tiene arma");
+            weaponImagePosition.sprite = null;
+        }
+        else
+        {
+            print("Tiene arma" + actualCharacter.name+  "de un total de "+ inventory.actualWeapons.Count);
+            for(int i = 0; i < inventory.actualWeapons.Count; i++)
+            {
+                Scripteable_Weapon weap = (Scripteable_Weapon)inventory.actualWeapons[i];
+                if (weap.name == stats.weaponequiped)
+                {
+                    print("Se ha equipado" + inventory.actualWeapons[i]);
+                    weaponImagePosition.sprite = weap.artwork;
+                    inventory.actualEquipedWeapon = weap;
+                    weap.equiped = true;
+                }
+            }
+            print("TIene la arma: " + stats.weaponequiped);
+        }
         HP.text = stats.lifePoints.ToString();
         STR.text = stats.strengthPoints.ToString();
         AGI.text = stats.agilityPoints.ToString();

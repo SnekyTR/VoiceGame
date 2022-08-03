@@ -12,6 +12,8 @@ public class GeneralStats : MonoBehaviour
     public int intellectPoints;
     public int agilityPoints;
     public int critStrikePoints;
+    public string weaponequiped;
+    public string weaponType;
 
     [SerializeField] private GameObject victoryRewardPlayer;
     [SerializeField] private GameObject groupPlayer;
@@ -40,11 +42,12 @@ public class GeneralStats : MonoBehaviour
     public void LoadPlayer()
     {
 
-        PlayerData data = SaveSystem.LoadPlayer(transform);
+        PlayerData data = SaveSystem.LoadPlayer(this.transform);
 
         levelSystem.level = data.level;
         levelSystem.currentXp = data.experience;
-
+        weaponequiped = data.weaponEquiped;
+        weaponType = data.weaponType;
         strengthPoints = data.strength;
         agilityPoints = data.agility;
         intellectPoints = data.intellectStat;

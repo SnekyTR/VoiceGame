@@ -47,7 +47,7 @@ public class LevelSystem : MonoBehaviour
     // Update is called once per frame
     public void LoadLevel()
     {
-        PlayerData data = SaveSystem.LoadPlayer(transform);
+        PlayerData data = SaveSystem.LoadPlayer(this.transform);
         amountOfLvl = data.amountofLevel;
         level = data.level;
         currentXp = data.experience;
@@ -141,7 +141,6 @@ public class LevelSystem : MonoBehaviour
             print("No tiene mas levels a subir");
             buttonsStats.SetActive(false);
             levelupNotif.SetActive(false);
-            increaseStats.statOrders.Stop();
             lvlUP.SetActive(false);
         }
         else
@@ -150,6 +149,7 @@ public class LevelSystem : MonoBehaviour
             buttonsStats.SetActive(true);
             levelupNotif.SetActive(true);
             lvlUP.SetActive(true);
+            increaseStats.statOrders.Start();
         }
 
     }

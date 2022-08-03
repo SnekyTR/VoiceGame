@@ -16,14 +16,14 @@ public class DissapearClosestObjects : MonoBehaviour
         print("Ha entrado" + other.name);
         if (other.gameObject.CompareTag("Ocultable"))
         {
-            other.gameObject.SetActive(false);
+            other.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Ocultable"))
         {
-            other.gameObject.SetActive(true);
+            other.gameObject.GetComponent<MeshRenderer>().enabled = true;
         }
     }
 }

@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb31159114f73c04d860d6e81c19d0d5, type: 3}
-  m_Name: FirstCombat
+  m_Name: FifthCombat
   m_EditorClassIdentifier: 
-  sceneIndex: 1
-  combatTitle: First
-  combatDescription: Description Here hehehe
+  sceneIndex: 6
+  combatTitle: Qunto combate
+  combatDescription: Este es el quinto combate
   Image: {fileID: 0}
-  reward: 51
-  level: Level 1
+  reward: 344
+  level: Enemigos
   enemyList:
-  - Basic Spider
-  - Basic Spider
+  - Esqueleto Lvl 2
+  - Esqueleto Lvl 2
+  - Esqueleto Lvl 2

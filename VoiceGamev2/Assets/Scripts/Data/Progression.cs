@@ -26,6 +26,7 @@ public class Progression : MonoBehaviour
 
     [SerializeField]private GameObject victoryResults;
     [SerializeField] private FTUE_Progresion fTUE_Progresion;
+    [SerializeField] private Inventory inventory;
     [SerializeField] private UIMovement uIMovement;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject singlePanel;
@@ -36,6 +37,7 @@ public class Progression : MonoBehaviour
     GameSave gameSave;
     VoiceDestinations voices;
     MoveDataToMain moveDataToMain;
+
     LevelSystem level;
     public int totalEXP;
     public bool fromVictory;
@@ -50,7 +52,6 @@ public class Progression : MonoBehaviour
             fromVictory = true;
             StartCoroutine(IncrementTheProgression());
         }
-        
         
         
         if (System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
@@ -87,6 +88,20 @@ public class Progression : MonoBehaviour
             }
             if(progression >= 2)
             {
+                bool isTheSame = false;
+                for(int i = 0; i < inventory.actualWeapons.Count; i++)
+                {
+                    if (inventory.totalWeapons[1] == inventory.actualWeapons[i])
+                    {
+                        isTheSame = true;
+                    }
+                    
+                }
+                if (!isTheSame)
+                {
+                    inventory.actualWeapons.Add(inventory.totalWeapons[1]);
+                }
+                
                 combat2.SetActive(false);
                 player.GetComponent<VoiceDestinations>().entered = false;
                 singlePanel.SetActive(false);
@@ -95,6 +110,8 @@ public class Progression : MonoBehaviour
 
                 if (progression >= 3)
                 {
+                    isTheSame = false;
+                    
                     print("Se activa vastion anum");
                     combat3.SetActive(false);
                     restAnimator.SetFloat("anim", 0);
@@ -102,6 +119,18 @@ public class Progression : MonoBehaviour
                     //vagnar.SetActive(true);
                     if (progression >= 4)
                     {
+                        for (int i = 0; i < inventory.actualWeapons.Count; i++)
+                        {
+                            if (inventory.totalWeapons[1] == inventory.actualWeapons[i])
+                            {
+                                isTheSame = true;
+                            }
+
+                        }
+                        if (!isTheSame)
+                        {
+                            inventory.actualWeapons.Add(inventory.totalWeapons[2]);
+                        }
                         bastionAnimator.SetFloat("anim", 0);
                         forestAnimator.SetFloat("anim", 1);
                         //p2Interface.SetActive(true);

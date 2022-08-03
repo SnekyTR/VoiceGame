@@ -18,10 +18,9 @@ public class IncreaseStats : MonoBehaviour
     private Dictionary<string, Action> statsActions = new Dictionary<string, Action>();
     public KeywordRecognizer statOrders;
     private GameObject player;
-    public bool levelear;
+    //public bool levelear;
     private void Start()
     {
-        AddControls();
         player = level.PlayerLvlUp();
         statOrders.Start();
     }
@@ -30,15 +29,14 @@ public class IncreaseStats : MonoBehaviour
         level = player.GetComponent<LevelSystem>();
         general = player.GetComponent<GeneralStats>();
         
-        if (levelear)
+        if(level.amountOfLvl!= 0)
         {
             statOrders.Start();
         }
-        else { levelear = true; }
         //character = player.GetComponent<CharacterInformation>();
         //character_Skills = GameObject.Find("Skills").GetComponent<Character_skills>();
     }
-    private void AddControls()
+    public void AddControls()
     {
         statsActions.Add("fuerza", IncreaseSRT);
         statsActions.Add("vida", IncreaseHealth);
@@ -114,6 +112,7 @@ public class IncreaseStats : MonoBehaviour
     private void UpdateLevelAmount()
     {
         level.amountOfLvl--;
+        statOrders.Stop();
         character_Skills.amountofLvl.text = "Puntos restantes: " + level.amountOfLvl.ToString();
         gameSave.SaveGame();
 

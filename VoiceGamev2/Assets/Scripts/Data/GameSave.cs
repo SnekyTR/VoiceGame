@@ -24,11 +24,13 @@ public class GameSave : MonoBehaviour
     }
     public void SaveGame()
     {
-        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Player").Length; i++)
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < players.Length; i++)
         {
-            GeneralStats general = GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<GeneralStats>();
-            LevelSystem level = GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>();
-            SaveSystem.SavePlayer(general, level, general.transform);
+            GeneralStats general = players[i].GetComponent<GeneralStats>();
+            LevelSystem level = players[i].GetComponent<LevelSystem>();
+            Transform trans = players[i].GetComponent<Transform>();
+            SaveSystem.SavePlayer(general, level, trans);
         }
         SaveSystem.SaveProgression(pro,fTUE_Progresion);
     }

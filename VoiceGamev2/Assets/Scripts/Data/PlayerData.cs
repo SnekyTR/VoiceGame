@@ -14,10 +14,12 @@ public class PlayerData
     public int coins;
     public int critStrikePoints;
     public int amountofLevel;
+    public string weaponType;
+    public string weaponEquiped;
 
     public float[] position;
 
-    public PlayerData(GeneralStats player, LevelSystem levelSystem, Transform transform)
+    public PlayerData(GeneralStats player, LevelSystem levelSystem)
     {
         level = levelSystem.level;
         experience = levelSystem.currentXp;
@@ -27,6 +29,8 @@ public class PlayerData
         agility = player.agilityPoints;
         critStrikePoints = player.critStrikePoints;
         amountofLevel = levelSystem.amountOfLvl;
+        weaponType = player.weaponType;
+        weaponEquiped = player.weaponequiped;
 
         position = new float[3];
         position[0] = player.transform.position.x;

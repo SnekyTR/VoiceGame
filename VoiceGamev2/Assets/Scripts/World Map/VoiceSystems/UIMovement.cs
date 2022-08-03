@@ -16,21 +16,28 @@ public class UIMovement : MonoBehaviour
     private KeywordRecognizer character;
     private Dictionary<string, Action> optionsOrders = new Dictionary<string, Action>();
     private KeywordRecognizer optionsRecognizer;
+    private Dictionary<string, Action> inventoryOptions = new Dictionary<string, Action>();
+    private KeywordRecognizer inventory;
 
     [SerializeField] private PartyInformation partyInformation;
     [SerializeField] private Character_skills character_Skills;
+    [SerializeField] private IncreaseStats increaseStats;
+    [SerializeField] private EquipObjects equipObjects;
 
     [SerializeField] private GameObject partyPannel;
+    [SerializeField] private Animator inventoryAnimator;
     [SerializeField] private GameObject characterPannel;
     [SerializeField] private GameObject victoryResult;
     [SerializeField] private GameObject optionsPannel;
     [SerializeField] private TextMeshProUGUI textSave;
+    [SerializeField] private GameObject skillsZone;
+    [SerializeField] private GameObject inventoryZone;
 
     [SerializeField] private GameObject mainHelpPannel;
     [SerializeField] private GameSave gameSave;
     [HideInInspector] public bool canOpenGroup;
 
-    private string charSelected;
+    public string charSelected;
 
     [SerializeField] private FTUE_Progresion fTUE_Progresion;
     // Start is called before the first frame update
@@ -40,10 +47,12 @@ public class UIMovement : MonoBehaviour
         character_Skills = GameObject.Find("Skills").GetComponent<Character_skills>();
         partyPannel = GameObject.Find("PartyInformation");
         characterPannel = GameObject.Find("CharacterInformation");*/
-
+        canOpenGroup = true;
         AddFirstLvl();
         AddPartyInf();
         OptionsOrders();
+        AddInventory();
+        increaseStats.AddControls();
     }
     private void Update()
     {
@@ -70,6 +79,15 @@ public class UIMovement : MonoBehaviour
         party = new KeywordRecognizer(partyInf.Keys.ToArray());
         party.OnPhraseRecognized += RecognizedVoiceParty;
     }
+    private void AddInventory()
+    {
+        inventoryOptions.Add("abilidades", ActivateSkillAnimation);
+        inventoryOptions.Add("inventario", ActivateInventoryAnimation);
+        inventoryOptions.Add("imventario", ActivateInventoryAnimation);
+        inventory = new KeywordRecognizer(inventoryOptions.Keys.ToArray());
+        inventory.OnPhraseRecognized += RecognizedInventory;
+        inventory.Start();
+    }
     private void OptionsOrders()
     {
         optionsOrders.Add("salir", CloseGame);
@@ -92,6 +110,25 @@ public class UIMovement : MonoBehaviour
             fTUE_Progresion.ftueProgression++;
             fTUE_Progresion.FTUEProgression();
         }
+    }
+    private void ActivateSkillAnimation()
+    {
+        inventoryAnimator.SetBool("ReverseInventory", true);
+        skillsZone.SetActive(true);
+        inventoryZone.SetActive(false);
+        equipObjects.weapons.Stop();
+        equipObjects.isInventory = false;
+        inventoryAnimator.SetBool("ReverseInventory", false);
+
+
+    }
+    private void ActivateInventoryAnimation()
+    {
+        inventoryAnimator.SetBool("Inventory", true);
+        skillsZone.SetActive(false);
+        inventoryZone.SetActive(true);
+        equipObjects.isInventory = true;
+        inventoryAnimator.SetBool("Inventory", false);
     }
     private void CloseGame()
     {
@@ -120,6 +157,11 @@ public class UIMovement : MonoBehaviour
     {
         Debug.Log(speech.text);
         firstCanvasLvl[speech.text].Invoke();
+    }
+    private void RecognizedInventory(PhraseRecognizedEventArgs speech)
+    {
+        Debug.Log(speech.text);
+        inventoryOptions[speech.text].Invoke();
     }
     private void RecognizedOptionsOrders(PhraseRecognizedEventArgs speech)
     {
@@ -162,6 +204,8 @@ public class UIMovement : MonoBehaviour
     {
         if (characterPannel.activeInHierarchy)
         {
+            skillsZone.SetActive(true);
+            inventoryZone.SetActive(false);
             characterPannel.SetActive(false);
             party.Start();
         }

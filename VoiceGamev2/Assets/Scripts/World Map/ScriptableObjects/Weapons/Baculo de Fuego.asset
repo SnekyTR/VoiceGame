@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b83a179a3b77cb42869fb42772a7920, type: 3}
+  m_Name: Baculo de Fuego
+  m_EditorClassIdentifier: 
+  id: 0
+  name: Baculo de Fuego
+  weaponType: fire staff
+  description: 
+  artwork: {fileID: 21300000, guid: bc0cc664a7a42464c9763575d1dd4c88, type: 3}
+  equiped: 0
+  weapon: {fileID: 5875270693028758024, guid: 3058356566addd04d8ab52928169b5e2, type: 3}
