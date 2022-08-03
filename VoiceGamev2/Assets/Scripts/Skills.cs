@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class Skills : MonoBehaviour
 {
+    [SerializeField] private GameObject arrowPrefab;
+    [SerializeField] private Transform arrowStart;
+    [SerializeField] private Transform hand;
     private PlayerMove plyMove;
     private CameraFollow gameM;
     private Animator plyAnim;
@@ -405,9 +408,17 @@ public class Skills : MonoBehaviour
             gameM.CameraSkillPlayer(2);
 
             plyAnim.SetInteger("A_Bow", 1);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
+            GameObject go =  Instantiate(arrowPrefab);
+            go.transform.parent = arrowStart;
+            go.transform.localPosition = new Vector3(-4.2f, 38f, 1);
+            go.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            go.transform.localScale = new Vector3(266.863f, 266.863f, 266.863f);
+
+            yield return new WaitForSeconds(1f);
             audioSource.clip = attacksFX[4];
             audioSource.Play();
+            
             yield return new WaitForSeconds(0.8f);
 
             plyAnim.SetInteger("A_Bow", 0);
@@ -431,11 +442,16 @@ public class Skills : MonoBehaviour
             Vector3 newPos = plyStats.transform.position;
             newPos.y += 1;
             Vector3 newDir = plyMove.target.transform.position - plyStats.transform.position;
+            
             if (Physics.Raycast(newPos, newDir, out hit, 1000f, mask))
             {
+                
                 print(hit.transform.name);
                 if (hit.transform.tag == "Enemy")
                 {
+                    go.transform.parent = null;
+                    go.transform.position = Vector3.MoveTowards(go.transform.position, hit.transform.position, 0.5f);
+                    Destroy(go);
                     hit.transform.GetComponent<EnemyStats>().SetLife(-dmg);
                     Destroy(Instantiate(blood, plyMove.target.transform.position, transform.rotation), 2);
                 }
@@ -921,22 +937,25 @@ public class Skills : MonoBehaviour
             gameM.CameraSkillPlayer(2);
 
             plyAnim.SetInteger("A_Bow", 1);
-            yield return new WaitForSeconds(2f);
-
-            /*audioSource.clip = attacksFX[4];
-            audioSource.Play();*/
+            yield return new WaitForSeconds(1f);
+            GameObject go = Instantiate(arrowPrefab);
+            go.transform.parent = arrowStart;
+            go.transform.localPosition = new Vector3(-4.2f, 38f, 1);
+            go.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            go.transform.localScale = new Vector3(266.863f, 266.863f, 266.863f);
+            yield return new WaitForSeconds(1f);
+            audioSource.clip = attacksFX[4];
+            audioSource.Play();
             yield return new WaitForSeconds(0.8f);
 
 
             plyAnim.SetInteger("A_Bow", 0);
 
             yield return new WaitForSeconds(0.3f);
-            /*audioSource.clip = attacksFX[6];
+            audioSource.clip = attacksFX[6];
             audioSource.volume = 0.50f;
             audioSource.Play();
-            audioSource.volume = 1;*/
-
-            
+            audioSource.volume = 1;
 
             int dmg = Random.Range((int)(plyStats.GetAgility() * 0.8f), (int)(plyStats.GetAgility() * 1.5f));
 
@@ -959,6 +978,10 @@ public class Skills : MonoBehaviour
                 print(hit.transform.name);
                 if (hit.transform.tag == "Enemy")
                 {
+                    go.transform.parent = null;
+                    go.transform.position = Vector3.MoveTowards(go.transform.position, hit.transform.position, 0.5f);
+                    Destroy(go);
+                    hit.transform.GetComponent<EnemyStats>().SetLife(-dmg);
                     plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
                     Destroy(Instantiate(blood, plyMove.target.transform.position, transform.rotation), 2);
                 }
