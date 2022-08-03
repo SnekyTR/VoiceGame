@@ -309,7 +309,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82e986e3a0645347980ffd296e0516c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 451701979}
 --- !u!1 &1664429419
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,8 +1954,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.34, y: 0.2, z: 0.31}
-  m_Center: {x: 0, y: 0.1, z: 0}
+  m_Size: {x: 0.34000003, y: 0.4644745, z: 0.3100001}
+  m_Center: {x: 0, y: 0.23223725, z: 0}
 --- !u!23 &451701980
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2049,12 +2048,15 @@ MonoBehaviour:
   shieldValue: 0
   atkValue: 0
   range: 0
-  energy: 10
   maxLife: 0
   maxShield: 0
   maxEnergy: 0
+  canv: {fileID: 0}
   xp: 50
   intBars: {fileID: 1926555000}
+  cinemaCam: {fileID: 0}
+  deathFX: {fileID: 0}
+  dmgTxt: {fileID: 0}
 --- !u!114 &3242782882943312139
 MonoBehaviour:
   m_ObjectHideFlags: 0
