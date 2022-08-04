@@ -14,7 +14,7 @@ public class BarbarianBerserkAI : MonoBehaviour
     private Animator animator;
 
     public bool captain;
-    private bool playerUseMagic;
+    [HideInInspector] public bool playerUseMagic;
     private bool isBuffed;
     private bool heavyAtk;
 
@@ -65,6 +65,10 @@ public class BarbarianBerserkAI : MonoBehaviour
                 {
                     gameM.enemys[i].GetComponent<BarbarianBerserkAI>().playerUseMagic = true;
                 }
+                else if (gameM.enemys[i].GetComponent<BarbarianMageAI>())
+                {
+                    gameM.enemys[i].GetComponent<BarbarianMageAI>().playerUseMagic = true;
+                }
             }
         }
     }
@@ -73,7 +77,7 @@ public class BarbarianBerserkAI : MonoBehaviour
     {
         if (enemyStats.IsStunned())
         {
-            gameM.NextIA(GetComponent<StateManager>());
+            StartCoroutine(NextEnemyStun());
             return;
         }
 
@@ -91,6 +95,12 @@ public class BarbarianBerserkAI : MonoBehaviour
 
         if (playerUseMagic) StatesManager2();
         else StatesManager();
+    }
+
+    IEnumerator NextEnemyStun()
+    {
+        yield return new WaitForSeconds(0.5f);
+        gameM.NextIA(GetComponent<StateManager>());
     }
 
     private void StatesManager()

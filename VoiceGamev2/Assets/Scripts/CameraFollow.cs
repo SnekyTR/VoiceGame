@@ -395,6 +395,8 @@ public class CameraFollow : MonoBehaviour
 
     private void SkillBookClose()
     {
+        if (!sbookRestriction) return;
+
         if (skBook.isStarted) sbookActive = false;
 
         skBook.StartSkillBook(1, players.Count);

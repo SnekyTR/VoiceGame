@@ -57,7 +57,7 @@ public class SkeletonGuardianAI : MonoBehaviour
     {
         if (enemyStats.IsStunned())
         {
-            gameM.NextIA(GetComponent<StateManager>());
+            StartCoroutine(NextEnemyStun());
             return;
         }
 
@@ -74,6 +74,12 @@ public class SkeletonGuardianAI : MonoBehaviour
         }
 
         StatesManager();
+    }
+
+    IEnumerator NextEnemyStun()
+    {
+        yield return new WaitForSeconds(0.5f);
+        gameM.NextIA(GetComponent<StateManager>());
     }
 
     private void StatesManager()

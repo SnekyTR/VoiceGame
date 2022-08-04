@@ -9,6 +9,7 @@ public class SkillBook : MonoBehaviour
     public GameObject magnusSB, vagnarSB, torekSB;
     public GameObject magnusA, vagnarA, torekA;
     public List<Sprite> skillImage = new List<Sprite>();
+    public List<Sprite> weaponImage = new List<Sprite>();
 
     private Skills skills;
     [HideInInspector]public List<PlayerStats> playerS = new List<PlayerStats>();
@@ -86,7 +87,8 @@ public class SkillBook : MonoBehaviour
         string wp = playerS[0].actualWeapon;
         int plyN = 0;
 
-        magnusSB.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = wp.ToUpper();
+        magnusSB.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = WeaponNameSpanish(wp);
+        magnusSB.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = ReturnWeaponImg(wp);
         magnusSB.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "Daño: " + GetBasicAtk(wp, plyN, true) + " - " +
             GetBasicAtk(wp, plyN, false) + "\n" + "Energía: " + GetEnergy(wp) + "\n" + "Rango: " +
             GetRange(wp) + "\n" + "Crítico: " + GetCritical(wp);
@@ -95,6 +97,7 @@ public class SkillBook : MonoBehaviour
         {
             magnusSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 1);
             magnusSB.transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 1));
+            magnusSB.transform.GetChild(2).GetChild(2).GetComponent<Text>().text = SkillDescription(GetSkillName(wp, 1));
             magnusSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 1), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 1)) + "\n" + "Rango: " +
             GetRange(GetSkillName(wp, 1));
@@ -105,6 +108,7 @@ public class SkillBook : MonoBehaviour
         {
             magnusSB.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 2);
             magnusSB.transform.GetChild(3).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 2));
+            magnusSB.transform.GetChild(3).GetChild(2).GetComponent<Text>().text = SkillDescription(GetSkillName(wp, 2));
             magnusSB.transform.GetChild(3).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 2), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 2)) + "\n" + "Rango: " +
             GetRange(GetSkillName(wp, 2));
@@ -115,6 +119,7 @@ public class SkillBook : MonoBehaviour
         {
             magnusSB.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 3);
             magnusSB.transform.GetChild(4).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 3));
+            magnusSB.transform.GetChild(4).GetChild(2).GetComponent<Text>().text = SkillDescription(GetSkillName(wp, 3));
             magnusSB.transform.GetChild(4).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 3), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 3)) + "\n" + "Rango: " +
             GetRange(GetSkillName(wp, 3));
@@ -127,7 +132,8 @@ public class SkillBook : MonoBehaviour
         string wp = playerS[1].actualWeapon;
         int plyN = 1;
 
-        vagnarSB.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = wp.ToUpper();
+        vagnarSB.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = WeaponNameSpanish(wp);
+        vagnarSB.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = ReturnWeaponImg(wp);
         vagnarSB.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "Daño: " + GetBasicAtk(wp, plyN, true) + " - " +
             GetBasicAtk(wp, plyN, false) + "\n" + "Energía: " + GetEnergy(wp) + "\n" + "Rango: " +
             GetRange(wp) + "\n" + "Crítico: " + GetCritical(wp);
@@ -136,6 +142,7 @@ public class SkillBook : MonoBehaviour
         {
             vagnarSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 1);
             vagnarSB.transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 1));
+            vagnarSB.transform.GetChild(2).GetChild(2).GetComponent<Text>().text = SkillDescription(GetSkillName(wp, 1));
             vagnarSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 1), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 1)) + "\n" + "Rango: " +
             GetRange(GetSkillName(wp, 1));
@@ -146,6 +153,7 @@ public class SkillBook : MonoBehaviour
         {
             vagnarSB.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 2);
             vagnarSB.transform.GetChild(3).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 2));
+            vagnarSB.transform.GetChild(3).GetChild(2).GetComponent<Text>().text = SkillDescription(GetSkillName(wp, 2));
             vagnarSB.transform.GetChild(3).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 2), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 2)) + "\n" + "Rango: " +
             GetRange(GetSkillName(wp, 2));
@@ -156,6 +164,7 @@ public class SkillBook : MonoBehaviour
         {
             vagnarSB.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 3);
             vagnarSB.transform.GetChild(4).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 3));
+            vagnarSB.transform.GetChild(4).GetChild(2).GetComponent<Text>().text = SkillDescription(GetSkillName(wp, 3));
             vagnarSB.transform.GetChild(4).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 3), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 3)) + "\n" + "Rango: " +
             GetRange(GetSkillName(wp, 3));
@@ -168,7 +177,8 @@ public class SkillBook : MonoBehaviour
         string wp = playerS[2].actualWeapon;
         int plyN = 2;
 
-        torekSB.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = wp.ToUpper();
+        torekSB.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = WeaponNameSpanish(wp);
+        torekSB.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = ReturnWeaponImg(wp);
         torekSB.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "Daño: " + GetBasicAtk(wp, plyN, true) + " - " +
             GetBasicAtk(wp, plyN, false) + "\n" + "Energía: " + GetEnergy(wp) + "\n" + "Rango: " +
             GetRange(wp) + "\n" + "Crítico: " + GetCritical(wp);
@@ -177,6 +187,7 @@ public class SkillBook : MonoBehaviour
         {
             torekSB.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 1);
             torekSB.transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 1));
+            torekSB.transform.GetChild(2).GetChild(2).GetComponent<Text>().text = SkillDescription(GetSkillName(wp, 1));
             torekSB.transform.GetChild(2).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 1), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 1)) + "\n" + "Rango: " +
             GetRange(GetSkillName(wp, 1));
@@ -187,6 +198,7 @@ public class SkillBook : MonoBehaviour
         {
             torekSB.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 2);
             torekSB.transform.GetChild(3).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 2));
+            torekSB.transform.GetChild(3).GetChild(2).GetComponent<Text>().text = SkillDescription(GetSkillName(wp, 2));
             torekSB.transform.GetChild(3).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 2), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 2)) + "\n" + "Rango: " +
             GetRange(GetSkillName(wp, 2));
@@ -197,6 +209,7 @@ public class SkillBook : MonoBehaviour
         {
             torekSB.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = GetSkillName(wp, 3);
             torekSB.transform.GetChild(4).GetChild(1).GetComponent<Image>().sprite = ReturnImg(GetSkillName(wp, 3));
+            torekSB.transform.GetChild(4).GetChild(2).GetComponent<Text>().text = SkillDescription(GetSkillName(wp, 3));
             torekSB.transform.GetChild(4).GetChild(3).GetComponent<Text>().text = GetSkillDmg(GetSkillName(wp, 3), plyN)
             + "\n" + "Energía: " + GetEnergy(GetSkillName(wp, 3)) + "\n" + "Rango: " +
             GetRange(GetSkillName(wp, 3));
@@ -455,6 +468,120 @@ public class SkillBook : MonoBehaviour
         else if (w == "Juicio Final")
         {
             return skillImage[11];
+        }
+
+        return null;
+    }
+
+    private Sprite ReturnWeaponImg(string w)
+    {
+        if (w == "sword")
+        {
+            return weaponImage[0];
+        }
+        else if (w == "axe")
+        {
+            return weaponImage[1];
+        }
+        else if (w == "spear")
+        {
+            return weaponImage[2];
+        }
+        else if (w == "bow")
+        {
+            return weaponImage[3];
+        }
+        else if (w == "fire staff")
+        {
+            return weaponImage[4];
+        }
+        else if (w == "sacred staff")
+        {
+            return weaponImage[5];
+        }
+
+        return null;
+    }
+
+    private string WeaponNameSpanish(string w)
+    {
+        if (w == "sword")
+        {
+            return "Espada";
+        }
+        else if (w == "axe")
+        {
+            return "Hacha";
+        }
+        else if (w == "spear")
+        {
+            return "Lanza";
+        }
+        else if (w == "bow")
+        {
+            return "Arco";
+        }
+        else if (w == "fire staff")
+        {
+            return "Báculo de fuego";
+        }
+        else if (w == "sacred staff")
+        {
+            return "Báculo sagrado";
+        }
+
+        return null;
+    }
+
+    private string SkillDescription(string w)
+    {
+        if (w == "Partir")
+        {
+            return "Ataca a los enemigos que se encuentren delante del personaje";
+        }
+        else if (w == "Aumento de fuerza")
+        {
+            return "El personaje obtiene un aumento de fuerza durante 2 turnos";
+        }
+        else if (w == "Demacia")
+        {
+            return "Ataque en salto que noquea a los enemigos en un rango amplio durante el siguiente turno";
+        }
+        else if (w == "Demolicíon")
+        {
+            return "Ataque que destruye cualquier escudo enemigo al instante, y hace daño extra";
+        }
+        else if (w == "Instinto asesino")
+        {
+            return "El personaje obtiene un aumento de agilidad y % critica durante 2 turnos";
+        }
+        else if (w == "Lluvia de flechas")
+        {
+            return "Multiples flechas caen del cielo realizando daño a los enemigos en un rango amplio";
+        }
+        else if (w == "Bola de fuego")
+        {
+            return "Ataque mágico, el cual quema al enemigo con el que colisiona";
+        }
+        else if (w == "Sacrificio de sangre")
+        {
+            return "El personaje obtiene un aumento de inteligencia, y sus ataques de fuego aplican marcas de fuego durante 2 turnos";
+        }
+        else if (w == "Lluvia de meteoritos")
+        {
+            return "Multiples rocas caen del cielo realizando gran daño a los enemigos en un rango amplio";
+        }
+        else if (w == "Curar")
+        {
+            return "Cura a un aliado seleccionado";
+        }
+        else if (w == "Revivir")
+        {
+            return "Resucita un aliado, solo se puede usar una vez";
+        }
+        else if (w == "Juicio Final")
+        {
+            return "Invoca una espada sagrada, la cual cae y daña a los enemigos";
         }
 
         return null;
