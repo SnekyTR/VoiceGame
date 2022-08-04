@@ -35,6 +35,8 @@ public class CameraFollow : MonoBehaviour
 
     [HideInInspector] public bool playerUseMagic = false;
 
+
+    private AudioSource audioSource;
     private void Awake()
     {
         whoTurn = true;         //player turn
@@ -71,6 +73,7 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
+        audioSource = skBook.gameObject.GetComponent<AudioSource>();
         for (int i = 0; i < players.Count; i++)                         //speech
         {
             selectPJCmd.Add(players[i].name, SelectPJ);
@@ -432,6 +435,7 @@ public class CameraFollow : MonoBehaviour
         nextTurnActive = true;
         cancelActive = false;
         sbookActive = false;
+        audioSource.Play();
 
         if (skBook.isStarted) SkillBookClose();
 

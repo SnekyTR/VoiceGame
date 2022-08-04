@@ -12,6 +12,10 @@ public class SkeletonArcherAI : MonoBehaviour
     private Transform target;
     private CameraFollow gameM;
     private Animator animator;
+    [SerializeField] Transform arrowStart;
+    private Skills skills;
+    private AudioSource audioSource;
+    private AudioClip audioClip;
 
     int mask;
 
@@ -22,6 +26,9 @@ public class SkeletonArcherAI : MonoBehaviour
         enemyNM = GetComponent<NavMeshAgent>();
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
         animator = GetComponent<Animator>();
+        skills = gameM.gameObject.GetComponent<Skills>();
+        audioSource = skills.gameObject.GetComponent<AudioSource>();
+        audioClip = skills.gameObject.GetComponent<PlayerMove>().moveSteps;
 
         isOnRoute = false;
         setTarget = false;
@@ -39,6 +46,7 @@ public class SkeletonArcherAI : MonoBehaviour
                 StatesManager();
                 isOnRoute = false;
                 enemyNM.isStopped = true;
+                audioSource.Stop();
                 animator.SetInteger("A_Movement", 0);
             }
         }
@@ -176,6 +184,9 @@ public class SkeletonArcherAI : MonoBehaviour
     private IEnumerator StartRoute()
     {
         yield return new WaitForSeconds(0.5f);
+        audioSource.clip = audioClip;
+        audioSource.volume = 0.2f;
+        audioSource.Play();
         isOnRoute = true;
     }
 
@@ -189,7 +200,20 @@ public class SkeletonArcherAI : MonoBehaviour
         gameM.CameraCinematic();
 
         animator.SetInteger("A_BasicAtk", 2);
-        yield return new WaitForSeconds(3.1f);
+        yield return new WaitForSeconds(1f);
+        GameObject go = Instantiate(skills.arrowPrefab);
+        go.transform.parent = arrowStart;
+        go.transform.localPosition = new Vector3(0,0,0);
+        go.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        go.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
+        yield return new WaitForSeconds(1f);
+        skills.audioSource.clip = skills.attacksFX[4];
+        skills.audioSource.volume = 0.2f;
+        skills.audioSource.Play();
+        yield return new WaitForSeconds(1.3f);
+        skills.audioSource.volume = 0.3f;
+        skills.audioSource.clip = skills.attacksFX[6];
+        skills.audioSource.Play();
 
         RaycastHit hit;
         Vector3 newPos = transform.position;
@@ -199,6 +223,10 @@ public class SkeletonArcherAI : MonoBehaviour
         {
             if (hit.transform.tag == "Player")
             {
+                
+                go.transform.parent = null;
+                go.transform.position = Vector3.MoveTowards(go.transform.position, hit.transform.position, 0.5f);
+                Destroy(go);
                 target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
             }
         }
@@ -206,6 +234,7 @@ public class SkeletonArcherAI : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         setTarget = false;
         enemyStats.canv.EnemyC(true);
+        skills.audioSource.volume = 1f;
         StatesManager();
     }
 }

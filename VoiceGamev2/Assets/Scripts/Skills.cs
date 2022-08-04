@@ -6,15 +6,14 @@ using UnityEngine.UI;
 
 public class Skills : MonoBehaviour
 {
-    [SerializeField] private GameObject arrowPrefab;
+    [SerializeField] public GameObject arrowPrefab;
     [SerializeField] private Transform arrowStart;
-    [SerializeField] private Transform hand;
     private PlayerMove plyMove;
     private CameraFollow gameM;
     private Animator plyAnim;
     private PlayerStats plyStats;
     private SkillsColocation skillCo;
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     private List<string> nameSkill = new List<string>();
     private List<string> weapons = new List<string>();
@@ -23,7 +22,7 @@ public class Skills : MonoBehaviour
     private List<Transform> skillMagnus = new List<Transform>();
     private List<Transform> skillVagnar = new List<Transform>();
     private List<Transform> skillHammun = new List<Transform>();
-    [SerializeField]private List<AudioClip> attacksFX = new List<AudioClip>();
+    [SerializeField]public List<AudioClip> attacksFX = new List<AudioClip>();
 
     private List<int> magnusTimer = new List<int>();
     private List<float> magnusTimer2 = new List<float>();
@@ -354,6 +353,7 @@ public class Skills : MonoBehaviour
 
             yield return new WaitForSeconds(0.7f);
             audioSource.clip = attacksFX[0];
+            audioSource.volume = 0.8f;
             audioSource.Play();
 
             int dmg = Random.Range((int)(plyStats.GetStrenght() * 0.9f), (int)(plyStats.GetStrenght() * 1.3f));
@@ -417,6 +417,7 @@ public class Skills : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
             audioSource.clip = attacksFX[4];
+            audioSource.volume = 0.09f;
             audioSource.Play();
             
             yield return new WaitForSeconds(0.8f);
@@ -425,6 +426,7 @@ public class Skills : MonoBehaviour
 
             yield return new WaitForSeconds(0.3f);
             audioSource.clip = attacksFX[5];
+            audioSource.volume = 0.17f;
             audioSource.Play();
 
             int dmg = Random.Range((int)(plyStats.GetAgility() * 0.8f), (int)(plyStats.GetAgility() * 1.5f));
@@ -454,8 +456,11 @@ public class Skills : MonoBehaviour
                     Destroy(go);
                     hit.transform.GetComponent<EnemyStats>().SetLife(-dmg);
                     Destroy(Instantiate(blood, plyMove.target.transform.position, transform.rotation), 2);
+                    
                 }
             }
+            yield return new WaitForSeconds(0.6f);
+            audioSource.volume = 1f;
         }
         else if (actualWeapon == weapons[4])
         {
@@ -833,6 +838,7 @@ public class Skills : MonoBehaviour
         plyAnim.SetInteger("A_Slash", 0);
         yield return new WaitForSeconds(0.5f);
         audioSource.clip = attacksFX[1];
+        audioSource.volume = 0.8f;
         audioSource.Play();
 
         yield return new WaitForSeconds(0.2f);

@@ -13,6 +13,8 @@ public class SpiderAI : MonoBehaviour
     private Transform target;
     private CameraFollow gameM;
     private Animator animator;
+    private AudioSource audioSource;
+    private AudioClip audioClip;
 
     int mask;
 
@@ -23,6 +25,8 @@ public class SpiderAI : MonoBehaviour
         enemyNM = GetComponent<NavMeshAgent>();
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
         animator = GetComponent<Animator>();
+        audioSource = gameM.gameObject.GetComponent<AudioSource>();
+        audioClip = gameM.gameObject.GetComponent<PlayerMove>().moveSteps;
 
         isOnRoute = false;
         setTarget = false;
@@ -39,6 +43,7 @@ public class SpiderAI : MonoBehaviour
             {
                 StatesManager();
                 isOnRoute = false;
+                audioSource.Stop();
                 animator.SetInteger("A_Movement", 0);
                 enemyNM.isStopped = true;
             }
@@ -167,6 +172,9 @@ public class SpiderAI : MonoBehaviour
     private IEnumerator StartRoute()
     {
         yield return new WaitForSeconds(0.5f);
+        audioSource.clip = audioClip;
+        audioSource.volume = 0.2f;
+        audioSource.Play();
         isOnRoute = true;
     }
 

@@ -152,7 +152,7 @@ public class PlayerStats : MonoBehaviour
         strengthPoints = data.strength;
         agilityPoints = data.agility;
         intellectPoints = data.intellectStat;
-        //actualWeapon = data.weaponType;
+        actualWeapon = data.weaponType;
     }
     void Update()
     {

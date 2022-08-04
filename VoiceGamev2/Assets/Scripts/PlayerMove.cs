@@ -16,8 +16,10 @@ public class PlayerMove : MonoBehaviour
     private Animator animator;
     private Transform playerTr;
     private CameraFollow gameM;
+    private AudioSource audioSource;
     private Skills skill;
     [HideInInspector]public CombatTimer timerC;
+    public AudioClip moveSteps;
 
     private GridActivation gridA;
     private bool isOnRoute =false;
@@ -63,6 +65,7 @@ public class PlayerMove : MonoBehaviour
         skill = GetComponent<Skills>();
         gridA = GameObject.Find("RayCast").GetComponent<GridActivation>();
         timerC = GameObject.Find("CanvasManager").GetComponent<CombatTimer>();
+        audioSource = gameM.gameObject.GetComponent<AudioSource>();
 
         //select action
         startCmd.Add("mover", StartMove);
@@ -235,6 +238,8 @@ public class PlayerMove : MonoBehaviour
             animator.SetInteger("A_Movement", 0);
             isOnRoute = false;
             gameM.CameraPos1();
+            audioSource.Stop();
+
         }
     }
 
@@ -297,7 +302,9 @@ public class PlayerMove : MonoBehaviour
     private void MoveCasilla(string i)
     {
         if (move2Restriction) return;
-
+        audioSource.clip = moveSteps;
+        audioSource.volume = 0.2f;
+        audioSource.Play();
         float energy = (Vector3.Distance(GameObject.Find(i).transform.position, playerTr.position) / 2);
         if (energy > ((int)energy + 0.1f) && energy < ((int)energy + 0.7f))
         {

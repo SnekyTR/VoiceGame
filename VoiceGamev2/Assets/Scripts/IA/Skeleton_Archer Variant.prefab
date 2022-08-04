@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5478539057443399824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2749183538333021384}
+  m_Layer: 0
+  m_Name: ArrowStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2749183538333021384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5478539057443399824}
+  m_LocalRotation: {x: 0.7638792, y: -0.023204712, z: -0.6446211, w: -0.020341396}
+  m_LocalPosition: {x: -0.02515145, y: -0.4312273, z: 0.0007202476}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3510314440043012220}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.359}
 --- !u!1001 &6934924323619202903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -155,6 +185,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5803706772665293575, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
   m_PrefabInstance: {fileID: 6934924323619202903}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &3510314440043012220 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5803706772664993579, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+  m_PrefabInstance: {fileID: 6934924323619202903}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &429392905490887889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,3 +204,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOnRoute: 0
   setTarget: 0
+  arrowStart: {fileID: 2749183538333021384}

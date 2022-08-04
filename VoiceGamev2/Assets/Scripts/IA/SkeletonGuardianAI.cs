@@ -12,6 +12,9 @@ public class SkeletonGuardianAI : MonoBehaviour
     private Transform target;
     private CameraFollow gameM;
     private Animator animator;
+    private Skills skills;
+    private AudioSource audioSource;
+    private AudioClip audioClip;
 
     int mask;
     public int ShieldAport;
@@ -23,6 +26,9 @@ public class SkeletonGuardianAI : MonoBehaviour
         enemyNM = GetComponent<NavMeshAgent>();
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
         animator = GetComponent<Animator>();
+        skills = gameM.gameObject.GetComponent<Skills>();
+        audioSource = skills.gameObject.GetComponent<AudioSource>();
+        audioClip = skills.gameObject.GetComponent<PlayerMove>().moveSteps;
 
         isOnRoute = false;
         setTarget = false;
@@ -41,6 +47,7 @@ public class SkeletonGuardianAI : MonoBehaviour
                 StatesManager();
                 isOnRoute = false;
                 enemyNM.isStopped = true;
+                audioSource.Stop();
                 animator.SetInteger("A_Movement", 0);
             }
         }
@@ -142,6 +149,8 @@ public class SkeletonGuardianAI : MonoBehaviour
         animator.SetInteger("A_BasicAtk", 1);
         gameM.CameraCinematic();
         yield return new WaitForSeconds(0.5f);
+        skills.audioSource.clip = skills.attacksFX[0];
+        skills.audioSource.Play();
 
         RaycastHit hit;
         Vector3 newPos = transform.position;
@@ -164,6 +173,9 @@ public class SkeletonGuardianAI : MonoBehaviour
     private IEnumerator StartRoute()
     {
         yield return new WaitForSeconds(0.5f);
+        audioSource.clip = audioClip;
+        audioSource.volume = 0.2f;
+        audioSource.Play();
         isOnRoute = true;
     }
 

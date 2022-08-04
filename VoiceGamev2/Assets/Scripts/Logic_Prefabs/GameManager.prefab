@@ -413,6 +413,8 @@ MonoBehaviour:
   nextTurnActive: 0
   cancelActive: 0
   sbookActive: 0
+  playerUseMagic: 0
+  audioClip: {fileID: 8300000, guid: 39c8e3f7485191d48a949419228c9d40, type: 3}
 --- !u!114 &1495127968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerC: {fileID: 0}
+  moveSteps: {fileID: 8300000, guid: 8b90c88ea34d04947bc40f54dc5b778d, type: 3}
   target: {fileID: 0}
   allieSpell: 0
   moveRestriction: 0
@@ -471,6 +474,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2576509d43503a54c84a09c0eafa4ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrowPrefab: {fileID: 1617419906277601818, guid: 2c925e2fb6d1cac428d146a97a34f6d3, type: 3}
+  arrowStart: {fileID: 0}
+  audioSource: {fileID: 0}
   attacksFX:
   - {fileID: 8300000, guid: 10d20fcecbd4e3e49bf027080f61e858, type: 3}
   - {fileID: 8300000, guid: 51186b7d61fca034a98790cb69943bbb, type: 3}
@@ -772,8 +778,8 @@ MonoBehaviour:
   smoothTime: 0.6
   offset: {x: 0, y: 0, z: 0}
   minZoom: 65
-  maxZoom: 25
-  zoomLimiter: 10
+  maxZoom: 35
+  zoomLimiter: 80
   rotations:
   - {x: 90, y: 180, z: 0}
   - {x: 170, y: -10, z: -180}
@@ -815,11 +821,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 00080d63d8432314e9607f7096b2dfcf, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.03
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
