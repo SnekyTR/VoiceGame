@@ -12,6 +12,8 @@ public class EquipObjects : MonoBehaviour
     [SerializeField] private Inventory inventory;
     [SerializeField] private UIMovement uIMovement;
     [SerializeField] private GameSave gameSave;
+    [SerializeField] private GameObject equipPanel;
+    [SerializeField] private GameObject usingText;
     private Dictionary<string, Action> weaponOptions = new Dictionary<string, Action>();
     public KeywordRecognizer weapons;
     private Dictionary<string, Action> equipWeapon = new Dictionary<string, Action>();
@@ -60,6 +62,12 @@ public class EquipObjects : MonoBehaviour
         Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
         zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, SelectObject);
         weapons = new KeywordRecognizer(zero1.Keys.ToArray());
+
+        int nss = PlayerPrefs.GetInt("pm");
+        PlayerPrefs.SetInt("pm", (nss + 1));
+        Dictionary<string, Action> zero2 = new Dictionary<string, Action>();
+        zero2.Add("asdfasd" + SceneManager.GetActiveScene().name + nss, SelectObject);
+        equipOrders = new KeywordRecognizer(zero2.Keys.ToArray());
     }
     private void SelectObject()
     {
@@ -69,16 +77,22 @@ public class EquipObjects : MonoBehaviour
             if (selectedWeapon == actual.name)
             {
                 print("Has seleccionado tu propia arma");
+                usingText.SetActive(true);
+                usingText.GetComponent<Animation>().Play();
                 return;
             }
             print("Quieres equiparlo?"+ "Se ha seleccionado " + selectedWeapon +" Actual "+ actual.name);
             equipOrders.Start();
+            weapons.Stop();
+            equipPanel.SetActive(true);
         }
     }
     private void AddEquipOrders()
     {
-        equipWeapon.Add("Equipar", EquipItem);
-        equipWeapon.Add("Cancelar", CancelEquip);
+        equipWeapon.Add("Si", EquipItem);
+        equipWeapon.Add("Ci", EquipItem);
+        equipWeapon.Add("Zi", EquipItem);
+        equipWeapon.Add("No", CancelEquip);
         equipOrders = new KeywordRecognizer(equipWeapon.Keys.ToArray());
         equipOrders.OnPhraseRecognized += RecognizedEquipVoice;
     }
@@ -89,6 +103,7 @@ public class EquipObjects : MonoBehaviour
     }
     private void EquipItem()
     {
+        equipPanel.SetActive(false);
         equipOrders.Stop();
         Scripteable_Weapon actual = (Scripteable_Weapon)inventory.actualEquipedWeapon;
         for(int i = 0; i < inventory.actualWeapons.Count; i++)
@@ -100,6 +115,7 @@ public class EquipObjects : MonoBehaviour
                 if (items.equiped)
                 {
                     print("Esta arma esta equipada");
+                    StartCoroutine(AlreadyEquiped());
                     return;
                 }
 
@@ -138,9 +154,15 @@ public class EquipObjects : MonoBehaviour
             }
         }
     }
+    IEnumerator AlreadyEquiped()
+    {
+        yield return new WaitForSeconds(3f);
+        usingText.SetActive(false);
+    }
     private void CancelEquip()
     {
-
+        equipPanel.SetActive(false);
+        weapons.Start();
     }
     
     

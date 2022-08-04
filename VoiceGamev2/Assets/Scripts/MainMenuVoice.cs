@@ -15,6 +15,7 @@ public class MainMenuVoice : MonoBehaviour
     public bool filesExist;
 
     [SerializeField] private GameObject createGame;
+    [SerializeField] private GameObject Vagnar;
     [SerializeField] private GameObject loadGame;
     [SerializeField] private LoadingScreen loadingScreen;
     // Start is called before the first frame update
@@ -23,6 +24,7 @@ public class MainMenuVoice : MonoBehaviour
         if (System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
         {
             filesExist = true;
+            LoadData();
         }
         else
         {
@@ -49,6 +51,14 @@ public class MainMenuVoice : MonoBehaviour
     void Update()
     {
 
+    }
+    private void LoadData()
+    {
+        GameProgressionData data = SaveSystem.LoadProgression();
+        if(data.progressionNumber >= 3)
+        {
+            Vagnar.SetActive(true);
+        }
     }
     private void AddOrders()
     {
