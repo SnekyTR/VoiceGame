@@ -29,11 +29,13 @@ public class Progression : MonoBehaviour
     [SerializeField] private Inventory inventory;
     [SerializeField] private UIMovement uIMovement;
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject weapReward;
     [SerializeField] private GameObject singlePanel;
     [SerializeField] private GameObject vagnar;
     [SerializeField] private TextMeshProUGUI expText1;
     [SerializeField] private TextMeshProUGUI expText2;
     [SerializeField] private TextMeshProUGUI expText3;
+    bool isTheSame = false;
     GameSave gameSave;
     VoiceDestinations voices;
     MoveDataToMain moveDataToMain;
@@ -88,7 +90,7 @@ public class Progression : MonoBehaviour
             }
             if(progression >= 2)
             {
-                bool isTheSame = false;
+                
                 for(int i = 0; i < inventory.actualWeapons.Count; i++)
                 {
                     if (inventory.totalWeapons[1] == inventory.actualWeapons[i])
@@ -100,6 +102,7 @@ public class Progression : MonoBehaviour
                 if (!isTheSame)
                 {
                     inventory.actualWeapons.Add(inventory.totalWeapons[1]);
+                    weapReward.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = inventory.totalWeapons[1].name;
                 }
                 
                 combat2.SetActive(false);
@@ -130,6 +133,7 @@ public class Progression : MonoBehaviour
                         if (!isTheSame)
                         {
                             inventory.actualWeapons.Add(inventory.totalWeapons[2]);
+                            weapReward.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = inventory.totalWeapons[2].name;
                         }
                         bastionAnimator.SetFloat("anim", 0);
                         forestAnimator.SetFloat("anim", 1);
@@ -162,6 +166,10 @@ public class Progression : MonoBehaviour
     {
         uIMovement.canOpenGroup = false;
         victoryResults.SetActive(true);
+        if (!isTheSame)
+        {
+            weapReward.SetActive(true);
+        }
         expText1.text = "+" + xp + " XP";
         expText2.text = "+" + xp + " XP";
         expText3.text = "+" + xp + " XP";

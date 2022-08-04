@@ -35,7 +35,7 @@ public class UIMovement : MonoBehaviour
 
     [SerializeField] private GameObject mainHelpPannel;
     [SerializeField] private GameSave gameSave;
-    [HideInInspector] public bool canOpenGroup;
+    [HideInInspector] public bool canOpenGroup = true;
 
     public string charSelected;
 
@@ -47,7 +47,6 @@ public class UIMovement : MonoBehaviour
         character_Skills = GameObject.Find("Skills").GetComponent<Character_skills>();
         partyPannel = GameObject.Find("PartyInformation");
         characterPannel = GameObject.Find("CharacterInformation");*/
-        canOpenGroup = true;
         AddFirstLvl();
         AddPartyInf();
         OptionsOrders();
