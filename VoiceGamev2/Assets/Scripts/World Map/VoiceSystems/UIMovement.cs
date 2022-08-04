@@ -25,6 +25,7 @@ public class UIMovement : MonoBehaviour
     [SerializeField] private EquipObjects equipObjects;
 
     [SerializeField] private GameObject partyPannel;
+    [SerializeField] private Animator animatorSave;
     [SerializeField] private Animator inventoryAnimator;
     [SerializeField] private GameObject characterPannel;
     [SerializeField] private GameObject victoryResult;
@@ -47,6 +48,7 @@ public class UIMovement : MonoBehaviour
         character_Skills = GameObject.Find("Skills").GetComponent<Character_skills>();
         partyPannel = GameObject.Find("PartyInformation");
         characterPannel = GameObject.Find("CharacterInformation");*/
+        canOpenGroup = true;
         AddFirstLvl();
         AddPartyInf();
         OptionsOrders();
@@ -149,7 +151,13 @@ public class UIMovement : MonoBehaviour
     {
         textSave.gameObject.SetActive(true);
         textSave.GetComponent<Animation>().Play();
-        yield return new WaitForSeconds(4f);
+        animatorSave.enabled = true;
+        animatorSave.SetFloat("float", 1);
+        yield return new WaitForSeconds(1);
+        animatorSave.SetFloat("float", 0);
+        yield return new WaitForSeconds(3);
+        animatorSave.enabled = false;
+
         textSave.gameObject.SetActive(false);
     }
     private void RecognizedVoiceFirst(PhraseRecognizedEventArgs speech)
