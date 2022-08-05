@@ -21,6 +21,7 @@ public class EquipObjects : MonoBehaviour
     public String selectedWeapon;
     public String equipedWeapon;
     public bool isInventory;
+    [SerializeField]private Animator animator;
 
     [SerializeField]private Image weaponImage;
     //public bool ableToEquip = false;
@@ -28,6 +29,7 @@ public class EquipObjects : MonoBehaviour
     private void Start()
     {
         AddEquipOrders();
+
     }
     public void AddDictionary()
     {
@@ -76,9 +78,8 @@ public class EquipObjects : MonoBehaviour
             Scripteable_Weapon actual = (Scripteable_Weapon)inventory.actualEquipedWeapon;
             if (selectedWeapon == actual.name)
             {
+                StartCoroutine(AlreadyEquiped());
                 print("Has seleccionado tu propia arma");
-                usingText.SetActive(true);
-                usingText.GetComponent<Animation>().Play();
                 return;
             }
             print("Quieres equiparlo?"+ "Se ha seleccionado " + selectedWeapon +" Actual "+ actual.name);
@@ -156,8 +157,11 @@ public class EquipObjects : MonoBehaviour
     }
     IEnumerator AlreadyEquiped()
     {
+        usingText.SetActive(true);
+        animator.SetFloat("fadeout", 1);
         yield return new WaitForSeconds(3f);
         usingText.SetActive(false);
+        animator.SetFloat("fadeout", 0);
     }
     private void CancelEquip()
     {
