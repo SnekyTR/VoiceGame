@@ -51,9 +51,8 @@ public class FTUE_Scene01 : MonoBehaviour
     {
         p2 = false;
 
-        yield return new WaitForSeconds(8.5f);
+        yield return new WaitForSeconds(3.5f);
 
-        tutos[1].SetActive(false);
         tutos[2].SetActive(true);
 
         plMove.moveRestriction = false;
@@ -65,6 +64,7 @@ public class FTUE_Scene01 : MonoBehaviour
     {
         if (plMove.moveActive)
         {
+            tutos[1].SetActive(false);
             tutos[2].SetActive(false);
             tutos[3].SetActive(true);
 
@@ -78,14 +78,23 @@ public class FTUE_Scene01 : MonoBehaviour
         if (plMove.move2Active)
         {
             tutos[3].SetActive(false);
-            tutos[4].SetActive(true);
 
-            plMove.atkRestriction = false;
-            plMove.moveRestriction = true;
+            StartCoroutine(StartPart04());
 
             p4 = false;
-            p5 = true;
         }
+    }
+
+    private IEnumerator StartPart04()
+    {
+        yield return new WaitForSeconds(3.8f);
+
+        tutos[4].SetActive(true);
+
+        plMove.atkRestriction = false;
+        plMove.moveRestriction = true;
+
+        p5 = true;
     }
 
     public void Part05()
