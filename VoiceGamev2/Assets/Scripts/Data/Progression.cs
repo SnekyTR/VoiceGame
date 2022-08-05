@@ -75,6 +75,7 @@ public class Progression : MonoBehaviour
         }
         GameProgressionData data = SaveSystem.LoadProgression();
         progression = data.progressionNumber;
+
         CheckProgression();
     }
     public void CheckProgression()
@@ -87,6 +88,9 @@ public class Progression : MonoBehaviour
             {
                 fTUE_Progresion.LoadFTUEProgresion();
                 fTUE_Progresion.FTUEProgression();
+            }else if(fTUE_Progresion.ftueProgression < 7)
+            {
+                fTUE_Progresion.ReloadFTUE();
             }
             if(progression >= 2)
             {

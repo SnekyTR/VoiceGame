@@ -14,7 +14,7 @@ public class FTUE_Progresion : MonoBehaviour
     private KeywordRecognizer ftueRecognizer;
     [SerializeField] private Progression pro;
 
-    [SerializeField] private GameObject pannel1;
+    public GameObject pannel1;
     [SerializeField] private GameObject extrapannel;
     [SerializeField] private GameObject pannel2;
     [SerializeField] private GameObject pannel3;
@@ -22,13 +22,15 @@ public class FTUE_Progresion : MonoBehaviour
     [SerializeField] private GameObject pannel5;
     [SerializeField] private GameObject pannel6;
     [SerializeField] private GameObject pannel7;
+    public GameObject downButtons;
+    private UIMovement uIMovement;
+    private void Awake()
+    {
 
+    }
     void Start()
     {
-        if(System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
-        {
-            LoadFTUEProgresion();
-        }
+        uIMovement = GetComponent<UIMovement>();
     }
     public void LoadFTUEProgresion()
     {
@@ -36,14 +38,43 @@ public class FTUE_Progresion : MonoBehaviour
         ftueProgression = data.ftueProgressionNumber;
         
     }
+    public void ReloadFTUE()
+    {
+        switch (ftueProgression)
+        {
+            case 1:
+                pannel2.SetActive(true);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+        }
+    }
+    public void AfterTimeLine()
+    {
+        ftueProgression = 1;
+        FTUEProgression();
+    }
     public void FTUEProgression()
     {
         if(ftueProgression == 0)
         {
-            //AddOrders();
+            downButtons.SetActive(false);
             pannel1.SetActive(true);
-        }else if(ftueProgression == 1)
+        }
+        else if(ftueProgression == 1)
         {
+            downButtons.SetActive(true);
+            uIMovement.canOpenGroup = true;
             pannel2.SetActive(true);
         }
         else if (ftueProgression == 2)
@@ -73,7 +104,7 @@ public class FTUE_Progresion : MonoBehaviour
             pro.restAnimator.SetFloat("anim", 1);
             pannel7.SetActive(true);
         }
-        else
+        else if (ftueProgression == 7)
         {
             pannel7.SetActive(false);
             

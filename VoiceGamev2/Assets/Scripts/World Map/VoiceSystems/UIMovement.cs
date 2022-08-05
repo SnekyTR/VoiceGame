@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Windows.Speech;
 
 public class UIMovement : MonoBehaviour
@@ -18,7 +19,7 @@ public class UIMovement : MonoBehaviour
     private KeywordRecognizer optionsRecognizer;
     private Dictionary<string, Action> inventoryOptions = new Dictionary<string, Action>();
     private KeywordRecognizer inventory;
-
+    private PlayableDirector timeLine;
     [SerializeField] private PartyInformation partyInformation;
     [SerializeField] private Character_skills character_Skills;
     [SerializeField] private IncreaseStats increaseStats;
@@ -49,6 +50,7 @@ public class UIMovement : MonoBehaviour
         partyPannel = GameObject.Find("PartyInformation");
         characterPannel = GameObject.Find("CharacterInformation");*/
         //canOpenGroup = true;
+        timeLine = GameObject.Find("TimeLine").GetComponent<PlayableDirector>();
         AddFirstLvl();
         AddPartyInf();
         OptionsOrders();
@@ -230,9 +232,13 @@ public class UIMovement : MonoBehaviour
             }
         }else if (victoryResult.activeInHierarchy)
         {
-            fTUE_Progresion.NextPannel();
             victoryResult.SetActive(false);
-            canOpenGroup = true;
+            if (fTUE_Progresion.ftueProgression == 0)
+            {
+                fTUE_Progresion.pannel1.SetActive(false);
+                timeLine.Play();
+            }
+            
 
         }
         else if(optionsPannel.activeInHierarchy){

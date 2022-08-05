@@ -7,10 +7,6 @@ public class LoadingScreen : MonoBehaviour
 {
     [SerializeField] MoveDataToMain moveDataToMain;
     public GameObject loadingScreen;
-    private void Start()
-    {
-        loadingScreen = GameObject.Find("Loading");
-    }
     public void LoadScene(int sceneId)
     {
         StartCoroutine(LoadSceneAsync(sceneId));
