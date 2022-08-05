@@ -13,8 +13,10 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int agilityPoints;
     public int criticProb;
     public string actualWeapon;
-
+    [HideInInspector]
+    public AudioSource audioSource;
     public List<Transform> cinemaCam;
+    public List<AudioClip> characterSounds;
 
     [Header("Weapons")]
     public GameObject weapon01;
@@ -71,6 +73,7 @@ public class PlayerStats : MonoBehaviour
         skillsColocation = GameObject.Find("CanvasManager").GetComponent<SkillsColocation>();
         skill = gameM.GetComponent<Skills>();
         winLoose = gameM.GetComponent<WinLoose>();
+        audioSource = gameObject.GetComponent<AudioSource>();
         winLoose.totalPlayers++;
         InitialWeapon();
         //calculo de valor de los stats
@@ -227,6 +230,11 @@ public class PlayerStats : MonoBehaviour
             animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
             GetComponent<NavMeshAgent>().enabled = false;
+            audioSource.clip = characterSounds[0];
+            audioSource.Play();
+
+
+
         }
         else if (n < 0)                         //dmg recieve
         {

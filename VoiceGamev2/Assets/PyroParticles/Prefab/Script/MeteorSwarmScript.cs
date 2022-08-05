@@ -7,8 +7,8 @@ namespace DigitalRuby.PyroParticles
     /// <summary>
     /// Meteor collision delegate
     /// </summary>
-    /// <param name="script">Meteor swarm script</param>
-    /// <param name="meteor">Meteor</param>
+    /// <param weaponName="script">Meteor swarm script</param>
+    /// <param weaponName="meteor">Meteor</param>
     public delegate void MeteorSwarmCollisionDelegate(MeteorSwarmScript script, GameObject meteor);
 
     /// <summary>

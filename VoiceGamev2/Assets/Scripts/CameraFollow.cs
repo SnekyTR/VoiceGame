@@ -150,9 +150,15 @@ public class CameraFollow : MonoBehaviour
         Debug.Log(speech.text);
         selectPJCmd[speech.text].Invoke(speech.text);
         string selectedChar = speech.text;
+        SelectedCharVoices(selectedChar);
 
     }
-
+    private void SelectedCharVoices(string player)
+    {
+        PlayerStats stats = GameObject.Find(player).GetComponent<PlayerStats>();
+        stats.audioSource.clip = stats.characterSounds[1];
+        stats.audioSource.Play();
+    }
     public void RecognizedVoice4(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);

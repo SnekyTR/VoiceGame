@@ -36,9 +36,9 @@ public class EquipObjects : MonoBehaviour
         for (int i = 0; i < inventory.actualWeapons.Count; i++)
         {
             Scripteable_Weapon data = (Scripteable_Weapon)inventory.actualWeapons[i];
-            //String weap = inventory((Scripteable_Weapon)inventory.actualWeapons[i].name);
-            weaponOptions.Add(data.name, SelectObject);
-            print("Se ha añadido la arma" + data.name);
+            //String weap = inventory((Scripteable_Weapon)inventory.actualWeapons[i].weaponName);
+            weaponOptions.Add(data.weaponName, SelectObject);
+            print("Se ha añadido la arma" + data.weaponName);
          
             /*weaponOptions.Add("Arco de lagrimas de andreu", SelectObject);
             weaponOptions.Add("espada revienta culo", SelectObject);
@@ -76,13 +76,13 @@ public class EquipObjects : MonoBehaviour
         if (isInventory)
         {
             Scripteable_Weapon actual = (Scripteable_Weapon)inventory.actualEquipedWeapon;
-            if (selectedWeapon == actual.name)
+            if (selectedWeapon == actual.weaponName)
             {
                 StartCoroutine(AlreadyEquiped());
                 print("Has seleccionado tu propia arma");
                 return;
             }
-            print("Quieres equiparlo?"+ "Se ha seleccionado " + selectedWeapon +" Actual "+ actual.name);
+            print("Quieres equiparlo?"+ "Se ha seleccionado " + selectedWeapon +" Actual "+ actual.weaponName);
             equipOrders.Start();
             weapons.Stop();
             equipPanel.SetActive(true);
@@ -111,7 +111,7 @@ public class EquipObjects : MonoBehaviour
         {
 
             Scripteable_Weapon items = (Scripteable_Weapon)inventory.actualWeapons[i];
-            if (items.name == selectedWeapon)
+            if (items.weaponName == selectedWeapon)
             {
                 if (items.equiped)
                 {
@@ -124,13 +124,13 @@ public class EquipObjects : MonoBehaviour
                 if (String.IsNullOrWhiteSpace(equipedWeapon))
                 {
                     
-                    inventory.DeactivateTheEquipped(actual.name);
+                    inventory.DeactivateTheEquipped(actual.weaponName);
                     actual.equiped = false;
-                    print("Te has equipado: " + items.name + "Al personaje " + uIMovement.charSelected);
+                    print("Te has equipado: " + items.weaponName + "Al personaje " + uIMovement.charSelected);
                     GeneralStats actualCharacter = GameObject.Find(uIMovement.charSelected).GetComponent<GeneralStats>();
-                    actualCharacter.weaponequiped = items.name;
+                    actualCharacter.weaponequiped = items.weaponName;
                     actualCharacter.weaponType = items.weaponType;
-                    equipedWeapon = items.name;
+                    equipedWeapon = items.weaponName;
                     weaponImage.sprite = items.artwork;
                     inventory.actualEquipedWeapon = items;
                     items.equiped = true;
@@ -139,13 +139,13 @@ public class EquipObjects : MonoBehaviour
                 }
                 else
                 {
-                    inventory.DeactivateTheEquipped(actual.name);
+                    inventory.DeactivateTheEquipped(actual.weaponName);
                     actual.equiped = false;
-                    print("Te vas a equipar: " + items.name);
+                    print("Te vas a equipar: " + items.weaponName);
                     GeneralStats actualCharacter = GameObject.Find(uIMovement.charSelected).GetComponent<GeneralStats>();
-                    actualCharacter.weaponequiped = items.name;
+                    actualCharacter.weaponequiped = items.weaponName;
                     inventory.DeactivateTheEquipped(equipedWeapon);
-                    equipedWeapon = items.name;
+                    equipedWeapon = items.weaponName;
                     weaponImage.sprite = items.artwork;
                     inventory.actualEquipedWeapon = items;
                     items.equiped = true;

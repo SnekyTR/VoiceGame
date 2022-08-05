@@ -414,7 +414,6 @@ MonoBehaviour:
   cancelActive: 0
   sbookActive: 0
   playerUseMagic: 0
-  audioClip: {fileID: 8300000, guid: 39c8e3f7485191d48a949419228c9d40, type: 3}
 --- !u!114 &1495127968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,6 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e4dbd35b9a4294db453aa14c702398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
   timerC: {fileID: 0}
   moveSteps: {fileID: 8300000, guid: 8b90c88ea34d04947bc40f54dc5b778d, type: 3}
   target: {fileID: 0}
@@ -797,8 +797,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8, y: 3.6144824, z: 4.7438035}
-  m_Center: {x: 0, y: 0.549371, z: 2.0584323}
+  m_Size: {x: 8, y: 3.6144824, z: 2.654639}
+  m_Center: {x: 0, y: 0.54937106, z: 0.3190859}
 --- !u!114 &3325842176598235600
 MonoBehaviour:
   m_ObjectHideFlags: 0

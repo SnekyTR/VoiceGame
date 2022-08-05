@@ -509,7 +509,7 @@ public class SkillsColocation : MonoBehaviour
 
         
         print(playerStats.intellectPoints);
-        if (player.name == "Magnus")
+        if (player.weaponName == "Magnus")
         {
             
         }

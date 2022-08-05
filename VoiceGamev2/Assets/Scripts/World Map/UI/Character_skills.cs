@@ -62,7 +62,7 @@ public class Character_skills : MonoBehaviour
             for(int i = 0; i < inventory.actualWeapons.Count; i++)
             {
                 Scripteable_Weapon weap = (Scripteable_Weapon)inventory.actualWeapons[i];
-                if (weap.name == stats.weaponequiped)
+                if (weap.weaponName == stats.weaponequiped)
                 {
                     print("Se ha equipado" + inventory.actualWeapons[i]);
                     weaponImagePosition.sprite = weap.artwork;

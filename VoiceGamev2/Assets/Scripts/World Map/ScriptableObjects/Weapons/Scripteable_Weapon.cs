@@ -6,7 +6,7 @@ using UnityEngine;
 public class Scripteable_Weapon : ScriptableObject
 {
     public int id;
-    public string name;
+    public string weaponName;
     public string weaponType;
     public string description;
 

@@ -866,12 +866,12 @@ public class Skills : MonoBehaviour
         audioSource.clip = attacksFX[2];
         audioSource.volume = 0.15f;
         audioSource.Play();
-        audioSource.volume = 1;
+        
 
         plyAnim.SetInteger("A_AutoBuff", 0);
 
         yield return new WaitForSeconds(1f);
-
+        
         GameObject buff = Instantiate(buffFX01, gameM.playerParent.position, transform.rotation);
 
         buff.transform.SetParent(gameM.playerParent);
@@ -879,6 +879,8 @@ public class Skills : MonoBehaviour
         plyStats.SetStrenght(1.25f);
 
         gameM.CameraPos1();
+        yield return new WaitForSeconds(1.5f);
+        audioSource.volume = 1;
     }
 
     private IEnumerator Demacia()

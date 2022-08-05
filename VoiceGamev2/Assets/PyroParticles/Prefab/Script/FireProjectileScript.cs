@@ -6,8 +6,8 @@ namespace DigitalRuby.PyroParticles
     /// <summary>
     /// Handle collision of a fire projectile
     /// </summary>
-    /// <param name="script">Script</param>
-    /// <param name="pos">Position</param>
+    /// <param weaponName="script">Script</param>
+    /// <param weaponName="pos">Position</param>
     public delegate void FireProjectileCollisionDelegate(FireProjectileScript script, Vector3 pos);
 
     /// <summary>

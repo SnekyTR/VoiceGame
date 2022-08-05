@@ -13,12 +13,9 @@ MonoBehaviour:
   m_Name: Hacha de Hierro
   m_EditorClassIdentifier: 
   id: 0
-  name: Hacha de Hierro
+  weaponName: Hacha de Hierro
   weaponType: axe
   description: 
   artwork: {fileID: 21300000, guid: d8de476b85577f64cb608421c1ae98a3, type: 3}
-  damage: 0
-  range: 0
-  durability: 0
-  maxDurability: 0
+  equiped: 0
   weapon: {fileID: 919132149155446097, guid: 775c96f25b29a464c96e04f3e961ff06, type: 3}

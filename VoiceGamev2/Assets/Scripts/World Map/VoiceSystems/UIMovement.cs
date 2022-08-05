@@ -48,7 +48,7 @@ public class UIMovement : MonoBehaviour
         character_Skills = GameObject.Find("Skills").GetComponent<Character_skills>();
         partyPannel = GameObject.Find("PartyInformation");
         characterPannel = GameObject.Find("CharacterInformation");*/
-        canOpenGroup = true;
+        //canOpenGroup = true;
         AddFirstLvl();
         AddPartyInf();
         OptionsOrders();
@@ -114,22 +114,22 @@ public class UIMovement : MonoBehaviour
     }
     private void ActivateSkillAnimation()
     {
-        inventoryAnimator.SetBool("ReverseInventory", true);
+        //inventoryAnimator.SetBool("ReverseInventory", true);
         skillsZone.SetActive(true);
         inventoryZone.SetActive(false);
         equipObjects.weapons.Stop();
         equipObjects.isInventory = false;
-        inventoryAnimator.SetBool("ReverseInventory", false);
+        //inventoryAnimator.SetBool("ReverseInventory", false);
 
 
     }
     private void ActivateInventoryAnimation()
     {
-        inventoryAnimator.SetBool("Inventory", true);
+        //inventoryAnimator.SetBool("Inventory", true);
         skillsZone.SetActive(false);
         inventoryZone.SetActive(true);
         equipObjects.isInventory = true;
-        inventoryAnimator.SetBool("Inventory", false);
+        //inventoryAnimator.SetBool("Inventory", false);
     }
     private void CloseGame()
     {
@@ -209,6 +209,8 @@ public class UIMovement : MonoBehaviour
     }
     private void CloseWindows()
     {
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.Play();
         if (characterPannel.activeInHierarchy)
         {
             skillsZone.SetActive(true);
@@ -224,12 +226,14 @@ public class UIMovement : MonoBehaviour
             {
                 fTUE_Progresion.ftueProgression++;
                 fTUE_Progresion.FTUEProgression();
+
             }
         }else if (victoryResult.activeInHierarchy)
         {
             fTUE_Progresion.NextPannel();
             victoryResult.SetActive(false);
             canOpenGroup = true;
+
         }
         else if(optionsPannel.activeInHierarchy){
             optionsPannel.SetActive(false);

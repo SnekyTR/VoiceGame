@@ -102,7 +102,7 @@ public class FTUE_Progresion : MonoBehaviour
         PlayerPrefs.SetInt("pm", (ns + 1));
 
         Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
-        zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, NextPannel);
+        zero1.Add("asdfasd" + SceneManager.GetActiveScene().weaponName + ns, NextPannel);
         ftueRecognizer = new KeywordRecognizer(zero1.Keys.ToArray());
     }*/
     public void RecognizedVoice(PhraseRecognizedEventArgs speech)

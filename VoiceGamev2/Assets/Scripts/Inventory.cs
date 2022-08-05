@@ -35,21 +35,21 @@ public class Inventory : MonoBehaviour
     }
     public String GetName(Scripteable_Weapon item)
     {
-        return item.name;
+        return item.weaponName;
     }
     private void DisplayWeapons(int i,Scripteable_Weapon item)
     {
         weaponPositions[i].gameObject.SetActive(true);
         Image img = weaponPositions[i].GetChild(0).GetComponent<Image>();
         img.sprite = item.artwork;
-        weaponPositions[i].GetChild(1).GetComponent<TextMeshProUGUI>().text = item.name;
+        weaponPositions[i].GetChild(1).GetComponent<TextMeshProUGUI>().text = item.weaponName;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         for (int a = 0; a < players.Length; a++)
         {
-            print("Se comprueba" + players[a].GetComponent<GeneralStats>().weaponequiped + "De" + item.name);
-            if (players[a].GetComponent<GeneralStats>().weaponequiped == item.name)
+            print("Se comprueba" + players[a].GetComponent<GeneralStats>().weaponequiped + "De" + item.weaponName);
+            if (players[a].GetComponent<GeneralStats>().weaponequiped == item.weaponName)
             {
-                print("PUTA" + item.name);
+                print("PUTA" + item.weaponName);
                 item.equiped = true;
 
                 weaponPositions[i].GetChild(4).gameObject.SetActive(true);
@@ -64,7 +64,7 @@ public class Inventory : MonoBehaviour
         {
             print(weaponPositions[i].transform.name);
             String weap = weaponPositions[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text;
-            if(weap == item.name.ToString())
+            if(weap == item.weaponName.ToString())
             {
                 print(weap);
                 weaponPositions[i].GetChild(4).gameObject.SetActive(true);

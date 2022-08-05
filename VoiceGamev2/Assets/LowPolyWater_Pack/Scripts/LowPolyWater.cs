@@ -29,7 +29,7 @@ namespace LowPolyWater
         /// <summary>
         /// Rearranges the mesh vertices to create a 'low poly' effect
         /// </summary>
-        /// <param name="mf">Mesh filter of gamobject</param>
+        /// <param weaponName="mf">Mesh filter of gamobject</param>
         /// <returns></returns>
         MeshFilter CreateMeshLowPoly(MeshFilter mf)
         {

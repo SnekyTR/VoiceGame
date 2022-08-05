@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Progression : MonoBehaviour
 {
@@ -36,6 +35,7 @@ public class Progression : MonoBehaviour
     [SerializeField] private TextMeshProUGUI expText2;
     [SerializeField] private TextMeshProUGUI expText3;
     bool isTheSame = false;
+    bool newWeap;
     GameSave gameSave;
     VoiceDestinations voices;
     MoveDataToMain moveDataToMain;
@@ -102,7 +102,10 @@ public class Progression : MonoBehaviour
                 if (!isTheSame)
                 {
                     inventory.actualWeapons.Add(inventory.totalWeapons[1]);
-                    weapReward.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = inventory.totalWeapons[1].name;
+                    Scripteable_Weapon weap = (Scripteable_Weapon)inventory.totalWeapons[1];
+                    weapReward.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = weap.name;
+                    weapReward.transform.GetChild(2).GetComponent<Image>().sprite = weap.artwork;
+                    newWeap = true;
                 }
                 
                 combat2.SetActive(false);
@@ -124,7 +127,7 @@ public class Progression : MonoBehaviour
                     {
                         for (int i = 0; i < inventory.actualWeapons.Count; i++)
                         {
-                            if (inventory.totalWeapons[1] == inventory.actualWeapons[i])
+                            if (inventory.totalWeapons[2] == inventory.actualWeapons[i])
                             {
                                 isTheSame = true;
                             }
@@ -132,8 +135,10 @@ public class Progression : MonoBehaviour
                         }
                         if (!isTheSame)
                         {
-                            inventory.actualWeapons.Add(inventory.totalWeapons[2]);
-                            weapReward.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = inventory.totalWeapons[2].name;
+                            Scripteable_Weapon weap = (Scripteable_Weapon)inventory.totalWeapons[2];
+                            weapReward.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = weap.name;
+                            weapReward.transform.GetChild(2).GetComponent<Image>().sprite = weap.artwork;
+                            newWeap = true;
                         }
                         bastionAnimator.SetFloat("anim", 0);
                         forestAnimator.SetFloat("anim", 1);
@@ -166,7 +171,7 @@ public class Progression : MonoBehaviour
     {
         uIMovement.canOpenGroup = false;
         victoryResults.SetActive(true);
-        if (!isTheSame)
+        if (newWeap)
         {
             weapReward.SetActive(true);
         }
@@ -201,6 +206,5 @@ public class Progression : MonoBehaviour
         voices.enabled = true;
         Victory(moveDataToMain.totalEXP);
         Progression pro = gameObject.GetComponent<Progression>();
-        //SaveSystem.SaveLvlExit(pro);
     }
 }

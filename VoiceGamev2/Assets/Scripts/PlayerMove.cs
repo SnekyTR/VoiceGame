@@ -16,7 +16,7 @@ public class PlayerMove : MonoBehaviour
     private Animator animator;
     private Transform playerTr;
     private CameraFollow gameM;
-    private AudioSource audioSource;
+    public AudioSource audioSource;
     private Skills skill;
     [HideInInspector]public CombatTimer timerC;
     public AudioClip moveSteps;
@@ -194,6 +194,7 @@ public class PlayerMove : MonoBehaviour
     {
         startCmdR.Start();
         spellCmdR.Start();
+        print("Se ha seleccionado");
     }
 
     public void SetList(string[] ns)
