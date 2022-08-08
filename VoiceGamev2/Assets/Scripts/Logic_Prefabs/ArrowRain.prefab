@@ -51,7 +51,7 @@ MonoBehaviour:
   ForceRadius: 0
   IsProjectile: 0
   ManualParticleSystems: []
-  MeteorPrefab: {fileID: 5474014686464707439, guid: 1a8eaaa38b934ed4dbe357ed598e1318, type: 3}
+  MeteorPrefab: {fileID: 5883703014395626525, guid: 47e9ecbfeaa9aa9468ca2715706ab26d, type: 3}
   DestinationRadius: 7
   Source: {x: 20, y: 100, z: -20}
   SourceRadius: 10
@@ -60,8 +60,8 @@ MonoBehaviour:
     Minimum: 25
     Maximum: 30
   ScaleRange:
-    Minimum: 1
-    Maximum: 1.5
+    Minimum: 3
+    Maximum: 5
   MeteorLifeTimeRange:
     Minimum: 6
     Maximum: 8

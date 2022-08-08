@@ -3277,6 +3277,7 @@ MonoBehaviour:
   agilityPoints: 6
   criticProb: 20
   actualWeapon: bow
+  audioSource: {fileID: 0}
   cinemaCam:
   - {fileID: 7766708396911771584}
   - {fileID: 3345446254370992412}
@@ -3295,7 +3296,7 @@ MonoBehaviour:
   maxEnergy: 0
   structure: {fileID: 0}
   selected: {fileID: 0}
-  stunFX: {fileID: 0}
+  stunFX: {fileID: 1500378020736912, guid: 2547a66872ebe45408ace228820a79e1, type: 3}
 --- !u!195 &704827454318050888
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -17,11 +17,14 @@ public class SkeletonArcherAI : MonoBehaviour
     private AudioSource audioSource;
     private AudioClip audioClip;
 
+    private GridActivation gridA;
+
     int mask;
 
     private void Start()
     {
-        casillas = GameObject.Find("RayCast").GetComponent<GridActivation>().casillas;
+        gridA = GameObject.Find("RayCast").GetComponent<GridActivation>();
+        casillas = gridA.casillas;
         enemyStats = GetComponent<EnemyStats>();
         enemyNM = GetComponent<NavMeshAgent>();
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
@@ -43,6 +46,7 @@ public class SkeletonArcherAI : MonoBehaviour
         {
             if (enemyNM.velocity == Vector3.zero)
             {
+                gridA.DisableAtkGrid();
                 StatesManager();
                 isOnRoute = false;
                 enemyNM.isStopped = true;
@@ -134,6 +138,8 @@ public class SkeletonArcherAI : MonoBehaviour
                     gameM.NextIA(GetComponent<StateManager>());
                     return;
                 }
+
+                gridA.EnableAtkGrid(transform, enemyStats.GetEnergy() * 2);
 
                 enemyStats.SetEnergy(-energy);
 

@@ -13,8 +13,10 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] private int atkValue;
     [SerializeField] private int range;
     private GameObject bars;
-    private float energy = 5;
-    private float energyActions = 5;
+
+    [Header ("Energia")]
+    public float energy = 5;
+    public float energyActions = 5;
     private Animator animator;
 
     private WinLoose winLoose;
@@ -23,7 +25,9 @@ public class EnemyStats : MonoBehaviour
     [HideInInspector] public float maxLife;
     [HideInInspector] public float maxShield;
     [HideInInspector] public float maxEnergy;
+    [HideInInspector] public float maxEnergyActions;
     [HideInInspector] public CanvasFollow canv;
+    [Header("Extra")]
     public int xp = 50;
 
     [SerializeField] private GameObject intBars;
@@ -45,9 +49,10 @@ public class EnemyStats : MonoBehaviour
         maxLife = lifeValue;
         maxShield = shieldValue;
         maxEnergy = energy;
+        maxEnergyActions = energyActions;
         winLoose = gameM.GetComponent<WinLoose>();
         winLoose.totalEnemies++;
-        extBars = GameObject.Find("CanvasManager").transform.GetChild(6).GetChild(nEnemy).gameObject;
+        extBars = GameObject.Find("CanvasManager").transform.GetChild(7).GetChild(nEnemy).gameObject;
 
         if (GameObject.Find("SceneConector")) moveData = GameObject.Find("SceneConector").GetComponent<MoveDataToMain>();
         if (GameObject.Find("SceneConector")) moveData.totalEXP = moveData.totalEXP + xp;
@@ -56,7 +61,7 @@ public class EnemyStats : MonoBehaviour
         extBars.transform.GetChild(1).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
         intBars.transform.GetChild(0).GetComponent<Text>().text = transform.name;
         intBars.transform.GetChild(1).GetChild(1).GetComponent<Slider>().value = (lifeValue / maxLife);
-        intBars.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
+        intBars.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (lifeValue + "/" + maxLife);
 
         bars = intBars.transform.GetChild(1).gameObject;
 
@@ -74,8 +79,6 @@ public class EnemyStats : MonoBehaviour
 
             if (shieldValue <= 0)
             {
-                extBars.transform.GetChild(2).GetComponent<Scrollbar>().size = 0;
-                intBars.transform.GetChild(1).GetChild(3).GetComponent<Slider>().value = 0;
                 intBars.transform.GetChild(1).GetChild(4).GetComponent<Text>().text = "";
 
                 extBars.transform.GetChild(2).gameObject.SetActive(false);
@@ -88,9 +91,7 @@ public class EnemyStats : MonoBehaviour
             }
             else
             {
-                extBars.transform.GetChild(2).GetComponent<Scrollbar>().size = (shieldValue / maxShield);
-                intBars.transform.GetChild(1).GetChild(3).GetComponent<Slider>().value = (shieldValue / maxShield);
-                intBars.transform.GetChild(1).GetChild(4).GetComponent<Text>().text = (shieldValue + " / " + maxShield);
+                intBars.transform.GetChild(1).GetChild(4).GetComponent<Text>().text = (shieldValue).ToString();
 
                 animator.SetInteger("A_Recieve", 1);
                 StartCoroutine(DmgTxtAnim(n));
@@ -123,7 +124,7 @@ public class EnemyStats : MonoBehaviour
 
         extBars.transform.GetChild(1).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
         intBars.transform.GetChild(1).GetChild(1).GetComponent<Slider>().value = (lifeValue / maxLife);
-        intBars.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
+        intBars.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (lifeValue + "/" + maxLife);
     }
 
     public void StunEnemy(bool t)
@@ -205,7 +206,7 @@ public class EnemyStats : MonoBehaviour
     public void FullEnergy()
     {
         energy = maxEnergy;
-        energyActions = maxEnergy;
+        energyActions = maxEnergyActions;
     }
 
     public void NewShield(int s)
@@ -217,9 +218,6 @@ public class EnemyStats : MonoBehaviour
         shieldValue = s;
         maxShield = s;
 
-        extBars.transform.GetChild(2).GetComponent<Scrollbar>().size = (shieldValue / maxShield);
-        intBars.transform.GetChild(1).GetChild(3).GetComponent<Slider>().value = (shieldValue / maxShield);
-        intBars.transform.GetChild(1).GetChild(4).GetComponent<Text>().text = (shieldValue + " / " + maxShield);
-        intBars.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "";
+        intBars.transform.GetChild(1).GetChild(4).GetComponent<Text>().text = (shieldValue).ToString();
     }
 }

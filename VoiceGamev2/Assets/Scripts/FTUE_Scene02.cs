@@ -22,10 +22,10 @@ public class FTUE_Scene02 : MonoBehaviour
         plMove.atkRestriction = true;
         plMove.atk2Restriction = true;
         plMove.spellRestriction = true;
-        gameM.selectPjRestriction = true;
+        gameM.selectPjRestriction = false;
         gameM.sbookRestriction = true;
 
-        StartCoroutine(InitialPart());
+        p0 = true;
     }
 
     void Update()
@@ -39,16 +39,6 @@ public class FTUE_Scene02 : MonoBehaviour
         if (p6) Part06();
     }
 
-    private IEnumerator InitialPart()
-    {
-        yield return new WaitForSeconds(4f);
-
-        p0 = true;
-        gameM.selectPjRestriction = false;
-
-        tutos[1].SetActive(true);
-    }
-
     private void Part00()
     {
         if(gameM.selectPjActive)
@@ -56,8 +46,7 @@ public class FTUE_Scene02 : MonoBehaviour
             p0 = false;
 
             tutos[0].SetActive(false);
-            tutos[1].SetActive(false);
-            tutos[2].SetActive(true);
+            tutos[1].SetActive(true);
 
             gameM.sbookRestriction = false;
 
@@ -71,8 +60,8 @@ public class FTUE_Scene02 : MonoBehaviour
         {
             p1 = false;
 
-            tutos[2].SetActive(false);
-            tutos[3].SetActive(true);
+            tutos[1].SetActive(false);
+            tutos[2].SetActive(true);
             plStats = gameM.players[0].GetComponent<PlayerStats>();
 
             p2 = true;
@@ -85,11 +74,10 @@ public class FTUE_Scene02 : MonoBehaviour
         {
             p2 = false;
 
-            plMove.spellRestriction = false;
-            plMove.atk2Restriction = false;
+            plMove.moveRestriction = false;
+            gameM.nextTurnRestriction = false;
 
-            tutos[3].SetActive(false);
-            tutos[4].SetActive(true);
+            tutos[2].SetActive(false);
 
             p3 = true;
         }
@@ -97,25 +85,25 @@ public class FTUE_Scene02 : MonoBehaviour
 
     private void Part03()
     {
-        if (plMove.spellActive)
+        if (Vector3.Distance(gameM.enemys[0].transform.position, gameM.playerParent.position) <= 3)
         {
             p3 = false;
 
-            tutos[4].SetActive(false);
-            tutos[5].SetActive(true);
+            plMove.spellRestriction = false;
+            plMove.atk2Restriction = false;
 
-            StartCoroutine(CancelProgress());
+            tutos[3].SetActive(true);
+
+            p4 = true;
         }
     }
 
-    private IEnumerator CancelProgress()
+    private IEnumerator AbilityProgress()
     {
-        tutos[4].SetActive(false);
-        tutos[5].SetActive(true);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
-        tutos[5].transform.GetChild(1).gameObject.SetActive(true);
+        tutos[4].transform.GetChild(3).gameObject.SetActive(true);
 
         gameM.cancelRestriction = false;
 
@@ -124,14 +112,14 @@ public class FTUE_Scene02 : MonoBehaviour
 
     private void Part04()
     {
-        if (gameM.cancelActive)
+        if (plMove.spellActive)
         {
             p4 = false;
 
-            tutos[5].SetActive(false);
+            tutos[3].SetActive(false);
+            tutos[4].SetActive(true);
 
-            plMove.moveRestriction = false;
-            plMove.atkRestriction = false;
+            StartCoroutine(AbilityProgress());
 
             p5 = true;
         }
@@ -139,49 +127,24 @@ public class FTUE_Scene02 : MonoBehaviour
 
     private void Part05()
     {
-        if (plStats.GetEnergy(1) <= 0.5f || plStats.GetEnergy(2) <= 1)
+        if (plMove.atkActive)
         {
-            p5 = false;
+            p4 = false;
 
-            tutos[6].SetActive(true);
-
-            gameM.nextTurnRestriction = false;
-
-            plMove.atkActive = false;
-            plMove.spellActive = false;
-            plMove.moveActive = false;
-            plMove.move2Active = false;
-            gameM.cancelActive = false;
+            tutos[4].SetActive(false);
 
             gameM.nextTurnRestriction = false;
             plMove.moveRestriction = false;
             plMove.atkRestriction = false;
+            plMove.atk2Restriction = false;
             plMove.spellRestriction = false;
-
-            p6 = true;
+            gameM.selectPjRestriction = false;
+            gameM.sbookRestriction = false;
         }
     }
 
     private void Part06()
     {
-        if (gameM.nextTurnActive)
-        {
-            p6 = false;
 
-            tutos[6].SetActive(false);
-
-            plMove.atkActive = false;
-            plMove.spellActive = false;
-            plMove.moveActive = false;
-            plMove.move2Active = false;
-            gameM.cancelActive = false;
-
-            gameM.nextTurnRestriction = false;
-            plMove.moveRestriction = false;
-            plMove.atkRestriction = false;
-            plMove.spellRestriction = false;
-
-            Destroy(transform.gameObject);
-        }
     }
 }

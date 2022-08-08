@@ -71,7 +71,7 @@ public class CombatTimer : MonoBehaviour
     private IEnumerator Red(string e)
     {
         red.SetActive(true);
-        red.GetComponent<Text>().text = e;
+        red.transform.GetChild(0).GetComponent<Text>().text = e;
 
         yield return new WaitForSeconds(2f);
 
@@ -81,7 +81,7 @@ public class CombatTimer : MonoBehaviour
     private IEnumerator Blue(string e)
     {
         blue.SetActive(true);
-        blue.GetComponent<Text>().text = e;
+        blue.transform.GetChild(0).GetComponent<Text>().text = e;
 
         yield return new WaitForSeconds(2f);
 

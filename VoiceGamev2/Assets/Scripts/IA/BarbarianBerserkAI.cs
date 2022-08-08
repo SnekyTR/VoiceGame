@@ -18,11 +18,14 @@ public class BarbarianBerserkAI : MonoBehaviour
     private bool isBuffed;
     private bool heavyAtk;
 
+    private GridActivation gridA;
+
     int mask;
 
     void Start()
     {
-        casillas = GameObject.Find("RayCast").GetComponent<GridActivation>().casillas;
+        gridA = GameObject.Find("RayCast").GetComponent<GridActivation>();
+        casillas = gridA.casillas;
         enemyStats = GetComponent<EnemyStats>();
         enemyNM = GetComponent<NavMeshAgent>();
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
@@ -41,6 +44,7 @@ public class BarbarianBerserkAI : MonoBehaviour
         {
             if (enemyNM.velocity == Vector3.zero)
             {
+                gridA.DisableAtkGrid();
                 if (playerUseMagic) StatesManager2();
                 else StatesManager();
                 isOnRoute = false;
@@ -135,6 +139,8 @@ public class BarbarianBerserkAI : MonoBehaviour
                     gameM.NextIA(GetComponent<StateManager>());
                     return;
                 }
+
+                gridA.EnableAtkGrid(transform, enemyStats.GetEnergy() * 2);
 
                 enemyStats.SetEnergy(-energy);
 
@@ -242,14 +248,15 @@ public class BarbarianBerserkAI : MonoBehaviour
 
     private int RandomPlayerPiece()
     {
-        float dis = 10000;
+        float dis1 = 10000;
         int ps = 0;
 
         for (int i = 0; i < casillas.Count; i++)
         {
             if ((Vector3.Distance(transform.position, casillas[i].position) / 2) <= enemyStats.GetEnergy())
             {
-                if (Vector3.Distance(target.position, casillas[i].position) <= dis && !casillas[i].GetComponent<SectionControl>().isOcuped)
+                if (Vector3.Distance(target.position, casillas[i].position) <= enemyStats.GetRange() && !casillas[i].GetComponent<SectionControl>().isOcuped
+                    && Vector3.Distance(transform.position, casillas[i].position) <= dis1)
                 {
                     RaycastHit hit;
                     Vector3 newPos = casillas[i].position;
@@ -260,7 +267,7 @@ public class BarbarianBerserkAI : MonoBehaviour
                         if (hit.transform.tag == "Player")
                         {
                             ps = i;
-                            dis = Vector3.Distance(target.position, casillas[i].position);
+                            dis1 = Vector3.Distance(transform.position, casillas[i].position);
                         }
                     }
                 }

@@ -438,6 +438,19 @@ public class Skills : MonoBehaviour
                 dmg = (int)(dmg * 1.5f);
             }
 
+            float dis = Vector3.Distance(plyStats.transform.position, plyMove.target.transform.position);
+
+            if(dis >= 7)
+            {
+                dis -= 6;
+
+                dis = dis / 10;
+
+                dis = 1 - dis;
+
+                dmg = (int)(dmg * dis);
+            }
+
             isBlood = false;
 
             RaycastHit hit;
@@ -965,7 +978,7 @@ public class Skills : MonoBehaviour
             audioSource.Play();
             audioSource.volume = 1;
 
-            int dmg = Random.Range((int)(plyStats.GetAgility() * 0.8f), (int)(plyStats.GetAgility() * 1.5f));
+            int dmg = Random.Range((int)(plyStats.GetAgility() * 0.5f), (int)(plyStats.GetAgility() * 0.8f));
 
             int crit = Random.Range(0, 100);
 

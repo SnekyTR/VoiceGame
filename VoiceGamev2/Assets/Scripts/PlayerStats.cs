@@ -102,25 +102,25 @@ public class PlayerStats : MonoBehaviour
             skillsColocation.AssignHammundSkills(actualWeapon, this.gameObject);
         }
 
-        lifeValue = 15;
+        lifeValue = 35;
         for(int i = 2; i <= lifePoints; i++)
         {
-            lifeValue += (int)i / 2;
+            lifeValue += (int)(i * 1.5f);
         }
 
-        strengthValue = 3;
+        strengthValue = 5;
         for(int i = 2; i <= strengthPoints; i++)
         {
             strengthValue += (int)i / 3;
         }
 
-        agilityValue = 3;
+        agilityValue = 4;
         for(int i = 2;i <= agilityPoints; i++)
         {
             agilityValue += (int)i / 3;
         }
 
-        intellectValue = 5;
+        intellectValue = 9;
         for(int i = 2; i <= intellectPoints; i++)
         {
             intellectValue += (int)i / 3;
@@ -198,8 +198,6 @@ public class PlayerStats : MonoBehaviour
 
             if(shieldValue <= 0)
             {
-                structure.transform.GetChild(2).GetComponent<Scrollbar>().size = 0;
-                selected.transform.GetChild(1).GetComponent<Scrollbar>().size = 0;
                 selected.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = "";
 
                 structure.transform.GetChild(2).gameObject.SetActive(false);
@@ -211,9 +209,7 @@ public class PlayerStats : MonoBehaviour
             }
             else
             {
-                structure.transform.GetChild(2).GetComponent<Scrollbar>().size = (shieldValue / maxShield);
-                selected.transform.GetChild(1).GetComponent<Scrollbar>().size = (shieldValue / maxShield);
-                selected.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = (shieldValue + " / " + maxShield);
+                selected.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = (shieldValue).ToString();
 
                 animator.SetInteger("A_Recieve", 1);
 
@@ -349,8 +345,6 @@ public class PlayerStats : MonoBehaviour
         shieldValue = s;
         maxShield = s;
 
-        structure.transform.GetChild(2).GetComponent<Scrollbar>().size = (shieldValue / maxShield);
-        selected.transform.GetChild(1).GetComponent<Scrollbar>().size = (shieldValue / maxShield);
-        selected.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = (shieldValue + " / " + maxShield);
+        selected.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = (shieldValue).ToString();
     }
 }

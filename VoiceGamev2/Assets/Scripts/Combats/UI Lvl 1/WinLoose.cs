@@ -80,7 +80,7 @@ public class WinLoose : MonoBehaviour
     }
     private void WinAsignOrders()
     {
-        winOrders.Add("Continuar", Continue);
+        winOrders.Add("Seguir", Continue);
         
         wOrders = new KeywordRecognizer(winOrders.Keys.ToArray());
         wOrders.OnPhraseRecognized += RecognizedVoice;

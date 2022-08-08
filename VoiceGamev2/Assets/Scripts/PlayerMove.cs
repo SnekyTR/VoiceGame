@@ -188,6 +188,7 @@ public class PlayerMove : MonoBehaviour
         gridA.DisableGrid();
         if(playerTr != null)playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
         if(playerTr != null)playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.black;
+        if (playerTr != null) playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(false);
     }
 
     public void PlayerSelect()
@@ -294,6 +295,7 @@ public class PlayerMove : MonoBehaviour
 
         gridA.EnableGrid(playerTr);
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = blueC;
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(true);
 
         gameM.CameraPos2();
         gameM.CameraAddEnemys();
@@ -331,6 +333,7 @@ public class PlayerMove : MonoBehaviour
                 moveCmdR.Stop();
 
                 playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = defaultC;
+                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(false);
                 gridA.DisableGrid();
 
                 moveActive = false;
@@ -385,6 +388,7 @@ public class PlayerMove : MonoBehaviour
         atkCmdR.Start();
 
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = redC;
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(true);
 
         atkState = "atk";
     }
@@ -422,6 +426,7 @@ public class PlayerMove : MonoBehaviour
 
             skill.ShowRangesAllie(skill.GetRanges(n));
             gridA.EnableAtkGrid(playerTr, skill.GetRanges(n));
+            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(true);
         }
         else if(n == "Aumento de fuerza" || n == "Instinto asesino" || n == "Sacrificio de sangre")
         {
@@ -439,6 +444,7 @@ public class PlayerMove : MonoBehaviour
             gridA.EnableAtkGrid(playerTr, skill.GetRanges(n));
 
             atkCmdR.Start();
+            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(true);
         }
     }
 
@@ -540,6 +546,7 @@ public class PlayerMove : MonoBehaviour
                 atkCmdR.Stop();
 
                 playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = defaultC;
+                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(false);
             }
         }
         else
@@ -550,6 +557,7 @@ public class PlayerMove : MonoBehaviour
             atkCmdR.Stop();
 
             playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = defaultC;
+            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(false);
             print("fuera de alcance");
         }
     }
@@ -569,6 +577,7 @@ public class PlayerMove : MonoBehaviour
         spellCmdR.Start();
 
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = defaultC;
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(false);
 
         skill.EliminateSkillSelection();
     }

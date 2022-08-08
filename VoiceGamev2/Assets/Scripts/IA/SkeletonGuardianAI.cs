@@ -16,11 +16,15 @@ public class SkeletonGuardianAI : MonoBehaviour
     private AudioSource audioSource;
     private AudioClip audioClip;
 
+    private GridActivation gridA;
+
     int mask;
     public int ShieldAport;
 
     void Start()
     {
+        gridA = GameObject.Find("RayCast").GetComponent<GridActivation>();
+        casillas = gridA.casillas;
         casillas = GameObject.Find("RayCast").GetComponent<GridActivation>().casillas;
         enemyStats = GetComponent<EnemyStats>();
         enemyNM = GetComponent<NavMeshAgent>();
@@ -44,6 +48,7 @@ public class SkeletonGuardianAI : MonoBehaviour
         {
             if (enemyNM.velocity == Vector3.zero)
             {
+                gridA.DisableAtkGrid();
                 StatesManager();
                 isOnRoute = false;
                 enemyNM.isStopped = true;
@@ -124,6 +129,8 @@ public class SkeletonGuardianAI : MonoBehaviour
                     return;
                 }
 
+                gridA.EnableAtkGrid(transform, enemyStats.GetEnergy() * 2);
+
                 enemyStats.SetEnergy(-energy);
 
                 enemyNM.isStopped = false;
@@ -181,14 +188,15 @@ public class SkeletonGuardianAI : MonoBehaviour
 
     private int RandomPlayerPiece()
     {
-        float dis = 10000;
+        float dis1 = 10000;
         int ps = 0;
 
         for (int i = 0; i < casillas.Count; i++)
         {
             if ((Vector3.Distance(transform.position, casillas[i].position) / 2) <= enemyStats.GetEnergy())
             {
-                if (Vector3.Distance(target.position, casillas[i].position) <= dis && !casillas[i].GetComponent<SectionControl>().isOcuped)
+                if (Vector3.Distance(target.position, casillas[i].position) <= enemyStats.GetRange() && !casillas[i].GetComponent<SectionControl>().isOcuped
+                    && Vector3.Distance(transform.position, casillas[i].position) <= dis1)
                 {
                     RaycastHit hit;
                     Vector3 newPos = casillas[i].position;
@@ -199,7 +207,7 @@ public class SkeletonGuardianAI : MonoBehaviour
                         if (hit.transform.tag == "Player")
                         {
                             ps = i;
-                            dis = Vector3.Distance(target.position, casillas[i].position);
+                            dis1 = Vector3.Distance(transform.position, casillas[i].position);
                         }
                     }
                 }

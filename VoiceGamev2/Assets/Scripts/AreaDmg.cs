@@ -55,10 +55,12 @@ public class AreaDmg : MonoBehaviour
             else if (plyM.GetAtkState() == "Demacia" && plyStats.actualWeapon == "sword")
             {
                 dmg = Random.Range((int)(plyStats.GetStrenght() * 0.5f), (int)(plyStats.GetStrenght() * 0.8f));
+                other.gameObject.GetComponent<EnemyStats>().StunEnemy(true);
             }
             else if (plyM.GetAtkState() == "Demacia" && plyStats.actualWeapon == "axe")
             {
                 dmg = Random.Range((int)(plyStats.GetStrenght() * 0.5f), (int)(plyStats.GetStrenght() * 0.8f));
+                other.gameObject.GetComponent<EnemyStats>().StunEnemy(true);
             }
             else if (plyM.GetAtkState() == "atk" && plyStats.actualWeapon == "fire staff")
             {
@@ -102,7 +104,6 @@ public class AreaDmg : MonoBehaviour
             }
 
             other.gameObject.GetComponent<EnemyStats>().SetLife(-dmg);
-            other.gameObject.GetComponent<EnemyStats>().StunEnemy(true);
             bloods.Add(Instantiate(blood, other.transform.position, transform.rotation));
 
             if (plyM.GetAtkState() == "atk" && plyStats.actualWeapon == "fire staff") Destroy(this.gameObject);

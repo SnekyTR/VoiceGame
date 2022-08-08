@@ -406,11 +406,14 @@ public class CameraFollow : MonoBehaviour
     {
         if (!sbookRestriction) return;
 
-        if (skBook.isStarted) sbookActive = false;
+        if (skBook.isStarted)
+        {
+            sbookActive = false;
 
-        skBook.StartSkillBook(1, players.Count);
+            skBook.StartSkillBook(1, players.Count);
 
-        sbookRestriction = false;
+            sbookRestriction = false;
+        }
     }
 
     public void CancelOrder()
