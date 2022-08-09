@@ -188,6 +188,7 @@ public class SpiderAI : MonoBehaviour
     private int RandomPlayerPiece()
     {
         float dis1 = 10000;
+        float dis2 = 10000;
         int ps = 0;
 
         for (int i = 0; i < casillas.Count; i++)
@@ -207,6 +208,21 @@ public class SpiderAI : MonoBehaviour
                         {
                             ps = i;
                             dis1 = Vector3.Distance(transform.position, casillas[i].position);
+                        }
+                    }
+                }
+                else if(!casillas[i].GetComponent<SectionControl>().isOcuped && Vector3.Distance(target.position, casillas[i].position) <= dis2)
+                {
+                    RaycastHit hit;
+                    Vector3 newPos = casillas[i].position;
+                    newPos.y += 1;
+                    Vector3 newDir = target.position - casillas[i].position;
+                    if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
+                    {
+                        if (hit.transform.tag == "Player")
+                        {
+                            ps = i;
+                            dis2 = Vector3.Distance(target.position, casillas[i].position);
                         }
                     }
                 }
