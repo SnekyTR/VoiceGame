@@ -36793,7 +36793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 472596, guid: 13af20cb32cfaab428901a23183d2ca1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 955.74
+      value: 955.35406
       objectReference: {fileID: 0}
     - target: {fileID: 472596, guid: 13af20cb32cfaab428901a23183d2ca1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -42866,6 +42866,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6479608414339696686, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 394501f7c0893bd41a7c6b08736aa5dd, type: 2}
     - target: {fileID: 8572994706734490198, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -84353,12 +84357,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: criticProb
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: lifePoints
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: actualWeapon
-      value: sword
+      value: fire staff
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: criticPoints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: shieldPoints
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: agilityPoints
@@ -84370,7 +84386,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: intellectPoints
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6670066613190947578, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: m_Layer

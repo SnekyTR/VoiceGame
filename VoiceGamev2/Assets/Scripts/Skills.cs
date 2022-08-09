@@ -62,7 +62,7 @@ public class Skills : MonoBehaviour
         nameSkill.Add("Instinto asesino");
         nameSkill.Add("Lluvia de flechas");
         nameSkill.Add("Bola de fuego");
-        nameSkill.Add("Sacrificio de sangre");
+        nameSkill.Add("Sacrificio");
         nameSkill.Add("Lluvia de meteoritos");
         nameSkill.Add("Curar");
         nameSkill.Add("Revivir");
@@ -184,7 +184,7 @@ public class Skills : MonoBehaviour
                 return 21;
             case "Bola de fuego":
                 return 13;
-            case "Sacrificio de sangre":
+            case "Sacrificio":
                 return 10000;
             case "Lluvia de meteoritos":
                 return 21;
@@ -273,7 +273,7 @@ public class Skills : MonoBehaviour
                 return 3.5f;
             case "Bola de fuego":
                 return 2.5f;
-            case "Sacrificio de sangre":
+            case "Sacrificio":
                 return 1.5f;
             case "Lluvia de meteoritos":
                 return 5f;
@@ -319,7 +319,7 @@ public class Skills : MonoBehaviour
             case "Bola de fuego":
                 StartCoroutine(FireBall());
                 break;
-            case "Sacrificio de sangre":
+            case "Sacrificio":
                 StartCoroutine(BloodSacrifice());
                 break;
             case "Lluvia de meteoritos":
@@ -641,7 +641,7 @@ public class Skills : MonoBehaviour
             case "Bola de fuego":
                 f = 1;
                 break;
-            case "Sacrificio de sangre":
+            case "Sacrificio":
                 f = 2;
                 break;
             case "Lluvia de meteoritos":

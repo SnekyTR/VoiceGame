@@ -91,7 +91,7 @@ public class SkillBook : MonoBehaviour
         magnusSB.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = ReturnWeaponImg(wp);
         magnusSB.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "Daño: " + GetBasicAtk(wp, plyN, true) + " - " +
             GetBasicAtk(wp, plyN, false) + "\n" + "Energía: " + GetEnergy(wp) + "\n" + "Rango: " +
-            GetRange(wp) + "\n" + "Crítico: " + GetCritical(wp);
+            GetRange(wp) + "\n" + "Crítico: " + GetCritical(plyN);
 
         if(ValidationSkill(wp, plyN) >= 1)
         {
@@ -136,7 +136,7 @@ public class SkillBook : MonoBehaviour
         vagnarSB.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = ReturnWeaponImg(wp);
         vagnarSB.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "Daño: " + GetBasicAtk(wp, plyN, true) + " - " +
             GetBasicAtk(wp, plyN, false) + "\n" + "Energía: " + GetEnergy(wp) + "\n" + "Rango: " +
-            GetRange(wp) + "\n" + "Crítico: " + GetCritical(wp);
+            GetRange(wp) + "\n" + "Crítico: " + GetCritical(plyN);
 
         if (ValidationSkill(wp, plyN) >= 1)
         {
@@ -181,7 +181,7 @@ public class SkillBook : MonoBehaviour
         torekSB.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = ReturnWeaponImg(wp);
         torekSB.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "Daño: " + GetBasicAtk(wp, plyN, true) + " - " +
             GetBasicAtk(wp, plyN, false) + "\n" + "Energía: " + GetEnergy(wp) + "\n" + "Rango: " +
-            GetRange(wp) + "\n" + "Crítico: " + GetCritical(wp);
+            GetRange(wp) + "\n" + "Crítico: " + GetCritical(plyN);
 
         if (ValidationSkill(wp, plyN) >= 1)
         {
@@ -277,34 +277,9 @@ public class SkillBook : MonoBehaviour
         return 0;
     }
 
-    private string GetCritical(string w)
+    private string GetCritical(int i)
     {
-        if (w == "sword")
-        {
-            return "20%";
-        }
-        else if (w == "axe")
-        {
-            return "15%";
-        }
-        else if (w == "spear")
-        {
-            return "25%";
-        }
-        else if (w == "bow")
-        {
-            return "25%";
-        }
-        else if (w == "fire staff")
-        {
-            return "20%";
-        }
-        else if (w == "sacred staff")
-        {
-            return "15%";
-        }
-
-        return "";
+        return playerS[i].criticProb + "%";
     }
 
     private float GetEnergy(string w)
@@ -314,7 +289,7 @@ public class SkillBook : MonoBehaviour
         else if (w == "spear" || w == "fire staff") return 1.5f;
         else if (w == "sacred staff") return 1f;
         else if (w == "Partir" || w == "Curar") return 3f;
-        else if (w == "Aumento de fuerza" || w == "Instinto asesino" || w == "Sacrificio de sangre") return 1.5f;
+        else if (w == "Aumento de fuerza" || w == "Instinto asesino" || w == "Sacrificio") return 1.5f;
         else if (w == "Demacia" || w == "Juicio Final") return 4f;
         else if (w == "Lluvia de meteoritos" || w == "Revivir") return 5f;
         else if (w == "Lluvia de flechas") return 3.5f;
@@ -329,7 +304,7 @@ public class SkillBook : MonoBehaviour
         else if (w == "bow" || w == "Demolicíon") return "7";
         else if (w == "fire staff" || w == "Bola de fuego") return "6";
         else if (w == "sacred staff" || w == "Curar") return "5";
-        else if (w == "Aumento de fuerza" || w == "Instinto asesino" || w == "Sacrificio de sangre") return " - ";
+        else if (w == "Aumento de fuerza" || w == "Instinto asesino" || w == "Sacrificio") return " - ";
         else if (w == "Lluvia de flechas" || w == "Lluvia de meteoritos" || w == "Juicio Final") return "10";
 
         return "";
@@ -352,7 +327,7 @@ public class SkillBook : MonoBehaviour
         else if (w == "fire staff")
         {
             if (i == 1) return "Bola de fuego";
-            else if (i == 2) return "Sacrificio de sangre";
+            else if (i == 2) return "Sacrificio";
             else if (i == 3) return "Lluvia de meteoritos";
         }
         else if (w == "sacred staff")
@@ -395,7 +370,7 @@ public class SkillBook : MonoBehaviour
         {
             return "Daño: " + (int)(playerS[i].GetIntellect() * 1.5f) + " - " + (int)(playerS[i].GetIntellect()* 2.2f);
         }
-        else if (w == "Sacrificio de sangre")
+        else if (w == "Sacrificio")
         {
             return "Aumento de inteligencia: x1.5 ";
         }
@@ -449,7 +424,7 @@ public class SkillBook : MonoBehaviour
         {
             return skillImage[6];
         }
-        else if (w == "Sacrificio de sangre")
+        else if (w == "Sacrificio")
         {
             return skillImage[7];
         }
@@ -563,7 +538,7 @@ public class SkillBook : MonoBehaviour
         {
             return "Ataque mágico, el cual quema al enemigo con el que colisiona";
         }
-        else if (w == "Sacrificio de sangre")
+        else if (w == "Sacrificio")
         {
             return "El personaje obtiene un aumento de inteligencia, y sus ataques de fuego aplican marcas de fuego durante 2 turnos";
         }

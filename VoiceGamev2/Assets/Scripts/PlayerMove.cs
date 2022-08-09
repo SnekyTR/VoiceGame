@@ -428,7 +428,7 @@ public class PlayerMove : MonoBehaviour
             gridA.EnableAtkGrid(playerTr, skill.GetRanges(n));
             playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(true);
         }
-        else if(n == "Aumento de fuerza" || n == "Instinto asesino" || n == "Sacrificio de sangre")
+        else if(n == "Aumento de fuerza" || n == "Instinto asesino" || n == "Sacrificio")
         {
             StartCoroutine(SelfBuffs());
             TurnEnergyActions(skill.GetCost(atkState));

@@ -11,7 +11,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int strengthPoints;
     [SerializeField] public int intellectPoints;
     [SerializeField] public int agilityPoints;
-    public int criticProb;
+    [SerializeField] public int shieldPoints;
+    [SerializeField] public int criticPoints;
+    [HideInInspector] public int criticProb;
     public string actualWeapon;
     [HideInInspector]
     public AudioSource audioSource;
@@ -102,7 +104,7 @@ public class PlayerStats : MonoBehaviour
             skillsColocation.AssignHammundSkills(actualWeapon, this.gameObject);
         }
 
-        lifeValue = 35;
+        lifeValue = 25;
         for(int i = 2; i <= lifePoints; i++)
         {
             lifeValue += (int)(i * 1.5f);
@@ -126,10 +128,20 @@ public class PlayerStats : MonoBehaviour
             intellectValue += (int)i / 3;
         }
 
+        shieldValue = 15;
+        for (int i = 2; i <= shieldPoints; i++)
+        {
+            shieldValue += (int)(i * 0.5f);
+        }
+
+        criticProb = criticPoints * 10;
+
         animator = GetComponent<Animator>();
         maxLife = lifeValue;
         maxShield = shieldValue;
         maxEnergy = energy;
+
+        NewShield(shieldValue);
 
         selected.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
 
@@ -253,12 +265,16 @@ public class PlayerStats : MonoBehaviour
             Vector3 pos = transform.position;
             pos.y += 2;
 
+            structure.transform.GetChild(3).gameObject.SetActive(true);
+
             stunPrefab = Instantiate(stunFX, pos, transform.rotation);
             isStunned = true;
         }
         else
         {
             Destroy(stunPrefab);
+
+            structure.transform.GetChild(3).gameObject.SetActive(true);
 
             isStunned = false;
         }
