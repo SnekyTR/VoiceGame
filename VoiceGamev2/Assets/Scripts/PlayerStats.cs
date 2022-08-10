@@ -210,7 +210,7 @@ public class PlayerStats : MonoBehaviour
 
             if(shieldValue <= 0)
             {
-                selected.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = "";
+                selected.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = "";
 
                 structure.transform.GetChild(2).gameObject.SetActive(false);
                 selected.transform.GetChild(1).gameObject.SetActive(false);
