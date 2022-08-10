@@ -25,7 +25,7 @@ public class CameraFollow : MonoBehaviour
     private Transform pos4;
 
     private Dictionary<string, Action<string>> selectPJCmd = new Dictionary<string, Action<string>>();
-    private KeywordRecognizer selectPJCmdR;
+    public KeywordRecognizer selectPJCmdR;
 
     private Dictionary<string, Action> passCmd = new Dictionary<string, Action>();
     private KeywordRecognizer passCmdR;
@@ -97,7 +97,7 @@ public class CameraFollow : MonoBehaviour
         selectPJCmdR = new KeywordRecognizer(selectPJCmd.Keys.ToArray());
         selectPJCmdR.OnPhraseRecognized += RecognizedVoice;
 
-        selectPJCmdR.Start();
+        //selectPJCmdR.Start();
         passCmdR.Start();
 
         //CameraCenter();
