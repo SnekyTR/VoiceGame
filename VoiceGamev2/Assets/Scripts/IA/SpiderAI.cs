@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class SpiderAI : MonoBehaviour
 {
-    public int nSpider;
     public bool isOnRoute, setTarget;
     private EnemyStats enemyStats;
     private NavMeshAgent enemyNM;
@@ -19,6 +18,8 @@ public class SpiderAI : MonoBehaviour
     private GridActivation gridA;
 
     int mask;
+
+    public GameObject toxicFX;
 
     private void Start()
     {
@@ -213,18 +214,8 @@ public class SpiderAI : MonoBehaviour
                 }
                 else if(!casillas[i].GetComponent<SectionControl>().isOcuped && Vector3.Distance(target.position, casillas[i].position) <= dis2)
                 {
-                    RaycastHit hit;
-                    Vector3 newPos = casillas[i].position;
-                    newPos.y += 1;
-                    Vector3 newDir = target.position - casillas[i].position;
-                    if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
-                    {
-                        if (hit.transform.tag == "Player")
-                        {
-                            ps = i;
-                            dis2 = Vector3.Distance(target.position, casillas[i].position);
-                        }
-                    }
+                    ps = i;
+                    dis2 = Vector3.Distance(target.position, casillas[i].position);
                 }
             }
         }
