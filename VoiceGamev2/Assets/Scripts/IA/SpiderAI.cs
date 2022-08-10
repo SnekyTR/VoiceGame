@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class SpiderAI : MonoBehaviour
 {
+    public bool toxic;
     public bool isOnRoute, setTarget;
     private EnemyStats enemyStats;
     private NavMeshAgent enemyNM;
@@ -159,7 +160,16 @@ public class SpiderAI : MonoBehaviour
         gameM.CameraCinematic();
 
         animator.SetInteger("A_Attack", 1);
+
         yield return new WaitForSeconds(0.6f);
+
+        if (toxic)
+        {
+            Vector3 abl = transform.GetChild(0).GetChild(0).GetChild(1).position;
+            abl.y -= 1.6f;
+            Destroy(Instantiate(toxicFX, abl, transform.rotation), 1.2f);
+            yield return new WaitForSeconds(0.4f);
+        }
 
         RaycastHit hit;
         Vector3 newPos = transform.position;
@@ -170,16 +180,18 @@ public class SpiderAI : MonoBehaviour
             if (hit.transform == target)
             {
                 target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
+
+                if (toxic) target.GetComponent<PlayerStats>().PoisonStart();
             }
         }
         enemyStats.SetEnergyAction(-2);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         setTarget = false;
         StatesManager();
     }
     private IEnumerator StartRoute()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         audioSource.clip = audioClip;
         audioSource.volume = 0.2f;
         audioSource.Play();

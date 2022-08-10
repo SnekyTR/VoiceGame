@@ -97,7 +97,7 @@ public class CameraFollow : MonoBehaviour
         selectPJCmdR = new KeywordRecognizer(selectPJCmd.Keys.ToArray());
         selectPJCmdR.OnPhraseRecognized += RecognizedVoice;
 
-        //selectPJCmdR.Start();
+        selectPJCmdR.Start();
         passCmdR.Start();
 
         //CameraCenter();
@@ -245,17 +245,41 @@ public class CameraFollow : MonoBehaviour
         if (whoTurn)
         {
             moveLogic.NewPlayer(actualPlayer.gameObject);
+        }
+
+        if (!moveLogic.IsMoving() && !moveLogic.IsAtk())
+        {
+            moveLogic.PlayerDeselectAtkMove();
+
+            NewParent(actualPlayer.transform);
+            CameraPos1();
+
+            moveLogic.ReasignateGrid();
+
+            moveLogic.PlayerDeselect();
+            moveLogic.PlayerSelect();
+        }
+        else if(moveLogic.GetAtkState() != "atk" && moveLogic.IsAtk())
+        {
+            moveLogic.PlayerDeselectAtkMove();
+
+            NewParent(actualPlayer.transform);
+            CameraPos1();
+
+            moveLogic.PlayerDeselect();
+            moveLogic.PlayerSelect();
+        }
+        else
+        {
+            moveLogic.PlayerDeselectAtkMove();
+
+            NewParent(actualPlayer.transform);
+            CameraPos2();
+
             moveLogic.ReasignateGrid();
         }
 
-        if (!moveLogic.IsMoving())
-        {
-            NewParent(actualPlayer.transform);
-            CameraPos1();
-        }
-        else NewParent(actualPlayer.transform);
-
-        if(n == playersNames[0])
+        if (n == playersNames[0])
         {
             playerSelected[0].SetActive(true);
             if (players.Count > 1) playerSelected[1].SetActive(false);
@@ -492,6 +516,7 @@ public class CameraFollow : MonoBehaviour
             for (int i = 0; i < players.Count; i++)
             {
                 players[i].GetComponent<PlayerStats>().FullEnergy();
+                players[i].GetComponent<PlayerStats>().PoisonTimer();
             }
 
             playerTurn.SetActive(true);

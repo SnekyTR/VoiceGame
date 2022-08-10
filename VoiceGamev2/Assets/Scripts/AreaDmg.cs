@@ -64,7 +64,7 @@ public class AreaDmg : MonoBehaviour
             }
             else if (plyM.GetAtkState() == "atk" && plyStats.actualWeapon == "fire staff")
             {
-                dmg = Random.Range((int)(plyStats.GetIntellect() * 0.9f), (int)(plyStats.GetIntellect() * 1.7f));
+                dmg = Random.Range((int)(plyStats.GetIntellect() * 1f), (int)(plyStats.GetIntellect() * 1.5f));
             }
             else if (plyM.GetAtkState() == "atk" && plyStats.actualWeapon == "sacred staff")
             {

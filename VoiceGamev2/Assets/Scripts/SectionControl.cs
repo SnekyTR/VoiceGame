@@ -46,9 +46,9 @@ public class SectionControl : MonoBehaviour
         transform.tag = "Untagged";
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        isOcuped = true;
+        if(!isOcuped) isOcuped = true;
     }
 
     private void OnTriggerExit(Collider other)

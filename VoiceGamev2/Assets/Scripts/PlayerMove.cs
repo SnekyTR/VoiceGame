@@ -166,16 +166,42 @@ public class PlayerMove : MonoBehaviour
         {
             gridA.DisableGrid();
             gridA.EnableGrid(playerTr);
+            PlayerSelectMove();
         }
         else if (atkCmdR.IsRunning)
         {
+            gridA.DisableGrid();
+            skill.ShowRanges(skill.GetRanges("atk"));
+            gridA.EnableAtkGrid(playerTr, skill.GetRanges("atk"));
+            PlayerSelectAtk();
 
+            print("hi");
         }
         else if (!startCmdR.IsRunning)
         {
             startCmdR.Start();
             spellCmdR.Start();
         }
+    }
+
+    public void PlayerDeselectAtkMove()
+    {
+        skill.UnShowRange();
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.black;
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(false);
+    }
+
+    private void PlayerSelectAtk()
+    {
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = redC;
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(true);
+    }
+
+    private void PlayerSelectMove()
+    {
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = blueC;
+        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(true);
     }
 
     public void PlayerDeselect()
@@ -270,6 +296,11 @@ public class PlayerMove : MonoBehaviour
     public bool IsMoving()
     {
         return moveCmdR.IsRunning;
+    }
+
+    public bool IsAtk()
+    {
+        return atkCmdR.IsRunning;
     }
 
     //move actions
@@ -468,7 +499,7 @@ public class PlayerMove : MonoBehaviour
 
         RaycastHit hit;
         Vector3 newPos = playerTr.position;
-        newPos.y += 1;
+        newPos.y += 1.5f;
         Vector3 newDir = target.transform.position - playerTr.position;
         if (Physics.Raycast(newPos, newDir, out hit, 1000f, mask))
         {

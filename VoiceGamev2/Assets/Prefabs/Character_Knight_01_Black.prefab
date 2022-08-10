@@ -1879,8 +1879,11 @@ MonoBehaviour:
   strengthPoints: 6
   intellectPoints: 4
   agilityPoints: 6
+  shieldPoints: 0
+  criticPoints: 0
   criticProb: 20
   actualWeapon: sword
+  audioSource: {fileID: 0}
   cinemaCam:
   - {fileID: 7061900362672386538}
   - {fileID: 2856801076609531702}
@@ -1900,6 +1903,7 @@ MonoBehaviour:
   structure: {fileID: 0}
   selected: {fileID: 0}
   stunFX: {fileID: 1500378020736912, guid: 2547a66872ebe45408ace228820a79e1, type: 3}
+  poisonFx: {fileID: 2339616375373499159, guid: 58534f5b0b97d674a87d07b283cc8231, type: 3}
 --- !u!195 &421785698
 NavMeshAgent:
   m_ObjectHideFlags: 0

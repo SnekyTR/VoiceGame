@@ -56,6 +56,9 @@ public class PlayerStats : MonoBehaviour
     private Skills skill;
     private WinLoose winLoose;
 
+    public GameObject poisonFx;
+    private GameObject poisonPrefab;
+    private int poisonTurns = 0;
 
     void Start()
     {
@@ -122,7 +125,7 @@ public class PlayerStats : MonoBehaviour
             agilityValue += (int)i / 3;
         }
 
-        intellectValue = 9;
+        intellectValue = 5;
         for(int i = 2; i <= intellectPoints; i++)
         {
             intellectValue += (int)i / 3;
@@ -258,6 +261,36 @@ public class PlayerStats : MonoBehaviour
         selected.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
     }
 
+    private void SetLifePoison(int n)
+    {
+        lifeValue += n;
+
+        if (lifeValue <= 0)                    //death
+        {
+            winLoose.totalPlayers--;
+            animator.SetInteger("A_Death", 1);
+            gameM.EliminateElement(this.gameObject);
+            GetComponent<NavMeshAgent>().enabled = false;
+            audioSource.clip = characterSounds[0];
+            audioSource.Play();
+
+
+
+        }
+        else if (n < 0)                         //dmg recieve
+        {
+            animator.SetInteger("A_Recieve", 1);
+        }
+        else if (n > 0)
+        {
+            if (lifeValue > maxLife) lifeValue = (int)maxLife;
+        }
+
+        structure.transform.GetChild(1).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
+        selected.transform.GetChild(0).GetComponent<Scrollbar>().size = (lifeValue / maxLife);
+        selected.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = (lifeValue + " / " + maxLife);
+    }
+
     public void StunPlayer(bool t)
     {
         if (t)
@@ -362,5 +395,39 @@ public class PlayerStats : MonoBehaviour
         maxShield = s;
 
         selected.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = (shieldValue).ToString();
+    }
+
+    public void PoisonStart()
+    {
+        if(poisonTurns == 0)
+        {
+            Vector3 newPos = transform.position;
+            newPos.y += 1;
+            poisonPrefab = Instantiate(poisonFx, newPos, transform.rotation);
+
+            selected.transform.GetChild(3).gameObject.SetActive(true);
+            structure.transform.GetChild(5).gameObject.SetActive(true);
+
+            poisonTurns = 3;
+        }
+    }
+
+    public void PoisonTimer()
+    {
+        if (poisonTurns == 0) return;
+
+        poisonTurns -= 1;
+
+        int newLife = (int)(maxLife * 0.1f);
+
+        SetLifePoison(-newLife);
+
+        if(poisonTurns == 0)
+        {
+            Destroy(poisonPrefab);
+
+            selected.transform.GetChild(3).gameObject.SetActive(false);
+            structure.transform.GetChild(5).gameObject.SetActive(false);
+        }
     }
 }
