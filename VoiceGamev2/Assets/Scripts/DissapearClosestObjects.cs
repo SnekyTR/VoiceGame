@@ -13,7 +13,6 @@ public class DissapearClosestObjects : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Ha entrado" + other.name);
         if (other.gameObject.CompareTag("Ocultable"))
         {
             other.gameObject.GetComponent<MeshRenderer>().enabled = false;
