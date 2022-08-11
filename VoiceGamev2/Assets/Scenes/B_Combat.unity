@@ -43181,6 +43181,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137509667}
     m_Modifications:
+    - target: {fileID: -7520687688447244144, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
+      propertyPath: toxic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6341872089512171486, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: m_Name
       value: "Ara\xF1a 1"
@@ -43647,11 +43651,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: atkValue
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: lifeValue
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: shieldValue
