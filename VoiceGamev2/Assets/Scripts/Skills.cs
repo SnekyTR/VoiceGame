@@ -1072,7 +1072,7 @@ public class Skills : MonoBehaviour
 
         Vector3 newPos = gameM.playerParent.transform.position;
 
-        newPos.y += 1;
+        newPos.y += 1.5f;
 
         Vector3 direction = plyMove.target.transform.position - gameM.playerParent.transform.position;
 
