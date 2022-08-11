@@ -3278,7 +3278,7 @@ MonoBehaviour:
   shieldPoints: 0
   criticPoints: 0
   criticProb: 20
-  actualWeapon: bow
+  actualWeapon: fire staff
   audioSource: {fileID: 0}
   cinemaCam:
   - {fileID: 7766708396911771584}
@@ -3880,6 +3880,10 @@ PrefabInstance:
     - target: {fileID: 3039789922994250242, guid: 710bd2906a0baed4ca8d7b9a28307742, type: 3}
       propertyPath: m_Name
       value: Quiver_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3039789922994250242, guid: 710bd2906a0baed4ca8d7b9a28307742, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7316342495884754943, guid: 710bd2906a0baed4ca8d7b9a28307742, type: 3}
       propertyPath: m_LocalScale.x
