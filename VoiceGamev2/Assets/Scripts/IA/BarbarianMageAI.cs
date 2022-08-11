@@ -39,14 +39,11 @@ public class BarbarianMageAI : MonoBehaviour
     {
         if (isOnRoute)
         {
-            if (enemyNM.velocity == Vector3.zero)
-            {
-                if (playerUseMagic) StatesManager2();
-                else StatesManager();
-                isOnRoute = false;
-                enemyNM.isStopped = true;
-                animator.SetInteger("A_Movement", 0);
-            }
+            if (playerUseMagic) StatesManager2();
+            else StatesManager();
+            isOnRoute = false;
+            //enemyNM.isStopped = true;
+            animator.SetInteger("A_Movement", 0);
         }
 
         if (setTarget)
@@ -138,9 +135,7 @@ public class BarbarianMageAI : MonoBehaviour
 
                 enemyStats.SetEnergy(-energy);
 
-                enemyNM.isStopped = false;
-                enemyNM.SetDestination(casillas[destiny].position);
-                animator.SetInteger("A_Movement", 1);
+                transform.position = casillas[destiny].position;
                 StartCoroutine(StartRoute());
             }
             else
@@ -222,11 +217,7 @@ public class BarbarianMageAI : MonoBehaviour
                     return;
                 }
 
-                enemyStats.SetEnergy(-energy);
-
-                enemyNM.isStopped = false;
-                enemyNM.SetDestination(casillas[destiny].position);
-                animator.SetInteger("A_Movement", 1);
+                transform.position = casillas[destiny].position;
                 StartCoroutine(StartRoute());
             }
             else
@@ -272,7 +263,7 @@ public class BarbarianMageAI : MonoBehaviour
 
     private IEnumerator StartRoute()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         isOnRoute = true;
     }
 

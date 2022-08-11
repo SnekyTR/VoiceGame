@@ -1622,6 +1622,7 @@ MonoBehaviour:
   maxLife: 0
   maxShield: 0
   maxEnergy: 0
+  maxEnergyActions: 0
   canv: {fileID: 0}
   xp: 50
   intBars: {fileID: 8572994707371243174}
@@ -1641,9 +1642,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b809ea0ea7fc3f4e9b6bd36fca8edee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nSpider: 0
+  toxic: 0
   isOnRoute: 0
   setTarget: 0
+  toxicFX: {fileID: 7025019999686932498, guid: 18a2e96bced3cad49b74e8a1f79b4183, type: 3}
 --- !u!1 &6341894526521195372
 GameObject:
   m_ObjectHideFlags: 0
