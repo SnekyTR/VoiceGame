@@ -46,7 +46,7 @@ public class AreaDmg : MonoBehaviour
         {
             if (plyM.GetAtkState() == "Partir" && plyStats.actualWeapon == "sword")
             {
-                dmg = Random.Range((int)(plyStats.GetStrenght() * 1.2f), (int)(plyStats.GetStrenght() * 1.6f));
+                dmg = Random.Range((int)(plyStats.GetStrenght() * 0.9f), (int)(plyStats.GetStrenght() * 1.7f));
             }
             else if (plyM.GetAtkState() == "Partir" && plyStats.actualWeapon == "axe")
             {

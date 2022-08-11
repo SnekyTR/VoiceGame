@@ -45,7 +45,7 @@ namespace DigitalRuby.PyroParticles
             }
             else if (plyM.GetAtkState() == "Bola de fuego")
             {
-                dmg = Random.Range((int)(plyStats.GetIntellect() * 1.5f), (int)(plyStats.GetIntellect() * 2.2f));
+                dmg = Random.Range((int)(plyStats.GetIntellect() * 1.3f), (int)(plyStats.GetIntellect() * 1.9f));
             }
             else if(plyM.GetAtkState() == "Lluvia de flechas")
             {
