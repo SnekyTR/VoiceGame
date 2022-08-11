@@ -13952,11 +13952,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: atkValue
-      value: 12
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: lifeValue
-      value: 30
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: energyActions
@@ -29689,7 +29689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: lifeValue
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986497, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: m_Size.x
@@ -31377,11 +31377,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: atkValue
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: lifeValue
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986497, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: m_Size.x
