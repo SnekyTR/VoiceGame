@@ -102,8 +102,11 @@ public class SpiderAI : MonoBehaviour
             newPos.y += 1;
             Vector3 newDir = target.position - transform.position;
             if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
+            {
 
-            if (Vector3.Distance(transform.position, target.position) < enemyStats.GetRange() && enemyStats.GetEnergyActions() >= 2 && hit.transform.tag == "Player")
+            }
+
+            if (Vector3.Distance(transform.position, target.position) <= enemyStats.GetRange() && enemyStats.GetEnergyActions() >= 2 && hit.transform.tag == "Player")
             {
                 if (target.GetComponent<PlayerStats>().GetLife() > 0)
                 {
@@ -137,6 +140,7 @@ public class SpiderAI : MonoBehaviour
                 enemyStats.SetEnergy(-energy);
 
                 enemyNM.isStopped = false;
+
 
                 enemyNM.SetDestination(casillas[destiny].position);
                 animator.SetInteger("A_Movement", 1);
@@ -208,7 +212,7 @@ public class SpiderAI : MonoBehaviour
         {
             if ((Vector3.Distance(transform.position, casillas[i].position) / 2) <= enemyStats.GetEnergy())
             {
-                if (Vector3.Distance(target.position, casillas[i].position) <= enemyStats.GetRange() && !casillas[i].GetComponent<SectionControl>().isOcuped
+                if (Vector3.Distance(target.position, casillas[i].position) < (enemyStats.GetRange() - 0.2f) && !casillas[i].GetComponent<SectionControl>().isOcuped
                     && Vector3.Distance(transform.position, casillas[i].position) <= dis1)
                 {
                     RaycastHit hit;
@@ -221,6 +225,8 @@ public class SpiderAI : MonoBehaviour
                         {
                             ps = i;
                             dis1 = Vector3.Distance(transform.position, casillas[i].position);
+
+                            print("hi1");
                         }
                     }
                 }
@@ -228,6 +234,8 @@ public class SpiderAI : MonoBehaviour
                 {
                     ps = i;
                     dis2 = Vector3.Distance(target.position, casillas[i].position);
+
+                    print("hi2");
                 }
             }
         }

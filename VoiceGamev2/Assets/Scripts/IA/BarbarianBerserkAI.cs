@@ -256,7 +256,7 @@ public class BarbarianBerserkAI : MonoBehaviour
         {
             if ((Vector3.Distance(transform.position, casillas[i].position) / 2) <= enemyStats.GetEnergy())
             {
-                if (Vector3.Distance(target.position, casillas[i].position) <= enemyStats.GetRange() && !casillas[i].GetComponent<SectionControl>().isOcuped
+                if (Vector3.Distance(target.position, casillas[i].position) <= (enemyStats.GetRange() - 0.2f) && !casillas[i].GetComponent<SectionControl>().isOcuped
                     && Vector3.Distance(transform.position, casillas[i].position) <= dis1)
                 {
                     RaycastHit hit;
