@@ -225,6 +225,7 @@ public class PlayerStats : MonoBehaviour
             else
             {
                 selected.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = (shieldValue).ToString();
+                structure.transform.GetChild(2).GetComponent<Image>().fillAmount = (shieldValue / maxShield);
 
                 animator.SetInteger("A_Recieve", 1);
 
@@ -404,6 +405,8 @@ public class PlayerStats : MonoBehaviour
             Vector3 newPos = transform.position;
             newPos.y += 1;
             poisonPrefab = Instantiate(poisonFx, newPos, transform.rotation);
+
+            poisonPrefab.transform.SetParent(transform);
 
             selected.transform.GetChild(3).gameObject.SetActive(true);
             structure.transform.GetChild(5).gameObject.SetActive(true);

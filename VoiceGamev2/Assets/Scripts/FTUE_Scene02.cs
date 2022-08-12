@@ -85,7 +85,7 @@ public class FTUE_Scene02 : MonoBehaviour
 
     private void Part03()
     {
-        if (Vector3.Distance(gameM.enemys[0].transform.position, gameM.playerParent.position) <= 3)
+        if (Vector3.Distance(gameM.enemys[0].transform.position, gameM.playerParent.position) <= 3 && gameM.whoTurn)
         {
             p3 = false;
 

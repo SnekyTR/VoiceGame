@@ -18,6 +18,8 @@ public class BarbarianMageAI : MonoBehaviour
     private bool isBuffed;
     private bool heavyAtk;
 
+    public GameObject tpFX;
+
     int mask;
 
     void Start()
@@ -135,8 +137,7 @@ public class BarbarianMageAI : MonoBehaviour
 
                 enemyStats.SetEnergy(-energy);
 
-                transform.position = casillas[destiny].position;
-                StartCoroutine(StartRoute());
+                StartCoroutine(StartRoute(destiny));
             }
             else
             {
@@ -217,8 +218,7 @@ public class BarbarianMageAI : MonoBehaviour
                     return;
                 }
 
-                transform.position = casillas[destiny].position;
-                StartCoroutine(StartRoute());
+                StartCoroutine(StartRoute(destiny));
             }
             else
             {
@@ -233,14 +233,16 @@ public class BarbarianMageAI : MonoBehaviour
 
     private int RandomPlayerPiece()
     {
-        float dis = 10000;
+        float dis1 = 10000;
+        float dis2 = 10000;
         int ps = 0;
 
         for (int i = 0; i < casillas.Count; i++)
         {
             if ((Vector3.Distance(transform.position, casillas[i].position) / 2) <= enemyStats.GetEnergy())
             {
-                if (Vector3.Distance(target.position, casillas[i].position) <= dis && !casillas[i].GetComponent<SectionControl>().isOcuped)
+                if (Vector3.Distance(target.position, casillas[i].position) <= enemyStats.GetRange() && !casillas[i].GetComponent<SectionControl>().isOcuped
+                    && Vector3.Distance(transform.position, casillas[i].position) <= dis1)
                 {
                     RaycastHit hit;
                     Vector3 newPos = casillas[i].position;
@@ -251,9 +253,14 @@ public class BarbarianMageAI : MonoBehaviour
                         if (hit.transform.tag == "Player")
                         {
                             ps = i;
-                            dis = Vector3.Distance(target.position, casillas[i].position);
+                            dis1 = Vector3.Distance(transform.position, casillas[i].position);
                         }
                     }
+                }
+                else if (!casillas[i].GetComponent<SectionControl>().isOcuped && Vector3.Distance(target.position, casillas[i].position) <= dis2)
+                {
+                    ps = i;
+                    dis2 = Vector3.Distance(target.position, casillas[i].position);
                 }
             }
         }
@@ -261,8 +268,19 @@ public class BarbarianMageAI : MonoBehaviour
         return ps;
     }
 
-    private IEnumerator StartRoute()
+    private IEnumerator StartRoute(int i)
     {
+        yield return new WaitForSeconds(0.4f);
+        animator.SetInteger("A_AutoBuff", 1);
+
+        yield return new WaitForSeconds(0.5f);
+        animator.SetInteger("A_AutoBuff", 0);
+        yield return new WaitForSeconds(0.4f);
+        Destroy(Instantiate(tpFX, transform.position, transform.rotation), 1.5f);
+
+        yield return new WaitForSeconds(0.3f);
+        transform.position = casillas[i].position;
+
         yield return new WaitForSeconds(1f);
         isOnRoute = true;
     }
