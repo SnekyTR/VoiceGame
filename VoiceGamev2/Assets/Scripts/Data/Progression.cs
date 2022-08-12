@@ -37,7 +37,7 @@ public class Progression : MonoBehaviour
     bool isTheSame = false;
     bool newWeap;
     GameSave gameSave;
-    VoiceDestinations voices;
+    [SerializeField]VoiceDestinations voices;
     MoveDataToMain moveDataToMain;
 
     LevelSystem level;
@@ -82,17 +82,28 @@ public class Progression : MonoBehaviour
     {
         if (progression >= 1)
         {
+            fTUE_Progresion.LoadFTUEProgresion();
+            print("Ha entrado en check Progresion");
             //Destroy(combat1);
             //combat2.SetActive(false);
             if(fTUE_Progresion.ftueProgression == 0)
             {
-                fTUE_Progresion.LoadFTUEProgresion();
+                
                 fTUE_Progresion.FTUEProgression();
-            }else if(fTUE_Progresion.ftueProgression < 7)
+            }else if(fTUE_Progresion.ftueProgression > 0)
             {
-                fTUE_Progresion.ReloadFTUE();
+                print("Es mayor a 0");
+                if (fTUE_Progresion.ftueProgression < 7)
+                {
+                    fTUE_Progresion.ReloadFTUE(); print("Es menor a 7");
+                    return;
+                }
+                else
+                {
+                    voices.mapDestinations.Start();
+                }
             }
-            if(progression >= 2)
+            if(progression >= 1)
             {
                 
                 for(int i = 0; i < inventory.actualWeapons.Count; i++)
@@ -112,22 +123,21 @@ public class Progression : MonoBehaviour
                     newWeap = true;
                 }
                 
-                combat2.SetActive(false);
+                
                 player.GetComponent<VoiceDestinations>().entered = false;
                 singlePanel.SetActive(false);
                 restAnimator.SetFloat("anim", 1);
-
-
-                if (progression >= 3)
+                print("Rested Anim");
+                if (progression >= 2)
                 {
                     isTheSame = false;
                     
                     print("Se activa vastion anum");
-                    combat3.SetActive(false);
+                    combat2.SetActive(false);
                     restAnimator.SetFloat("anim", 0);
                     bastionAnimator.SetFloat("anim", 1);
                     //vagnar.SetActive(true);
-                    if (progression >= 4)
+                    if (progression >= 3)
                     {
                         for (int i = 0; i < inventory.actualWeapons.Count; i++)
                         {
@@ -149,19 +159,19 @@ public class Progression : MonoBehaviour
                         //p2Interface.SetActive(true);
                         //p2.SetActive(true);
                         vagnar.GetComponent<GeneralStats>().PlayerActivation();
-                        combat4.SetActive(false);
-                        if (progression >= 5)
+                        combat3.SetActive(false);
+                        if (progression >= 4)
                         {
                             forestAnimator.SetFloat("anim", 0);
-                            combat5.SetActive(false);
-                            if (progression >= 6)
+                            combat4.SetActive(false);
+                            if (progression >= 5)
                             {
-                                combat6.SetActive(false);
-                                if (progression >= 7)
+                                combat5.SetActive(false);
+                                if (progression >= 6)
                                 {
                                     p3Interface.SetActive(true);
                                     p3.SetActive(true);
-                                    combat7.SetActive(false);
+                                    combat6.SetActive(false);
 
                                 }
                             }
@@ -182,6 +192,11 @@ public class Progression : MonoBehaviour
         expText1.text = "+" + xp + " XP";
         expText2.text = "+" + xp + " XP";
         expText3.text = "+" + xp + " XP";
+        if(fTUE_Progresion.ftueProgression == 0)
+        {
+            fTUE_Progresion.ftueProgression = 1;
+            gameSave.SaveGame();
+        }
     }
     IEnumerator IncrementTheProgression()
     {

@@ -17,14 +17,20 @@ public class VoiceDestinations : MonoBehaviour
     public bool entered = false;
     [SerializeField] private NavMeshAgent agent;
     private Dictionary<string, Action> mapActions = new Dictionary<string, Action>();
-    private KeywordRecognizer mapDestinations;
+    public KeywordRecognizer mapDestinations;
     private BoxCollider boxCollider;
+    private UIMovement uIMovement;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        AddDestinations();
+    }
     void Start()
     {
         boxCollider = gameObject.GetComponent<BoxCollider>();
         agent = gameObject.GetComponent<NavMeshAgent>();
-        AddDestinations();
+        uIMovement = GameObject.Find("Canvas").GetComponent<UIMovement>();
+        
     }
 
     // Update is called once per frame
@@ -41,7 +47,6 @@ public class VoiceDestinations : MonoBehaviour
         mapActions.Add("bosque de los aullidos", SelectDestination);
         mapDestinations = new KeywordRecognizer(mapActions.Keys.ToArray());
         mapDestinations.OnPhraseRecognized += RecognizedVoice;
-        mapDestinations.Start();
     }
     public void CloseDestinations()
     {
@@ -66,6 +71,7 @@ public class VoiceDestinations : MonoBehaviour
     }
     private void SelectDestination()
     {
+        if (uIMovement.inOptions) return;
         objectTransform = GameObject.Find(selectedLocation).transform;
         boxCollider.enabled = true;
         //combatEnter.www();

@@ -18,6 +18,7 @@ public class D_Cinematica : MonoBehaviour
     private Transform vagnar;
     private Canvas canvas;
     private BoxCollider box;
+    private bool entered;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +36,9 @@ public class D_Cinematica : MonoBehaviour
         canvas.enabled = false;
         box.isTrigger = false;
 
+
         StartCoroutine(Talk());
-        //0 1 6
+        // 0 1 6
         // 15 -180 0
     }
 
@@ -45,15 +47,23 @@ public class D_Cinematica : MonoBehaviour
     {
         if ((Vector3.Distance(magnus.position, magnusDest.position)) <= 0.4f)
         {
-            magnusAnim.SetInteger("A_Run", 0);
-            magnus.LookAt(Esqueleto.position);
-            //StartCoroutine(Withdraw());
+            if (!entered)
+            {
+                magnusAnim.SetInteger("A_Run", 0);
+                magnus.LookAt(Esqueleto.position);
+                //StartCoroutine(Withdraw());
+            }
+
         }
         if ((Vector3.Distance(vagnar.position, vagnarDest.position)) <= 0.4f)
         {
-            vagnarAnim.SetInteger("A_Run", 0);
-            vagnar.LookAt(araña.position);
-            //StartCoroutine(Withdraw());
+            if (!entered)
+            {
+                vagnarAnim.SetInteger("A_Run", 0);
+                vagnar.LookAt(araña.position);
+                //StartCoroutine(Withdraw());
+            }
+
         }
     }
     public void Nod()

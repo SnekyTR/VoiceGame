@@ -12,7 +12,7 @@ public class UIMovement : MonoBehaviour
     private Dictionary<string, Action> firstCanvasLvl = new Dictionary<string, Action>();
     public KeywordRecognizer firstCanvas;
     private Dictionary<string, Action> partyInf = new Dictionary<string, Action>();
-    private KeywordRecognizer party;
+    public KeywordRecognizer party;
     private Dictionary<string, Action> charInf = new Dictionary<string, Action>();
     private KeywordRecognizer character;
     private Dictionary<string, Action> optionsOrders = new Dictionary<string, Action>();
@@ -20,6 +20,7 @@ public class UIMovement : MonoBehaviour
     private Dictionary<string, Action> inventoryOptions = new Dictionary<string, Action>();
     private KeywordRecognizer inventory;
     private PlayableDirector timeLine;
+    public bool inOptions;
     [SerializeField] private PartyInformation partyInformation;
     [SerializeField] private Character_skills character_Skills;
     [SerializeField] private IncreaseStats increaseStats;
@@ -34,6 +35,7 @@ public class UIMovement : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textSave;
     [SerializeField] private GameObject skillsZone;
     [SerializeField] private GameObject inventoryZone;
+    [SerializeField] private VoiceDestinations voiceDestinations;
 
     [SerializeField] private GameObject mainHelpPannel;
     [SerializeField] private GameSave gameSave;
@@ -89,7 +91,7 @@ public class UIMovement : MonoBehaviour
         inventoryOptions.Add("imventario", ActivateInventoryAnimation);
         inventory = new KeywordRecognizer(inventoryOptions.Keys.ToArray());
         inventory.OnPhraseRecognized += RecognizedInventory;
-        inventory.Start();
+        //inventory.Start();
     }
     private void OptionsOrders()
     {
@@ -102,6 +104,7 @@ public class UIMovement : MonoBehaviour
 
     private void LoadCharacter()
     {
+        if (inOptions) return;
         party.Stop();
         characterPannel.SetActive(true);
         GameObject actualCharacter = GameObject.Find(charSelected);
@@ -198,8 +201,10 @@ public class UIMovement : MonoBehaviour
     }
     private void ActivatePartyInformation()
     {
+        if (inOptions) return;
         if (canOpenGroup)
         {
+            voiceDestinations.mapDestinations.Stop();
             partyPannel.SetActive(true);
             party.Start();
             if (fTUE_Progresion.ftueProgression == 1)
@@ -222,6 +227,8 @@ public class UIMovement : MonoBehaviour
         }
         else if(partyPannel.activeInHierarchy)
         {
+            voiceDestinations.mapDestinations.Start();
+            firstCanvas.Start();
             partyPannel.SetActive(false);
             party.Stop();
             if (fTUE_Progresion.ftueProgression == 5)
@@ -233,7 +240,8 @@ public class UIMovement : MonoBehaviour
         }else if (victoryResult.activeInHierarchy)
         {
             victoryResult.SetActive(false);
-            if (fTUE_Progresion.ftueProgression == 0)
+            voiceDestinations.mapDestinations.Start();
+            if (fTUE_Progresion.ftueProgression == 0 || fTUE_Progresion.ftueProgression == 1)
             {
                 fTUE_Progresion.pannel1.SetActive(false);
                 timeLine.Play();
@@ -244,6 +252,7 @@ public class UIMovement : MonoBehaviour
         else if(optionsPannel.activeInHierarchy){
             optionsPannel.SetActive(false);
             optionsRecognizer.Stop();
+            inOptions = false;
             canOpenGroup = true;
         }
         

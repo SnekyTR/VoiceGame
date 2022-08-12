@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.Windows.Speech;
 
@@ -23,14 +24,16 @@ public class FTUE_Progresion : MonoBehaviour
     [SerializeField] private GameObject pannel6;
     [SerializeField] private GameObject pannel7;
     public GameObject downButtons;
-    private UIMovement uIMovement;
+    private PlayableDirector timeLine;
+    [SerializeField] private UIMovement uIMovement;
+    [SerializeField]private GameSave gameSave;
     private void Awake()
     {
 
     }
     void Start()
     {
-        uIMovement = GetComponent<UIMovement>();
+        
     }
     public void LoadFTUEProgresion()
     {
@@ -40,12 +43,18 @@ public class FTUE_Progresion : MonoBehaviour
     }
     public void ReloadFTUE()
     {
-        switch (ftueProgression)
+        print("se ha hecho reload");
+        pannel2.SetActive(true);
+        /*switch (ftueProgression)
         {
             case 1:
                 pannel2.SetActive(true);
+                uIMovement.firstCanvas.Start();
                 break;
             case 2:
+                pannel2.SetActive(false);
+                pannel3.SetActive(true);
+                uIMovement.party.Start();
                 break;
             case 3:
                 break;
@@ -57,7 +66,7 @@ public class FTUE_Progresion : MonoBehaviour
                 break;
             case 7:
                 break;
-        }
+        }*/
     }
     public void AfterTimeLine()
     {
@@ -107,7 +116,7 @@ public class FTUE_Progresion : MonoBehaviour
         else if (ftueProgression == 7)
         {
             pannel7.SetActive(false);
-            
+            gameSave.SaveGame();
         }
     }
     IEnumerator ActivateTimer()

@@ -13,6 +13,7 @@ public class C_Cinematic : MonoBehaviour
     [SerializeField] private GameObject sword;
     [SerializeField] private GameObject swordHip;
     private Canvas canvas;
+    private bool entered;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,8 +33,13 @@ public class C_Cinematic : MonoBehaviour
     {
         if ((Vector3.Distance(player.position, dest1.position)) <= 0.5f)
         {
-            animator.SetInteger("A_Cwalk", 0);
-            //StartCoroutine(Withdraw());
+            if (!entered)
+            {
+                entered = true;
+                animator.SetInteger("A_Cwalk", 0);
+                //StartCoroutine(Withdraw());
+            }
+
         }
     }
     private void StartWalking()

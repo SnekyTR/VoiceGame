@@ -114,7 +114,11 @@ public class IncreaseStats : MonoBehaviour
         level.amountOfLvl--;
         statOrders.Stop();
         character_Skills.amountofLvl.text = "Puntos restantes: " + level.amountOfLvl.ToString();
-        gameSave.SaveGame();
+        if(fTUE_Progresion.ftueProgression != 3)
+        {
+            gameSave.SaveGame();
+        }
+        
 
     }
 }

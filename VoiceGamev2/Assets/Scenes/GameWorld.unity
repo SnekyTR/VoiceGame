@@ -5110,7 +5110,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -9.999939, y: 0}
+  m_AnchoredPosition: {x: -10, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &474596798
@@ -8035,6 +8035,7 @@ MonoBehaviour:
   expText1: {fileID: 493275135}
   expText2: {fileID: 1536882374}
   expText3: {fileID: 365076888}
+  voices: {fileID: 344659056}
   totalEXP: 0
   fromVictory: 0
 --- !u!1 &661419656 stripped
@@ -26226,6 +26227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a266f1abca8974648aff824a207c28f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inOptions: 0
   partyInformation: {fileID: 1999643698456566913}
   character_Skills: {fileID: 1999643696878407513}
   increaseStats: {fileID: 1999643698823904403}
@@ -26239,6 +26241,7 @@ MonoBehaviour:
   textSave: {fileID: 1415890137}
   skillsZone: {fileID: 1999643696878407495}
   inventoryZone: {fileID: 1666316006}
+  voiceDestinations: {fileID: 344659056}
   mainHelpPannel: {fileID: 375705107}
   gameSave: {fileID: 645889366}
   canOpenGroup: 0
@@ -26267,6 +26270,8 @@ MonoBehaviour:
   pannel6: {fileID: 940508070}
   pannel7: {fileID: 155826092}
   downButtons: {fileID: 200009539}
+  uIMovement: {fileID: 2003819489}
+  gameSave: {fileID: 645889366}
 --- !u!114 &2003819491
 MonoBehaviour:
   m_ObjectHideFlags: 0
