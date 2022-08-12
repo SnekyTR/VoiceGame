@@ -7567,8 +7567,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Esta es la opci\xF3n de Grupo, la cual te lleva visualizar los personajes
-    de tu grupo"
+  m_text: "Esta es la opci\xF3n de                           , la cual te lleva visualizar
+    los personajes de tu grupo"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: faa26c437fd6517478f170e67b3953b2, type: 2}
   m_sharedMaterial: {fileID: 7649214206849331385, guid: faa26c437fd6517478f170e67b3953b2, type: 2}
@@ -15899,7 +15899,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '                    Nombre del Destino'
+  m_text: '                    Reposo del Gigante'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: faa26c437fd6517478f170e67b3953b2, type: 2}
   m_sharedMaterial: {fileID: 7649214206849331385, guid: faa26c437fd6517478f170e67b3953b2, type: 2}
@@ -22254,7 +22254,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.4, y: 26.258701}
+  m_AnchoredPosition: {x: 40.7, y: 26.258701}
   m_SizeDelta: {x: 38.009, y: 27.677}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1678129826
