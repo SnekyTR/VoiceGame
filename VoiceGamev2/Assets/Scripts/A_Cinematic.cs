@@ -25,13 +25,21 @@ public class A_Cinematic : MonoBehaviour
         cameraFollow = GameObject.Find("GameManager").GetComponent<CameraFollow>();
         canvas = GameObject.Find("CanvasManager").GetComponent<Canvas>();
         canvas.enabled = false;
-        sword.SetActive(false);
+        
         StartWalking();
     }
     public void StartWalking()
     {
         navMesh.SetDestination(dest1.position);
+        
         animator.SetInteger("A_Walk", 1);
+        
+        StartCoroutine(sss());
+    }
+    IEnumerator sss()
+    {
+        yield return new WaitForSeconds(0.2f);
+        sword.SetActive(false);
     }
     private void Update()
     {
