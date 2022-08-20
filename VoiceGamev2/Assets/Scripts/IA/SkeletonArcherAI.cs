@@ -21,6 +21,8 @@ public class SkeletonArcherAI : MonoBehaviour
 
     int mask;
 
+    public GameObject bloodFx;
+
     private void Start()
     {
         gridA = GameObject.Find("RayCast").GetComponent<GridActivation>();
@@ -234,6 +236,11 @@ public class SkeletonArcherAI : MonoBehaviour
                 go.transform.position = Vector3.MoveTowards(go.transform.position, hit.transform.position, 0.5f);
                 Destroy(go);
                 target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
+
+                Vector3 pos = target.position;
+                pos.y += 1;
+
+                Destroy(Instantiate(bloodFx, pos, transform.rotation), 1.5f);
             }
         }
         enemyStats.SetEnergyAction(-2);

@@ -22,6 +22,8 @@ public class BarbarianBerserkAI : MonoBehaviour
 
     int mask;
 
+    public GameObject bloodFx;
+
     void Start()
     {
         gridA = GameObject.Find("RayCast").GetComponent<GridActivation>();
@@ -319,6 +321,11 @@ public class BarbarianBerserkAI : MonoBehaviour
                 {
                     target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
                 }
+
+                Vector3 pos = target.position;
+                pos.y += 1;
+
+                Destroy(Instantiate(bloodFx, pos, transform.rotation), 1.5f);
             }
         }
         enemyStats.SetEnergyAction(-2);
@@ -378,6 +385,11 @@ public class BarbarianBerserkAI : MonoBehaviour
             {
                 target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
                 target.GetComponent<PlayerStats>().StunPlayer(true);
+
+                Vector3 pos = target.position;
+                pos.y += 1;
+
+                Destroy(Instantiate(bloodFx, pos, transform.rotation), 1.5f);
             }
         }
         enemyStats.SetEnergyAction(-3);
@@ -408,6 +420,11 @@ public class BarbarianBerserkAI : MonoBehaviour
             if (hit.transform.tag == "Player")
             {
                 target.GetComponent<PlayerStats>().SetLife(-(enemyStats.GetAtk()* 2));
+
+                Vector3 pos = target.position;
+                pos.y += 1;
+
+                Destroy(Instantiate(bloodFx, pos, transform.rotation), 1.5f);
             }
         }
         enemyStats.SetEnergyAction(-5);

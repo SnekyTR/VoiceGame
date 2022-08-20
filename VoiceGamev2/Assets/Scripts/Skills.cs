@@ -524,11 +524,16 @@ public class Skills : MonoBehaviour
 
         if (isBlood)
         {
-            GameObject h = Instantiate(blood, plyMove.target.transform.position, transform.rotation);
+            if(plyMove.target.GetComponent<SkeletonArcherAI>() || plyMove.target.GetComponent<SkeletonGuardianAI>())
+            {
+
+            }
+            else
+            {
+                Destroy(Instantiate(blood, plyMove.target.transform.position, transform.rotation), 1.2f);
+            }
 
             yield return new WaitForSeconds(1.2f);
-
-            Destroy(h);
         }
 
         gameM.CameraPos1();

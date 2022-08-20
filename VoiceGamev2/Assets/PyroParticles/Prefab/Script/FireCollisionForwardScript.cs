@@ -34,8 +34,10 @@ namespace DigitalRuby.PyroParticles
         public void OnCollisionEnter(Collision col)
         {
             CollisionHandler.HandleCollision(gameObject, col);
+            if (col.transform.tag != "Enemy") return;
+            if (col.gameObject.GetComponent<EnemyStats>().inmunity) return;
 
-            if(plyM.GetAtkState() == "Lluvia de meteoritos")
+            if (plyM.GetAtkState() == "Lluvia de meteoritos")
             {
                 dmg = Random.Range((int)(plyStats.GetIntellect() * 0.4f), (int)(plyStats.GetIntellect() * 0.6f));
             }

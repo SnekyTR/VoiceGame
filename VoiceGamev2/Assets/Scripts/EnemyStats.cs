@@ -41,6 +41,9 @@ public class EnemyStats : MonoBehaviour
 
     public GameObject stunFX;
     private GameObject stunPrefab;
+    private List<GameObject> auraFX = new List<GameObject>();
+
+    [HideInInspector] public bool inmunity = false;
 
     void Start()
     {
@@ -66,10 +69,6 @@ public class EnemyStats : MonoBehaviour
         bars = intBars.transform.GetChild(1).gameObject;
 
         if (shieldValue > 0) NewShield(shieldValue);
-    }
-    void Update()
-    {
-        
     }
     public void SetLife(int n)
     {
@@ -108,12 +107,17 @@ public class EnemyStats : MonoBehaviour
             winLoose.totalEnemies--;
             animator.SetInteger("A_Death", 1);
             gameM.EliminateElement(this.gameObject);
-            GetComponent<NavMeshAgent>().enabled = false;
+            if(GetComponent<NavMeshAgent>()) GetComponent<NavMeshAgent>().enabled = false;
 
             intBars.transform.GetChild(0).gameObject.SetActive(false);
             intBars.transform.GetChild(1).gameObject.SetActive(false);
             StartCoroutine(DmgTxtAnim(n));
             Destroy(Instantiate(deathFX, transform.position, transform.rotation), 4);
+
+            for(int i = 0; i < auraFX.Count; i++)
+            {
+                Destroy(auraFX[i]);
+            }
         }
         else if (n < 0)                         //dmg recieve
         {
@@ -219,5 +223,10 @@ public class EnemyStats : MonoBehaviour
         maxShield = s;
 
         intBars.transform.GetChild(1).GetChild(4).GetComponent<Text>().text = (shieldValue).ToString();
+    }
+
+    public void AddAura(GameObject obj)
+    {
+        auraFX.Add(obj);
     }
 }

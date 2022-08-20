@@ -21,6 +21,7 @@ public class SpiderAI : MonoBehaviour
     int mask;
 
     public GameObject toxicFX;
+    public GameObject bloodFx;
 
     private void Start()
     {
@@ -186,6 +187,13 @@ public class SpiderAI : MonoBehaviour
                 target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
 
                 if (toxic) target.GetComponent<PlayerStats>().PoisonStart();
+                else
+                {
+                    Vector3 pos = target.position;
+                    pos.y += 1;
+
+                    Destroy(Instantiate(bloodFx, pos, transform.rotation), 1.5f);
+                }
             }
         }
         enemyStats.SetEnergyAction(-2);

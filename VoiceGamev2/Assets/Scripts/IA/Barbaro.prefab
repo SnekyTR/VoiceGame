@@ -11443,6 +11443,7 @@ MonoBehaviour:
   setTarget: 0
   captain: 1
   playerUseMagic: 0
+  bloodFx: {fileID: 4787146697146794734, guid: e9050f838eb01db44b8958e4d8266866, type: 3}
 --- !u!114 &5846514154055955192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11465,6 +11466,7 @@ MonoBehaviour:
   maxLife: 0
   maxShield: 0
   maxEnergy: 0
+  maxEnergyActions: 0
   canv: {fileID: 0}
   xp: 50
   intBars: {fileID: 6333252580401080991}
@@ -11472,6 +11474,7 @@ MonoBehaviour:
   deathFX: {fileID: 4397334591890123670, guid: b0159ffb3464ec5478e3f6e6ce51d561, type: 3}
   dmgTxt: {fileID: 2725558678743584906}
   stunFX: {fileID: 1500378020736912, guid: 2547a66872ebe45408ace228820a79e1, type: 3}
+  inmunity: 0
 --- !u!195 &5847727884346991392
 NavMeshAgent:
   m_ObjectHideFlags: 0

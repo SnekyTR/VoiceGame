@@ -1521,6 +1521,7 @@ MonoBehaviour:
   isOnRoute: 0
   setTarget: 0
   ShieldAport: 5
+  bloodFx: {fileID: 4787146697146794734, guid: e9050f838eb01db44b8958e4d8266866, type: 3}
 --- !u!114 &1912414069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1563,6 +1564,7 @@ MonoBehaviour:
   deathFX: {fileID: 4397334591890123670, guid: b0159ffb3464ec5478e3f6e6ce51d561, type: 3}
   dmgTxt: {fileID: 5397818289107988712}
   stunFX: {fileID: 1500378020736912, guid: 2547a66872ebe45408ace228820a79e1, type: 3}
+  inmunity: 0
 --- !u!195 &1912414071
 NavMeshAgent:
   m_ObjectHideFlags: 0

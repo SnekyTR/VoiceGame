@@ -47,6 +47,8 @@ public class AreaDmg : MonoBehaviour
             if (plyM.GetAtkState() == "Partir" && plyStats.actualWeapon == "sword")
             {
                 dmg = Random.Range((int)(plyStats.GetStrenght() * 0.9f), (int)(plyStats.GetStrenght() * 1.7f));
+
+                if (other.GetComponent<EnemyStats>().inmunity) return;
             }
             else if (plyM.GetAtkState() == "Partir" && plyStats.actualWeapon == "axe")
             {
@@ -54,6 +56,8 @@ public class AreaDmg : MonoBehaviour
             }
             else if (plyM.GetAtkState() == "Demacia" && plyStats.actualWeapon == "sword")
             {
+                if (other.GetComponent<EnemyStats>().inmunity) return;
+
                 dmg = Random.Range((int)(plyStats.GetStrenght() * 0.5f), (int)(plyStats.GetStrenght() * 0.8f));
                 other.gameObject.GetComponent<EnemyStats>().StunEnemy(true);
             }
@@ -72,6 +76,8 @@ public class AreaDmg : MonoBehaviour
             }
             else if (plyM.GetAtkState() == "Juicio final" && plyStats.actualWeapon == "sacred staff")
             {
+                if (other.GetComponent<EnemyStats>().inmunity) return;
+
                 Destroy(Instantiate(dust, plyM.target.transform.position, transform.rotation), 2);
 
                 dmg = Random.Range((int)(plyStats.GetIntellect() * 1.5f), (int)(plyStats.GetIntellect() * 2.5f));
@@ -89,7 +95,14 @@ public class AreaDmg : MonoBehaviour
                     {
                         gameM.enemys[i].GetComponent<EnemyStats>().SetLife(-dmg);
 
-                        Destroy(Instantiate(blood, gameM.enemys[i].transform.position, transform.rotation), 2);
+                        if (gameM.enemys[i].GetComponent<SkeletonArcherAI>() || gameM.enemys[i].GetComponent<SkeletonGuardianAI>())
+                        {
+
+                        }
+                        else
+                        {
+                            Destroy(Instantiate(blood, gameM.enemys[i].transform.position, transform.rotation), 2);
+                        }
                     }
                 }
 
@@ -104,7 +117,15 @@ public class AreaDmg : MonoBehaviour
             }
 
             other.gameObject.GetComponent<EnemyStats>().SetLife(-dmg);
-            bloods.Add(Instantiate(blood, other.transform.position, transform.rotation));
+
+            if (other.GetComponent<SkeletonArcherAI>() || other.GetComponent<SkeletonGuardianAI>())
+            {
+
+            }
+            else
+            {
+                bloods.Add(Instantiate(blood, other.transform.position, transform.rotation));
+            }
 
             if (plyM.GetAtkState() == "atk" && plyStats.actualWeapon == "fire staff") Destroy(this.gameObject);
             else if (plyM.GetAtkState() == "atk" && plyStats.actualWeapon == "sacred staff") Destroy(this.gameObject);

@@ -16,9 +16,11 @@ public class BarbarianMageAI : MonoBehaviour
     public bool captain;
     [HideInInspector] public bool playerUseMagic;
     private bool isBuffed;
-    private bool heavyAtk;
 
     public GameObject tpFX;
+    public GameObject magicAura;
+    public GameObject bullet;
+    public GameObject inmunityAura;
 
     int mask;
 
@@ -158,49 +160,22 @@ public class BarbarianMageAI : MonoBehaviour
             {
                 StartCoroutine(GiantForm());
             }
-            else if (heavyAtk && enemyStats.GetEnergyActions() >= 5)
+            else if (CheckAlliesLife() && enemyStats.GetEnergyActions() >= 3)
             {
-                StartCoroutine(HeavyAtk());
+                StartCoroutine(InmunityShield());
             }
             else if (Vector3.Distance(transform.position, target.position) < enemyStats.GetRange())
             {
                 if (target.GetComponent<PlayerStats>().GetLife() > 0)
                 {
-                    if (target.GetComponent<PlayerStats>().IsStunned())
-                    {
-                        if (enemyStats.GetEnergyActions() >= 2)
-                        {
-                            StartCoroutine(AttackAnim());
-                            heavyAtk = true;
-                        }
-                        else
-                        {
-                            heavyAtk = true;
-                            gameM.NextIA(GetComponent<StateManager>());
-                        }
-                    }
-                    else
-                    {
-                        int rnd = Random.Range(0, 2);
-
-                        if (rnd == 0)
-                        {
-                            if (enemyStats.GetEnergyActions() >= 3) StartCoroutine(GroundStun());
-                            else gameM.NextIA(GetComponent<StateManager>());
-                        }
-                        else
-                        {
-                            if (enemyStats.GetEnergyActions() >= 2) StartCoroutine(AttackAnim());
-                            else gameM.NextIA(GetComponent<StateManager>());
-                        }
-                    }
+                    StartCoroutine(AttackAnim());
                 }
                 else
                 {
                     StarIA();
                 }
             }
-            else if (Vector3.Distance(transform.position, target.position) > enemyStats.GetRange())
+            else if (Vector3.Distance(transform.position, target.position) > enemyStats.GetRange() && enemyStats.GetEnergyActions() >= 2)
             {
                 int destiny = RandomPlayerPiece();
 
@@ -295,31 +270,18 @@ public class BarbarianMageAI : MonoBehaviour
         gameM.CameraCinematic();
 
         animator.SetInteger("A_BasicAtk", 1);
+        yield return new WaitForSeconds(0.2f);
+        animator.SetInteger("A_BasicAtk", 0);
+        yield return new WaitForSeconds(0.3f);
+
+        GameObject obj = Instantiate(bullet, transform.position, transform.rotation);
+        obj.GetComponent<BulletDmg>().dmg = enemyStats.GetAtk();
+        obj.GetComponent<BulletDmg>().target = target;
+
         yield return new WaitForSeconds(0.6f);
 
-        RaycastHit hit;
-        Vector3 newPos = transform.position;
-        newPos.y += 1;
-        Vector3 newDir = target.position - transform.position;
-        if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
-        {
-            if (hit.transform.tag == "Player")
-            {
-                float pro = target.GetComponent<PlayerStats>().GetLife() / target.GetComponent<PlayerStats>().maxLife;
-
-                if (pro <= 0.35f)
-                {
-                    target.GetComponent<PlayerStats>().SetLife(-(int)(enemyStats.GetAtk() * 1.5));
-                }
-                else
-                {
-                    target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
-                }
-            }
-        }
         enemyStats.SetEnergyAction(-2);
-        if (heavyAtk) enemyStats.SetEnergyAction(-5);
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1f);
         setTarget = false;
         enemyStats.canv.EnemyC(true);
         if (playerUseMagic) StatesManager2();
@@ -330,18 +292,12 @@ public class BarbarianMageAI : MonoBehaviour
     {
         animator.SetInteger("A_AutoBuff", 1);
 
-        transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
         yield return new WaitForSeconds(0.3f);
         animator.SetInteger("A_AutoBuff", 0);
 
-        transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
-        yield return new WaitForSeconds(0.3f);
-        transform.localScale = new Vector3(1.15f, 1.15f, 1.15f);
-        yield return new WaitForSeconds(0.3f);
-        transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        yield return new WaitForSeconds(0.3f);
-        transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
-        yield return new WaitForSeconds(0.9f);
+        yield return new WaitForSeconds(1.2f);
+
+        GetComponent<EnemyStats>().AddAura(Instantiate(magicAura, transform.position, transform.rotation, transform));
 
         enemyStats.SetDmg((int)(enemyStats.GetAtk() * 1.2f));
         enemyStats.SetEnergyAction(-1);
@@ -349,70 +305,58 @@ public class BarbarianMageAI : MonoBehaviour
         isBuffed = true;
     }
 
-    private IEnumerator GroundStun()
+    private bool CheckAlliesLife()
     {
-        setTarget = true;
-        enemyStats.canv.EnemyC(false);
-        yield return new WaitForSeconds(0.8f);
-
-        enemyStats.canv.EnemyC(false);
-        gameM.CameraCinematic();
-
-        animator.SetInteger("A_JumpAtk", 1);
-        yield return new WaitForSeconds(0.6f);
-        animator.SetInteger("A_JumpAtk", 0);
-
-        yield return new WaitForSeconds(0.4f);
-
-        RaycastHit hit;
-        Vector3 newPos = transform.position;
-        newPos.y += 1;
-        Vector3 newDir = target.position - transform.position;
-        if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
+        for(int i = 0; i < gameM.enemys.Count; i++)
         {
-            if (hit.transform.tag == "Player")
+            float e = gameM.enemys[i].GetComponent<EnemyStats>().GetLife() / gameM.enemys[i].GetComponent<EnemyStats>().maxLife;
+
+            if (e <= 0.5f)
             {
-                target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
-                target.GetComponent<PlayerStats>().StunPlayer(true);
+                if (gameM.enemys[i].GetComponent<EnemyStats>().inmunity == true)
+                {
+
+                }
+                else return true;
             }
         }
-        enemyStats.SetEnergyAction(-3);
-        yield return new WaitForSeconds(0.8f);
-        setTarget = false;
-        enemyStats.canv.EnemyC(true);
-        StatesManager2();
+
+        return false;
     }
 
-    private IEnumerator HeavyAtk()
+    private IEnumerator InmunityShield()
     {
-        setTarget = true;
-        enemyStats.canv.EnemyC(false);
-        yield return new WaitForSeconds(0.8f);
-
-        enemyStats.canv.EnemyC(false);
-        gameM.CameraCinematic();
-
-        animator.SetInteger("A_BasicAtk", 1);
-        yield return new WaitForSeconds(0.6f);
-
-        RaycastHit hit;
-        Vector3 newPos = transform.position;
-        newPos.y += 1;
-        Vector3 newDir = target.position - transform.position;
-        if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
+        for (int i = 0; i < gameM.enemys.Count; i++)
         {
-            if (hit.transform.tag == "Player")
+            float e = gameM.enemys[i].GetComponent<EnemyStats>().GetLife() / gameM.enemys[i].GetComponent<EnemyStats>().maxLife;
+
+            if (e <= 0.5f)
             {
-                target.GetComponent<PlayerStats>().SetLife(-(enemyStats.GetAtk() * 2));
+                target = gameM.enemys[i].transform;
             }
         }
-        enemyStats.SetEnergyAction(-5);
-        yield return new WaitForSeconds(0.8f);
-        setTarget = false;
-        enemyStats.canv.EnemyC(true);
-        if (playerUseMagic) StatesManager2();
-        else StatesManager();
 
-        heavyAtk = false;
+        setTarget = true;
+
+        yield return new WaitForSeconds(0.6f);
+
+        animator.SetInteger("A_Shield", 1);
+
+        yield return new WaitForSeconds(0.2f);
+
+        animator.SetInteger("A_Shield", 0);
+
+        yield return new WaitForSeconds(1.2f);
+
+        setTarget = false;
+
+        target.GetComponent<EnemyStats>().inmunity = true;
+
+        target.GetComponent<EnemyStats>().AddAura(Instantiate(inmunityAura, target.transform.position, transform.rotation, target.transform));
+
+        yield return new WaitForSeconds(0.8f);
+
+        enemyStats.SetEnergyAction(-3);
+        StarIA();
     }
 }

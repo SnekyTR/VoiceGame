@@ -43,6 +43,10 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2293447318503262332, guid: 8811cf890c93bbd4a8db91a3922b033d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2749270887160428151, guid: 8811cf890c93bbd4a8db91a3922b033d, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.b
       value: 0.37647057
@@ -185,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8335445306240828094, guid: 8811cf890c93bbd4a8db91a3922b033d, type: 3}
       propertyPath: m_Name
-      value: PowerUp3
+      value: PowerUp3 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8335445306240828225, guid: 8811cf890c93bbd4a8db91a3922b033d, type: 3}
       propertyPath: m_RootOrder

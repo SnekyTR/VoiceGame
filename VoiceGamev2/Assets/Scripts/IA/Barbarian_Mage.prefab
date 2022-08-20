@@ -8406,8 +8406,8 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -8455,6 +8455,7 @@ MonoBehaviour:
   deathFX: {fileID: 4397334591890123670, guid: b0159ffb3464ec5478e3f6e6ce51d561, type: 3}
   dmgTxt: {fileID: 6761615699221477553}
   stunFX: {fileID: 1500378020736912, guid: 2547a66872ebe45408ace228820a79e1, type: 3}
+  inmunity: 0
 --- !u!114 &8531869958911382885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8484,6 +8485,9 @@ MonoBehaviour:
   captain: 0
   playerUseMagic: 0
   tpFX: {fileID: 7888857835762348946, guid: 84dab4a8cf751fc4181b5f09a6186c21, type: 3}
+  magicAura: {fileID: 8335445306240828094, guid: 8811cf890c93bbd4a8db91a3922b033d, type: 3}
+  bullet: {fileID: 3382560731246871838, guid: ecedbaee305a9a44bbc005e2b1f27588, type: 3}
+  inmunityAura: {fileID: 3317181204763069847, guid: 2282351327a43f1408ce53a6fc885c67, type: 3}
 --- !u!1 &8531879068023230841
 GameObject:
   m_ObjectHideFlags: 0

@@ -1630,6 +1630,7 @@ MonoBehaviour:
   deathFX: {fileID: 4397334591890123670, guid: b0159ffb3464ec5478e3f6e6ce51d561, type: 3}
   dmgTxt: {fileID: 66073005561761669}
   stunFX: {fileID: 1500378020736912, guid: 2547a66872ebe45408ace228820a79e1, type: 3}
+  inmunity: 0
 --- !u!114 &-7520687688447244144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1646,6 +1647,7 @@ MonoBehaviour:
   isOnRoute: 0
   setTarget: 0
   toxicFX: {fileID: 7025019999686932498, guid: 18a2e96bced3cad49b74e8a1f79b4183, type: 3}
+  bloodFx: {fileID: 4787146697146794734, guid: e9050f838eb01db44b8958e4d8266866, type: 3}
 --- !u!1 &6341894526521195372
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,8 @@ public class SkeletonGuardianAI : MonoBehaviour
     int mask;
     public int ShieldAport;
 
+    public GameObject bloodFx;
+
     void Start()
     {
         gridA = GameObject.Find("RayCast").GetComponent<GridActivation>();
@@ -168,6 +170,11 @@ public class SkeletonGuardianAI : MonoBehaviour
             if (hit.transform == target)
             {
                 target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
+
+                Vector3 pos = target.position;
+                pos.y += 1;
+
+                Destroy(Instantiate(bloodFx, pos, transform.rotation), 1.5f);
             }
         }
         enemyStats.SetEnergyAction(-2);
