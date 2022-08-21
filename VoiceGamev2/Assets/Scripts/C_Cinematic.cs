@@ -14,6 +14,7 @@ public class C_Cinematic : MonoBehaviour
     [SerializeField] private GameObject swordHip;
     private Canvas canvas;
     private bool entered;
+    private BoxCollider box;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,7 @@ public class C_Cinematic : MonoBehaviour
         cameraFollow = GameObject.Find("GameManager").GetComponent<CameraFollow>();
         canvas = GameObject.Find("CanvasManager").GetComponent<Canvas>();
         canvas.enabled = false;
+        box = GameObject.Find("MainCamera").GetComponent<BoxCollider>();
 
         StartWalking();
     }
@@ -51,6 +53,7 @@ public class C_Cinematic : MonoBehaviour
     {
         cameraFollow.selectPJCmdR.Start();
         canvas.enabled = true;
+        box.enabled = true;
     }
 
     IEnumerator OpenSequence()

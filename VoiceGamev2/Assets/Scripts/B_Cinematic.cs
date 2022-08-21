@@ -63,5 +63,6 @@ public class B_Cinematic : MonoBehaviour
         cameraFollow.selectPJCmdR.Start();
         canvas.enabled = true;
         FTUE.SetActive(true);
+        navMesh.speed = 4;
     }
 }

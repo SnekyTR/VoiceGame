@@ -310,7 +310,7 @@ public class SkillBook : MonoBehaviour
         return "";
     }
 
-    private string GetSkillName(string w, int i)
+    public string GetSkillName(string w, int i)
     {
         if (w == "sword" || w == "axe")
         {
