@@ -56,12 +56,16 @@ namespace DigitalRuby.PyroParticles
 
             crit = Random.Range(0, 100);
 
+            bool c = false;
+
             if (crit <= plyStats.criticProb)
             {
                 dmg = (int)(dmg * 1.5f);
+
+                c = true;
             }
 
-            if (col.transform.tag == "Enemy") col.gameObject.GetComponent<EnemyStats>().SetLife(-dmg);
+            if (col.transform.tag == "Enemy") col.gameObject.GetComponent<EnemyStats>().SetLife(-dmg, c);
 
             GetComponent<Rigidbody>().isKinematic = true;
         }

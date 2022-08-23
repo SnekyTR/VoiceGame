@@ -360,12 +360,16 @@ public class Skills : MonoBehaviour
 
             int crit = Random.Range(0, 100);
 
+            bool c = false;
+
             if(crit <= plyStats.criticProb)
             {
                 dmg = (int)(dmg * 1.5f);
+
+                c = true;
             }
 
-            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
+            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg, c);
         }
         else if (actualWeapon == weapons[1])
         {
@@ -384,7 +388,7 @@ public class Skills : MonoBehaviour
                 dmg = (int)(dmg * 1.5f);
             }
 
-            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
+            //plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
         }
         else if (actualWeapon == weapons[2])
         {
@@ -396,12 +400,16 @@ public class Skills : MonoBehaviour
 
             int crit = Random.Range(0, 100);
 
+            bool c = false;
+
             if (crit <= plyStats.criticProb)
             {
                 dmg = (int)(dmg * 1.5f);
+
+                c = true;
             }
 
-            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
+            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg, c);
         }
         else if (actualWeapon == weapons[3])
         {
@@ -467,7 +475,7 @@ public class Skills : MonoBehaviour
                     go.transform.parent = null;
                     go.transform.position = Vector3.MoveTowards(go.transform.position, hit.transform.position, 0.5f);
                     Destroy(go);
-                    hit.transform.GetComponent<EnemyStats>().SetLife(-dmg);
+                    //hit.transform.GetComponent<EnemyStats>().SetLife(-dmg);
                     Destroy(Instantiate(blood, plyMove.target.transform.position, transform.rotation), 2);
                     
                 }
@@ -948,15 +956,19 @@ public class Skills : MonoBehaviour
 
             int crit = Random.Range(0, 100);
 
+            bool c = false;
+
             if (crit <= plyStats.criticProb)
             {
                 dmg = (int)(dmg * 1.5f);
+
+                c = true;
             }
 
             int dmg2 = plyMove.target.GetComponent<EnemyStats>().GetShield();
             dmg = dmg + dmg2;
 
-            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
+            plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg,c);
         }
         else if(actualWeapon == weapons[3])
         {
@@ -1007,8 +1019,8 @@ public class Skills : MonoBehaviour
                     go.transform.parent = null;
                     go.transform.position = Vector3.MoveTowards(go.transform.position, hit.transform.position, 0.5f);
                     Destroy(go);
-                    hit.transform.GetComponent<EnemyStats>().SetLife(-dmg);
-                    plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
+                    //hit.transform.GetComponent<EnemyStats>().SetLife(-dmg);
+                    //plyMove.target.GetComponent<EnemyStats>().SetLife(-dmg);
                     Destroy(Instantiate(blood, plyMove.target.transform.position, transform.rotation), 2);
                 }
             }

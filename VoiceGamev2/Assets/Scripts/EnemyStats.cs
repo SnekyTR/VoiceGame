@@ -38,6 +38,7 @@ public class EnemyStats : MonoBehaviour
     public Transform cinemaCam;
     public GameObject deathFX;
     public Text dmgTxt;
+    public Color dmgColor;
 
     public GameObject stunFX;
     private GameObject stunPrefab;
@@ -68,10 +69,14 @@ public class EnemyStats : MonoBehaviour
 
         bars = intBars.transform.GetChild(1).gameObject;
 
+        intBars.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = atkValue.ToString();
+
         if (shieldValue > 0) NewShield(shieldValue);
     }
-    public void SetLife(int n)
+    public void SetLife(int n, bool t)
     {
+        StartCoroutine(DmgTxtAnim(n, t));
+
         if (shieldValue > 0 && n < 0)
         {
             shieldValue += n;
@@ -93,7 +98,6 @@ public class EnemyStats : MonoBehaviour
                 intBars.transform.GetChild(1).GetChild(4).GetComponent<Text>().text = (shieldValue).ToString();
 
                 animator.SetInteger("A_Recieve", 1);
-                StartCoroutine(DmgTxtAnim(n));
 
                 return;
             }
@@ -111,7 +115,6 @@ public class EnemyStats : MonoBehaviour
 
             intBars.transform.GetChild(0).gameObject.SetActive(false);
             intBars.transform.GetChild(1).gameObject.SetActive(false);
-            StartCoroutine(DmgTxtAnim(n));
             Destroy(Instantiate(deathFX, transform.position, transform.rotation), 4);
 
             for(int i = 0; i < auraFX.Count; i++)
@@ -122,7 +125,6 @@ public class EnemyStats : MonoBehaviour
         else if (n < 0)                         //dmg recieve
         {
             animator.SetInteger("A_Recieve", 1);
-            StartCoroutine(DmgTxtAnim(n));
         }
         
 
@@ -154,9 +156,20 @@ public class EnemyStats : MonoBehaviour
         return isStunned;
     }
 
-    private IEnumerator DmgTxtAnim(int i)
+    private IEnumerator DmgTxtAnim(int i, bool t)
     {
-        dmgTxt.text = i.ToString();
+        if (t)
+        {
+            dmgTxt.fontSize = 120;
+            dmgTxt.color = Color.white;
+            dmgTxt.text = i.ToString();
+        }
+        else
+        {
+            dmgTxt.fontSize = 80;
+            dmgTxt.color = dmgColor;
+            dmgTxt.text = i.ToString();
+        }
 
         yield return new WaitForSeconds(2f);
 

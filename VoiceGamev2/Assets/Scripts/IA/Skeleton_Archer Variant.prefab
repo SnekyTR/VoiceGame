@@ -61,6 +61,22 @@ PrefabInstance:
       propertyPath: enemy
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+      propertyPath: dmgColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+      propertyPath: dmgColor.b
+      value: 0.09411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+      propertyPath: dmgColor.g
+      value: 0.09411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+      propertyPath: dmgColor.r
+      value: 0.41568628
+      objectReference: {fileID: 0}
     - target: {fileID: 1434406646970229465, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
       propertyPath: m_IsActive
       value: 0

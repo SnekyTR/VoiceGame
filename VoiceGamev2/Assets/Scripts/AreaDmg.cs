@@ -84,16 +84,20 @@ public class AreaDmg : MonoBehaviour
 
                 crit = Random.Range(0, 100);
 
+                bool t = false;
+
                 if (crit <= plyStats.criticProb)
                 {
                     dmg = (int)(dmg * 1.5f);
+
+                    t = true;
                 }
 
-                for(int i = 0; i < gameM.enemys.Count; i++)
+                for (int i = 0; i < gameM.enemys.Count; i++)
                 {
                     if (Vector3.Distance(gameM.enemys[i].transform.position, plyM.target.transform.position) <= 5)
                     {
-                        gameM.enemys[i].GetComponent<EnemyStats>().SetLife(-dmg);
+                        gameM.enemys[i].GetComponent<EnemyStats>().SetLife(-dmg, t);
 
                         if (gameM.enemys[i].GetComponent<SkeletonArcherAI>() || gameM.enemys[i].GetComponent<SkeletonGuardianAI>())
                         {
@@ -111,12 +115,16 @@ public class AreaDmg : MonoBehaviour
 
             crit = Random.Range(0, 100);
 
+            bool c = false;
+
             if (crit <= plyStats.criticProb)
             {
                 dmg = (int)(dmg * 1.5f);
+
+                c = true;
             }
 
-            other.gameObject.GetComponent<EnemyStats>().SetLife(-dmg);
+            other.gameObject.GetComponent<EnemyStats>().SetLife(-dmg, c);
 
             if (other.GetComponent<SkeletonArcherAI>() || other.GetComponent<SkeletonGuardianAI>())
             {
