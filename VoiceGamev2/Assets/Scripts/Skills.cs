@@ -600,8 +600,16 @@ public class Skills : MonoBehaviour
             {
                 hamunTimer[i] -= 1;
 
-                skillHammun[i].GetChild(4).GetComponent<Image>().fillAmount = (hamunTimer[i]/hamunTimer2[i]);
-                skillHammun[i].GetChild(3).GetChild(0).GetComponent<Text>().text = hamunTimer[i].ToString();
+                if(hamunTimer[i] > 20)
+                {
+                    skillHammun[i].GetChild(4).GetComponent<Image>().fillAmount = 1;
+                    skillHammun[i].GetChild(3).GetChild(0).GetComponent<Text>().text = "-";
+                }
+                else
+                {
+                    skillHammun[i].GetChild(4).GetComponent<Image>().fillAmount = (hamunTimer[i] / hamunTimer2[i]);
+                    skillHammun[i].GetChild(3).GetChild(0).GetComponent<Text>().text = hamunTimer[i].ToString();
+                }
 
                 if (hamunTimer[i] == 0)
                 {

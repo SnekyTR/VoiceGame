@@ -197,6 +197,14 @@ public class CameraFollow : MonoBehaviour
             }
         }
 
+        if (moveLogic.allieSpell)
+        {
+
+            moveLogic.Allie(n);
+            moveLogic.allieSpell = false;
+            return;
+        }
+
         Transform actualPlayer = null;
         for(int i = 0; i < players.Count; i++)
         {
@@ -210,13 +218,6 @@ public class CameraFollow : MonoBehaviour
             {
                 return;
             }
-        }
-
-        if (moveLogic.allieSpell)
-        {
-            moveLogic.Allie(n);
-            moveLogic.allieSpell = false;
-            return;
         }
 
         if (skBook.isStarted)

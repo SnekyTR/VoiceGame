@@ -65,7 +65,7 @@ public class CombatTimer : MonoBehaviour
 
     public void EnemyFar()
     {
-        StartCoroutine(Red("Enemigo inválido"));
+        StartCoroutine(Red("Objetivo inválido"));
     }
 
     private IEnumerator Red(string e)

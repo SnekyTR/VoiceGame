@@ -232,6 +232,8 @@ public class BarbarianBerserkAI : MonoBehaviour
 
                 enemyStats.SetEnergy(-energy);
 
+                gridA.EnableAtkGrid(transform, enemyStats.GetEnergy() * 2);
+
                 enemyNM.isStopped = false;
                 enemyNM.SetDestination(casillas[destiny].position);
                 animator.SetInteger("A_Movement", 1);
@@ -303,31 +305,21 @@ public class BarbarianBerserkAI : MonoBehaviour
         animator.SetInteger("A_BasicAtk", 1);
         yield return new WaitForSeconds(0.6f);
 
-        RaycastHit hit;
-        Vector3 newPos = transform.position;
-        newPos.y += 1;
-        Vector3 newDir = target.position - transform.position;
-        if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
+        float pro = target.GetComponent<PlayerStats>().GetLife() / target.GetComponent<PlayerStats>().maxLife;
+
+        if (pro <= 0.35f)
         {
-            if (hit.transform.tag == "Player")
-            {
-                float pro = target.GetComponent<PlayerStats>().GetLife() / target.GetComponent<PlayerStats>().maxLife;
-
-                if (pro <= 0.35f)
-                {
-                    target.GetComponent<PlayerStats>().SetLife(-(int)(enemyStats.GetAtk() * 1.5));
-                }
-                else
-                {
-                    target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
-                }
-
-                Vector3 pos = target.position;
-                pos.y += 1;
-
-                Destroy(Instantiate(bloodFx, pos, transform.rotation), 1.5f);
-            }
+            target.GetComponent<PlayerStats>().SetLife(-(int)(enemyStats.GetAtk() * 1.5));
         }
+        else
+        {
+            target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
+        }
+
+        Vector3 pos = target.position;
+        pos.y += 1;
+
+        Destroy(Instantiate(bloodFx, pos, transform.rotation), 1.5f);
         enemyStats.SetEnergyAction(-2);
         if(heavyAtk) enemyStats.SetEnergyAction(-5);
         yield return new WaitForSeconds(0.8f);

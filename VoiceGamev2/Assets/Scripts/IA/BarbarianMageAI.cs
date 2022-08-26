@@ -22,10 +22,13 @@ public class BarbarianMageAI : MonoBehaviour
     public GameObject bullet;
     public GameObject inmunityAura;
 
+    private GridActivation gridA;
+
     int mask;
 
     void Start()
     {
+        gridA = GameObject.Find("RayCast").GetComponent<GridActivation>();
         casillas = GameObject.Find("RayCast").GetComponent<GridActivation>().casillas;
         enemyStats = GetComponent<EnemyStats>();
         enemyNM = GetComponent<NavMeshAgent>();
@@ -43,11 +46,11 @@ public class BarbarianMageAI : MonoBehaviour
     {
         if (isOnRoute)
         {
-            if (playerUseMagic) StatesManager2();
-            else StatesManager();
+            gridA.DisableAtkGrid();
             isOnRoute = false;
             //enemyNM.isStopped = true;
             animator.SetInteger("A_Movement", 0);
+            StarIA();
         }
 
         if (setTarget)
@@ -108,8 +111,25 @@ public class BarbarianMageAI : MonoBehaviour
     {
         if (enemyStats.GetEnergy() > 0 || enemyStats.GetEnergyActions() > 0)
         {
-            if (Vector3.Distance(transform.position, target.position) < enemyStats.GetRange() && enemyStats.GetEnergyActions() >= 2)
+            float dis = Vector3.Distance(transform.position, target.position);
+
+            RaycastHit hit;
+            Vector3 newPos = transform.position;
+            newPos.y += 1;
+            Vector3 newDir = target.position - transform.position;
+            if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
             {
+
+            }
+
+            if (Vector3.Distance(transform.position, target.position) <= enemyStats.GetRange() && hit.transform.tag == "Player")
+            {
+                if (enemyStats.GetEnergyActions() < 2)
+                {
+                    gameM.NextIA(GetComponent<StateManager>());
+                    return;
+                }
+
                 if (target.GetComponent<PlayerStats>().GetLife() > 0)
                 {
                     StartCoroutine(AttackAnim());
@@ -119,7 +139,7 @@ public class BarbarianMageAI : MonoBehaviour
                     StarIA();
                 }
             }
-            else if (Vector3.Distance(transform.position, target.position) > enemyStats.GetRange())
+            else
             {
                 int destiny = RandomPlayerPiece();
 
@@ -137,13 +157,11 @@ public class BarbarianMageAI : MonoBehaviour
                     return;
                 }
 
+                gridA.EnableAtkGrid(transform, enemyStats.GetEnergy() * 2);
+
                 enemyStats.SetEnergy(-energy);
 
                 StartCoroutine(StartRoute(destiny));
-            }
-            else
-            {
-                gameM.NextIA(GetComponent<StateManager>());
             }
         }
         else
@@ -156,6 +174,17 @@ public class BarbarianMageAI : MonoBehaviour
     {
         if (enemyStats.GetEnergy() > 0 || enemyStats.GetEnergyActions() > 0)
         {
+            float dis = Vector3.Distance(transform.position, target.position);
+
+            RaycastHit hit;
+            Vector3 newPos = transform.position;
+            newPos.y += 1;
+            Vector3 newDir = target.position - transform.position;
+            if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
+            {
+
+            }
+
             if (!isBuffed && enemyStats.GetEnergyActions() >= 1)
             {
                 StartCoroutine(GiantForm());
@@ -164,8 +193,14 @@ public class BarbarianMageAI : MonoBehaviour
             {
                 StartCoroutine(InmunityShield());
             }
-            else if (Vector3.Distance(transform.position, target.position) < enemyStats.GetRange())
+            else if (Vector3.Distance(transform.position, target.position) <= enemyStats.GetRange() && hit.transform.tag == "Player")
             {
+                if (enemyStats.GetEnergyActions() < 2)
+                {
+                    gameM.NextIA(GetComponent<StateManager>());
+                    return;
+                }
+
                 if (target.GetComponent<PlayerStats>().GetLife() > 0)
                 {
                     StartCoroutine(AttackAnim());
@@ -175,7 +210,7 @@ public class BarbarianMageAI : MonoBehaviour
                     StarIA();
                 }
             }
-            else if (Vector3.Distance(transform.position, target.position) > enemyStats.GetRange() && enemyStats.GetEnergyActions() >= 2)
+            else
             {
                 int destiny = RandomPlayerPiece();
 
@@ -193,11 +228,11 @@ public class BarbarianMageAI : MonoBehaviour
                     return;
                 }
 
+                gridA.EnableAtkGrid(transform, enemyStats.GetEnergy() * 2);
+
+                enemyStats.SetEnergy(-energy);
+
                 StartCoroutine(StartRoute(destiny));
-            }
-            else
-            {
-                gameM.NextIA(GetComponent<StateManager>());
             }
         }
         else
@@ -216,7 +251,7 @@ public class BarbarianMageAI : MonoBehaviour
         {
             if ((Vector3.Distance(transform.position, casillas[i].position) / 2) <= enemyStats.GetEnergy())
             {
-                if (Vector3.Distance(target.position, casillas[i].position) <= enemyStats.GetRange() && !casillas[i].GetComponent<SectionControl>().isOcuped
+                if (Vector3.Distance(target.position, casillas[i].position) < enemyStats.GetRange() && !casillas[i].GetComponent<SectionControl>().isOcuped
                     && Vector3.Distance(transform.position, casillas[i].position) <= dis1)
                 {
                     RaycastHit hit;
@@ -229,6 +264,11 @@ public class BarbarianMageAI : MonoBehaviour
                         {
                             ps = i;
                             dis1 = Vector3.Distance(transform.position, casillas[i].position);
+                        }
+                        else if (!casillas[i].GetComponent<SectionControl>().isOcuped && Vector3.Distance(target.position, casillas[i].position) <= dis2)
+                        {
+                            ps = i;
+                            dis2 = Vector3.Distance(target.position, casillas[i].position);
                         }
                     }
                 }
@@ -256,7 +296,7 @@ public class BarbarianMageAI : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         transform.position = casillas[i].position;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.2f);
         isOnRoute = true;
     }
 

@@ -455,7 +455,7 @@ public class PlayerMove : MonoBehaviour
 
             gameM.CameraPos2();
 
-            skill.ShowRangesAllie(skill.GetRanges(n));
+            if(n == "Curar") skill.ShowRangesAllie(skill.GetRanges(n));
             gridA.EnableAtkGrid(playerTr, skill.GetRanges(n));
             playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(true);
         }
@@ -551,6 +551,12 @@ public class PlayerMove : MonoBehaviour
                 target = null;
                 break;
             }
+        }
+
+        if (atkState == "Revivir" && GameObject.Find(n).GetComponent<PlayerStats>().GetLife() > 0)
+        {
+            timerC.EnemyFar();
+            return;
         }
 
         skill.UnShowRange();
