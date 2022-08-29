@@ -11,6 +11,8 @@ public class Skills : MonoBehaviour
     private PlayerMove plyMove;
     private CameraFollow gameM;
     private Animator plyAnim;
+    [SerializeField]
+    private HelpPannel helpPannel;
     private PlayerStats plyStats;
     private SkillsColocation skillCo;
     public AudioSource audioSource;
@@ -30,6 +32,7 @@ public class Skills : MonoBehaviour
     private List<float> vagnarTimer2 = new List<float>();
     private List<int> hamunTimer = new List<int>();
     private List<float> hamunTimer2 = new List<float>();
+    private CameraFollow cameraFollow;
 
     private string actualWeapon;
 
@@ -95,8 +98,10 @@ public class Skills : MonoBehaviour
         plyMove = GetComponent<PlayerMove>();
         gameM = GetComponent<CameraFollow>();
         skillCo = GameObject.Find("CanvasManager").GetComponent<SkillsColocation>();
+        helpPannel = skillCo.gameObject.GetComponent<HelpPannel>();
+        cameraFollow = GetComponent<CameraFollow>();
 
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             skillMagnus.Add(skillCo.GetSkillsMagnus()[i].parent);
             skillVagnar.Add(skillCo.GetSkillsVagnar()[i].parent);
@@ -638,7 +643,7 @@ public class Skills : MonoBehaviour
     public void SetSkillSelected(string n)      //remarca la skill seleccionada por el player
     {
         int f = 0;
-
+        helpPannel.AttackState();
         switch (n)
         {
             case "Partir":
