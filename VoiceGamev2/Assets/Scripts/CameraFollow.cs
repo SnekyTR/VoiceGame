@@ -17,6 +17,7 @@ public class CameraFollow : MonoBehaviour
     private List<string> playersNames = new List<string>();
     private PlayerMove moveLogic;
     private SkillBook skBook;
+    private HelpPannel helpPannel;
     private MultipleTargetCamera camS;
     private GameObject playerTurn, enemyTurn;
     private Transform cam;
@@ -34,7 +35,8 @@ public class CameraFollow : MonoBehaviour
     [HideInInspector] public bool selectPjActive, nextTurnActive, cancelActive, sbookActive;
 
     [HideInInspector] public bool playerUseMagic = false;
-
+    [HideInInspector]
+    public string actualPlayerSelection;
 
     private AudioSource audioSource;
     private void Awake()
@@ -51,6 +53,7 @@ public class CameraFollow : MonoBehaviour
 
         Transform ply = GameObject.Find("Players").transform;
         Transform cnv = GameObject.Find("CanvasManager").transform;
+        helpPannel = cnv.gameObject.GetComponent<HelpPannel>();
         skBook = cnv.GetComponent<SkillBook>();
 
         for (int i = 0; i < ply.childCount; i++)
@@ -211,6 +214,8 @@ public class CameraFollow : MonoBehaviour
             if(n == players[i].name)
             {
                 actualPlayer = players[i];
+                actualPlayerSelection = actualPlayer.name;
+                helpPannel.SelectedPlayer(actualPlayer.name);
                 GetComponent<Skills>().SetActualPlayer(actualPlayer.GetComponent<PlayerStats>());
                 break;
             }
@@ -444,6 +449,7 @@ public class CameraFollow : MonoBehaviour
     public void CancelOrder()
     {
         if (cancelRestriction) return;
+        helpPannel.SelectedPlayer(actualPlayerSelection);
         selectPjActive = false;
         nextTurnActive = false;
         cancelActive = true;

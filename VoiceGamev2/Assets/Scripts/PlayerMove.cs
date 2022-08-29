@@ -13,9 +13,12 @@ public class PlayerMove : MonoBehaviour
     //player
     private NavMeshAgent playerNM;
     private PlayerStats playerStats;
+    private CameraFollow cameraFollow;
     private Animator animator;
     private Transform playerTr;
     private CameraFollow gameM;
+    [SerializeField]
+    private HelpPannel helpPannel;
     public AudioSource audioSource;
     private Skills skill;
     [HideInInspector]public CombatTimer timerC;
@@ -66,7 +69,8 @@ public class PlayerMove : MonoBehaviour
         gridA = GameObject.Find("RayCast").GetComponent<GridActivation>();
         timerC = GameObject.Find("CanvasManager").GetComponent<CombatTimer>();
         audioSource = gameM.gameObject.GetComponent<AudioSource>();
-
+        helpPannel = timerC.gameObject.GetComponent<HelpPannel>();
+        cameraFollow = GetComponent<CameraFollow>();
         //select action
         startCmd.Add("mover", StartMove);
         startCmd.Add("muevete a", StartMove);
@@ -183,7 +187,6 @@ public class PlayerMove : MonoBehaviour
             spellCmdR.Start();
         }
     }
-
     public void PlayerDeselectAtkMove()
     {
         skill.UnShowRange();
@@ -393,7 +396,7 @@ public class PlayerMove : MonoBehaviour
     private void StartAttack()
     {
         if (atkRestriction) return;
-
+        helpPannel.AttackState();
         moveActive = false;
         atkActive = false;
         spellActive = false;
@@ -454,8 +457,8 @@ public class PlayerMove : MonoBehaviour
             allieSpell = true;
 
             gameM.CameraPos2();
-
-            if(n == "Curar") skill.ShowRangesAllie(skill.GetRanges(n));
+            if(n == "Revivir") helpPannel.ReviveState();
+            if (n == "Curar") skill.ShowRangesAllie(skill.GetRanges(n));
             gridA.EnableAtkGrid(playerTr, skill.GetRanges(n));
             playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(true);
         }
