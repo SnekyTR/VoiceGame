@@ -14,7 +14,7 @@ public class PlayerMove : MonoBehaviour
     private NavMeshAgent playerNM;
     private PlayerStats playerStats;
     private Animator animator;
-    private Transform playerTr;
+    [HideInInspector] public Transform playerTr;
     private CameraFollow gameM;
     public AudioSource audioSource;
     private Skills skill;

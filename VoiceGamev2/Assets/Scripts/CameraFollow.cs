@@ -505,8 +505,15 @@ public class CameraFollow : MonoBehaviour
 
             moveLogic.timerC.isPlaying = false;
 
+            GetComponent<Skills>().EliminateSkillSelection();
+            GetComponent<Skills>().UnShowRange();
+
             playerTurn.SetActive(false);
             enemyTurn.SetActive(true);
+
+            playerParent = null;
+            moveLogic.allieSpell = false;
+            moveLogic.playerTr = null;
         }
         else
         {
@@ -537,6 +544,7 @@ public class CameraFollow : MonoBehaviour
             {
                 if(Vector3.Distance(playerParent.position, enemys[i].transform.position) <= 20f) nw.Add(enemys[i].transform);
                 if (enemys[i].GetComponent<EnemyStats>().IsStunned()) enemys[i].GetComponent<EnemyStats>().StunEnemy(false);
+                if (enemys[i].GetComponent<EnemyStats>().IsOnFire()) enemys[i].GetComponent<EnemyStats>().FireDmg();
             }
 
             camS.enabled = true;

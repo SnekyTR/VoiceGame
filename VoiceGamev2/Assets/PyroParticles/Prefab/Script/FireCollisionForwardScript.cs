@@ -3,7 +3,6 @@ using System.Collections;
 
 namespace DigitalRuby.PyroParticles
 {
-
     public interface ICollisionHandler
     {
         void HandleCollision(GameObject obj, Collision c);
@@ -23,6 +22,8 @@ namespace DigitalRuby.PyroParticles
         private PlayerStats plyStats;
         int dmg;
         int crit;
+
+        public GameObject ringFire;
 
         public void Start()
         {
@@ -47,7 +48,13 @@ namespace DigitalRuby.PyroParticles
             }
             else if (plyM.GetAtkState() == "Bola de fuego")
             {
-                dmg = Random.Range((int)(plyStats.GetIntellect() * 1.3f), (int)(plyStats.GetIntellect() * 1.9f));
+                dmg = Random.Range((int)(plyStats.GetIntellect() * 0.8f), (int)(plyStats.GetIntellect() * 1.8f));
+
+                if (!col.gameObject.GetComponent<EnemyStats>().IsOnFire())
+                {
+                    Instantiate(ringFire, col.transform.position, col.transform.rotation, col.transform);
+                    col.gameObject.GetComponent<EnemyStats>().OnFire((int)(plyStats.GetIntellect() * 0.2f));
+                }
             }
             else if(plyM.GetAtkState() == "Lluvia de flechas")
             {

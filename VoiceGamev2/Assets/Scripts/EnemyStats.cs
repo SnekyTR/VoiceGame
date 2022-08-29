@@ -21,6 +21,8 @@ public class EnemyStats : MonoBehaviour
 
     private WinLoose winLoose;
     private bool isStunned;
+    private bool isOnFire = false;
+    private int fireDmg = 0;
 
     [HideInInspector] public float maxLife;
     [HideInInspector] public float maxShield;
@@ -241,5 +243,25 @@ public class EnemyStats : MonoBehaviour
     public void AddAura(GameObject obj)
     {
         auraFX.Add(obj);
+    }
+
+    public void OnFire(int e)
+    {
+        if (!isOnFire)
+        {
+            isOnFire = true;
+            fireDmg = e;
+        }
+    }
+
+    public void FireDmg()
+    {
+        if (fireDmg > 0) fireDmg *= -1;
+        SetLife(fireDmg, false);
+    }
+
+    public bool IsOnFire()
+    {
+        return isOnFire;
     }
 }

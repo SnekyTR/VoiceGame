@@ -80,7 +80,7 @@ public class AreaDmg : MonoBehaviour
 
                 Destroy(Instantiate(dust, plyM.target.transform.position, transform.rotation), 2);
 
-                dmg = Random.Range((int)(plyStats.GetIntellect() * 1.5f), (int)(plyStats.GetIntellect() * 2.5f));
+                dmg = Random.Range((int)(plyStats.GetIntellect() * 0.9f), (int)(plyStats.GetIntellect() * 2f));
 
                 crit = Random.Range(0, 100);
 
