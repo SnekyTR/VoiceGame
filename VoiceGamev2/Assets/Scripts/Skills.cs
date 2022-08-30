@@ -848,6 +848,11 @@ public class Skills : MonoBehaviour
 
                 skillHammun[1].GetChild(4).GetComponent<Image>().fillAmount = 1;
                 skillHammun[1].GetChild(3).GetChild(0).GetComponent<Text>().text = b.ToString();
+
+                if (b > 20)
+                {
+                    skillHammun[1].GetChild(3).GetChild(0).GetComponent<Text>().text = "-";
+                }
             }
             else
             {

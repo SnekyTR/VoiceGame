@@ -246,8 +246,17 @@ public class PlayerStats : MonoBehaviour
             audioSource.clip = characterSounds[0];
             audioSource.Play();
 
+            if(poisonPrefab != null) Destroy(poisonPrefab);
 
+            selected.transform.GetChild(3).gameObject.SetActive(false);
+            structure.transform.GetChild(5).gameObject.SetActive(false);
 
+            if (stunPrefab != null) Destroy(stunPrefab);
+
+            structure.transform.GetChild(3).gameObject.SetActive(false);
+
+            isStunned = false;
+            lifeValue = 0;
         }
         else if (n < 0)                         //dmg recieve
         {
@@ -309,7 +318,7 @@ public class PlayerStats : MonoBehaviour
         {
             Destroy(stunPrefab);
 
-            structure.transform.GetChild(3).gameObject.SetActive(true);
+            structure.transform.GetChild(3).gameObject.SetActive(false);
 
             isStunned = false;
         }
