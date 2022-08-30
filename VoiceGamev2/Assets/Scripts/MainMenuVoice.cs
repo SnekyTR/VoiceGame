@@ -76,11 +76,7 @@ public class MainMenuVoice : MonoBehaviour
         Debug.Log(speech.text);
         menuActions[speech.text].Invoke();
     }
-    IEnumerator caca()
-    {
-        yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(2);
-    }
+
     private void DeleteFiles()
     {
         //UnityEditor.FileUtil.DeleteFileOrDirectory(Application.persistentDataPath);
@@ -96,7 +92,7 @@ public class MainMenuVoice : MonoBehaviour
     {
         if (filesExist) { return; }
         CloseOrders();
-        loadingScreen.LoadScene(7);
+        loadingScreen.LoadScene(2);
        
     }
     private void ExitGame()
@@ -114,6 +110,7 @@ public class MainMenuVoice : MonoBehaviour
         zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, CreateNewGame);
         menuKeyword = new KeywordRecognizer(zero1.Keys.ToArray());
         menuKeyword.OnPhraseRecognized += RecognizedVoice;
+        print("Se han cerrado");
     }
 
 }

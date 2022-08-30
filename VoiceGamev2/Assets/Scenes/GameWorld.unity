@@ -2664,7 +2664,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -744, y: -147}
+  m_AnchoredPosition: {x: -744, y: -112}
   m_SizeDelta: {x: 195.02, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &228143777
@@ -23940,7 +23940,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: bef96f6b3e4985649a16650a444a7f90, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -26635,7 +26635,6 @@ MonoBehaviour:
   increaseStats: {fileID: 1999643698823904403}
   partyPannel: {fileID: 1999643698456566925}
   animatorSave: {fileID: 67573980}
-  inventoryAnimator: {fileID: 0}
   characterPannel: {fileID: 1999643697923373945}
   victoryResult: {fileID: 532953708}
   optionsPannel: {fileID: 1641281639}
@@ -26661,6 +26660,7 @@ MonoBehaviour:
   ftueProgression: 0
   pro: {fileID: 645889367}
   pannel1: {fileID: 699151365}
+  actualPlayer: 
   extrapannel: {fileID: 2077249984}
   pannel2: {fileID: 1113198908}
   pannel3: {fileID: 197625871}
@@ -26669,6 +26669,7 @@ MonoBehaviour:
   pannel6: {fileID: 940508070}
   pannel7: {fileID: 155826092}
   downButtons: {fileID: 200009539}
+  timeLine: {fileID: 0}
   uIMovement: {fileID: 2003819489}
   gameSave: {fileID: 645889366}
 --- !u!114 &2003819491

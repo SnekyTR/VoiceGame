@@ -7,6 +7,7 @@ public class GameProgressionData
 {
     public int progressionNumber;
     public int ftueProgressionNumber;
+    public string actualPlayer;
 
     //[SerializeField] FTUE_Progresion fTUE_Progresion;
 
@@ -16,6 +17,7 @@ public class GameProgressionData
     {
         progressionNumber = pro.progression;
         ftueProgressionNumber = fTUE_Progresion.ftueProgression;
+        actualPlayer = fTUE_Progresion.actualPlayer;
     }
     public void SummProgression(int incr)
     {

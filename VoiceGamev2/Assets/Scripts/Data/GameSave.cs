@@ -33,6 +33,7 @@ public class GameSave : MonoBehaviour
             SaveSystem.SavePlayer(general, level, trans);
         }
         SaveSystem.SaveProgression(pro,fTUE_Progresion);
+        print("Progresion saved");
     }
     public void LoadGame()
     {

@@ -17,7 +17,7 @@ public class UIMovement : MonoBehaviour
     private KeywordRecognizer character;
     private Dictionary<string, Action> optionsOrders = new Dictionary<string, Action>();
     private KeywordRecognizer optionsRecognizer;
-    private Dictionary<string, Action> inventoryOptions = new Dictionary<string, Action>();
+    //private Dictionary<string, Action> inventoryOptions = new Dictionary<string, Action>();
     //private KeywordRecognizer inventory;
     private PlayableDirector timeLine;
     public bool inOptions;
@@ -26,10 +26,10 @@ public class UIMovement : MonoBehaviour
     [SerializeField] private IncreaseStats increaseStats;
     //[SerializeField] private EquipObjects equipObjects;
 
-    [SerializeField] private GameObject partyPannel;
+    [SerializeField] public GameObject partyPannel;
     [SerializeField] private Animator animatorSave;
-    [SerializeField] private Animator inventoryAnimator;
-    [SerializeField] private GameObject characterPannel;
+    //[SerializeField] private Animator inventoryAnimator;
+    [SerializeField] public GameObject characterPannel;
     [SerializeField] private GameObject victoryResult;
     [SerializeField] private GameObject optionsPannel;
     [SerializeField] private TextMeshProUGUI textSave;
@@ -47,6 +47,14 @@ public class UIMovement : MonoBehaviour
 
     [SerializeField] private FTUE_Progresion fTUE_Progresion;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        
+        increaseStats.AddControls();
+        timeLine = GameObject.Find("TimeLine").GetComponent<PlayableDirector>();
+        openGroup = GameObject.Find("OpenGroup").GetComponent<PlayableDirector>();
+        closeGroup = GameObject.Find("CloseGroup").GetComponent<PlayableDirector>();
+    }
     void Start()
     {
         /*partyInformation = GameObject.Find("PartyInformation").GetComponent<PartyInformation>();
@@ -54,20 +62,12 @@ public class UIMovement : MonoBehaviour
         partyPannel = GameObject.Find("PartyInformation");
         characterPannel = GameObject.Find("CharacterInformation");*/
         //canOpenGroup = true;
-        timeLine = GameObject.Find("TimeLine").GetComponent<PlayableDirector>();
-        openGroup = GameObject.Find("OpenGroup").GetComponent<PlayableDirector>();
-        closeGroup = GameObject.Find("CloseGroup").GetComponent<PlayableDirector>();
-        AddFirstLvl();
-        AddPartyInf();
-        OptionsOrders();
         //AddInventory();
-        canOpenGroup = true;
-        increaseStats.AddControls();
     }
     private void Update()
     {
     }
-    private void AddFirstLvl()
+    public void AddFirstLvl()
     {
         firstCanvasLvl.Add("grupo", ActivatePartyInformation);
         firstCanvasLvl.Add("cerrar", CloseWindows);
@@ -77,7 +77,7 @@ public class UIMovement : MonoBehaviour
         firstCanvas.Start();
     }
     
-    private void AddPartyInf()
+    public void AddPartyInf()
     {
 
         for (int i = 0; i < partyInformation.players.Length; i++)
@@ -98,7 +98,7 @@ public class UIMovement : MonoBehaviour
         inventory.OnPhraseRecognized += RecognizedInventory;
         //inventory.Start();
     }*/
-    private void OptionsOrders()
+    public void OptionsOrders()
     {
         optionsOrders.Add("salir", CloseGame);
         optionsOrders.Add("guardar", Save);
@@ -121,6 +121,16 @@ public class UIMovement : MonoBehaviour
             fTUE_Progresion.ftueProgression++;
             fTUE_Progresion.FTUEProgression();
         }
+    }
+    public void ReLoadCharacter(string p)
+    {
+        //string p = fTUE_Progresion.GetPlayer();
+        party.Stop();
+        characterPannel.SetActive(true);
+        GameObject actualCharacter = GameObject.Find(p);
+        LevelSystem level = actualCharacter.GetComponent<LevelSystem>();
+        level.ActivateButtons();
+        character_Skills.DisplayCharacterInf(actualCharacter);
     }
     /*private void ActivateSkillAnimation()
     {
@@ -175,11 +185,11 @@ public class UIMovement : MonoBehaviour
         Debug.Log(speech.text);
         firstCanvasLvl[speech.text].Invoke();
     }
-    private void RecognizedInventory(PhraseRecognizedEventArgs speech)
+    /*private void RecognizedInventory(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
         inventoryOptions[speech.text].Invoke();
-    }
+    }*/
     private void RecognizedOptionsOrders(PhraseRecognizedEventArgs speech)
     {
         Debug.Log(speech.text);
@@ -204,7 +214,7 @@ public class UIMovement : MonoBehaviour
         yield return new WaitForSeconds(4f);
         actualPannel.SetActive(false);
     }
-    private void ActivatePartyInformation()
+    public void ActivatePartyInformation()
     {
         print("NO Puede abrir");
         if (inOptions) return;
@@ -220,6 +230,7 @@ public class UIMovement : MonoBehaviour
             {
                 fTUE_Progresion.ftueProgression++;
                 fTUE_Progresion.FTUEProgression();
+                gameSave.SaveGame();
             }
         }
     }
@@ -251,13 +262,14 @@ public class UIMovement : MonoBehaviour
         }else if (victoryResult.activeInHierarchy)
         {
             victoryResult.SetActive(false);
-            voiceDestinations.mapDestinations.Start();
+            
             if (fTUE_Progresion.ftueProgression == 0 || fTUE_Progresion.ftueProgression == 1)
             {
                 fTUE_Progresion.pannel1.SetActive(false);
                 timeLine.Play();
+                return;
             }
-            
+            voiceDestinations.mapDestinations.Start();
 
         }
         else if(optionsPannel.activeInHierarchy){

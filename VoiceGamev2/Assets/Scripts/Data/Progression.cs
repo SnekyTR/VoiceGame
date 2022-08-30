@@ -56,15 +56,19 @@ public class Progression : MonoBehaviour
         }
         
         
+
+    }
+    private void Start()
+    {
+        uIMovement.AddPartyInf();
+        uIMovement.OptionsOrders();
+        uIMovement.AddFirstLvl();
+
         if (System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
         {
             print("Se ha cargado progresion");
             LoadProgresion();
         }
-    }
-    private void Start()
-    {
-        
         gameSave = gameObject.GetComponent<GameSave>();
     }
     private void LoadProgresion()
@@ -88,9 +92,10 @@ public class Progression : MonoBehaviour
             //combat2.SetActive(false);
             if(fTUE_Progresion.ftueProgression == 0)
             {
-                
+
                 fTUE_Progresion.FTUEProgression();
-            }else if(fTUE_Progresion.ftueProgression > 0)
+            }
+            else if(fTUE_Progresion.ftueProgression > 0)
             {
                 print("Es mayor a 0");
                 if (fTUE_Progresion.ftueProgression < 7)
@@ -126,8 +131,11 @@ public class Progression : MonoBehaviour
                 
                 player.GetComponent<VoiceDestinations>().entered = false;
                 singlePanel.SetActive(false);
-                restAnimator.SetFloat("anim", 1);
-                print("Rested Anim");
+                if(fTUE_Progresion.ftueProgression == 7)
+                {
+                    restAnimator.SetFloat("anim", 1);
+                }
+                
                 if (progression >= 2)
                 {
                     //isTheSame = false;

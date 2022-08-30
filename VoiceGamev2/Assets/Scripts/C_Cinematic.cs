@@ -25,7 +25,7 @@ public class C_Cinematic : MonoBehaviour
         cameraFollow = GameObject.Find("GameManager").GetComponent<CameraFollow>();
         canvas = GameObject.Find("CanvasManager").GetComponent<Canvas>();
         canvas.enabled = false;
-        box = GameObject.Find("MainCamera").GetComponent<BoxCollider>();
+        box = GameObject.Find("Main Camera").GetComponent<BoxCollider>();
 
         StartWalking();
     }

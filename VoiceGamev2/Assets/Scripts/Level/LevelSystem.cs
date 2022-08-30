@@ -15,7 +15,7 @@ public class LevelSystem : MonoBehaviour
     public float requiredXp;
     private float lerpTimer;
     private float delayTimer;
-    public int amountOfLvl = 0;
+    public int amountOfLvl;
 
     [SerializeField]private GameObject buttonsStats;
     [SerializeField]private GameObject levelupNotif;
@@ -36,6 +36,11 @@ public class LevelSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (System.IO.File.Exists(Application.persistentDataPath + "/" + transform.name +".data"))
+        {
+            LoadLevel();
+        }
+        
         print("Amount of lvl: " + amountOfLvl);
         frontXpBar.fillAmount = currentXp / requiredXp;
         backXpBar.fillAmount = currentXp / requiredXp;
@@ -48,6 +53,7 @@ public class LevelSystem : MonoBehaviour
     public void LoadLevel()
     {
         PlayerData data = SaveSystem.LoadPlayer(this.transform);
+        print("Amount" + data.amountofLevel);
         amountOfLvl = data.amountofLevel;
         level = data.level;
         currentXp = data.experience;

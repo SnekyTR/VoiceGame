@@ -31,19 +31,24 @@ public class Character_skills : MonoBehaviour
     //[SerializeField] private TextMeshProUGUI AGI;
     //[SerializeField] private TextMeshProUGUI INT;
     [SerializeField] private TextMeshProUGUI CRIT;
+    private FTUE_Progresion fTUE_Progresion;
 
     [SerializeField] public TextMeshProUGUI amountofLvl;
 
     [SerializeField]private ScriptableObject[] actualWeaps;
     [HideInInspector]public bool isMagic;
     private GeneralStats general;
+    private GameSave gameSave;
     //[SerializeField] private Inventory inventory;
 
     private void Awake()
     {
+        gameSave = GameObject.Find("GameSaver").GetComponent<GameSave>();
+        fTUE_Progresion = GameObject.Find("Canvas").GetComponent<FTUE_Progresion>();
     }
     void Start()
     {
+        
         
     }
     private void Update()
@@ -55,6 +60,8 @@ public class Character_skills : MonoBehaviour
         GeneralStats stats = GameObject.Find(actualCharacter.transform.name).GetComponent<GeneralStats>();
         GameObject.Find(actualCharacter.transform.name).GetComponent<LevelSystem>().DeactivateButtons();
         general = stats;
+        gameSave.SaveGame();
+        fTUE_Progresion.actualPlayer = actualCharacter.transform.name;
         CallThings(actualCharacter);
         if(stats.weaponequiped != null){
             for(int i = 0; i < actualWeaps.Length; i++)
