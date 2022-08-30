@@ -9983,8 +9983,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 750758571}
     m_Modifications:
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: lifePoints
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: actualWeapon
       value: fire staff
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: criticPoints
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: shieldPoints
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: intellectPoints
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6670066613191042240, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: m_Name
@@ -23276,11 +23292,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
       propertyPath: atkValue
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
       propertyPath: lifeValue
-      value: 19
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+      propertyPath: shieldValue
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5803706772664993575, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
       propertyPath: m_RootOrder
@@ -64700,6 +64720,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 750758571}
     m_Modifications:
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: lifePoints
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: criticPoints
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: shieldPoints
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: agilityPoints
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6670066613191042240, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: m_Name
       value: Magnus
@@ -70559,11 +70595,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
       propertyPath: atkValue
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
       propertyPath: lifeValue
-      value: 19
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+      propertyPath: shieldValue
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5803706772664993575, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
       propertyPath: m_RootOrder
@@ -94399,11 +94439,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6934924321722005537, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
       propertyPath: atkValue
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6934924321722005537, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
       propertyPath: lifeValue
-      value: 16
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934924321722005537, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
+      propertyPath: shieldValue
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6934924322987636879, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
       propertyPath: m_AnchorMax.x
@@ -106445,11 +106489,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6934924321722005537, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
       propertyPath: atkValue
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6934924321722005537, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
       propertyPath: lifeValue
-      value: 16
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934924321722005537, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
+      propertyPath: shieldValue
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6934924322987636879, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
       propertyPath: m_AnchorMax.x
