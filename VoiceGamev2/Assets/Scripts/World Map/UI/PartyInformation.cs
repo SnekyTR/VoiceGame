@@ -53,9 +53,12 @@ public class PartyInformation : MonoBehaviour
             }
         }
     }
-    // Update is called once per frame
-    void Update()
+    public void CloseGroup()
     {
-        
+        gameObject.SetActive(false);
+    }
+    public void OpenGroup()
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
     }
 }

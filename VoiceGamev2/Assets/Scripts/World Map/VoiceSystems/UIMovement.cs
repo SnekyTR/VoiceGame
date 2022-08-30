@@ -39,7 +39,9 @@ public class UIMovement : MonoBehaviour
 
     [SerializeField] private GameObject mainHelpPannel;
     [SerializeField] private GameSave gameSave;
-    [HideInInspector] public bool canOpenGroup = true;
+    [HideInInspector] public bool canOpenGroup;
+    private PlayableDirector openGroup;
+    private PlayableDirector closeGroup;
 
     public string charSelected;
 
@@ -53,10 +55,13 @@ public class UIMovement : MonoBehaviour
         characterPannel = GameObject.Find("CharacterInformation");*/
         //canOpenGroup = true;
         timeLine = GameObject.Find("TimeLine").GetComponent<PlayableDirector>();
+        openGroup = GameObject.Find("OpenGroup").GetComponent<PlayableDirector>();
+        closeGroup = GameObject.Find("CloseGroup").GetComponent<PlayableDirector>();
         AddFirstLvl();
         AddPartyInf();
         OptionsOrders();
         //AddInventory();
+        canOpenGroup = true;
         increaseStats.AddControls();
     }
     private void Update()
@@ -201,11 +206,15 @@ public class UIMovement : MonoBehaviour
     }
     private void ActivatePartyInformation()
     {
+        print("NO Puede abrir");
         if (inOptions) return;
+        print("ASDASDASD Puede abrir");
         if (canOpenGroup)
         {
+            print("Puede abrir");
             voiceDestinations.mapDestinations.Stop();
             partyPannel.SetActive(true);
+            openGroup.Play();
             party.Start();
             if (fTUE_Progresion.ftueProgression == 1)
             {
@@ -229,7 +238,9 @@ public class UIMovement : MonoBehaviour
         {
             voiceDestinations.mapDestinations.Start();
             firstCanvas.Start();
-            partyPannel.SetActive(false);
+            //partyPannel.SetActive(false);
+            partyPannel.transform.GetChild(0).gameObject.SetActive(false);
+            closeGroup.Play();
             party.Stop();
             if (fTUE_Progresion.ftueProgression == 5)
             {
