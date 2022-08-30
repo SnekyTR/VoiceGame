@@ -18,10 +18,10 @@ public class Cinematic_Text : MonoBehaviour
         loadingScreen = gameObject.GetComponent<LoadingScreen>();
         listed.Add("Este es el reino de Laryan, la tierra de los cuatro ducados. Al norte está el ducado de Krenid, " +
     "hogar de la orden de los hijos del gigante, protectores del reino contra las tierras oscuras.");
-        listed.Add("Laryan is protected by the magic of the tree of light which stops the advance of darkness with its power. " +
-            "It is believed that once the tree dies, the darkness will invade the kingdom and destroy it.");
-        listed.Add("Our protagonist, called Magnus, has managed to escape an attack by the creatures of darkness " +
-            "in order to bring the last seed of the tree to the capital.");
+        listed.Add("Laryan está protegido por la magia del árbol de la luz, que detiene el avance de la oscuridad con su poder, " +
+            "Se cree que una vez que el árbol muera, la oscuridad invadirá el reino y lo destruirá.");
+        listed.Add("Nuestro protagonista, llamado Magnus, ha conseguido escapar de un ataque de las criaturas de la oscuridad para llevar la última semilla del árbol a la capital." +
+            "Por el camino se enfrentará a grandes peligros y conseguirá poderosos aliados.");
     }
     /*public void StartText()
     {
