@@ -367,23 +367,14 @@ public class BarbarianBerserkAI : MonoBehaviour
 
         yield return new WaitForSeconds(0.4f);
 
-        RaycastHit hit;
-        Vector3 newPos = transform.position;
-        newPos.y += 1;
-        Vector3 newDir = target.position - transform.position;
-        if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
-        {
-            if (hit.transform.tag == "Player")
-            {
-                target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
-                target.GetComponent<PlayerStats>().StunPlayer(true);
+        target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
+        target.GetComponent<PlayerStats>().StunPlayer(true);
 
-                Vector3 pos = target.position;
-                pos.y += 1;
+        Vector3 pos = target.position;
+        pos.y += 1;
 
-                Destroy(Instantiate(bloodFx, pos, transform.rotation), 1.5f);
-            }
-        }
+        Destroy(Instantiate(bloodFx, pos, transform.rotation), 1.5f);
+
         enemyStats.SetEnergyAction(-3);
         yield return new WaitForSeconds(0.8f);
         setTarget = false;
@@ -403,22 +394,13 @@ public class BarbarianBerserkAI : MonoBehaviour
         animator.SetInteger("A_BasicAtk", 1);
         yield return new WaitForSeconds(0.6f);
 
-        RaycastHit hit;
-        Vector3 newPos = transform.position;
-        newPos.y += 1;
-        Vector3 newDir = target.position - transform.position;
-        if (Physics.Raycast(newPos, newDir, out hit, 100f, mask))
-        {
-            if (hit.transform.tag == "Player")
-            {
-                target.GetComponent<PlayerStats>().SetLife(-(enemyStats.GetAtk()* 2));
+        target.GetComponent<PlayerStats>().SetLife(-(enemyStats.GetAtk() * 2));
 
-                Vector3 pos = target.position;
-                pos.y += 1;
+        Vector3 pos = target.position;
+        pos.y += 1;
 
-                Destroy(Instantiate(bloodFx, pos, transform.rotation), 1.5f);
-            }
-        }
+        Destroy(Instantiate(bloodFx, pos, transform.rotation), 1.5f);
+
         enemyStats.SetEnergyAction(-5);
         yield return new WaitForSeconds(0.8f);
         setTarget = false;
