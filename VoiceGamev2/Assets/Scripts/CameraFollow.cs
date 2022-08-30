@@ -548,7 +548,7 @@ public class CameraFollow : MonoBehaviour
 
             for(int i = 0; i < enemys.Count; i++)
             {
-                if(Vector3.Distance(playerParent.position, enemys[i].transform.position) <= 20f) nw.Add(enemys[i].transform);
+                if(Vector3.Distance(players[0].position, enemys[i].transform.position) <= 20f) nw.Add(enemys[i].transform);
                 if (enemys[i].GetComponent<EnemyStats>().IsStunned()) enemys[i].GetComponent<EnemyStats>().StunEnemy(false);
                 if (enemys[i].GetComponent<EnemyStats>().IsOnFire()) enemys[i].GetComponent<EnemyStats>().FireDmg();
             }
