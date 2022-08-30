@@ -38,10 +38,11 @@ public class IncreaseStats : MonoBehaviour
     }
     public void AddControls()
     {
-        statsActions.Add("fuerza", IncreaseSRT);
+        statsActions.Add("fuerza", IncreaseVAR);
+        statsActions.Add("armadura", IncreaseARMOR);
         statsActions.Add("vida", IncreaseHealth);
-        statsActions.Add("agilidad", IncreaseAGI);
-        statsActions.Add("intelecto", IncreaseINT);
+        //statsActions.Add("agilidad", IncreaseAGI);
+        statsActions.Add("intelecto", IncreaseVAR);
         statsActions.Add("critico", IncreaseCRIT);
         statOrders = new KeywordRecognizer(statsActions.Keys.ToArray());
         statOrders.OnPhraseRecognized += RecognizedVoice;
@@ -55,7 +56,7 @@ public class IncreaseStats : MonoBehaviour
         PlayerPrefs.SetInt("pm", (ns + 1));
 
         Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
-        zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, IncreaseSRT);
+        zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, IncreaseCRIT);
         statOrders = new KeywordRecognizer(zero1.Keys.ToArray());
         statOrders.OnPhraseRecognized += RecognizedVoice;
     }
@@ -69,14 +70,14 @@ public class IncreaseStats : MonoBehaviour
             fTUE_Progresion.FTUEProgression();
         }
     }
-    public void IncreaseSRT()
+    /*public void IncreaseSRT()
     {
         general.strengthPoints++;
         character_Skills.UpdateSRT(general);
         UpdateLevelAmount();
         level.DeactivateButtons();
 
-    }
+    }*/
     public void IncreaseHealth()
     {
         general.lifePoints++;
@@ -85,20 +86,39 @@ public class IncreaseStats : MonoBehaviour
         level.DeactivateButtons();
 
     }
-    public void IncreaseAGI()
+    /*public void IncreaseAGI()
     {
         general.agilityPoints++;
         character_Skills.UpdateAGI(general);
         UpdateLevelAmount();
         level.DeactivateButtons();
 
-    }
-    public void IncreaseINT()
+    }*/
+    public void IncreaseARMOR()
     {
-        general.intellectPoints++;
-        character_Skills.UpdateINT(general);
+        general.armorPoints++;
+        character_Skills.UpdateARMOR(general);
         UpdateLevelAmount();
         level.DeactivateButtons();
+
+    }
+    public void IncreaseVAR()
+    {
+        if (character_Skills.isMagic)
+        {
+            general.intellectPoints++;
+            character_Skills.UpdateVAR(general);
+            UpdateLevelAmount();
+            level.DeactivateButtons();
+        }
+        else
+        {
+            general.strengthPoints++;
+            character_Skills.UpdateVAR(general);
+            UpdateLevelAmount();
+            level.DeactivateButtons();
+        }
+        
 
     }
     public void IncreaseCRIT()

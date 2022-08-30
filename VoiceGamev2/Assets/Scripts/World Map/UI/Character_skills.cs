@@ -20,20 +20,24 @@ public class Character_skills : MonoBehaviour
     [SerializeField] private RawImage strenghtSkill2;
     [SerializeField] private RawImage strenghtSkill3;
 
-    [SerializeField] private RawImage agilitySkill1;
+    /*[SerializeField] private RawImage agilitySkill1;
     [SerializeField] private RawImage agilitySkill2;
-    [SerializeField] private RawImage agilitySkill3;
+    [SerializeField] private RawImage agilitySkill3;*/
 
     [SerializeField] private TextMeshProUGUI HP;
+    [SerializeField] private TextMeshProUGUI ARMOR;
     [SerializeField] private TextMeshProUGUI STR;
-    [SerializeField] private TextMeshProUGUI AGI;
-    [SerializeField] private TextMeshProUGUI INT;
+    [SerializeField] private TextMeshProUGUI varialbeText;
+    //[SerializeField] private TextMeshProUGUI AGI;
+    //[SerializeField] private TextMeshProUGUI INT;
     [SerializeField] private TextMeshProUGUI CRIT;
 
     [SerializeField] public TextMeshProUGUI amountofLvl;
 
+    [SerializeField]private ScriptableObject[] actualWeaps;
+    [HideInInspector]public bool isMagic;
     private GeneralStats general;
-    [SerializeField] private Inventory inventory;
+    //[SerializeField] private Inventory inventory;
 
     private void Awake()
     {
@@ -52,16 +56,24 @@ public class Character_skills : MonoBehaviour
         GameObject.Find(actualCharacter.transform.name).GetComponent<LevelSystem>().DeactivateButtons();
         general = stats;
         CallThings(actualCharacter);
-        if(stats.weaponequiped == null){
+        if(stats.weaponequiped != null){
+            for(int i = 0; i < actualWeaps.Length; i++)
+            {
+                if (stats.weaponequiped == actualWeaps[i].name)
+                {
+                    Scripteable_Weapon weap = (Scripteable_Weapon)actualWeaps[i];
+                    weaponImagePosition.sprite = weap.artwork;
+                }
+            }
             print("No tiene arma");
             weaponImagePosition.sprite = null;
         }
-        else
+        /*else
         {
             print("Tiene arma" + actualCharacter.name+  "de un total de "+ inventory.actualWeapons.Count);
             for(int i = 0; i < inventory.actualWeapons.Count; i++)
             {
-                Scripteable_Weapon weap = (Scripteable_Weapon)inventory.actualWeapons[i];
+                Scripteable_Weapon weap = (Scripteable_Weapon)actualWeaps[i];
                 if (weap.weaponName == stats.weaponequiped)
                 {
                     print("Se ha equipado" + inventory.actualWeapons[i]);
@@ -71,18 +83,31 @@ public class Character_skills : MonoBehaviour
                 }
             }
             print("TIene la arma: " + stats.weaponequiped);
-        }
+        }*/
         HP.text = stats.lifePoints.ToString();
-        STR.text = stats.strengthPoints.ToString();
-        AGI.text = stats.agilityPoints.ToString();
-        INT.text = stats.intellectPoints.ToString();
+        
+        //AGI.text = stats.agilityPoints.ToString();
+        
+        if(actualCharacter.transform.name == "Magnus")
+        {
+            varialbeText.text = "Fuerza:";
+            STR.text = stats.strengthPoints.ToString();
+            isMagic = false;
+        }
+        else
+        {
+            varialbeText.text = "Intelecto:";
+            STR.text = stats.intellectPoints.ToString();
+            isMagic = true;
+        }
         CRIT.text = stats.critStrikePoints.ToString();
+        ARMOR.text = stats.armorPoints.ToString();
         magicBar.value = stats.intellectPoints;
         physicalBar.value = stats.strengthPoints;
-        agilityBar.value = stats.agilityPoints;
+        //agilityBar.value = stats.agilityPoints;
         player.text = actualCharacter.name;
         amountofLvl.text = "Puntos restantes: " + actualCharacter.GetComponent<LevelSystem>().amountOfLvl.ToString();
-        CheckAgility();
+        //CheckAgility();
         CheckIntellect();
         CheckStrenght();
     }
@@ -146,7 +171,7 @@ public class Character_skills : MonoBehaviour
             magicSkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
         }
     }
-    public void CheckAgility()
+    /*public void CheckAgility()
     {
         if (general.agilityPoints >= 6)
         {
@@ -175,7 +200,7 @@ public class Character_skills : MonoBehaviour
             agilitySkill2.color = new Color(0.15f, 0.15f, 0.15f, 255);
             agilitySkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
         }
-    }
+    }*/
     private void CallThings(GameObject actualcharacter)
     {
         magicBar = GameObject.Find("magic_bar").GetComponent<Slider>();
@@ -184,22 +209,36 @@ public class Character_skills : MonoBehaviour
         //physicalBar = GameObject.Find("physical_bar").GetComponent<Scrollbar>();
         //image = GameObject.Find("magic_image").GetComponent<Image>();
         HP = GameObject.Find("hp_stat").GetComponent<TextMeshProUGUI>();
+        ARMOR = GameObject.Find("armor_stat").GetComponent<TextMeshProUGUI>();
         STR = GameObject.Find("str_stat").GetComponent<TextMeshProUGUI>();
-        AGI = GameObject.Find("agi_stat").GetComponent<TextMeshProUGUI>();
-        INT = GameObject.Find("int_stat").GetComponent<TextMeshProUGUI>();
+        //AGI = GameObject.Find("agi_stat").GetComponent<TextMeshProUGUI>();
+        //INT = GameObject.Find("int_stat").GetComponent<TextMeshProUGUI>();
         CRIT = GameObject.Find("crit_stat").GetComponent<TextMeshProUGUI>();
     }
-    public void UpdateSRT(GeneralStats general)
+    public void UpdateVAR(GeneralStats general)
     {
-        STR.text = general.strengthPoints.ToString();
-        physicalBar.value = general.strengthPoints;
-        CheckStrenght();
+        if (isMagic)
+        {
+            STR.text = general.intellectPoints.ToString();
+            magicBar.value = general.intellectPoints;
+            CheckIntellect();
+        }
+        else
+        {
+            STR.text = general.strengthPoints.ToString();
+            physicalBar.value = general.strengthPoints;
+            CheckStrenght();
+        }
     }
     public void UpdateHP(GeneralStats general)
     {
         HP.text = general.lifePoints.ToString();
     }
-    public void UpdateAGI(GeneralStats general)
+    public void UpdateARMOR(GeneralStats general)
+    {
+        ARMOR.text = general.armorPoints.ToString();
+    }
+    /*public void UpdateAGI(GeneralStats general)
     {
         AGI.text = general.agilityPoints.ToString();
         agilityBar.value = general.agilityPoints;
@@ -210,7 +249,7 @@ public class Character_skills : MonoBehaviour
         INT.text = general.intellectPoints.ToString();
         magicBar.value = general.intellectPoints;
         CheckIntellect();
-    }
+    }*/
     public void UpdateCRIT(GeneralStats general)
     {
         CRIT.text = general.critStrikePoints.ToString();

@@ -556,6 +556,7 @@ public class CameraFollow : MonoBehaviour
             camS.enabled = true;
 
             camS.CameraPlayerTurn(nw);
+            helpPannel.UpdateTextHelp(helpPannel.preSelectPlayer);
         }
     }
 

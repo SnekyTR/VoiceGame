@@ -18,13 +18,13 @@ public class UIMovement : MonoBehaviour
     private Dictionary<string, Action> optionsOrders = new Dictionary<string, Action>();
     private KeywordRecognizer optionsRecognizer;
     private Dictionary<string, Action> inventoryOptions = new Dictionary<string, Action>();
-    private KeywordRecognizer inventory;
+    //private KeywordRecognizer inventory;
     private PlayableDirector timeLine;
     public bool inOptions;
     [SerializeField] private PartyInformation partyInformation;
     [SerializeField] private Character_skills character_Skills;
     [SerializeField] private IncreaseStats increaseStats;
-    [SerializeField] private EquipObjects equipObjects;
+    //[SerializeField] private EquipObjects equipObjects;
 
     [SerializeField] private GameObject partyPannel;
     [SerializeField] private Animator animatorSave;
@@ -33,8 +33,8 @@ public class UIMovement : MonoBehaviour
     [SerializeField] private GameObject victoryResult;
     [SerializeField] private GameObject optionsPannel;
     [SerializeField] private TextMeshProUGUI textSave;
-    [SerializeField] private GameObject skillsZone;
-    [SerializeField] private GameObject inventoryZone;
+    //[SerializeField] private GameObject skillsZone;
+    //[SerializeField] private GameObject inventoryZone;
     [SerializeField] private VoiceDestinations voiceDestinations;
 
     [SerializeField] private GameObject mainHelpPannel;
@@ -56,7 +56,7 @@ public class UIMovement : MonoBehaviour
         AddFirstLvl();
         AddPartyInf();
         OptionsOrders();
-        AddInventory();
+        //AddInventory();
         increaseStats.AddControls();
     }
     private void Update()
@@ -84,7 +84,7 @@ public class UIMovement : MonoBehaviour
         party = new KeywordRecognizer(partyInf.Keys.ToArray());
         party.OnPhraseRecognized += RecognizedVoiceParty;
     }
-    private void AddInventory()
+    /*private void AddInventory()
     {
         inventoryOptions.Add("abilidades", ActivateSkillAnimation);
         inventoryOptions.Add("inventario", ActivateInventoryAnimation);
@@ -92,7 +92,7 @@ public class UIMovement : MonoBehaviour
         inventory = new KeywordRecognizer(inventoryOptions.Keys.ToArray());
         inventory.OnPhraseRecognized += RecognizedInventory;
         //inventory.Start();
-    }
+    }*/
     private void OptionsOrders()
     {
         optionsOrders.Add("salir", CloseGame);
@@ -117,7 +117,7 @@ public class UIMovement : MonoBehaviour
             fTUE_Progresion.FTUEProgression();
         }
     }
-    private void ActivateSkillAnimation()
+    /*private void ActivateSkillAnimation()
     {
         //inventoryAnimator.SetBool("ReverseInventory", true);
         skillsZone.SetActive(true);
@@ -135,7 +135,7 @@ public class UIMovement : MonoBehaviour
         inventoryZone.SetActive(true);
         equipObjects.isInventory = true;
         //inventoryAnimator.SetBool("Inventory", false);
-    }
+    }*/
     private void CloseGame()
     {
         gameSave.SaveGame();
@@ -220,8 +220,8 @@ public class UIMovement : MonoBehaviour
         audioSource.Play();
         if (characterPannel.activeInHierarchy)
         {
-            skillsZone.SetActive(true);
-            inventoryZone.SetActive(false);
+            //skillsZone.SetActive(true);
+            //inventoryZone.SetActive(false);
             characterPannel.SetActive(false);
             party.Start();
         }

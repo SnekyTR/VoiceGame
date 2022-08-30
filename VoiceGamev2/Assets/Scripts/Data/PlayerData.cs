@@ -11,6 +11,7 @@ public class PlayerData
     public int intellectStat;
     public int strength;
     public int agility;
+    public int armor;
     public int coins;
     public int critStrikePoints;
     public int amountofLevel;
@@ -22,6 +23,7 @@ public class PlayerData
     public PlayerData(GeneralStats player, LevelSystem levelSystem)
     {
         level = levelSystem.level;
+        armor = player.armorPoints;
         experience = levelSystem.currentXp;
         healthStat = player.lifePoints;
         intellectStat = player.intellectPoints;

@@ -25,7 +25,7 @@ public class Progression : MonoBehaviour
 
     [SerializeField]private GameObject victoryResults;
     [SerializeField] private FTUE_Progresion fTUE_Progresion;
-    [SerializeField] private Inventory inventory;
+    //[SerializeField] private Inventory inventory;
     [SerializeField] private UIMovement uIMovement;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject weapReward;
@@ -34,8 +34,8 @@ public class Progression : MonoBehaviour
     [SerializeField] private TextMeshProUGUI expText1;
     [SerializeField] private TextMeshProUGUI expText2;
     [SerializeField] private TextMeshProUGUI expText3;
-    bool isTheSame = false;
-    bool newWeap;
+    //bool isTheSame = false;
+    //bool newWeap;
     GameSave gameSave;
     [SerializeField]VoiceDestinations voices;
     MoveDataToMain moveDataToMain;
@@ -106,7 +106,7 @@ public class Progression : MonoBehaviour
             if(progression >= 1)
             {
                 
-                for(int i = 0; i < inventory.actualWeapons.Count; i++)
+                /*for(int i = 0; i < inventory.actualWeapons.Count; i++)
                 {
                     if (inventory.totalWeapons[1] == inventory.actualWeapons[i])
                     {
@@ -121,7 +121,7 @@ public class Progression : MonoBehaviour
                     weapReward.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = weap.name;
                     weapReward.transform.GetChild(2).GetComponent<Image>().sprite = weap.artwork;
                     newWeap = true;
-                }
+                }*/
                 
                 
                 player.GetComponent<VoiceDestinations>().entered = false;
@@ -130,7 +130,7 @@ public class Progression : MonoBehaviour
                 print("Rested Anim");
                 if (progression >= 2)
                 {
-                    isTheSame = false;
+                    //isTheSame = false;
                     
                     print("Se activa vastion anum");
                     combat2.SetActive(false);
@@ -139,7 +139,7 @@ public class Progression : MonoBehaviour
                     //vagnar.SetActive(true);
                     if (progression >= 3)
                     {
-                        for (int i = 0; i < inventory.actualWeapons.Count; i++)
+                        /*for (int i = 0; i < inventory.actualWeapons.Count; i++)
                         {
                             if (inventory.totalWeapons[2] == inventory.actualWeapons[i])
                             {
@@ -153,7 +153,7 @@ public class Progression : MonoBehaviour
                             weapReward.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = weap.name;
                             weapReward.transform.GetChild(2).GetComponent<Image>().sprite = weap.artwork;
                             newWeap = true;
-                        }
+                        }*/
                         bastionAnimator.SetFloat("anim", 0);
                         forestAnimator.SetFloat("anim", 1);
                         //p2Interface.SetActive(true);
@@ -185,10 +185,10 @@ public class Progression : MonoBehaviour
     {
         uIMovement.canOpenGroup = false;
         victoryResults.SetActive(true);
-        if (newWeap)
+        /*if (newWeap)
         {
             weapReward.SetActive(true);
-        }
+        }*/
         expText1.text = "+" + xp + " XP";
         expText2.text = "+" + xp + " XP";
         expText3.text = "+" + xp + " XP";

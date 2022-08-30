@@ -8,6 +8,7 @@ public class GeneralStats : MonoBehaviour
     public int playerLevel;
     public int playerExperience;
     public int lifePoints;
+    public int armorPoints;
     public int strengthPoints;
     public int intellectPoints;
     public int agilityPoints;
@@ -52,6 +53,7 @@ public class GeneralStats : MonoBehaviour
         agilityPoints = data.agility;
         intellectPoints = data.intellectStat;
         lifePoints = data.healthStat;
+        armorPoints = data.armor;
         critStrikePoints = data.critStrikePoints;
 
         Vector3 position;

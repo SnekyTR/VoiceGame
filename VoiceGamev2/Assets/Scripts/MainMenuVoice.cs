@@ -96,7 +96,7 @@ public class MainMenuVoice : MonoBehaviour
     {
         if (filesExist) { return; }
         CloseOrders();
-        loadingScreen.LoadScene(2);
+        loadingScreen.LoadScene(7);
        
     }
     private void ExitGame()
