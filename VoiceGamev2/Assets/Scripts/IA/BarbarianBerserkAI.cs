@@ -24,8 +24,12 @@ public class BarbarianBerserkAI : MonoBehaviour
 
     public GameObject bloodFx;
 
+    private AudioSource audioS;
+    public AudioClip atk, powerUp;
+
     void Start()
     {
+        audioS = GetComponent<AudioSource>();
         gridA = GameObject.Find("RayCast").GetComponent<GridActivation>();
         casillas = gridA.casillas;
         enemyStats = GetComponent<EnemyStats>();
@@ -303,7 +307,10 @@ public class BarbarianBerserkAI : MonoBehaviour
         gameM.CameraCinematic();
 
         animator.SetInteger("A_BasicAtk", 1);
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.3f);
+        audioS.clip = atk;
+        audioS.Play();
+        yield return new WaitForSeconds(0.3f);
 
         float pro = target.GetComponent<PlayerStats>().GetLife() / target.GetComponent<PlayerStats>().maxLife;
 
@@ -333,23 +340,27 @@ public class BarbarianBerserkAI : MonoBehaviour
     {
         animator.SetInteger("A_AutoBuff", 1);
 
-        transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+        transform.localScale = new Vector3(1.06f, 1.06f, 1.06f);
         yield return new WaitForSeconds(0.3f);
         animator.SetInteger("A_AutoBuff", 0);
 
-        transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
+        transform.localScale = new Vector3(1.12f, 1.12f, 1.12f);
         yield return new WaitForSeconds(0.3f);
-        transform.localScale = new Vector3(1.15f, 1.15f, 1.15f);
+
+        audioS.clip = powerUp;
+        audioS.Play();
+
+        transform.localScale = new Vector3(1.18f, 1.18f, 1.18f);
         yield return new WaitForSeconds(0.3f);
-        transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        transform.localScale = new Vector3(1.24f, 1.24f, 1.24f);
         yield return new WaitForSeconds(0.3f);
-        transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
+        transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
         yield return new WaitForSeconds(0.9f);
 
         enemyStats.SetDmg((int)(enemyStats.GetAtk() * 1.2f));
         enemyStats.SetEnergyAction(-1);
-        StatesManager2();
         isBuffed = true;
+        StatesManager2();
     }
 
     private IEnumerator GroundStun()
@@ -364,6 +375,9 @@ public class BarbarianBerserkAI : MonoBehaviour
         animator.SetInteger("A_JumpAtk", 1);
         yield return new WaitForSeconds(0.6f);
         animator.SetInteger("A_JumpAtk", 0);
+
+        audioS.clip = atk;
+        audioS.Play();
 
         yield return new WaitForSeconds(0.4f);
 

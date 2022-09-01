@@ -48,6 +48,9 @@ public class EnemyStats : MonoBehaviour
 
     [HideInInspector] public bool inmunity = false;
 
+    private AudioSource audioS;
+    public AudioClip hurtS, dieS;
+
     void Start()
     {
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
@@ -74,6 +77,8 @@ public class EnemyStats : MonoBehaviour
         intBars.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = atkValue.ToString();
 
         if (shieldValue > 0) NewShield(shieldValue);
+
+        audioS = GetComponent<AudioSource>();
     }
     public void SetLife(int n, bool t)
     {
@@ -93,6 +98,9 @@ public class EnemyStats : MonoBehaviour
 
                 animator.SetInteger("A_Recieve", 1);
 
+                audioS.clip = hurtS;
+                audioS.Play();
+
                 n = shieldValue;
             }
             else
@@ -100,6 +108,9 @@ public class EnemyStats : MonoBehaviour
                 intBars.transform.GetChild(1).GetChild(4).GetComponent<Text>().text = (shieldValue).ToString();
 
                 animator.SetInteger("A_Recieve", 1);
+
+                audioS.clip = hurtS;
+                audioS.Play();
 
                 return;
             }
@@ -119,14 +130,22 @@ public class EnemyStats : MonoBehaviour
             intBars.transform.GetChild(1).gameObject.SetActive(false);
             Destroy(Instantiate(deathFX, transform.position, transform.rotation), 4);
 
+            audioS.clip = dieS;
+            audioS.Play();
+
             for(int i = 0; i < auraFX.Count; i++)
             {
                 Destroy(auraFX[i]);
             }
+
+            GetComponent<CapsuleCollider>().enabled = false;
         }
         else if (n < 0)                         //dmg recieve
         {
             animator.SetInteger("A_Recieve", 1);
+
+            audioS.clip = hurtS;
+            audioS.Play();
         }
         
 

@@ -8629,6 +8629,8 @@ MonoBehaviour:
   dmgColor: {r: 0.41568628, g: 0.09411765, b: 0.09411765, a: 1}
   stunFX: {fileID: 1500378020736912, guid: 2547a66872ebe45408ace228820a79e1, type: 3}
   inmunity: 0
+  hurtS: {fileID: 8300000, guid: 62a50e5d956a8ca4eb9a439fd23bb23d, type: 3}
+  dieS: {fileID: 8300000, guid: b83239fc238acaf4fbb26c5112418170, type: 3}
 --- !u!114 &8531869958911382885
 MonoBehaviour:
   m_ObjectHideFlags: 0

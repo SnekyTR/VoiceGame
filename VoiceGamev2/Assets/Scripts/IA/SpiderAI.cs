@@ -31,7 +31,7 @@ public class SpiderAI : MonoBehaviour
         enemyNM = GetComponent<NavMeshAgent>();
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
         animator = GetComponent<Animator>();
-        audioSource = gameM.gameObject.GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         audioClip = gameM.gameObject.GetComponent<PlayerMove>().moveSteps;
 
         isOnRoute = false;
@@ -184,6 +184,9 @@ public class SpiderAI : MonoBehaviour
         {
             if (hit.transform == target)
             {
+                audioSource.clip = GetComponent<EnemyStats>().hurtS;
+                audioSource.Play();
+
                 target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
 
                 if (toxic) target.GetComponent<PlayerStats>().PoisonStart();

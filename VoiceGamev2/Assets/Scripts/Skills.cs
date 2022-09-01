@@ -1221,7 +1221,7 @@ public class Skills : MonoBehaviour
         yield return new WaitForSeconds(1.3f);
 
         Vector3 newPos = plyMove.target.transform.position;
-        newPos.y += 40;
+        newPos.y += 24;
 
         Quaternion newRot = gameM.playerParent.rotation;
         newRot.x = 180;

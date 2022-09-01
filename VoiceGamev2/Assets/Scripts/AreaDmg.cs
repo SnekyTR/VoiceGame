@@ -15,6 +15,8 @@ public class AreaDmg : MonoBehaviour
     public GameObject dust;
     private List<GameObject> bloods = new List<GameObject>();
 
+    public AudioClip ablSound;
+
     void Start()
     {
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
@@ -74,7 +76,7 @@ public class AreaDmg : MonoBehaviour
             {
                 dmg = Random.Range((int)(plyStats.GetIntellect() * 0.6f), (int)(plyStats.GetIntellect() * 0.9f));
             }
-            else if (plyM.GetAtkState() == "Juicio final" && plyStats.actualWeapon == "sacred staff")
+            else if (plyM.GetAtkState() == "Juicio final")
             {
                 if (other.GetComponent<EnemyStats>().inmunity) return;
 
@@ -93,11 +95,14 @@ public class AreaDmg : MonoBehaviour
                     t = true;
                 }
 
+                List<EnemyStats> enDmg = new List<EnemyStats>();
+
                 for (int i = 0; i < gameM.enemys.Count; i++)
                 {
                     if (Vector3.Distance(gameM.enemys[i].transform.position, plyM.target.transform.position) <= 5)
                     {
-                        gameM.enemys[i].GetComponent<EnemyStats>().SetLife(-dmg, t);
+                        print(gameM.enemys[i].name);
+                        enDmg.Add(gameM.enemys[i].GetComponent<EnemyStats>());
 
                         if (gameM.enemys[i].GetComponent<SkeletonArcherAI>() || gameM.enemys[i].GetComponent<SkeletonGuardianAI>())
                         {
@@ -110,6 +115,12 @@ public class AreaDmg : MonoBehaviour
                     }
                 }
 
+                for(int i = 0; i < enDmg.Count; i++)
+                {
+                    enDmg[i].SetLife(-dmg, t);
+                }
+
+                Destroy(gameObject);
                 return;
             }
 

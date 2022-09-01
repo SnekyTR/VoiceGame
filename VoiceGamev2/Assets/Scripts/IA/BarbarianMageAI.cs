@@ -339,10 +339,11 @@ public class BarbarianMageAI : MonoBehaviour
 
         GetComponent<EnemyStats>().AddAura(Instantiate(magicAura, transform.position, transform.rotation, transform));
 
+        yield return new WaitForSeconds(0.3f);
         enemyStats.SetDmg((int)(enemyStats.GetAtk() * 1.2f));
         enemyStats.SetEnergyAction(-1);
-        StatesManager2();
         isBuffed = true;
+        StatesManager2();
     }
 
     private bool CheckAlliesLife()

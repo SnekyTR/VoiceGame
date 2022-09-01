@@ -60,6 +60,8 @@ public class PlayerStats : MonoBehaviour
     private GameObject poisonPrefab;
     private int poisonTurns = 0;
 
+    public AudioClip hurtS;
+
     void Start()
     {
         //******* Aqui carga ya sabes todos los datos de lifepoint, strenghtpoint, agilitypoints, intellectpoints
@@ -261,6 +263,9 @@ public class PlayerStats : MonoBehaviour
         else if (n < 0)                         //dmg recieve
         {
             animator.SetInteger("A_Recieve", 1);
+
+            audioSource.clip = hurtS;
+            audioSource.Play();
         }
         else if(n > 0)
         {

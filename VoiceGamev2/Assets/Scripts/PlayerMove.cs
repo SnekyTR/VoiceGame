@@ -81,7 +81,7 @@ public class PlayerMove : MonoBehaviour
         startCmd.Add("desbloquear", Unlook);
 
         //movement
-
+        
         for(int i = 0; i < posNames.Length; i++)
         {
             moveCmd.Add(posNames[i], MoveCasilla);

@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5932200022324653735, guid: e62e775cb5c996a4c944ff20f3cec481, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c87d261f9dddb14481c6dae87e6e64f, type: 3}
     - target: {fileID: 6605214786588152256, guid: e62e775cb5c996a4c944ff20f3cec481, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -235,5 +239,6 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.key1.r
       value: 0.40671712
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2993044578034652770, guid: e62e775cb5c996a4c944ff20f3cec481, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e62e775cb5c996a4c944ff20f3cec481, type: 3}
