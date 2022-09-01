@@ -9984,7 +9984,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: lifePoints
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: actualWeapon
@@ -9999,8 +9999,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: agilityPoints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: strengthPoints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: intellectPoints
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6670066613191042240, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: m_Name
@@ -23296,11 +23304,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
       propertyPath: lifeValue
-      value: 24
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
       propertyPath: shieldValue
-      value: 18
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5803706772664993575, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
       propertyPath: m_RootOrder
@@ -64722,19 +64730,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: lifePoints
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: criticPoints
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
-      propertyPath: shieldPoints
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: shieldPoints
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: agilityPoints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: strengthPoints
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: intellectPoints
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6670066613191042240, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: m_Name
@@ -70599,11 +70615,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
       propertyPath: lifeValue
-      value: 24
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
       propertyPath: shieldValue
-      value: 18
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5803706772664993575, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
       propertyPath: m_RootOrder
@@ -94434,6 +94450,10 @@ PrefabInstance:
       value: Esqueleto 4
       objectReference: {fileID: 0}
     - target: {fileID: 6934924321722005537, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
+      propertyPath: range
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934924321722005537, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
       propertyPath: nEnemy
       value: 3
       objectReference: {fileID: 0}
@@ -94443,7 +94463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6934924321722005537, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
       propertyPath: lifeValue
-      value: 18
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6934924321722005537, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
       propertyPath: shieldValue
@@ -106484,6 +106504,10 @@ PrefabInstance:
       value: Esqueleto 1
       objectReference: {fileID: 0}
     - target: {fileID: 6934924321722005537, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
+      propertyPath: range
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934924321722005537, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
       propertyPath: nEnemy
       value: 0
       objectReference: {fileID: 0}
@@ -106493,7 +106517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6934924321722005537, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
       propertyPath: lifeValue
-      value: 18
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6934924321722005537, guid: 5ca4773c044ca744398e00a50d6c66ed, type: 3}
       propertyPath: shieldValue

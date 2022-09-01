@@ -9422,7 +9422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8531869958911382884, guid: e8c48bfdddc14284da5f48a130f99b4b, type: 3}
       propertyPath: lifeValue
-      value: 24
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 8531869958911382884, guid: e8c48bfdddc14284da5f48a130f99b4b, type: 3}
       propertyPath: shieldValue
@@ -60678,7 +60678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5846514154055955192, guid: b7c289e4e553ce3458dc4a6ad04896df, type: 3}
       propertyPath: lifeValue
-      value: 34
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 5846514154055955192, guid: b7c289e4e553ce3458dc4a6ad04896df, type: 3}
       propertyPath: shieldValue
@@ -75215,19 +75215,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: lifePoints
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: criticPoints
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: shieldPoints
-      value: 2
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: agilityPoints
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: strengthPoints
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: intellectPoints
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6670066613191042240, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: m_Name
@@ -78048,7 +78056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8531869958911382884, guid: e8c48bfdddc14284da5f48a130f99b4b, type: 3}
       propertyPath: lifeValue
-      value: 24
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 8531869958911382884, guid: e8c48bfdddc14284da5f48a130f99b4b, type: 3}
       propertyPath: shieldValue
@@ -89764,7 +89772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5846514154055955192, guid: b7c289e4e553ce3458dc4a6ad04896df, type: 3}
       propertyPath: lifeValue
-      value: 35
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 5846514154055955192, guid: b7c289e4e553ce3458dc4a6ad04896df, type: 3}
       propertyPath: shieldValue
@@ -106694,7 +106702,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: agilityPoints
-      value: 7
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: strengthPoints
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: intellectPoints
@@ -113225,19 +113237,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 704827454318050890, guid: 513d5679578a5cf40b528f83d150cb18, type: 3}
       propertyPath: criticPoints
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 704827454318050890, guid: 513d5679578a5cf40b528f83d150cb18, type: 3}
-      propertyPath: shieldPoints
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 704827454318050890, guid: 513d5679578a5cf40b528f83d150cb18, type: 3}
+      propertyPath: shieldPoints
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 704827454318050890, guid: 513d5679578a5cf40b528f83d150cb18, type: 3}
       propertyPath: agilityPoints
-      value: 8
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 704827454318050890, guid: 513d5679578a5cf40b528f83d150cb18, type: 3}
+      propertyPath: strengthPoints
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 704827454318050890, guid: 513d5679578a5cf40b528f83d150cb18, type: 3}
       propertyPath: intellectPoints
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6149905994039421674, guid: 513d5679578a5cf40b528f83d150cb18, type: 3}
       propertyPath: m_Name
