@@ -32,12 +32,12 @@ public class Character_skills : MonoBehaviour
     //[SerializeField] private TextMeshProUGUI INT;
     [SerializeField] private TextMeshProUGUI CRIT;
     private FTUE_Progresion fTUE_Progresion;
-
+    private int nextLvl;
     [SerializeField] public TextMeshProUGUI amountofLvl;
 
     [SerializeField]private ScriptableObject[] actualWeaps;
     [HideInInspector]public bool isMagic;
-    private GeneralStats general;
+    [HideInInspector]public GeneralStats general;
     private GameSave gameSave;
     //[SerializeField] private Inventory inventory;
 
@@ -57,13 +57,16 @@ public class Character_skills : MonoBehaviour
 
     public void DisplayCharacterInf(GameObject actualCharacter)
     {
+        
         GeneralStats stats = GameObject.Find(actualCharacter.transform.name).GetComponent<GeneralStats>();
         GameObject.Find(actualCharacter.transform.name).GetComponent<LevelSystem>().DeactivateButtons();
+        
         general = stats;
         gameSave.SaveGame();
         fTUE_Progresion.actualPlayer = actualCharacter.transform.name;
         CallThings(actualCharacter);
-        if(stats.weaponequiped != null){
+        Values(stats);
+        if (stats.weaponequiped != null){
             for(int i = 0; i < actualWeaps.Length; i++)
             {
                 if (stats.weaponequiped == actualWeaps[i].name)
@@ -109,6 +112,7 @@ public class Character_skills : MonoBehaviour
         }
         CRIT.text = stats.critStrikePoints.ToString();
         ARMOR.text = stats.armorPoints.ToString();
+        
         magicBar.value = stats.intellectPoints;
         physicalBar.value = stats.strengthPoints;
         //agilityBar.value = stats.agilityPoints;
@@ -117,6 +121,93 @@ public class Character_skills : MonoBehaviour
         //CheckAgility();
         CheckIntellect();
         CheckStrenght();
+    }
+    public void Values(GeneralStats stats)
+    {
+        LevelSystem level = general.gameObject.GetComponent<LevelSystem>();
+        int lifeValue = 25;
+        for (int i = 2; i <= stats.lifePoints; i++)
+        {
+            lifeValue += (int)(i * 1.5f);
+        }
+        TextMeshProUGUI life = HP.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        life.text = lifeValue.ToString();
+        
+        int strengthValue = 5;
+        
+        if (isMagic)
+        {
+            int intellectValue = 5;
+            for (int i = 2; i <= stats.intellectPoints; i++)
+            {
+                intellectValue += (int)i / 3;
+                if (i == stats.intellectPoints)
+                {
+                    
+                    nextLvl = (int)(i / 3);
+                }
+            }
+            TextMeshProUGUI intel = STR.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            intel.text = intellectValue.ToString();
+            if (level.amountOfLvl > 0)
+            {
+                TextMeshProUGUI intelnext = GameObject.Find("str_button").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                intelnext.text = "+" + nextLvl.ToString();
+            }
+        }
+        else
+        {
+            for (int i = 2; i <= stats.strengthPoints; i++)
+            {
+                strengthValue += (int)i / 3;
+                if (i == stats.strengthPoints)
+                {
+                    i++;
+                    nextLvl = (int)(i / 3f);
+                }
+            }
+            if (level.amountOfLvl >0)
+            {
+                TextMeshProUGUI strnext = GameObject.Find("str_button").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                strnext.text = "+" + nextLvl.ToString();
+            }
+            TextMeshProUGUI str = STR.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            
+            str.text = strengthValue.ToString();
+            
+        }
+        int shieldValue = 15;
+        for (int i = 2; i <= stats.armorPoints; i++)
+        {
+            shieldValue += (int)(i * 0.5f);
+
+                nextLvl = (int)(i * 0.5f);
+                
+        }
+        if (level.amountOfLvl > 0)
+        {
+            TextMeshProUGUI shieldnext = GameObject.Find("agi_button").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            shieldnext.text = "+" + nextLvl.ToString();
+        }
+        TextMeshProUGUI shield = ARMOR.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        
+        shield.text = shieldValue.ToString();
+        
+
+
+        float criticProb = stats.critStrikePoints * 10f;
+        TextMeshProUGUI crit = CRIT.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        crit.text = criticProb.ToString();
+        
+        if (level.amountOfLvl > 0)
+        {
+            TextMeshProUGUI critnext = GameObject.Find("crit_button").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            critnext.text = "+10%";
+        }
+        
+        
+
+        
     }
     public void CheckStrenght()
     {

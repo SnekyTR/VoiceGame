@@ -25,8 +25,7 @@ public class WinLoose : MonoBehaviour
     void Start()
     {
         Assign();
-        WinAsignOrders();
-        LooseAsignOrders();
+
 
         plyMove = GetComponent<PlayerMove>();
         gameM = GetComponent<CameraFollow>();
@@ -94,11 +93,14 @@ public class WinLoose : MonoBehaviour
     }
     public void WinActivateVoice()
     {
+        WinAsignOrders();
+
         wPanel.SetActive(true);
         wOrders.Start();
     }
     public void LooseActivateVoice()
     {
+        LooseAsignOrders();
         lPanel.SetActive(true);
         lOrders.Start();
     }

@@ -270,6 +270,7 @@ public class UIMovement : MonoBehaviour
                 return;
             }
             voiceDestinations.mapDestinations.Start();
+            canOpenGroup = true;
 
         }
         else if(optionsPannel.activeInHierarchy){

@@ -40,7 +40,7 @@ public class IncreaseStats : MonoBehaviour
     {
         statsActions.Add("fuerza", IncreaseVAR);
         statsActions.Add("armadura", IncreaseARMOR);
-        statsActions.Add("vida", IncreaseHealth);
+        //statsActions.Add("vida", IncreaseHealth);
         //statsActions.Add("agilidad", IncreaseAGI);
         statsActions.Add("intelecto", IncreaseVAR);
         statsActions.Add("critico", IncreaseCRIT);
@@ -78,14 +78,14 @@ public class IncreaseStats : MonoBehaviour
         level.DeactivateButtons();
 
     }*/
-    public void IncreaseHealth()
+    /*public void IncreaseHealth()
     {
         general.lifePoints++;
         character_Skills.UpdateHP(general);
         UpdateLevelAmount();
         level.DeactivateButtons();
 
-    }
+    }*/
     /*public void IncreaseAGI()
     {
         general.agilityPoints++;
@@ -131,6 +131,7 @@ public class IncreaseStats : MonoBehaviour
     }
     private void UpdateLevelAmount()
     {
+        character_Skills.Values(character_Skills.general);
         level.amountOfLvl--;
         statOrders.Stop();
         character_Skills.amountofLvl.text = "Puntos restantes: " + level.amountOfLvl.ToString();
@@ -138,7 +139,5 @@ public class IncreaseStats : MonoBehaviour
         {
             gameSave.SaveGame();
         }
-        
-
     }
 }

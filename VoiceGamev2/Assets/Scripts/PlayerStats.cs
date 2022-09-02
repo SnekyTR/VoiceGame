@@ -174,6 +174,7 @@ public class PlayerStats : MonoBehaviour
         intellectPoints = data.intellectStat;
         actualWeapon = data.weaponType;
         shieldPoints = data.armor;
+        criticPoints = data.critStrikePoints;
     }
     void Update()
     {

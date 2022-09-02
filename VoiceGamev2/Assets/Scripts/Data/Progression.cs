@@ -54,9 +54,6 @@ public class Progression : MonoBehaviour
             fromVictory = true;
             StartCoroutine(IncrementTheProgression());
         }
-        
-        
-
     }
     private void Start()
     {
@@ -76,6 +73,7 @@ public class Progression : MonoBehaviour
         if (!fromVictory)
         {
             uIMovement.canOpenGroup = true;
+            print("Se activa el OpenGroup");
         }
         GameProgressionData data = SaveSystem.LoadProgression();
         progression = data.progressionNumber;
@@ -136,7 +134,7 @@ public class Progression : MonoBehaviour
                     restAnimator.SetFloat("anim", 1);
                 }
                 
-                if (progression >= 2)
+                if (progression > 2)
                 {
                     //isTheSame = false;
                     
@@ -168,14 +166,14 @@ public class Progression : MonoBehaviour
                         //p2.SetActive(true);
                         vagnar.GetComponent<GeneralStats>().PlayerActivation();
                         combat3.SetActive(false);
-                        if (progression >= 4)
+                        if (progression > 4)
                         {
                             forestAnimator.SetFloat("anim", 0);
                             combat4.SetActive(false);
-                            if (progression >= 5)
+                            if (progression > 5)
                             {
                                 combat5.SetActive(false);
-                                if (progression >= 6)
+                                if (progression > 6)
                                 {
                                     p3Interface.SetActive(true);
                                     p3.SetActive(true);
@@ -225,8 +223,12 @@ public class Progression : MonoBehaviour
         for (int i = 0; i < GameObject.FindGameObjectsWithTag("Player").Length; i++)
         {
             level = GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>();
+            GeneralStats general = level.gameObject.GetComponent<GeneralStats>();
+
             level.GainExperience(moveDataToMain.totalEXP);
             level.hasLvlUP = true;
+            
+            general.lifePoints++;
             //gameSave.LoadGame(GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<GeneralStats>(), GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<LevelSystem>()) ;
         }
         gameSave.SaveGame();

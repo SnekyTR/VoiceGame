@@ -61,6 +61,7 @@ public class B_Cinematic : MonoBehaviour
     public void ActivateFTUE()
     {
         cameraFollow.selectPJCmdR.Start();
+        print("Se activa");
         canvas.enabled = true;
         FTUE.SetActive(true);
         navMesh.speed = 4;

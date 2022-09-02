@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -13,11 +14,13 @@ public class MainMenuVoice : MonoBehaviour
     private Dictionary<string, Action> menuActions = new Dictionary<string, Action>();
     private KeywordRecognizer menuKeyword;
     public bool filesExist;
+    private bool deleting = false;
 
     [SerializeField] private GameObject createGame;
     [SerializeField] private GameObject Vagnar;
     [SerializeField] private GameObject loadGame;
     [SerializeField] private LoadingScreen loadingScreen;
+    [SerializeField] private GameObject confirmPanel;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -33,14 +36,10 @@ public class MainMenuVoice : MonoBehaviour
     }
     void Start()
     {
+        
         AddOrders();
         //loadGame.SetActive(false);
-        if (filesExist)
-        {
-            createGame.GetComponent<Image>().color = new Color(255, 255, 255, 0.5f);
-            createGame.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(255, 255, 255, 0.5f);
-        }
-        else
+        if (!filesExist)
         {
             loadGame.GetComponent<Image>().color = new Color(255, 255, 255, 0.5f);
             loadGame.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(255, 255, 255, 0.5f);
@@ -54,7 +53,7 @@ public class MainMenuVoice : MonoBehaviour
     }
     private void LoadData()
     {
-        GameProgressionData data = SaveSystem.LoadProgression();
+        GameProgressionData data =  SaveSystem.LoadProgression();
         if(data.progressionNumber >= 3)
         {
             Vagnar.SetActive(true);
@@ -64,12 +63,12 @@ public class MainMenuVoice : MonoBehaviour
     {
         menuActions.Add("cargar partida", LoadGame);
         menuActions.Add("crear partida", CreateNewGame);
-        menuActions.Add("borrar datos", DeleteFiles);
+        menuActions.Add("borrar", ConfirmDelete);
+        menuActions.Add("no", BackNormal);
         menuActions.Add("salir", ExitGame);
         menuKeyword = new KeywordRecognizer(menuActions.Keys.ToArray());
         menuKeyword.OnPhraseRecognized += RecognizedVoice;
         menuKeyword.Start();
-        print("Se ha n aádido");
     }
     public void RecognizedVoice(PhraseRecognizedEventArgs speech)
     {
@@ -79,8 +78,14 @@ public class MainMenuVoice : MonoBehaviour
 
     private void DeleteFiles()
     {
-        //UnityEditor.FileUtil.DeleteFileOrDirectory(Application.persistentDataPath);
-        //filesExist = false;
+        /*
+        DirectoryInfo di = new DirectoryInfo(Application.persistentDataPath);
+        foreach(FileInfo file in di.GetFiles())
+        {
+            file.Delete();
+        }
+        filesExist = false;
+        CreateNewGame();*/
     }
     private void LoadGame()
     {
@@ -90,14 +95,39 @@ public class MainMenuVoice : MonoBehaviour
     }
     private void CreateNewGame()
     {
-        if (filesExist) { return; }
+
+        if (filesExist) {
+            //print("Se elimina");
+            //PopDelete();
+        }
+        else
+        {
+            
+        }
         CloseOrders();
-        loadingScreen.LoadScene(2);
-       
+        print("se crea");
+        loadingScreen.LoadScene(7);
     }
     private void ExitGame()
     {
         Application.Quit();
+    }
+    private void PopDelete()
+    {
+        /*confirmPanel.SetActive(true);
+        deleting = true;*/
+    }
+    private void ConfirmDelete()
+    {
+        /*if (!deleting) return;
+        confirmPanel.SetActive(false);
+        DeleteFiles();*/
+    }
+    private void BackNormal()
+    {
+        /*if (!deleting) return;
+        confirmPanel.SetActive(false);
+        deleting = false;*/
     }
     private void CloseOrders()
     {
@@ -110,7 +140,6 @@ public class MainMenuVoice : MonoBehaviour
         zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, CreateNewGame);
         menuKeyword = new KeywordRecognizer(zero1.Keys.ToArray());
         menuKeyword.OnPhraseRecognized += RecognizedVoice;
-        print("Se han cerrado");
     }
 
 }

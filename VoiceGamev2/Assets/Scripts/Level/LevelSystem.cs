@@ -41,7 +41,6 @@ public class LevelSystem : MonoBehaviour
             LoadLevel();
         }
         
-        print("Amount of lvl: " + amountOfLvl);
         frontXpBar.fillAmount = currentXp / requiredXp;
         backXpBar.fillAmount = currentXp / requiredXp;
         requiredXp = CalculateRequireXp();

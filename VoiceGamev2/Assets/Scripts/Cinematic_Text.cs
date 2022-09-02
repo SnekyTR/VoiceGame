@@ -1,16 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using UnityEngine.Windows.Speech;
 
 public class Cinematic_Text : MonoBehaviour
 {
+    private Dictionary<string, Action> skipActions = new Dictionary<string, Action>();
+    public KeywordRecognizer skip;
     public TextMeshProUGUI[] textMeshProText;
     private new List<string> listed = new List<string>();
     public float letterPause = 0.2f;
     private string contentText;
     private LoadingScreen loadingScreen;
+    private PlayableDirector skippedText;
     [SerializeField] private GameObject[] backGrounds;
     public int i = 0;
     private void Awake()
@@ -47,20 +54,42 @@ public class Cinematic_Text : MonoBehaviour
     }*/
     private void Start()
     {
+        skippedText = GameObject.Find("TimeLine").GetComponent<PlayableDirector>();
         StartText();
+        skipActions.Add("Saltar", SkipScene);
+        skip = new KeywordRecognizer(skipActions.Keys.ToArray());
+        skip.OnPhraseRecognized += RecognizedVoice;
+    }
+    private void RecognizedVoice(PhraseRecognizedEventArgs speech)
+    {
+        Debug.Log(speech.text);
+        skipActions[speech.text].Invoke();
+    }
+    private void SkipScene()
+    {
+        print("Se esquipea");
+        if (!PlayerPrefs.HasKey("pm")) PlayerPrefs.SetInt("pm", 0);
+
+        int ns = PlayerPrefs.GetInt("pm");
+        PlayerPrefs.SetInt("pm", (ns + 1));
+
+        Dictionary<string, Action> zero1 = new Dictionary<string, Action>();
+        zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, SkipScene);
+        skip = new KeywordRecognizer(zero1.Keys.ToArray());
+        skip.OnPhraseRecognized += RecognizedVoice;
+        loadingScreen.LoadScene(2);
     }
     public void StartText()
-    {
-        print("Printea");
-        
+    {        
         backGrounds[i].SetActive(true);
         contentText = listed[i];
         string writeThis = contentText;
-
+        StartCoroutine(skipText());
         StartCoroutine(TypeSentence(writeThis, i));
     }
     IEnumerator TypeSentence(string sentence, int a)
     {
+        yield return new WaitForSeconds(0.5f);
         foreach (char letter in sentence.ToCharArray())
         {
             textMeshProText[a].text += letter;
@@ -73,13 +102,16 @@ public class Cinematic_Text : MonoBehaviour
         if (i >= backGrounds.Length)
         {
             loadingScreen.LoadScene(2);
-            print("AAA");
         }
         else
-        {
-            print("todavia no");
-            
+        {            
             StartText();
         }
+    }
+    IEnumerator skipText()
+    {
+        yield return new WaitForSeconds(1.5f);
+        skippedText.Play();
+        skip.Start();
     }
 }
