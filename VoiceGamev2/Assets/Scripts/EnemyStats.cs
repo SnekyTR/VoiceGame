@@ -128,6 +128,7 @@ public class EnemyStats : MonoBehaviour
 
             intBars.transform.GetChild(0).gameObject.SetActive(false);
             intBars.transform.GetChild(1).gameObject.SetActive(false);
+            intBars.transform.GetChild(3).gameObject.SetActive(false);
             Destroy(Instantiate(deathFX, transform.position, transform.rotation), 4);
 
             audioS.clip = dieS;
