@@ -66,18 +66,9 @@ public class Character_skills : MonoBehaviour
         fTUE_Progresion.actualPlayer = actualCharacter.transform.name;
         CallThings(actualCharacter);
         Values(stats);
-        if (stats.weaponequiped != null){
-            for(int i = 0; i < actualWeaps.Length; i++)
-            {
-                if (stats.weaponequiped == actualWeaps[i].name)
-                {
-                    Scripteable_Weapon weap = (Scripteable_Weapon)actualWeaps[i];
-                    weaponImagePosition.sprite = weap.artwork;
-                }
-            }
-            print("No tiene arma");
-            weaponImagePosition.sprite = null;
-        }
+        CheckWeapon(stats);
+        
+        print("Continua despues del for");
         /*else
         {
             print("Tiene arma" + actualCharacter.name+  "de un total de "+ inventory.actualWeapons.Count);
@@ -121,6 +112,24 @@ public class Character_skills : MonoBehaviour
         //CheckAgility();
         CheckIntellect();
         CheckStrenght();
+    }
+    private void CheckWeapon(GeneralStats stats)
+    {
+        if (stats.weaponequiped != null)
+        {
+            for (int i = 0; i < actualWeaps.Length; i++)
+            {
+                print(actualWeaps[i].name + stats.weaponequiped);
+                if (stats.weaponequiped == actualWeaps[i].name)
+                {
+                    Scripteable_Weapon weap = (Scripteable_Weapon)actualWeaps[i];
+                    weaponImagePosition.sprite = weap.artwork;
+                    return;
+                }
+            }
+            print("No tiene arma");
+            weaponImagePosition.sprite = null;
+        }
     }
     public void Values(GeneralStats stats)
     {

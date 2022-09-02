@@ -61,7 +61,7 @@ public class UIMovement : MonoBehaviour
         character_Skills = GameObject.Find("Skills").GetComponent<Character_skills>();
         partyPannel = GameObject.Find("PartyInformation");
         characterPannel = GameObject.Find("CharacterInformation");*/
-        //canOpenGroup = true;
+        canOpenGroup = true;
         //AddInventory();
     }
     private void Update()

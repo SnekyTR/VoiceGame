@@ -24,6 +24,10 @@ public class MainMenuVoice : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+
+    }
+    void Start()
+    {
         if (System.IO.File.Exists(Application.persistentDataPath + "/progression.data"))
         {
             filesExist = true;
@@ -33,10 +37,6 @@ public class MainMenuVoice : MonoBehaviour
         {
             filesExist = false;
         }
-    }
-    void Start()
-    {
-        
         AddOrders();
         //loadGame.SetActive(false);
         if (!filesExist)
@@ -78,14 +78,20 @@ public class MainMenuVoice : MonoBehaviour
 
     private void DeleteFiles()
     {
-        /*
+        loadGame.GetComponent<Image>().color = new Color(255, 255, 255, 0.5f);
+        loadGame.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(255, 255, 255, 0.5f);
         DirectoryInfo di = new DirectoryInfo(Application.persistentDataPath);
         foreach(FileInfo file in di.GetFiles())
         {
-            file.Delete();
+            if (file.Name != "Player.log")
+            {
+                print(file.Name);
+                file.Delete();
+            }           
         }
         filesExist = false;
-        CreateNewGame();*/
+
+        CreateNewGame();
     }
     private void LoadGame()
     {
@@ -97,16 +103,15 @@ public class MainMenuVoice : MonoBehaviour
     {
 
         if (filesExist) {
-            //print("Se elimina");
-            //PopDelete();
+            print("Se elimina");
+            PopDelete();
         }
         else
         {
-            
+            CloseOrders();
+            print("se crea");
+            loadingScreen.LoadScene(7);
         }
-        CloseOrders();
-        print("se crea");
-        loadingScreen.LoadScene(7);
     }
     private void ExitGame()
     {
@@ -114,20 +119,20 @@ public class MainMenuVoice : MonoBehaviour
     }
     private void PopDelete()
     {
-        /*confirmPanel.SetActive(true);
-        deleting = true;*/
+        confirmPanel.SetActive(true);
+        deleting = true;
     }
     private void ConfirmDelete()
     {
-        /*if (!deleting) return;
+        if (!deleting) return;
         confirmPanel.SetActive(false);
-        DeleteFiles();*/
+        DeleteFiles();
     }
     private void BackNormal()
     {
-        /*if (!deleting) return;
+        if (!deleting) return;
         confirmPanel.SetActive(false);
-        deleting = false;*/
+        deleting = false;
     }
     private void CloseOrders()
     {
