@@ -138,7 +138,8 @@ public class EnemyStats : MonoBehaviour
                 Destroy(auraFX[i]);
             }
 
-            GetComponent<CapsuleCollider>().enabled = false;
+            if(GetComponent<CapsuleCollider>()) GetComponent<CapsuleCollider>().enabled = false;
+            else GetComponent<BoxCollider>().enabled = false;
         }
         else if (n < 0)                         //dmg recieve
         {

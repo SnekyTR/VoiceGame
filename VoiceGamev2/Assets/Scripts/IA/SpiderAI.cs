@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -166,6 +166,9 @@ public class SpiderAI : MonoBehaviour
 
         animator.SetInteger("A_Attack", 1);
 
+        audioSource.clip = GetComponent<EnemyStats>().hurtS;
+        audioSource.Play();
+
         yield return new WaitForSeconds(0.6f);
 
         if (toxic)
@@ -184,9 +187,6 @@ public class SpiderAI : MonoBehaviour
         {
             if (hit.transform == target)
             {
-                audioSource.clip = GetComponent<EnemyStats>().hurtS;
-                audioSource.Play();
-
                 target.GetComponent<PlayerStats>().SetLife(-enemyStats.GetAtk());
 
                 if (toxic) target.GetComponent<PlayerStats>().PoisonStart();
