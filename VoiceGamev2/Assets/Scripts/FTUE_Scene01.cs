@@ -9,7 +9,12 @@ public class FTUE_Scene01 : MonoBehaviour
 
     public List<GameObject> tutos = new List<GameObject>();
 
+    public List<Transform> objs = new List<Transform>();
+
     private bool p1, p2, p3, p4, p5, p6, p7, p8, p9, p10;
+
+    private float scaling = 1f;
+    private float mult = 0.5f;
 
     void Start()
     {
@@ -42,12 +47,25 @@ public class FTUE_Scene01 : MonoBehaviour
 
     public void Part01()
     {
+        scaling += mult * Time.deltaTime;
+
+        if (objs[0].localScale.x >= 1.3)
+        {
+            mult = (-0.5f);
+        }
+        else if (objs[0].localScale.x <= 0.8)
+        {
+            mult = (0.5f);
+        }
+
+        objs[0].localScale = new Vector3(scaling, scaling,1);
+
         if (gameM.selectPjActive)
         {
             tutos[0].SetActive(false);
             tutos[1].SetActive(true);
 
-
+            objs[0].localScale = new Vector3(1, 1, 1);
             p1 = false;
             p2 = true;
         }
@@ -131,10 +149,25 @@ public class FTUE_Scene01 : MonoBehaviour
 
     public void Part07()
     {
+        scaling += mult * Time.deltaTime;
+
+        if (objs[0].localScale.x >= 1.3)
+        {
+            mult = (-0.5f);
+        }
+        else if (objs[0].localScale.x <= 0.8)
+        {
+            mult = (0.5f);
+        }
+
+        objs[0].localScale = new Vector3(scaling, scaling, 1);
+
         if (gameM.selectPjActive)
         {
             tutos[5].SetActive(false);
             tutos[6].SetActive(true);
+
+            objs[0].localScale = new Vector3(scaling, scaling, 1);
 
             p7 = false;
             p8 = true;

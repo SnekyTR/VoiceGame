@@ -45,7 +45,7 @@ public class OptionsCombat : MonoBehaviour
     }
     private void Options()
     {
-
+        
     }
     private void GotoMap()
     {

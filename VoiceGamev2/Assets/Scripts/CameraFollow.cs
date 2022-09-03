@@ -35,10 +35,13 @@ public class CameraFollow : MonoBehaviour
     [HideInInspector] public bool selectPjActive, nextTurnActive, cancelActive, sbookActive;
 
     [HideInInspector] public bool playerUseMagic = false;
-    [HideInInspector]
+
     public string actualPlayerSelection;
 
     private AudioSource audioSource;
+
+     
+
     private void Awake()
     {
         whoTurn = true;         //player turn

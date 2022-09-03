@@ -28,6 +28,11 @@ public class PlayerMove : MonoBehaviour
     private bool isOnRoute =false;
     private string atkState;
 
+    private Image atkBtn, moveBtn;
+    private bool atkAnim, moveAnim;
+    private float scaling = 1f;
+    private float mult = 0.4f;
+
     [Header("Locations")]
     private string[] posNames;
 
@@ -157,6 +162,44 @@ public class PlayerMove : MonoBehaviour
         playerStats = Pl.GetComponent<PlayerStats>();
         playerNM = Pl.GetComponent<NavMeshAgent>();
         playerTr = Pl.transform;
+
+        moveBtn = playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>();
+        atkBtn = playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (moveAnim)
+        {
+            scaling += mult * Time.deltaTime;
+
+            if (moveBtn.transform.localScale.x >= 1.2)
+            {
+                mult = (-0.4f);
+            }
+            else if (moveBtn.transform.localScale.x <= 0.9)
+            {
+                mult = (0.4f);
+            }
+
+            moveBtn.transform.localScale = new Vector3(scaling, scaling, 1);
+        }
+
+        if (atkAnim)
+        {
+            scaling += mult * Time.deltaTime;
+
+            if (atkBtn.transform.localScale.x >= 1.2)
+            {
+                mult = (-0.5f);
+            }
+            else if (atkBtn.transform.localScale.x <= 0.9)
+            {
+                mult = (0.5f);
+            }
+
+            atkBtn.transform.localScale = new Vector3(scaling, scaling, 1);
+        }
     }
 
     public string GetAtkState()
@@ -178,8 +221,6 @@ public class PlayerMove : MonoBehaviour
             skill.ShowRanges(skill.GetRanges("atk"));
             gridA.EnableAtkGrid(playerTr, skill.GetRanges("atk"));
             PlayerSelectAtk();
-
-            print("hi");
         }
         else if (!startCmdR.IsRunning)
         {
@@ -190,20 +231,30 @@ public class PlayerMove : MonoBehaviour
     public void PlayerDeselectAtkMove()
     {
         skill.UnShowRange();
-        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.black;
-        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
+        moveBtn.color = Color.black;
+        atkBtn.color = Color.black;
+
+        moveAnim = false;
+        atkAnim = false;
+
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(false);
     }
 
     private void PlayerSelectAtk()
     {
-        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = redC;
+        atkBtn.color = redC;
+
+        atkAnim = true;
+
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(true);
     }
 
     private void PlayerSelectMove()
     {
-        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = blueC;
+        moveBtn.color = blueC;
+
+        moveAnim = true;
+
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(true);
     }
 
@@ -215,9 +266,16 @@ public class PlayerMove : MonoBehaviour
         if(spellCmdR.IsRunning) spellCmdR.Stop();
         gridA.DisableAtkGrid();
         gridA.DisableGrid();
-        if(playerTr != null)playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.black;
-        if(playerTr != null)playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = Color.black;
-        if (playerTr != null) playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(false);
+
+        atkAnim = false;
+        moveAnim = false;
+
+        if (playerTr != null)
+        {
+            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(false);
+            moveBtn.color = Color.black;
+            atkBtn.color = Color.black;
+        }
     }
 
     public void PlayerSelect()
@@ -328,7 +386,9 @@ public class PlayerMove : MonoBehaviour
         spellCmdR.Stop();
 
         gridA.EnableGrid(playerTr);
-        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = blueC;
+
+        moveAnim = true;
+        moveBtn.color = blueC;
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(true);
 
         gameM.CameraPos2();
@@ -366,7 +426,9 @@ public class PlayerMove : MonoBehaviour
 
                 moveCmdR.Stop();
 
-                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(1).GetComponent<Image>().color = defaultC;
+                moveBtn.transform.localScale = new Vector3(1, 1, 1);
+                moveAnim = false;
+                moveBtn.color = defaultC;
                 playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(false);
                 gridA.DisableGrid();
 
@@ -421,7 +483,8 @@ public class PlayerMove : MonoBehaviour
 
         atkCmdR.Start();
 
-        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = redC;
+        atkAnim = true;
+        atkBtn.color = redC;
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(true);
 
         atkState = "atk";
@@ -585,7 +648,9 @@ public class PlayerMove : MonoBehaviour
 
                 atkCmdR.Stop();
 
-                playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = defaultC;
+                atkBtn.transform.localScale = new Vector3(1, 1, 1);
+                atkAnim = false;
+                atkBtn.color = defaultC;
                 playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(false);
             }
         }
@@ -596,7 +661,9 @@ public class PlayerMove : MonoBehaviour
 
             atkCmdR.Stop();
 
-            playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = defaultC;
+            atkBtn.transform.localScale = new Vector3(1, 1, 1);
+            atkAnim = false;
+            atkBtn.color = defaultC;
             playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(false);
             print("fuera de alcance");
         }
@@ -616,7 +683,9 @@ public class PlayerMove : MonoBehaviour
         if (!startCmdR.IsRunning)startCmdR.Start();
         spellCmdR.Start();
 
-        playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Image>().color = defaultC;
+        atkBtn.transform.localScale = new Vector3(1, 1, 1);
+        atkAnim = false;
+        atkBtn.color = defaultC;
         playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(false);
 
         skill.EliminateSkillSelection();
