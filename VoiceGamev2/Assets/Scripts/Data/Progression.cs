@@ -134,14 +134,14 @@ public class Progression : MonoBehaviour
                     restAnimator.SetFloat("anim", 1);
                 }
                 
-                if (progression > 2)
+                if (progression >= 2)
                 {
                     //isTheSame = false;
                     
                     print("Se activa vastion anum");
                     combat2.SetActive(false);
-                    restAnimator.SetFloat("anim", 0);
-                    bastionAnimator.SetFloat("anim", 1);
+                    restAnimator.SetFloat("anim", 1);
+                    
                     //vagnar.SetActive(true);
                     if (progression >= 3)
                     {
@@ -160,20 +160,23 @@ public class Progression : MonoBehaviour
                             weapReward.transform.GetChild(2).GetComponent<Image>().sprite = weap.artwork;
                             newWeap = true;
                         }*/
-                        bastionAnimator.SetFloat("anim", 0);
-                        forestAnimator.SetFloat("anim", 1);
+                        restAnimator.SetFloat("anim", 0);
+                        bastionAnimator.SetFloat("anim", 1);
+                        
                         //p2Interface.SetActive(true);
                         //p2.SetActive(true);
-                        vagnar.GetComponent<GeneralStats>().PlayerActivation();
+                        
                         combat3.SetActive(false);
-                        if (progression > 4)
+                        if (progression >= 4)
                         {
-                            forestAnimator.SetFloat("anim", 0);
+                            vagnar.GetComponent<GeneralStats>().PlayerActivation();
+                            bastionAnimator.SetFloat("anim", 0);
+                            forestAnimator.SetFloat("anim", 1);
                             combat4.SetActive(false);
-                            if (progression > 5)
+                            if (progression >= 5)
                             {
                                 combat5.SetActive(false);
-                                if (progression > 6)
+                                if (progression >= 6)
                                 {
                                     p3Interface.SetActive(true);
                                     p3.SetActive(true);
