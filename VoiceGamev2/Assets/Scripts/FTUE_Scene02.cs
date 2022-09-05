@@ -137,16 +137,19 @@ public class FTUE_Scene02 : MonoBehaviour
 
     private void Part03()
     {
-        if (Vector3.Distance(gameM.enemys[0].transform.position, playerTr.position) <= 3 && gameM.whoTurn && gameM.selectPjActive || plMove.moveActive)
+        if (Vector3.Distance(gameM.enemys[0].transform.position, playerTr.position) <= 3)
         {
-            p3 = false;
+            if (gameM.whoTurn && gameM.selectPjActive || plMove.move2Active)
+            {
+                p3 = false;
 
-            plMove.spellRestriction = false;
-            plMove.atk2Restriction = false;
+                plMove.spellRestriction = false;
+                plMove.atk2Restriction = false;
 
-            tutos[3].SetActive(true);
+                tutos[3].SetActive(true);
 
-            p4 = true;
+                p4 = true;
+            }
         }
     }
 
