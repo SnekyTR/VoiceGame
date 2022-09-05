@@ -14417,11 +14417,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: atkValue
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: lifeValue
-      value: 12
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: energyActions
@@ -30203,7 +30203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: lifeValue
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986497, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: m_Size.x
@@ -32667,11 +32667,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: atkValue
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986496, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: lifeValue
-      value: 12
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8572994706966986497, guid: a852865119ef24340a5b5b224c767b5f, type: 3}
       propertyPath: m_Size.x
@@ -40986,6 +40986,26 @@ PrefabInstance:
     - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: manaSld2
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: criticPoints
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: shieldPoints
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: agilityPoints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: strengthPoints
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 421785696, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
+      propertyPath: intellectPoints
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 421785698, guid: 25cb979be39b6b24bb63aae71aa06067, type: 3}
       propertyPath: m_Speed
