@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
-    //player
+    //magnus
     private NavMeshAgent playerNM;
     private PlayerStats playerStats;
     private CameraFollow cameraFollow;
@@ -97,7 +97,7 @@ public class PlayerMove : MonoBehaviour
         moveCmdR = new KeywordRecognizer(moveCmd.Keys.ToArray());
         moveCmdR.OnPhraseRecognized += RecognizedVoice2;
 
-        //player attack
+        //magnus attack
         for (int i = 0; i < gameM.enemys.Count; i++)
         {
             atkCmd.Add(gameM.enemys[i].name, Enemy);

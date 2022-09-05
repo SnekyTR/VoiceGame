@@ -312,7 +312,7 @@ public class Character_skills : MonoBehaviour
     {
         magicBar = GameObject.Find("magic_bar").GetComponent<Slider>();
         physicalBar = GameObject.Find("physical_bar").GetComponent<Slider>();
-        agilityBar = GameObject.Find("agility_bar").GetComponent<Slider>();
+        //agilityBar = GameObject.Find("agility_bar").GetComponent<Slider>();
         //physicalBar = GameObject.Find("physical_bar").GetComponent<Scrollbar>();
         //image = GameObject.Find("magic_image").GetComponent<Image>();
         HP = GameObject.Find("hp_stat").GetComponent<TextMeshProUGUI>();

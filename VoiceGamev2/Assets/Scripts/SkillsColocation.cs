@@ -501,15 +501,15 @@ public class SkillsColocation : MonoBehaviour
             }
         }
     }
-    /*public void GetThePlayer(Transform player)
+    /*public void GetThePlayer(Transform magnus)
     {        
-        //playerStats = player.GetComponent<PlayerStats>();
+        //playerStats = magnus.GetComponent<PlayerStats>();
         //playerStats = GameObject.Find("Magnus").GetComponent<PlayerStats>();
-        playerStats = player.gameObject.GetComponent<PlayerStats>();
+        playerStats = magnus.gameObject.GetComponent<PlayerStats>();
 
         
         print(playerStats.intellectPoints);
-        if (player.weaponName == "Magnus")
+        if (magnus.weaponName == "Magnus")
         {
             
         }

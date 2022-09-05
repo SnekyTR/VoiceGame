@@ -65,7 +65,7 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         //******* Aqui carga ya sabes todos los datos de lifepoint, strenghtpoint, agilitypoints, intellectpoints
-        //******* cada player tiene su nombre normal escepto hammun el cual se llama jamun
+        //******* cada magnus tiene su nombre normal escepto hammun el cual se llama jamun
         //******* ademas de ello tienes q determinar el arma de cada uno dependiendo de su nombre, los nombres de las armas como deberan ser reconocidos son
         //******* actualWeapon = ... - los nombres de las armas estan en el script "Skills", aunq son los nombres de las armas pero en ingles y todo minusculas
         //******* solo eso prueba bien las cosas, y recuerda lo de resucitar, en script "Skills" al final esta el resusitar, suerte con eso

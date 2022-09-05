@@ -640,7 +640,7 @@ public class Skills : MonoBehaviour
         skillHammun[2].GetChild(1).gameObject.SetActive(false);
     }
 
-    public void SetSkillSelected(string n)      //remarca la skill seleccionada por el player
+    public void SetSkillSelected(string n)      //remarca la skill seleccionada por el magnus
     {
         int f = 0;
         helpPannel.AttackState();

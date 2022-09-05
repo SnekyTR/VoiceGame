@@ -89,7 +89,7 @@ public class VoiceDestinations : MonoBehaviour
                 fTUE_Progresion.FTUEProgression();
             }
         }
-        //if (combatEnter.combat == true) { print("Se ha parado player"); StopPlayer(); } else {  }
+        //if (combatEnter.combat == true) { print("Se ha parado magnus"); StopPlayer(); } else {  }
         //else { ); }
     }
     public void StopPlayer()

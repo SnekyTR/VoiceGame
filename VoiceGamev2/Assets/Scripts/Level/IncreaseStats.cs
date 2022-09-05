@@ -33,7 +33,7 @@ public class IncreaseStats : MonoBehaviour
         {
             statOrders.Start();
         }
-        //character = player.GetComponent<CharacterInformation>();
+        //character = magnus.GetComponent<CharacterInformation>();
         //character_Skills = GameObject.Find("Skills").GetComponent<Character_skills>();
     }
     public void AddControls()

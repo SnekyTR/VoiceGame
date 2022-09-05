@@ -44,7 +44,7 @@ public class CameraFollow : MonoBehaviour
 
     private void Awake()
     {
-        whoTurn = true;         //player turn
+        whoTurn = true;         //magnus turn
 
         cam = transform.GetChild(0);
         camS = cam.GetComponent<MultipleTargetCamera>();

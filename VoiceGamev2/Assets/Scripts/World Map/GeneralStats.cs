@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GeneralStats : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GeneralStats : MonoBehaviour
     public int critStrikePoints;
     public string weaponequiped;
     public string weaponType;
+    public Sprite charImage;
 
     [SerializeField] private GameObject victoryRewardPlayer;
     [SerializeField] private GameObject groupPlayer;

@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PartyInformation : MonoBehaviour
 {
     [SerializeField] private LevelSystem levelSystem;
-
+    [SerializeField] private Image image;
     [SerializeField] public Transform[] players;
     [SerializeField] private TextMeshProUGUI[] playersName;
        //string actualLevel;
 
     //[Header("Player 1")]
     //[SerializeField] private TextMeshProUGUI playerName1;
-    /*[SerializeField] private Transform player;
+    /*[SerializeField] private Transform magnus;
     [SerializeField] private TextMeshProUGUI level;
     
 
@@ -38,6 +39,9 @@ public class PartyInformation : MonoBehaviour
             playersName[i].text = players[i].name;
             //levelSystem.UpdateLevel();
             levelSystem = players[i].gameObject.GetComponent<LevelSystem>();
+            GeneralStats general = players[i].gameObject.GetComponent<GeneralStats>();
+            image = playersName[i].transform.GetChild(1).GetComponent<Image>();
+            image.sprite = general.charImage;
             levelSystem.UpdateLevel();
         }
     }
