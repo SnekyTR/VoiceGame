@@ -67,6 +67,8 @@ public class PlayerMove : MonoBehaviour
 
     int mask;
 
+    [HideInInspector] public bool isPaused;
+
     void Start()
     {
         gameM = GetComponent<CameraFollow>();
@@ -334,22 +336,30 @@ public class PlayerMove : MonoBehaviour
 
     public void RecognizedVoice1(PhraseRecognizedEventArgs speech)
     {
+        if (isPaused) return;
+
         Debug.Log(speech.text);
         startCmd[speech.text].Invoke();
     }
     public void RecognizedVoice2(PhraseRecognizedEventArgs speech)
     {
+        if (isPaused) return;
+
         Debug.Log(speech.text);
         
         moveCmd[speech.text].Invoke(speech.text);
     }
     public void RecognizedVoice3(PhraseRecognizedEventArgs speech)
     {
+        if (isPaused) return;
+
         Debug.Log(speech.text);
         atkCmd[speech.text].Invoke(speech.text);
     }
     public void RecognizedVoice5(PhraseRecognizedEventArgs speech)
     {
+        if (isPaused) return;
+
         Debug.Log(speech.text);
         spellCmd[speech.text].Invoke(speech.text);
     }

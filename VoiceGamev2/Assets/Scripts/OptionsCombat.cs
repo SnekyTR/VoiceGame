@@ -8,15 +8,21 @@ using UnityEngine.Windows.Speech;
 
 public class OptionsCombat : MonoBehaviour
 {
-    private GameObject optionsPanel;
+    public GameObject optionsPanel;
     private Dictionary<string, Action> optOrders = new Dictionary<string, Action>();
     public KeywordRecognizer optDict;
     private LoadingScreen loadingScreen;
+    private bool isOnPause;
+    private CameraFollow gameM;
+    private PlayerMove plMove;
+
     // Start is called before the first frame update
     void Start()
     {
         loadingScreen = GetComponent<LoadingScreen>();
         AddOptOrders();
+        gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
+        plMove = gameM.GetComponent<PlayerMove>();
     }
 
     // Update is called once per frame
@@ -41,19 +47,43 @@ public class OptionsCombat : MonoBehaviour
     }
     private void Continue()
     {
+        isOnPause = false;
+
         optionsPanel.SetActive(false);
+
+        plMove.isPaused = false;
+        gameM.isPaused = false;
+        plMove.enabled = true;
+        gameM.enabled = true;
+
+        Time.timeScale = 1f;
     }
     private void Options()
     {
-        
+        isOnPause = true;
+
+        Time.timeScale = 0f;
+
+        plMove.isPaused = true;
+        gameM.isPaused = true;
+        plMove.enabled = false;
+        gameM.enabled = false;
+
+        optionsPanel.SetActive(true);
     }
     private void GotoMap()
     {
-        loadingScreen.LoadScene(1);
+        if (isOnPause)
+        {
+            loadingScreen.LoadScene(1);
+        }
     }
     private void ExitGame()
     {
-        Application.Quit();
+        if (isOnPause)
+        {
+            Application.Quit();
+        }
     }
     public void CloseOrders()
     {
@@ -66,5 +96,10 @@ public class OptionsCombat : MonoBehaviour
         zero1.Add("asdfasd" + SceneManager.GetActiveScene().name + ns, ExitGame);
         optDict = new KeywordRecognizer(zero1.Keys.ToArray());
         optDict.OnPhraseRecognized += RecognizedOptions;
+    }
+
+    public bool GetPause()
+    {
+        return isOnPause;
     }
 }

@@ -40,7 +40,7 @@ public class CameraFollow : MonoBehaviour
 
     private AudioSource audioSource;
 
-     
+    [HideInInspector] public bool isPaused; 
 
     private void Awake()
     {
@@ -105,32 +105,6 @@ public class CameraFollow : MonoBehaviour
 
         selectPJCmdR.Start();
         passCmdR.Start();
-
-        //CameraCenter();
-    }
-    
-    void LateUpdate()
-    {
-        /*if(playerParent != null)
-        {
-            Vector3 newPos = Vector3.MoveTowards(transform.position,new Vector3(playerParent.position.x, transform.position.y, playerParent.position.z), 6 * Time.deltaTime);
-            transform.position = newPos;
-
-            if(cameraParent == 1)
-            {
-                Vector3 newPos1 = Vector3.MoveTowards(transform.GetChild(0).position, pos1.position, 9 * Time.deltaTime);
-                cam.position = newPos1;
-
-                cam.rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos1.rotation, 1.3f * Time.deltaTime);
-            }
-            else if(cameraParent == 2)
-            {
-                Vector3 newPos2 = Vector3.MoveTowards(transform.GetChild(0).position, pos2.position, 9 * Time.deltaTime);
-                cam.position = newPos2;
-
-                cam.rotation = Quaternion.Slerp(transform.GetChild(0).rotation, pos2.rotation, 1.5f * Time.deltaTime);
-            }
-        }*/
     }
 
     public void CloseCameraFollow()
@@ -153,6 +127,8 @@ public class CameraFollow : MonoBehaviour
 
     public void RecognizedVoice(PhraseRecognizedEventArgs speech)
     {
+        if (isPaused) return;
+
         Debug.Log(speech.text);
         selectPJCmd[speech.text].Invoke(speech.text);
         string selectedChar = speech.text;
@@ -161,12 +137,16 @@ public class CameraFollow : MonoBehaviour
     }
     private void SelectedCharVoices(string player)
     {
+        if (isPaused) return;
+
         PlayerStats stats = GameObject.Find(player).GetComponent<PlayerStats>();
         stats.audioSource.clip = stats.characterSounds[1];
         stats.audioSource.Play();
     }
     public void RecognizedVoice4(PhraseRecognizedEventArgs speech)
     {
+        if (isPaused) return;
+
         Debug.Log(speech.text);
         passCmd[speech.text].Invoke();
     }
@@ -464,9 +444,6 @@ public class CameraFollow : MonoBehaviour
 
         NewParent(playerParent);
         CameraPos1();
-
-        //NavMeshBuilder.ClearAllNavMeshes();
-        //NavMeshBuilder.BuildNavMesh();
 
         GetComponent<Skills>().EliminateSkillSelection();
     }

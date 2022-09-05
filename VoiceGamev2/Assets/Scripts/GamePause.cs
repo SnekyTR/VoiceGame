@@ -9,22 +9,24 @@ public class GamePause : MonoBehaviour
    
     [SerializeField] private GameObject text;
     [SerializeField] private GameObject darkPanel;
+    private OptionsCombat options;
     // Start is called before the first frame update
     void Start()
     {
         pause = true;
+        options = GetComponent<OptionsCombat>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (pause)
+        if (pause && !options.GetPause())
         {
             //text.text = "No esta paused";
             //GUI.Label(new Rect(100, 100, 50, 30), "Game Paused");
             Time.timeScale = 1;
         }
-        else
+        else if(!options.GetPause())
         {
             darkPanel.SetActive(true);
             Time.timeScale = 0;
