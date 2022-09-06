@@ -27,6 +27,7 @@ public class GamePause : MonoBehaviour
                 //text.text = "No esta paused";
                 //GUI.Label(new Rect(100, 100, 50, 30), "Game Paused");
                 Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.Locked;
             }
             else if (!options.GetPause())
             {
@@ -42,6 +43,7 @@ public class GamePause : MonoBehaviour
                 //text.text = "No esta paused";
                 //GUI.Label(new Rect(100, 100, 50, 30), "Game Paused");
                 Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.Locked;
             }
             else
             {

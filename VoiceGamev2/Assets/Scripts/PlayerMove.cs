@@ -202,6 +202,11 @@ public class PlayerMove : MonoBehaviour
 
             atkBtn.transform.localScale = new Vector3(scaling, scaling, 1);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     public string GetAtkState()
