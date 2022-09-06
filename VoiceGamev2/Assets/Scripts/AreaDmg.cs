@@ -56,14 +56,14 @@ public class AreaDmg : MonoBehaviour
             {
                 dmg = Random.Range((int)(plyStats.GetStrenght() * 1.5f), (int)(plyStats.GetStrenght() * 2f));
             }
-            else if (plyM.GetAtkState() == "Demacia" && plyStats.actualWeapon == "sword")
+            else if (plyM.GetAtkState() == "Pulverizar" && plyStats.actualWeapon == "sword")
             {
                 if (other.GetComponent<EnemyStats>().inmunity) return;
 
                 dmg = Random.Range((int)(plyStats.GetStrenght() * 0.5f), (int)(plyStats.GetStrenght() * 0.8f));
                 other.gameObject.GetComponent<EnemyStats>().StunEnemy(true);
             }
-            else if (plyM.GetAtkState() == "Demacia" && plyStats.actualWeapon == "axe")
+            else if (plyM.GetAtkState() == "Pulverizar" && plyStats.actualWeapon == "axe")
             {
                 dmg = Random.Range((int)(plyStats.GetStrenght() * 0.5f), (int)(plyStats.GetStrenght() * 0.8f));
                 other.gameObject.GetComponent<EnemyStats>().StunEnemy(true);

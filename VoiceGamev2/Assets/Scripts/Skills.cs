@@ -60,7 +60,7 @@ public class Skills : MonoBehaviour
     {
         nameSkill.Add("Partir");
         nameSkill.Add("Aumento de fuerza");
-        nameSkill.Add("Demacia");
+        nameSkill.Add("Pulverizar");
         nameSkill.Add("Demolicion");
         nameSkill.Add("Instinto asesino");
         nameSkill.Add("Lluvia de flechas");
@@ -178,7 +178,7 @@ public class Skills : MonoBehaviour
                 return 3;
             case "Aumento de fuerza":
                 return 10000;
-            case "Demacia":
+            case "Pulverizar":
                 return 6;
             case "Demolicion":
                 if (actualWeapon == weapons[2]) return 5;
@@ -268,7 +268,7 @@ public class Skills : MonoBehaviour
                 return 3f;
             case "Aumento de fuerza":
                 return 1.5f;
-            case "Demacia":
+            case "Pulverizar":
                 return 4f;
             case "Demolicion":
                 return 2.5f;
@@ -309,7 +309,7 @@ public class Skills : MonoBehaviour
             case "Aumento de fuerza":
                 StartCoroutine(StrenghtBuff());
                 break;
-            case "Demacia":
+            case "Pulverizar":
                 StartCoroutine(Demacia());
                 break;
             case "Demolicion":
@@ -652,7 +652,7 @@ public class Skills : MonoBehaviour
             case "Aumento de fuerza":
                 f = 2;
                 break;
-            case "Demacia":
+            case "Pulverizar":
                 f = 3;
                 break;
             case "Demolicion":
