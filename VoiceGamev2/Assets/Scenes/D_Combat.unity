@@ -58001,6 +58001,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
+      propertyPath: xp
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 1912414070, guid: cd15b2f9851046d48a2322c6acdabc1c, type: 3}
       propertyPath: nEnemy
       value: 2
       objectReference: {fileID: 0}

@@ -9732,6 +9732,10 @@ PrefabInstance:
       value: Barbaro 1
       objectReference: {fileID: 0}
     - target: {fileID: 8531869958911382884, guid: e8c48bfdddc14284da5f48a130f99b4b, type: 3}
+      propertyPath: xp
+      value: 95
+      objectReference: {fileID: 0}
+    - target: {fileID: 8531869958911382884, guid: e8c48bfdddc14284da5f48a130f99b4b, type: 3}
       propertyPath: atkValue
       value: 18
       objectReference: {fileID: 0}
@@ -60951,6 +60955,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5846514154055955192, guid: b7c289e4e553ce3458dc4a6ad04896df, type: 3}
+      propertyPath: xp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5846514154055955192, guid: b7c289e4e553ce3458dc4a6ad04896df, type: 3}
       propertyPath: nEnemy
       value: 3
       objectReference: {fileID: 0}
@@ -79235,6 +79243,10 @@ PrefabInstance:
       value: Barbaro 2
       objectReference: {fileID: 0}
     - target: {fileID: 8531869958911382884, guid: e8c48bfdddc14284da5f48a130f99b4b, type: 3}
+      propertyPath: xp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8531869958911382884, guid: e8c48bfdddc14284da5f48a130f99b4b, type: 3}
       propertyPath: nEnemy
       value: 1
       objectReference: {fileID: 0}
@@ -91947,6 +91959,10 @@ PrefabInstance:
     - target: {fileID: 1690921941446659052, guid: b7c289e4e553ce3458dc4a6ad04896df, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5846514154055955192, guid: b7c289e4e553ce3458dc4a6ad04896df, type: 3}
+      propertyPath: xp
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5846514154055955192, guid: b7c289e4e553ce3458dc4a6ad04896df, type: 3}
       propertyPath: nEnemy

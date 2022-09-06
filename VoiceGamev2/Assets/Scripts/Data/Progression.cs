@@ -19,6 +19,7 @@ public class Progression : MonoBehaviour
     [SerializeField] private Animator bastionAnimator;
     [SerializeField] private Animator forestAnimator;
     [SerializeField] private GameObject olerfell;
+    [SerializeField] private GameObject lundorf;
     [SerializeField] private GameObject p2Interface;
     [SerializeField] private GameObject p2;
     [SerializeField] private GameObject p3Interface;
@@ -187,11 +188,18 @@ public class Progression : MonoBehaviour
                                 combat5.SetActive(false);
                                 if (progression >= 6)
                                 {
+                                    Animator lundorfAnimator = lundorf.transform.GetComponent<Animator>();
+                                    lundorfAnimator.SetFloat("anim", 1);
                                     combat6.SetActive(false);
-                                    print("Camino");    
+                                    print("Camino");
                                     /*p3Interface.SetActive(true);
                                     p3.SetActive(true);
                                     combat6.SetActive(false);*/
+                                    if (progression >= 7)
+                                    {
+                                        combat7.SetActive(false);
+
+                                    }
 
                                 }
                             }

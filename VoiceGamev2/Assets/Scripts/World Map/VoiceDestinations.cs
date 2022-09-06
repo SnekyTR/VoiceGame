@@ -46,7 +46,7 @@ public class VoiceDestinations : MonoBehaviour
         mapActions.Add("bastion negro", SelectDestination);
         mapActions.Add("bosque de los aullidos", SelectDestination);
         mapActions.Add("olerfeld", SelectDestination);
-        mapActions.Add("Last", SelectDestination);
+        mapActions.Add("lundorf", SelectDestination);
         mapDestinations = new KeywordRecognizer(mapActions.Keys.ToArray());
         mapDestinations.OnPhraseRecognized += RecognizedVoice;
     }
