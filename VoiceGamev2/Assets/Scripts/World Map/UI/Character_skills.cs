@@ -132,7 +132,6 @@ public class Character_skills : MonoBehaviour
                     return;
                 }
             }
-            print("No tiene arma");
             weaponImagePosition.sprite = null;
         }
     }
@@ -184,6 +183,7 @@ public class Character_skills : MonoBehaviour
             {
                 TextMeshProUGUI strnext = GameObject.Find("str_button").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
                 strnext.text = "+" + nextLvl.ToString();
+                print("Carga Fuerza");
             }
             TextMeshProUGUI str = STR.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             

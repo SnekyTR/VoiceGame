@@ -11920,7 +11920,6 @@ GameObject:
   - component: {fileID: 819240669}
   - component: {fileID: 819240668}
   - component: {fileID: 819240666}
-  - component: {fileID: 819240667}
   m_Layer: 5
   m_Name: Fight
   m_TagString: Untagged
@@ -11992,7 +11991,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 819240667}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: FightButton, Assembly-CSharp
         m_MethodName: EnterBattle
         m_Mode: 1
@@ -12004,18 +12003,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &819240667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 819240664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41e428d460d91d74590306320151fe82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &819240668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52037,6 +52024,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torek
       objectReference: {fileID: 0}
+    - target: {fileID: 8092044367693632001, guid: a481346d5dc9efc4a9ef9713288d24b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8092044367693632006, guid: a481346d5dc9efc4a9ef9713288d24b1, type: 3}
       propertyPath: charImage
       value: 
@@ -52081,6 +52072,10 @@ PrefabInstance:
       propertyPath: victoryRewardPlayer
       value: 
       objectReference: {fileID: 1841499227}
+    - target: {fileID: 8092044367693632007, guid: a481346d5dc9efc4a9ef9713288d24b1, type: 3}
+      propertyPath: level
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8092044367693632007, guid: a481346d5dc9efc4a9ef9713288d24b1, type: 3}
       propertyPath: lvlUP
       value: 
@@ -52221,6 +52216,10 @@ PrefabInstance:
       propertyPath: musicChanger
       value: 
       objectReference: {fileID: 534669906}
+    - target: {fileID: 8092044369313570325, guid: a481346d5dc9efc4a9ef9713288d24b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8092044369313570346, guid: a481346d5dc9efc4a9ef9713288d24b1, type: 3}
       propertyPath: charImage
       value: 
@@ -52265,6 +52264,10 @@ PrefabInstance:
       propertyPath: victoryRewardPlayer
       value: 
       objectReference: {fileID: 1730552319}
+    - target: {fileID: 8092044369313570347, guid: a481346d5dc9efc4a9ef9713288d24b1, type: 3}
+      propertyPath: level
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8092044369313570347, guid: a481346d5dc9efc4a9ef9713288d24b1, type: 3}
       propertyPath: lvlUP
       value: 

@@ -56,6 +56,10 @@ public class LevelSystem : MonoBehaviour
         amountOfLvl = data.amountofLevel;
         level = data.level;
         currentXp = data.experience;
+        if(amountOfLvl > 0)
+        {
+            DeactivateButtons();
+        }
     }
     void Update()
     {
