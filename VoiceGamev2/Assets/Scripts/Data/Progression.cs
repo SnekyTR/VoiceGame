@@ -18,6 +18,7 @@ public class Progression : MonoBehaviour
     [SerializeField] public Animator restAnimator;
     [SerializeField] private Animator bastionAnimator;
     [SerializeField] private Animator forestAnimator;
+    [SerializeField] private GameObject olerfell;
     [SerializeField] private GameObject p2Interface;
     [SerializeField] private GameObject p2;
     [SerializeField] private GameObject p3Interface;
@@ -31,6 +32,7 @@ public class Progression : MonoBehaviour
     [SerializeField] private GameObject weapReward;
     [SerializeField] private GameObject singlePanel;
     [SerializeField] private GameObject vagnar;
+    [SerializeField] private GameObject torek;
     [SerializeField] private TextMeshProUGUI expText1;
     [SerializeField] private TextMeshProUGUI expText2;
     [SerializeField] private TextMeshProUGUI expText3;
@@ -176,11 +178,21 @@ public class Progression : MonoBehaviour
                             if (progression >= 5)
                             {
                                 combat5.SetActive(false);
+                                forestAnimator.SetFloat("anim", 0);
+                                Animator olerfellAnimator = olerfell.transform.GetComponent<Animator>();
+                                olerfellAnimator.SetFloat("anim", 1);
+                                
+                                torek.GetComponent<GeneralStats>().PlayerActivation();
+                                print("Ciudad");
+
+                                combat5.SetActive(false);
                                 if (progression >= 6)
                                 {
-                                    p3Interface.SetActive(true);
-                                    p3.SetActive(true);
                                     combat6.SetActive(false);
+                                    print("Camino");    
+                                    /*p3Interface.SetActive(true);
+                                    p3.SetActive(true);
+                                    combat6.SetActive(false);*/
 
                                 }
                             }

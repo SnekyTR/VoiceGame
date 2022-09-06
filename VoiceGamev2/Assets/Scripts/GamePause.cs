@@ -20,18 +20,18 @@ public class GamePause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pause && !options.GetPause())
+        if (pause )
         {
             //text.text = "No esta paused";
             //GUI.Label(new Rect(100, 100, 50, 30), "Game Paused");
             Time.timeScale = 1;
         }
-        else if(!options.GetPause())
+        /*else if(!options.GetPause())
         {
             darkPanel.SetActive(true);
             Time.timeScale = 0;
             //text.text = "Game Paused";
-        }
+        }*/
     }
     private void OnApplicationFocus(bool focus)
     {
