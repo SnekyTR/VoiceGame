@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: SecondCombat
   m_EditorClassIdentifier: 
   sceneIndex: 3
-  combatTitle: "Camino Ar\xE1cnido"
-  combatDescription: "Mientras avanzabas por el camino, te sorprenden dos ara\xF1as
-    saltando del bosque a atacarte"
+  combatTitle: Camino Real
+  combatDescription: "Mientras avanzas por el camino real, dos ara\xF1as te cortan
+    el paso."
   Image: {fileID: 0}
   reward: 102
   level: Enemigos
   enemyList:
-  - "Ara\xF1a Lvl 1"
-  - "Ara\xF1a Lvl 1"
+  - "Ara\xF1a Lvl 2"
+  - "Ara\xF1a Lvl 2"
