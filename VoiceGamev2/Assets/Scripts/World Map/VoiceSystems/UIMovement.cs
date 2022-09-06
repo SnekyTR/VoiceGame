@@ -20,6 +20,7 @@ public class UIMovement : MonoBehaviour
     //private Dictionary<string, Action> inventoryOptions = new Dictionary<string, Action>();
     //private KeywordRecognizer inventory;
     private PlayableDirector timeLine;
+    private bool inGroup;
     public bool inOptions;
     [SerializeField] private PartyInformation partyInformation;
     [SerializeField] private Character_skills character_Skills;
@@ -216,12 +217,10 @@ public class UIMovement : MonoBehaviour
     }
     public void ActivatePartyInformation()
     {
-        print("NO Puede abrir");
         if (inOptions) return;
-        print("ASDASDASD Puede abrir");
-        if (canOpenGroup)
+        if (canOpenGroup && !inGroup)
         {
-            print("Puede abrir");
+            inGroup = true;
             voiceDestinations.mapDestinations.Stop();
             partyPannel.SetActive(true);
             openGroup.Play();
@@ -247,6 +246,7 @@ public class UIMovement : MonoBehaviour
         }
         else if(partyPannel.activeInHierarchy)
         {
+            inGroup = false;
             voiceDestinations.mapDestinations.Start();
             firstCanvas.Start();
             //partyPannel.SetActive(false);

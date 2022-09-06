@@ -10,6 +10,7 @@ public class Character_skills : MonoBehaviour
     private Slider physicalBar;
     private Slider agilityBar;
     [SerializeField] private Image weaponImagePosition;
+    [SerializeField] private Image playerImage;
     [SerializeField] private TextMeshProUGUI player;
 
     [SerializeField] private RawImage magicSkill1;
@@ -39,6 +40,8 @@ public class Character_skills : MonoBehaviour
     [HideInInspector]public bool isMagic;
     [HideInInspector]public GeneralStats general;
     private GameSave gameSave;
+    [SerializeField] private GameObject physicalSkills;
+    [SerializeField] private GameObject magicalSkills;
     //[SerializeField] private Inventory inventory;
 
     private void Awake()
@@ -46,15 +49,6 @@ public class Character_skills : MonoBehaviour
         gameSave = GameObject.Find("GameSaver").GetComponent<GameSave>();
         fTUE_Progresion = GameObject.Find("Canvas").GetComponent<FTUE_Progresion>();
     }
-    void Start()
-    {
-        
-        
-    }
-    private void Update()
-    {
-    }
-
     public void DisplayCharacterInf(GameObject actualCharacter)
     {
         
@@ -94,24 +88,34 @@ public class Character_skills : MonoBehaviour
             varialbeText.text = "Fuerza:";
             STR.text = stats.strengthPoints.ToString();
             isMagic = false;
+            physicalSkills.SetActive(true);
+            magicalSkills.SetActive(false);
+            physicalBar = GameObject.Find("physical_bar").GetComponent<Slider>();
+            physicalBar.value = stats.strengthPoints;
         }
         else
         {
             varialbeText.text = "Intelecto:";
             STR.text = stats.intellectPoints.ToString();
             isMagic = true;
+            magicalSkills.SetActive(true);
+            physicalSkills.SetActive(false);
+            magicBar = GameObject.Find("magic_bar").GetComponent<Slider>();
+            magicBar.value = stats.intellectPoints;
         }
+
         CRIT.text = stats.critStrikePoints.ToString();
         ARMOR.text = stats.armorPoints.ToString();
+
+        playerImage.sprite = general.charImage;
         
-        magicBar.value = stats.intellectPoints;
-        physicalBar.value = stats.strengthPoints;
         //agilityBar.value = stats.agilityPoints;
         player.text = actualCharacter.name;
         amountofLvl.text = "Puntos restantes: " + actualCharacter.GetComponent<LevelSystem>().amountOfLvl.ToString();
         //CheckAgility();
         CheckIntellect();
         CheckStrenght();
+
     }
     private void CheckWeapon(GeneralStats stats)
     {
@@ -310,8 +314,7 @@ public class Character_skills : MonoBehaviour
     }*/
     private void CallThings(GameObject actualcharacter)
     {
-        magicBar = GameObject.Find("magic_bar").GetComponent<Slider>();
-        physicalBar = GameObject.Find("physical_bar").GetComponent<Slider>();
+        
         //agilityBar = GameObject.Find("agility_bar").GetComponent<Slider>();
         //physicalBar = GameObject.Find("physical_bar").GetComponent<Scrollbar>();
         //image = GameObject.Find("magic_image").GetComponent<Image>();

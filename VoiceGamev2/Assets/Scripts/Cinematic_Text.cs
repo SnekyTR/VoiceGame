@@ -20,6 +20,7 @@ public class Cinematic_Text : MonoBehaviour
     private PlayableDirector skippedText;
     [SerializeField] private GameObject[] backGrounds;
     public int i = 0;
+    private bool skipped;
     private void Awake()
     {
         loadingScreen = gameObject.GetComponent<LoadingScreen>();
@@ -66,7 +67,9 @@ public class Cinematic_Text : MonoBehaviour
         skipActions[speech.text].Invoke();
     }
     private void SkipScene()
-    {
+    { 
+        if (skipped) { return; }
+        skipped = true;
         print("Se esquipea");
         if (!PlayerPrefs.HasKey("pm")) PlayerPrefs.SetInt("pm", 0);
 
@@ -110,6 +113,8 @@ public class Cinematic_Text : MonoBehaviour
     }
     IEnumerator skipText()
     {
+
+        
         yield return new WaitForSeconds(1.5f);
         skippedText.Play();
         skip.Start();
