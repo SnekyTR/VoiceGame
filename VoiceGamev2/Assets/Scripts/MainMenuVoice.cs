@@ -54,7 +54,7 @@ public class MainMenuVoice : MonoBehaviour
     private void LoadData()
     {
         GameProgressionData data =  SaveSystem.LoadProgression();
-        if(data.progressionNumber >= 3)
+        if(data.progressionNumber >= 4)
         {
             Vagnar.SetActive(true);
         }
