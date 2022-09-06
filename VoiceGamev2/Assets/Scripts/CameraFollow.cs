@@ -103,7 +103,7 @@ public class CameraFollow : MonoBehaviour
         selectPJCmdR = new KeywordRecognizer(selectPJCmd.Keys.ToArray());
         selectPJCmdR.OnPhraseRecognized += RecognizedVoice;
 
-        selectPJCmdR.Start();
+        //selectPJCmdR.Start();
         passCmdR.Start();
     }
 
@@ -536,7 +536,7 @@ public class CameraFollow : MonoBehaviour
             camS.enabled = true;
 
             camS.CameraPlayerTurn(nw);
-            helpPannel.UpdateTextHelp(helpPannel.preSelectPlayer);
+            //helpPannel.UpdateTextHelp(helpPannel.preSelectPlayer);
 
         }
     }
