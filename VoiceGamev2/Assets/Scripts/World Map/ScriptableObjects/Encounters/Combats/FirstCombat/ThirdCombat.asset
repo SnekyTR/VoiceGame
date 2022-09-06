@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: ThirdCombat
   m_EditorClassIdentifier: 
   sceneIndex: 4
-  combatTitle: Originalidad
-  combatDescription: 'Descripcion de '
+  combatTitle: Encuentros en la oscuridad
+  combatDescription: "Durante tu paso por las catacumbas de la fortaleza, unas ara\xF1as
+    surgen del suelo para atacarte. "
   Image: {fileID: 0}
   reward: 217
   level: Enemigos
   enemyList:
-  - "Ara\xF1a Lvl 2"
-  - "Ara\xF1a Lvl 2"
+  - "Ara\xF1a especial"
+  - "Ara\xF1a Lvl 3"
+  - "Ara\xF1a venenosa  Lvl 1"

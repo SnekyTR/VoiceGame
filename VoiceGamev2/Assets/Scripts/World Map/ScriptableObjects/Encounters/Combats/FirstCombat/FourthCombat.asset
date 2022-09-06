@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: FourthCombat
   m_EditorClassIdentifier: 
   sceneIndex: 5
-  combatTitle: Cuarto combate
-  combatDescription: Este es el cuarto combate
+  combatTitle: Banquete rojo
+  combatDescription: "Durante el banquete con tu aliado, la fortaleza es atacada
+    por ara\xF1as y esqueletos"
   Image: {fileID: 0}
   reward: 379
   level: Enemigos
   enemyList:
-  - "Ara\xF1a de Rango Lvl 3"
+  - "Ara\xF1a cuerpo a cuerpoLvl 3"
   - "Ara\xF1a de Rango Lvl 3"
   - Esqueleto Lvl 1

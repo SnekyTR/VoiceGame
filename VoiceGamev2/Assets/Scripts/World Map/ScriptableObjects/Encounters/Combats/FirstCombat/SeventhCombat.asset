@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb31159114f73c04d860d6e81c19d0d5, type: 3}
   m_Name: SeventhCombat
   m_EditorClassIdentifier: 
-  sceneIndex: 0
-  combatTitle: 
-  combatDescription: 
+  sceneIndex: 9
+  combatTitle: Batalla Olerfeld
+  combatDescription: 'Durante la batalla contra los saqueadores se une un nuevo miembro
+    al grupo. '
   Image: {fileID: 0}
   reward: 
-  level: 
-  enemyList: []
+  level: Enemigos
+  enemyList:
+  - Guerrero lvl 1
+  - Mago lvl 1
+  - Mago lvl 1

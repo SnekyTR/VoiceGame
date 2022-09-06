@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb31159114f73c04d860d6e81c19d0d5, type: 3}
   m_Name: EighthCombat
   m_EditorClassIdentifier: 
-  sceneIndex: 0
-  combatTitle: 
-  combatDescription: 
+  sceneIndex: 10
+  combatTitle: 'Emboscada en el camino '
+  combatDescription: 'De camino a la capital, el grupo es atacado por una partida
+    de saqueadores. '
   Image: {fileID: 0}
   reward: 
-  level: 
-  enemyList: []
+  level: Enemigos
+  enemyList:
+  - Guerrero lvl 2
+  - Guerrero lvl 2
+  - Mago lvl 2
+  - Mago lvl 2

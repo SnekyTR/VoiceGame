@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb31159114f73c04d860d6e81c19d0d5, type: 3}
   m_Name: SixthCombat
   m_EditorClassIdentifier: 
-  sceneIndex: 0
-  combatTitle: 
-  combatDescription: 
+  sceneIndex: 8
+  combatTitle: "Persecuci\xF3n"
+  combatDescription: "Despu\xE9s de escapar de los guerreros caidos sois perseguidos
+    por m\xE1s esqueletos. "
   Image: {fileID: 0}
   reward: 
-  level: 
-  enemyList: []
+  level: 'Enemigos '
+  enemyList:
+  - Esqueleto Arquero lvl 3
+  - Esqueleto Arquero lvl 3
+  - Esqueleto cuerpo a cuerpo lvl 3
+  - 'Esqueleto cuerpo a cuerpo lvl 3 '
