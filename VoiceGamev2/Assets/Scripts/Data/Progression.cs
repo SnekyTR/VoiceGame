@@ -46,7 +46,6 @@ public class Progression : MonoBehaviour
     public int totalEXP;
     public bool fromVictory;
 
-
     GameObject[] players;
     private void Awake()
     {

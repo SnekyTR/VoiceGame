@@ -52,7 +52,7 @@ public class G_Cinematic : MonoBehaviour
     }
     private void Update()
     {
-        if ((Vector3.Distance(magnus.position, dest1.position)) <= 1f)
+        /*if ((Vector3.Distance(magnus.position, dest1.position)) <= 1f)
         {
             if (!entered)
             {
@@ -69,7 +69,7 @@ public class G_Cinematic : MonoBehaviour
                 vagnarAnimator.SetInteger("A_Walk", 0);
                 StartCoroutine(Withdraw());
             }
-        }
+        }*/
     }
     IEnumerator Withdraw()
     {

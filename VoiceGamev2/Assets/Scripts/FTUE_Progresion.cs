@@ -84,6 +84,7 @@ public class FTUE_Progresion : MonoBehaviour
                 uIMovement.firstCanvas.Start();
                 uIMovement.ReLoadCharacter(actualPlayer);
                 pannel2.SetActive(false);
+                uIMovement.ftueRestriction1 = false;
                 StartCoroutine(ActivateTimer());
                 break;
             case 6:
@@ -91,6 +92,7 @@ public class FTUE_Progresion : MonoBehaviour
                 pro.restAnimator.SetFloat("anim", 1);
                 VoiceDestinations voices = GameObject.Find("Magnus").GetComponent<VoiceDestinations>();
                 voices.mapDestinations.Start();
+                uIMovement.ftueRestriction1 = false;
                 uIMovement.firstCanvas.Start();
                 pannel2.SetActive(false);
 
@@ -98,6 +100,7 @@ public class FTUE_Progresion : MonoBehaviour
             default:
                 pannel2.SetActive(false);
                 uIMovement.firstCanvas.Start();
+                uIMovement.ftueRestriction1 = false;
                 timeLine.Play();
                 break;
         }
@@ -168,6 +171,7 @@ public class FTUE_Progresion : MonoBehaviour
         pannel5.SetActive(true);
         yield return new WaitForSeconds(4f);
         pannel5.SetActive(false);
+        uIMovement.ftueRestriction1 = false;
         ftueProgression++;
         FTUEProgression();
     }

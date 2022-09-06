@@ -198,7 +198,7 @@ public class CameraFollow : MonoBehaviour
             {
                 actualPlayer = players[i];
                 actualPlayerSelection = actualPlayer.name;
-                helpPannel.SelectedPlayer(actualPlayer.name);
+                //helpPannel.SelectedPlayer(actualPlayer.name);
                 GetComponent<Skills>().SetActualPlayer(actualPlayer.GetComponent<PlayerStats>());
                 break;
             }
@@ -432,7 +432,7 @@ public class CameraFollow : MonoBehaviour
     public void CancelOrder()
     {
         if (cancelRestriction) return;
-        helpPannel.SelectedPlayer(actualPlayerSelection);
+        //helpPannel.SelectedPlayer(actualPlayerSelection);
         selectPjActive = false;
         nextTurnActive = false;
         cancelActive = true;

@@ -42,6 +42,7 @@ public class Character_skills : MonoBehaviour
     private GameSave gameSave;
     [SerializeField] private GameObject physicalSkills;
     [SerializeField] private GameObject magicalSkills;
+    private bool restrictions;
     //[SerializeField] private Inventory inventory;
 
     private void Awake()
@@ -49,9 +50,9 @@ public class Character_skills : MonoBehaviour
         gameSave = GameObject.Find("GameSaver").GetComponent<GameSave>();
         fTUE_Progresion = GameObject.Find("Canvas").GetComponent<FTUE_Progresion>();
     }
-    public void DisplayCharacterInf(GameObject actualCharacter)
+    public void DisplayCharacterInf(GameObject actualCharacter, bool restriction)
     {
-        
+        restrictions = restriction;
         GeneralStats stats = GameObject.Find(actualCharacter.transform.name).GetComponent<GeneralStats>();
         GameObject.Find(actualCharacter.transform.name).GetComponent<LevelSystem>().DeactivateButtons();
         
@@ -199,8 +200,13 @@ public class Character_skills : MonoBehaviour
         }
         if (level.amountOfLvl > 0)
         {
-            TextMeshProUGUI shieldnext = GameObject.Find("agi_button").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            shieldnext.text = "+" + nextLvl.ToString();
+            print("Restrictions: " + restrictions);
+            if (!restrictions)
+            {
+                TextMeshProUGUI shieldnext = GameObject.Find("agi_button").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                shieldnext.text = "+" + nextLvl.ToString();
+            }
+            
         }
         TextMeshProUGUI shield = ARMOR.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         
@@ -214,8 +220,12 @@ public class Character_skills : MonoBehaviour
         
         if (level.amountOfLvl > 0)
         {
-            TextMeshProUGUI critnext = GameObject.Find("crit_button").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            critnext.text = "+10%";
+            if (!restrictions)
+            {
+                TextMeshProUGUI critnext = GameObject.Find("crit_button").transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                critnext.text = "+10%";
+            }
+            
         }
         
         

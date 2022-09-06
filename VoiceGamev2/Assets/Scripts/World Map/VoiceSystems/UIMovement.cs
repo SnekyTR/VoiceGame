@@ -22,6 +22,9 @@ public class UIMovement : MonoBehaviour
     private PlayableDirector timeLine;
     private bool inGroup;
     public bool inOptions;
+    public bool ftuebuttons;
+    [SerializeField] private GameObject critButton;
+    [SerializeField] private GameObject armorButton;
     [SerializeField] private PartyInformation partyInformation;
     [SerializeField] private Character_skills character_Skills;
     [SerializeField] private IncreaseStats increaseStats;
@@ -45,6 +48,10 @@ public class UIMovement : MonoBehaviour
     private PlayableDirector closeGroup;
 
     public string charSelected;
+
+    [HideInInspector] public bool ftueRestriction1;
+    [HideInInspector] public bool ftueRestriction2;
+    [HideInInspector] public bool ftueRestriction3;
 
     [SerializeField] private FTUE_Progresion fTUE_Progresion;
     // Start is called before the first frame update
@@ -116,22 +123,37 @@ public class UIMovement : MonoBehaviour
         GameObject actualCharacter = GameObject.Find(charSelected);
         LevelSystem level = actualCharacter.GetComponent<LevelSystem>();
         level.ActivateButtons();
-        character_Skills.DisplayCharacterInf(actualCharacter);
+        character_Skills.DisplayCharacterInf(actualCharacter, ftueRestriction1);
         if (fTUE_Progresion.ftueProgression == 2)
         {
+            DEAFtueExtraButtons();
             fTUE_Progresion.ftueProgression++;
             fTUE_Progresion.FTUEProgression();
         }
+    }
+    private void DEAFtueExtraButtons()
+    {
+        critButton.SetActive(false);
+        armorButton.SetActive(false);
+        ftuebuttons = true;
+    }
+    private void EnableFtueExtraButtons()
+    {
+        critButton.SetActive(true);
+        armorButton.SetActive(true);
+        ftuebuttons = false;
     }
     public void ReLoadCharacter(string p)
     {
         //string p = fTUE_Progresion.GetPlayer();
         party.Stop();
         characterPannel.SetActive(true);
+        ftueRestriction1 = true;
         GameObject actualCharacter = GameObject.Find(p);
         LevelSystem level = actualCharacter.GetComponent<LevelSystem>();
         level.ActivateButtons();
-        character_Skills.DisplayCharacterInf(actualCharacter);
+        DEAFtueExtraButtons();
+        character_Skills.DisplayCharacterInf(actualCharacter, ftueRestriction1);
     }
     /*private void ActivateSkillAnimation()
     {
@@ -230,12 +252,23 @@ public class UIMovement : MonoBehaviour
                 fTUE_Progresion.ftueProgression++;
                 fTUE_Progresion.FTUEProgression();
                 gameSave.SaveGame();
+                ftueRestriction1 = true;
             }
         }
     }
     private void CloseWindows()
     {
         AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        if (optionsPannel.activeInHierarchy)
+        {
+            optionsPannel.SetActive(false);
+            optionsRecognizer.Stop();
+            inOptions = false;
+            canOpenGroup = true;
+            
+            audioSource.Play();
+        }
+        if (ftueRestriction1) return;
         audioSource.Play();
         if (characterPannel.activeInHierarchy)
         {
@@ -243,6 +276,10 @@ public class UIMovement : MonoBehaviour
             //inventoryZone.SetActive(false);
             characterPannel.SetActive(false);
             party.Start();
+            if(fTUE_Progresion.ftueProgression == 4)
+            {
+                EnableFtueExtraButtons();
+            }
         }
         else if(partyPannel.activeInHierarchy)
         {
@@ -257,7 +294,6 @@ public class UIMovement : MonoBehaviour
             {
                 fTUE_Progresion.ftueProgression++;
                 fTUE_Progresion.FTUEProgression();
-
             }
         }else if (victoryResult.activeInHierarchy)
         {
@@ -273,12 +309,7 @@ public class UIMovement : MonoBehaviour
             canOpenGroup = true;
 
         }
-        else if(optionsPannel.activeInHierarchy){
-            optionsPannel.SetActive(false);
-            optionsRecognizer.Stop();
-            inOptions = false;
-            canOpenGroup = true;
-        }
+        
         
     }
     private void DeActivatePartyInformation()

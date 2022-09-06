@@ -643,7 +643,7 @@ public class Skills : MonoBehaviour
     public void SetSkillSelected(string n)      //remarca la skill seleccionada por el magnus
     {
         int f = 0;
-        helpPannel.AttackState();
+        //helpPannel.AttackState();
         switch (n)
         {
             case "Partir":

@@ -468,7 +468,7 @@ public class PlayerMove : MonoBehaviour
     private void StartAttack()
     {
         if (atkRestriction) return;
-        helpPannel.AttackState();
+        //helpPannel.AttackState();
         moveActive = false;
         atkActive = false;
         spellActive = false;
@@ -530,7 +530,7 @@ public class PlayerMove : MonoBehaviour
             allieSpell = true;
 
             gameM.CameraPos2();
-            if(n == "Revivir") helpPannel.ReviveState();
+            //if(n == "Revivir") helpPannel.ReviveState();
             if (n == "Curar") skill.ShowRangesAllie(skill.GetRanges(n));
             gridA.EnableAtkGrid(playerTr, skill.GetRanges(n));
             playerTr.GetComponent<PlayerStats>().selected.transform.parent.parent.GetChild(2).GetChild(5).gameObject.SetActive(true);

@@ -29,7 +29,7 @@ public class HelpPannel : MonoBehaviour
         {
             attackEnemies += GameObject.Find("Enemys").transform.GetChild(i).name + "\n";
         }
-        UpdateTextHelp(preSelectPlayer);
+        //UpdateTextHelp(preSelectPlayer);
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
     }
     public void UpdateTextHelp(string helpText)
@@ -49,7 +49,7 @@ public class HelpPannel : MonoBehaviour
             }
         }
         selectedPlayer += "Habilidades";
-        UpdateTextHelp(selectedPlayer);
+        //UpdateTextHelp(selectedPlayer);
     }
     public void AttackState()
     {
@@ -63,7 +63,7 @@ public class HelpPannel : MonoBehaviour
             {
                 attackEnemies += GameObject.Find("Players").transform.GetChild(i).name + "\n";
             }
-            UpdateTextHelp(attackEnemies);
+            //UpdateTextHelp(attackEnemies);
         }
         else
         {
@@ -79,7 +79,7 @@ public class HelpPannel : MonoBehaviour
                 }
             }
             attackEnemies += "Cancelar";
-            UpdateTextHelp(attackEnemies);
+            //UpdateTextHelp(attackEnemies);
         }
     }
     public void ReviveState()
@@ -90,7 +90,7 @@ public class HelpPannel : MonoBehaviour
         {
             revivePlayers += GameObject.Find("Players").transform.GetChild(i).name + "\n";
         }
-        UpdateTextHelp(revivePlayers);
+        //UpdateTextHelp(revivePlayers);
     }
 
     public void GetSkillsName(string pname, int atrPoints)

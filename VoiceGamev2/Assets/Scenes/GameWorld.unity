@@ -10442,7 +10442,7 @@ MonoBehaviour:
   restAnimator: {fileID: 1955722898}
   bastionAnimator: {fileID: 1524946960}
   forestAnimator: {fileID: 916985284}
-  olerfell: {fileID: 0}
+  olerfell: {fileID: 603344591}
   p2Interface: {fileID: 514330442}
   p2: {fileID: 2115945310}
   p3Interface: {fileID: 0}
@@ -10454,7 +10454,7 @@ MonoBehaviour:
   weapReward: {fileID: 872277963}
   singlePanel: {fileID: 189538480}
   vagnar: {fileID: 2115945310}
-  torek: {fileID: 0}
+  torek: {fileID: 514330442}
   expText1: {fileID: 493275135}
   expText2: {fileID: 1536882374}
   expText3: {fileID: 365076888}
@@ -31990,6 +31990,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inOptions: 0
+  ftuebuttons: 0
+  critButton: {fileID: 1999643698030751835}
+  armorButton: {fileID: 1999643697472006735}
   partyInformation: {fileID: 1999643698456566913}
   character_Skills: {fileID: 1999643696878407513}
   increaseStats: {fileID: 1999643698823904403}
@@ -32004,6 +32007,9 @@ MonoBehaviour:
   gameSave: {fileID: 645889366}
   canOpenGroup: 0
   charSelected: 
+  ftueRestriction1: 0
+  ftueRestriction2: 0
+  ftueRestriction3: 0
   fTUE_Progresion: {fileID: 2003819490}
 --- !u!114 &2003819490
 MonoBehaviour:
