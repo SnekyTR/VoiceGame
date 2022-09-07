@@ -157,7 +157,7 @@ public class PlayerStats : MonoBehaviour
         else if (actualWeapon == "spear") atkE = 1.5f;
         else if (actualWeapon == "bow") atkE = 2f;
         else if (actualWeapon == "fire staff") atkE = 1.5f;
-        else if (actualWeapon == "sacred staff") atkE = 1;
+        else if (actualWeapon == "sacred staff") atkE = 2;
 
         selected.transform.parent.parent.GetChild(2).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = atkE.ToString();
 

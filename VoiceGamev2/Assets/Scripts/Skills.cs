@@ -294,7 +294,7 @@ public class Skills : MonoBehaviour
                 else if (actualWeapon == weapons[2]) return 1.5f;
                 else if (actualWeapon == weapons[3]) return 2f;
                 else if (actualWeapon == weapons[4]) return 1.5f;
-                else if (actualWeapon == weapons[5]) return 1f;
+                else if (actualWeapon == weapons[5]) return 2f;
                 return 2f;
         }
     }                       
