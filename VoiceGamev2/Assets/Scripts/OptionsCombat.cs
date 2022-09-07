@@ -20,9 +20,9 @@ public class OptionsCombat : MonoBehaviour
     void Start()
     {
         loadingScreen = GetComponent<LoadingScreen>();
-        AddOptOrders();
         gameM = GameObject.Find("GameManager").GetComponent<CameraFollow>();
         plMove = gameM.GetComponent<PlayerMove>();
+        AddOptOrders();
     }
 
     // Update is called once per frame
