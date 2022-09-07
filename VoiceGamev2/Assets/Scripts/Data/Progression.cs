@@ -24,6 +24,7 @@ public class Progression : MonoBehaviour
     [SerializeField] private GameObject p2;
     [SerializeField] private GameObject p3Interface;
     [SerializeField] private GameObject p3;
+    [SerializeField] private GameObject finalPanel;
 
     [SerializeField]private GameObject victoryResults;
     [SerializeField] private FTUE_Progresion fTUE_Progresion;
@@ -40,7 +41,7 @@ public class Progression : MonoBehaviour
     //bool isTheSame = false;
     //bool newWeap;
     GameSave gameSave;
-    [SerializeField]VoiceDestinations voices;
+    [SerializeField] VoiceDestinations voices;
     MoveDataToMain moveDataToMain;
 
     LevelSystem level;
@@ -182,14 +183,14 @@ public class Progression : MonoBehaviour
                                 Animator olerfellAnimator = olerfell.transform.GetComponent<Animator>();
                                 olerfellAnimator.SetFloat("anim", 1);
                                 
-                                torek.GetComponent<GeneralStats>().PlayerActivation();
+                                
                                 print("Ciudad");
 
                                 combat5.SetActive(false);
                                 if (progression >= 6)
                                 {
-                                    Animator lundorfAnimator = lundorf.transform.GetComponent<Animator>();
-                                    lundorfAnimator.SetFloat("anim", 1);
+                                    olerfellAnimator.SetFloat("anim", 1);
+                                    
                                     combat6.SetActive(false);
                                     print("Camino");
                                     /*p3Interface.SetActive(true);
@@ -197,8 +198,17 @@ public class Progression : MonoBehaviour
                                     combat6.SetActive(false);*/
                                     if (progression >= 7)
                                     {
+                                        torek.GetComponent<GeneralStats>().PlayerActivation();
+                                        Animator lundorfAnimator = lundorf.transform.GetComponent<Animator>();
+                                        lundorfAnimator.SetFloat("anim", 1);
                                         combat7.SetActive(false);
-
+                                        
+                                        if(progression >= 8)
+                                        {
+                                            lundorfAnimator.SetFloat("anim", 0);
+                                            finalPanel.SetActive(true);
+                                            combat8.SetActive(false);
+                                        }
                                     }
 
                                 }

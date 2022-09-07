@@ -31,6 +31,7 @@ public class UIMovement : MonoBehaviour
     //[SerializeField] private EquipObjects equipObjects;
 
     [SerializeField] public GameObject partyPannel;
+    [SerializeField] public GameObject finalPanel;
     [SerializeField] private Animator animatorSave;
     //[SerializeField] private Animator inventoryAnimator;
     [SerializeField] public GameObject characterPannel;
@@ -295,7 +296,12 @@ public class UIMovement : MonoBehaviour
                 fTUE_Progresion.ftueProgression++;
                 fTUE_Progresion.FTUEProgression();
             }
-        }else if (victoryResult.activeInHierarchy)
+        }
+        else if (finalPanel.activeInHierarchy)
+        {
+            finalPanel.SetActive(false);
+        }
+        else if (victoryResult.activeInHierarchy)
         {
             victoryResult.SetActive(false);
             

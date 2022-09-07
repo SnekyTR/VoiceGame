@@ -15,7 +15,11 @@ public class Character_skills : MonoBehaviour
 
     [SerializeField] private RawImage magicSkill1;
     [SerializeField] private RawImage magicSkill2;
-    [SerializeField] private RawImage magicSkill3;
+    [SerializeField] private RawImage magicSkill3;    
+    
+    [SerializeField] private RawImage healingSkill1;
+    [SerializeField] private RawImage healingSkill2;
+    [SerializeField] private RawImage healingSkill3;
 
     [SerializeField] private RawImage strenghtSkill1;
     [SerializeField] private RawImage strenghtSkill2;
@@ -42,6 +46,8 @@ public class Character_skills : MonoBehaviour
     private GameSave gameSave;
     [SerializeField] private GameObject physicalSkills;
     [SerializeField] private GameObject magicalSkills;
+    [SerializeField] private GameObject dmgSkills;
+    [SerializeField] private GameObject healingSkills;
     private bool restrictions;
     //[SerializeField] private Inventory inventory;
 
@@ -63,7 +69,7 @@ public class Character_skills : MonoBehaviour
         Values(stats);
         CheckWeapon(stats);
         
-        print("Continua despues del for");
+        
         /*else
         {
             print("Tiene arma" + actualCharacter.name+  "de un total de "+ inventory.actualWeapons.Count);
@@ -86,6 +92,8 @@ public class Character_skills : MonoBehaviour
         
         if(actualCharacter.transform.name == "Magnus")
         {
+            dmgSkills.SetActive(false);
+            healingSkills.SetActive(false);
             varialbeText.text = "Fuerza:";
             STR.text = stats.strengthPoints.ToString();
             isMagic = false;
@@ -94,8 +102,9 @@ public class Character_skills : MonoBehaviour
             physicalBar = GameObject.Find("physical_bar").GetComponent<Slider>();
             physicalBar.value = stats.strengthPoints;
         }
-        else
+        else if(actualCharacter.transform.name == "Vagnar")
         {
+            healingSkills.SetActive(false);
             varialbeText.text = "Intelecto:";
             STR.text = stats.intellectPoints.ToString();
             isMagic = true;
@@ -103,6 +112,20 @@ public class Character_skills : MonoBehaviour
             physicalSkills.SetActive(false);
             magicBar = GameObject.Find("magic_bar").GetComponent<Slider>();
             magicBar.value = stats.intellectPoints;
+            CheckIntellect();
+            dmgSkills.SetActive(true);
+        }else if(actualCharacter.transform.name == "Torek")
+        {
+            dmgSkills.SetActive(false);
+            healingSkills.SetActive(true);
+            varialbeText.text = "Intelecto:";
+            STR.text = stats.intellectPoints.ToString();
+            isMagic = true;
+            magicalSkills.SetActive(true);
+            physicalSkills.SetActive(false);
+            magicBar = GameObject.Find("magic_bar").GetComponent<Slider>();
+            magicBar.value = stats.intellectPoints;
+            CheckHealing();
         }
 
         CRIT.text = stats.critStrikePoints.ToString();
@@ -124,7 +147,7 @@ public class Character_skills : MonoBehaviour
         {
             for (int i = 0; i < actualWeaps.Length; i++)
             {
-                print(actualWeaps[i].name + stats.weaponequiped);
+                
                 if (stats.weaponequiped == actualWeaps[i].name)
                 {
                     Scripteable_Weapon weap = (Scripteable_Weapon)actualWeaps[i];
@@ -264,6 +287,7 @@ public class Character_skills : MonoBehaviour
     }
     public void CheckIntellect()
     {
+        print("Se chequea: " + general.intellectPoints);
         if (general.intellectPoints >= 6)
         {
             magicSkill1.color = new Color(255, 255, 255, 255);
@@ -276,7 +300,7 @@ public class Character_skills : MonoBehaviour
                 }
                 else
                 {
-                   magicSkill2.color = new Color(0.15f, 0.15f, 0.15f, 255);
+                   magicSkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
                 }
             }
             else
@@ -290,6 +314,37 @@ public class Character_skills : MonoBehaviour
             magicSkill1.color = new Color(0.15f, 0.15f, 0.15f, 255);
             magicSkill2.color = new Color(0.15f, 0.15f, 0.15f, 255);
             magicSkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
+        }
+    }
+    public void CheckHealing()
+    {
+        print("Se chequea: " + general.intellectPoints);
+        if (general.intellectPoints >= 6)
+        {
+            healingSkill1.color = new Color(255, 255, 255, 255);
+            if (general.intellectPoints >= 8)
+            {
+                healingSkill2.color = new Color(255, 255, 255, 255);
+                if (general.intellectPoints >= 10)
+                {
+                    healingSkill3.color = new Color(255, 255, 255, 255);
+                }
+                else
+                {
+                    healingSkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
+                }
+            }
+            else
+            {
+                healingSkill2.color = new Color(0.15f, 0.15f, 0.15f, 255);
+                healingSkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
+            }
+        }
+        else
+        {
+            healingSkill1.color = new Color(0.15f, 0.15f, 0.15f, 255);
+            healingSkill2.color = new Color(0.15f, 0.15f, 0.15f, 255);
+            healingSkill3.color = new Color(0.15f, 0.15f, 0.15f, 255);
         }
     }
     /*public void CheckAgility()
@@ -337,11 +392,20 @@ public class Character_skills : MonoBehaviour
     }
     public void UpdateVAR(GeneralStats general)
     {
+        print("Magic: " + isMagic);
         if (isMagic)
         {
-            STR.text = general.intellectPoints.ToString();
-            magicBar.value = general.intellectPoints;
-            CheckIntellect();
+            if (healingSkills.activeInHierarchy)
+            {
+                STR.text = general.intellectPoints.ToString();
+                magicBar.value = general.intellectPoints;
+                CheckHealing();
+            }
+            else{
+                STR.text = general.intellectPoints.ToString();
+                magicBar.value = general.intellectPoints;
+                CheckIntellect();
+            }
         }
         else
         {

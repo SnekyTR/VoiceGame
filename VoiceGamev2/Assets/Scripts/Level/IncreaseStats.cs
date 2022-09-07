@@ -109,6 +109,7 @@ public class IncreaseStats : MonoBehaviour
             general.intellectPoints++;
             character_Skills.UpdateVAR(general);
             UpdateLevelAmount();
+            character_Skills.CheckIntellect();
             level.DeactivateButtons();
         }
         else
@@ -116,6 +117,7 @@ public class IncreaseStats : MonoBehaviour
             general.strengthPoints++;
             character_Skills.UpdateVAR(general);
             UpdateLevelAmount();
+            character_Skills.CheckStrenght();
             level.DeactivateButtons();
         }
         
