@@ -86,7 +86,7 @@ public class WinLoose : MonoBehaviour
     }
     private void LooseAsignOrders()
     {
-        looseOrders.Add("Salir", Retry);
+        looseOrders.Add("Salir", MapReturn);
         looseOrders.Add("Reintentar", Retry);
         lOrders = new KeywordRecognizer(looseOrders.Keys.ToArray());
         lOrders.OnPhraseRecognized += LooseRecognizedVoice;
@@ -137,5 +137,10 @@ public class WinLoose : MonoBehaviour
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
         int scene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(scene);
+    }
+
+    private void MapReturn()
+    {
+        SceneManager.LoadScene(1);
     }
 }
